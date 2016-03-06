@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="delete thx">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_conf.md" afterPath="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_conf.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/network/2015-12-27-dtd.md" afterPath="$PROJECT_DIR$/_posts/network/2015-12-27-dtd.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nohup.out" afterPath="$PROJECT_DIR$/nohup.out" />
     </list>
     <ignored path="foolchild.iws" />
@@ -28,22 +27,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016-01-07-spring_base.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/java_web/spring/2016-01-07-spring_base.md">
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
-                <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2015-12-22-manual.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/linux/2015-12-22-manual.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
@@ -150,15 +133,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-28-spring_conf.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-12-28-spring_conf.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_conf.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.7081545">
-                <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+              <first_editor vertical-scroll-proportion="0.32188842">
+                <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-12-27-dtd.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/network/2015-12-27-dtd.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.45064378">
+                <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -206,6 +205,7 @@
         <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-28-String.md" />
         <option value="$PROJECT_DIR$/_posts/thought/2016-02-20-thx.md" />
         <option value="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_conf.md" />
+        <option value="$PROJECT_DIR$/_posts/network/2015-12-27-dtd.md" />
       </list>
     </option>
   </component>
@@ -395,7 +395,7 @@
       <option name="number" value="Default" />
       <updated>1457054361830</updated>
       <workItem from="1457054365003" duration="4479000" />
-      <workItem from="1457275318590" duration="565000" />
+      <workItem from="1457275318590" duration="750000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -427,11 +427,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457275595855</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="spring_conf">
+      <created>1457275912940</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1457275912940</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5044000" />
+    <option name="totallyTimeSpent" value="5229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -470,7 +476,8 @@
     <MESSAGE value="git 本地关联远程仓库" />
     <MESSAGE value="string awk  cron spring_base" />
     <MESSAGE value="delete thx" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete thx" />
+    <MESSAGE value="spring_conf" />
+    <option name="LAST_COMMIT_MESSAGE" value="spring_conf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -798,8 +805,22 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.7081545">
-            <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <first_editor vertical-scroll-proportion="0.32188842">
+            <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/network/2015-12-27-dtd.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.45064378">
+            <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
             <folding />
           </first_editor>
           <second_editor />
