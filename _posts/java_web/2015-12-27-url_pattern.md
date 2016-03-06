@@ -62,7 +62,8 @@ wrapper代表一个servlet，它负责管理一个Servlet，包括Servlet的装�
 
 源码详见[internalMapWrapper](#internalMapWrapper)
 
-<h2 id="ant_style>ant_style</h2>
+## ant_style
+
 Ant path 匹配原则
 路径匹配原则(Path Matching) Spring MVC中的路径匹配要比标准的web.xml要灵活的多。默认的策略实现了 org.springframework.util.AntPathMatcher，就像名字提示的那样，路径模式是使用了Apache Ant的样式路径，Apache Ant样式的路径有三种通配符匹配方法（在下面的表格中列出)
 这些可以组合出很多种灵活的路径模式
