@@ -10,6 +10,7 @@ spring的配置xsd都有详细说明，然后稍微懂点英语，会看xsd就ok
 [会看xsd](/2015/12/27/xsd)
 
 下是一些常用配置，讲究实用
+
 #### 读取配置文件
 
     1.<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
