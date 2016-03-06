@@ -27,6 +27,10 @@ tags: spring
 #### 典型web应用程序应用场景
 
 ![典型web架构](/images/java_web/webStruct.jpg)
+
+#### spring模块说明
+
+*   aop 面向切面编程,提供比如日志记录、权限控制、性能统计等通用功能和业务逻辑分离的技术
 参考
 
 [1]<http://www.importnew.com/17474.html>
