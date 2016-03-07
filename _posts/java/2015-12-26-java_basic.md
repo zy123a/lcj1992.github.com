@@ -5,7 +5,15 @@ categories:  java
 tags: java autoboxing transient thread jdbc
 ---
 
-<h3 id="init">初始化顺序</h3>
+*   [java初始化顺序](#init)
+*   [自动装箱拆箱](#autobox)
+*   [transient](#transient)
+*   [thread](#thread)
+*   [jdbc](#jdbc)
+*   [annotation](#annotation)
+
+
+### 初始化顺序 {#init}
 
 1.  静态变量（类变量）、静态初始化块 > 实例变量、 初始化块 > 构造器
 
@@ -13,7 +21,7 @@ tags: java autoboxing transient thread jdbc
 
 3.  静态代码块是在类加载时主动执行的，静态方法是在被调用的时候被动执行的
 
-<h3 id="autobox">自动装箱拆箱</h3>
+### 自动装箱拆箱 {#autobox}
 
 装箱
 基本类型-》引用类型
@@ -35,7 +43,7 @@ The Java compiler applies unboxing when an object of a wrapper class is:
 
 If the value p being boxed is true, false, a byte, or a char in the range \u0000 to \u007f, or an int or short number between -128 and 127 (inclusive), then let r1 and r2 be the results of any two boxing conversions of p. It is always the case that r1 == r2.
 
-<h3 id="transient">transient</h3>
+### transient
 
 1.  一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
 
@@ -43,7 +51,7 @@ If the value p being boxed is true, false, a byte, or a char in the range \u0000
 
 3.  被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。
 
-<h3 id="thread">线程</h3>
+### thread
 
 结合[jvm内存模型](http://lcj1992.github.io/2015/09/03/java_internal)
 
@@ -61,7 +69,7 @@ thread.run()和thread.start()
 
 start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。
 
-<h3 id="jdbc">jdbc</h3>
+### jdbc
 
 #### 基本用法
 
@@ -126,7 +134,7 @@ String sql = String.format("select * from account where id=%d and name='%s", id,
 Statement statement = con.createStatement();
 rs = statement.executeQuery(sql);
 
-<h3 id="annotation">注解</h3>
+### annotation
 
 #### java中内置的三种注解
 `@Override`: 重写方法，或者实现接口
@@ -164,7 +172,8 @@ RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读�
 
 Class，Method，Field等类都实现了AnnotatedElement接口
 
-#### 注解元素可用的类型：
+#### 注解元素可用的类型
+
 八大基本类型
 String
 Class
@@ -239,6 +248,12 @@ Annotaion
             }
             System.out.println(user);
         }
+
+### 位运算符 {#bitOp}
+
+*   \<\<   左移运算符，num \<\< 1,相当于num乘以2
+*   \>\>   右移运算符，num \>\> 1,相当于num除以2
+*   \>\>\> 无符号右移，忽略符号位，空位都以0补齐
 
 [1]<http://blog.csdn.net/xyang81/article/details/7270002#comments>
 
