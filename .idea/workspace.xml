@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" afterPath="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" afterPath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nohup.out" afterPath="$PROJECT_DIR$/nohup.out" />
     </list>
     <ignored path="foolchild.iws" />
@@ -91,12 +91,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-02-24-HashMap.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2016-02-24-HashMap.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.9221698">
-                <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
+              <first_editor vertical-scroll-proportion="0.3207547">
+                <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -123,12 +123,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-26-ideaDebugTool.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-12-26-ideaDebugTool.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.9292453">
-                <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
+              <first_editor vertical-scroll-proportion="0.7523585">
+                <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -206,8 +206,8 @@
         <option value="$PROJECT_DIR$/_posts/java/2016-01-27-guava.md" />
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-java_basic.md" />
         <option value="$PROJECT_DIR$/_posts/java/jdk/2016-03-07-Integer.md" />
-        <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
         <option value="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" />
+        <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
       </list>
     </option>
   </component>
@@ -773,7 +773,7 @@
       <workItem from="1457054365003" duration="4479000" />
       <workItem from="1457275318590" duration="2060000" />
       <workItem from="1457316410707" duration="1824000" />
-      <workItem from="1457359550845" duration="4624000" />
+      <workItem from="1457359550845" duration="5276000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -841,11 +841,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457399638322</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="multi thread debug">
+      <created>1457399842308</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1457399842308</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12987000" />
+    <option name="totallyTimeSpent" value="13639000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1305,32 +1311,32 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.7523585">
+            <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.9221698">
-            <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
+          <first_editor vertical-scroll-proportion="0.3207547">
+            <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.9292453">
-            <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
       </provider>
     </entry>
   </component>
