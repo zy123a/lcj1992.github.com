@@ -94,3 +94,5 @@ run - view Breakpoints - suspend 将All改为Thread就可以了
 ###  参考
 
 [1]<http://javapapers.com/core-java/top-10-java-debugging-tips-with-eclipse>
+
+[2][idea 多线程调试](http://emacsist.github.io/2015/12/03/IDEA-%E5%92%8C-Eclipse-%E8%B0%83%E8%AF%95%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BA%94%E7%94%A8/)
