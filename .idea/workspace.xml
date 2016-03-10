@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" afterPath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/jdk/2016-02-27-Thread.md" afterPath="$PROJECT_DIR$/_posts/java/jdk/2016-02-27-Thread.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md" afterPath="$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,8 +46,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.2476415">
-                <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+              <first_editor vertical-scroll-proportion="0.31839624">
+                <caret line="9" column="77" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="77" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -767,7 +765,7 @@
       <workItem from="1457433985281" duration="1580000" />
       <workItem from="1457488027839" duration="1540000" />
       <workItem from="1457516017686" duration="2339000" />
-      <workItem from="1457535192982" duration="3069000" />
+      <workItem from="1457535192982" duration="3215000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -865,11 +863,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457537142310</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="equal and hashmap">
+      <created>1457572970599</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1457572970599</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23768000" />
+    <option name="totallyTimeSpent" value="23914000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -924,7 +928,8 @@
     <MESSAGE value="hash map loop" />
     <MESSAGE value="ssh" />
     <MESSAGE value="hashMap" />
-    <option name="LAST_COMMIT_MESSAGE" value="hashMap" />
+    <MESSAGE value="equal and hashmap" />
+    <option name="LAST_COMMIT_MESSAGE" value="equal and hashmap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1556,8 +1561,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.2476415">
-            <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+          <first_editor vertical-scroll-proportion="0.31839624">
+            <caret line="9" column="77" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="77" />
             <folding />
           </first_editor>
           <second_editor />
