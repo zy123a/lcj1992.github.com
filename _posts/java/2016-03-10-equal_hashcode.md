@@ -5,6 +5,8 @@ categories: java
 tags: java equal hashcode
 ---
 
+
+todo
 参考
 
 [1]<http://crunchify.com/how-to-override-equals-and-hashcode-method-in-java/>
