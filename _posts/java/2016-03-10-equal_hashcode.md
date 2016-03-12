@@ -29,9 +29,8 @@ hashCode():
 
 1.  如果你重写了equals方法,你必须重写hashCode方法
 2.  关系:
-    *   equals(逻辑相等)的对象,hashCode()一定相等; 
-    *   hashCode()相等的对象,不一定equals ; 
-    *   hashCode()不等的对象,一定不equals,可以用这个特点来改善hashtable一些操作的性能(However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables
+    *   equals(逻辑相等)的对象,hashCode()一定相等; 其逆否命题:hashCode()不等的对象,一定不equals
+    *   hashCode()相等的对象,不一定equals ;  
 3.  equals和hashCode使用相同的域(`same set of "significant" fields`),不一定是所有域
 4.  当使用hash-based的Collection和Map如 HashSet,LinkedHashSet,HashMap,HashTable,WeakHashMap,确保key的hashCode()是不可变的
 
