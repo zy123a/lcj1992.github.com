@@ -9,11 +9,13 @@ tags: java equal hashcode
 *   [hashCode和equals关系](#relation)
 *   [实现equals](#equals)
 *   [实现hashCode](#hashcode)
+*   [一个例子](#example)
 *   [参考](#ref)
 
 ### 概述 {#summary}
 equals() 和 hashCode()是java中Object类中两个基本的方法
-equals:
+
+equals():
 
 *   == (引用相等)是比较两个对象的在内存中的地址是否相同
 *   equals() (逻辑相等)比较的是两个对象的数据是否想等
@@ -51,7 +53,7 @@ hashCode():
 *   使用==来检查引用的相等性
 *   使用instanceof 来检测参数类型
 *   cast参数到正确的类型
-*   比较有意义的域的相等性
+*   按照上边的比较方法比较你觉得有意义的域的相等性
 
 看下String的equals方法
 
@@ -77,7 +79,7 @@ hashCode():
         return false;
     }
 
-可以使用apache的工具类[EqualsBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/EqualsBuilder.html)
+还可以使用apache的工具类[EqualsBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/EqualsBuilder.html)
 
 ### 实现hashCode {#hashcode}
 
@@ -97,7 +99,11 @@ ps:
 用37这样的素数，可以让各种对象的hashcode值分布散列一些，为了减少下面这种情况的发生，不同对象虽然每个实例变量不同，还是可能计算出来的hashCode值相同
 [详见](http://stackoverflow.com/questions/8577582/on-integer-multiplication-overflow-and-information-loss)
 
-可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html) 
+还可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html) 
+
+### 例子 {#example}
+
+[在这](/2016/03/12/equals_hashcode_example)
 
 ### 参考 {#ref}
 
