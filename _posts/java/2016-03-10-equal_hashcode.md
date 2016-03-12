@@ -1,12 +1,106 @@
 ---
 layout: post
-title: equal & hashcode(译)
+title: equal & hashcode
 categories: java
 tags: java equal hashcode
 ---
 
+*   [概述](#summary)
+*   [hashCode和equals关系](#relation)
+*   [实现equals](#equals)
+*   [实现hashCode](#hashcode)
+*   [Q&A](#q&a)
+*   [参考](#ref)
 
-todo
-参考
+### 概述 {#summary}
+equals() 和 hashCode()是java中Object类中两个基本的方法
+
+*   == (引用相等)是比较两个对象的在内存中的地址是否相同
+*   equals() (逻辑相等)比较的是两个对象的数据是否想等
+
+###  hashCode和equals关系 {#relation}
+
+1.  如果你重写了equals方法,你必须重写hashCode方法
+2.  关系:
+    *   equals(逻辑相等)的对象,hashCode()一定相等; 
+    *   hashCode()相等的对象,不一定equals ; 
+    *   hashCode()不等的对象,一定不equals,可以用这个特点来改善hashtable一些操作的性能(However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables
+3.  equals和hashCode使用相同的域(`same set of "significant" fields`),不一定是所有域
+4.  当使用hash-based的Collection和Map如 HashSet,LinkedHashSet,HashMap,HashTable,WeakHashMap,确保key的hashCode()是不可变的
+
+### 实现equals {#equals}
+ 
+当实现equals,根据类型不同,采用不同的比较方法
+
+1.  对象域包括collections :equals
+2.  类型安全的枚举 : equals或者==
+3.  可能为空的对象域 : ==和equals
+4.  数据域 : Arrays.equals
+5.  除了float和equals的基本类型 : ==
+6.  float : 通过Float.floatToIntBits转化为int ,然后使用 ==
+6.  double : 通过Double.doubleToLongBits转化为int ,然后使用 ==
+
+很多人认为hashCode是一个对象的唯一标识,其实这是不对的.在java中equals方法必须满足`自反性`,`对称性`,`传递性`,`一致性`,且obj.equals(null)肯定返回false
+重写equals的最加实践是:
+
+*   使用==来检查引用的相等性
+*   使用instanceof 来检测参数类型
+*   cast参数到正确的类型
+*   比较有意义的域的相等性
+
+看下String的equals方法
+
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof String) {
+            String anotherString = (String) anObject;
+            int n = value.length;
+            if (n == anotherString.value.length) {
+                char v1[] = value;
+                char v2[] = anotherString.value;
+                int i = 0;
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])
+                            return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+可以使用apache的工具类[EqualsBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/EqualsBuilder.html)
+
+### 实现hashCode {#hashcode}
+
+1.  把某个非零常数值保存在int变量result中
+2.  对于对象的每一个关键域f(equals方法中考虑的每一个域)
+    *   boolean 计算 `f ? 0 :1`
+    *   byte,char,short 计算`(int) f`
+    *   long    计算`(int)(f^(f\>\>\>32))`
+    *   float   计算`Float.floatToIntBits(f)`
+    *   double  计算`Double.doubleToLongBits(f)`得到一个long,然后计算`(int)(f^(f\>\>\>32))`;
+    *   对象引用 递归调用它的hashCode方法`f.hashCode()`
+    *   数组域,对其中每个元素调用它的hashCode方法.
+3.  将上面计算得到的散列码保存到int变量c中,然后执行`result = 37 * result + c`
+4.  返回result
+
+ps:
+用37这样的素数，可以让各种对象的hashcode值分布散列一些，为了减少下面这种情况的发生，不同对象虽然每个实例变量不同，还是可能计算出来的hashCode值相同
+
+可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html) 
+
+### 参考 {#ref}
 
 [1]<http://crunchify.com/how-to-override-equals-and-hashcode-method-in-java/>
+
+[2]<http://zhangjunhd.blog.51cto.com/113473/71571>
+
+[3]<http://stackoverflow.com/questions/27581/what-issues-should-be-considered-when-overriding-equals-and-hashcode-in-java>
+
+[4]<http://www.javapractices.com/topic/TopicAction.do?Id=29>
+
+[5]<http://www.cnblogs.com/dolphin0520/p/3681042.html>
