@@ -19,9 +19,6 @@ Beijing City, China   Computer Software
 [github](http://github.com/lcj1992/)
 
 [微博](http://weibo.com/u/1825339361)
-
-微信公众号
-![we_chat](/images/we_chat.jpg "微信公众号")
     
 ### 关于blog
 
@@ -29,6 +26,15 @@ Beijing City, China   Computer Software
 
 2. `外文翻译`　自己英语水平不够;　自己走一遍比单纯转个连接要强; 之前的认知可能存在偏差，自己的博客自己可以改，不断改认识不断深化，如[jvm　internal](/2015/09/03/jvm_internal),[tcp状态机](/2015/12/25/tcpFSM)
 
-3.  `别人的or笔记`　见上2,3,如[文件系统x问](/2016/01/07/fileSysQA),[并发基础](/2015/11/25concurrent)
+3.  `别人的or笔记`　见上2,3,如[文件系统x问](/2016/01/07/fileSysQA),[并发基础](/2015/11/25/concurrent)
 
-4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[cpu高了](/2015/12/17/cpuHigh) ,[磁盘满了](/2015/12/17/diskFull)　
+4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[equals和hashCoe](/2016/03/10/equal_hashcode) ,[磁盘满了](/2015/12/17/diskFull)　
+
+### 博客的快捷键
+
+1.  双击ctrl 全局搜
+2.  alt + h 博客主页
+3.  alt + a 跳到这个页面
+4.  alt + n 跳到下篇文章
+5.  alt + p 跳到上篇文章
+6.  alt + c 跳到目录页面
