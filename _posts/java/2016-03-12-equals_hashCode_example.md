@@ -144,8 +144,8 @@ tags: equals hashCode
 
 最后一行的方法调用链如下:
 
-`hashMap.get(new People("foolchild", 24)) -/> HashMap#get() -/> HashMap#getEntry() -/> HashMap#hash(Object k)`
+`hashMap.get(new People("foolchild", 24)) -> HashMap#get() -> HashMap#getEntry() -> HashMap#hash(Object k)`
 
-因为只重写了equals没重写hashCode,`e.hash == hash` && ((k = e.key) == key || (key != null && key.equals(k))) 肯定过不去啊,
+因为只重写了equals没重写hashCode,`e.hash == hash` && ((k = e.key) == key \|\| (key != null && key.equals(k))) 肯定过不去啊,
 
 所以上述例子返回null
