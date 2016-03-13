@@ -107,7 +107,30 @@ ps:
 
 #### hashCode为什么能够提升hash-based的Collection和Map的性能 {#hashCode_hash_based}
  
-想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历?
+想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历,逐一equals判定?如果map中存了一万条数据呢?
+
+看下hashMap#getEntry的实现
+
+1.  `hash(key)` 都是移位运算
+2.  `indexFor()` hash值与table.length - 1 进行与运算,找到hash(key)所在table的index.
+3.  又因为table的length是2的n次幂,保证table数据可以均匀分配.
+4.  然后遍历该table\[index\]的entry,最好情况下时间复杂度为O(1),最坏也是O(n)
+
+高下立判
+
+    int hash = (key == null) ? 0 : hash(key);
+    for (Entry<K,V> e = table[indexFor(hash, table.length)];
+         e != null;
+         e = e.next) {
+        Object k;
+        // 这段逻辑是否熟悉,忘了的话看上边,再贴一遍吧
+        // e.hash值等于上hash并且e.key与key逻辑相等或就是同一个引用,满足的话,就是同一个entry,返回改entry
+        if (e.hash == hash &&
+            ((k = e.key) == key || (key != null && key.equals(k))))
+            return e;
+    }
+    return null;
+
 
 ### 一道题目 {#example}
 
