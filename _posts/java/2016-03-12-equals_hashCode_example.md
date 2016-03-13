@@ -57,7 +57,7 @@ tags: equals hashCode
         int i = indexFor(hash, table.length);
         for (Entry<K,V> e = table[i]; e != null; e = e.next) {
             Object k;
-            // e.hash值等于上hash并且e.key与key逻辑相等或就是同一个引用,满足的话,就是同一个key,value替换为新值
+            // e.hash值等于hash并且e.key与key逻辑相等或就是同一个引用,满足的话,就是同一个key,value替换为新值
             if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
                 V oldValue = e.value;
                 e.value = value;
@@ -76,7 +76,7 @@ tags: equals hashCode
 
 ### HashMap#hash() {#hash} 
 
-***根据key的hashCode***在算出一个hashCode,在hashMap resize时,该值不变,其数学原理暂时不懂.
+***根据key的hashCode***再算出一个hashCode,在hashMap resize时,该值不变.为什么要这么算,其数学原理暂时不懂.
 
     final int hash(Object k) {
         int h = hashSeed;
@@ -98,10 +98,12 @@ tags: equals hashCode
 
 根据hashCode计算该key在table中的index
 
+对于table length 为2^n(n > 0),h & (length - 1) 其实就是 h % length,不过位运算比模运算效率高(之所以采用table采用2^n,这样可以保证品君分配)
+
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
         // 对于table.length,为2^n(n > 0)(这个必须的)
-        // h & (length -1) 其实就是 h % length,不过前者效率高的多,这样可以保证分配平均
+        // h & (length - 1) 其实就是 h % length,不过前者效率高的多,这样可以保证分配平均
         return h & (length-1);
     }
     
@@ -119,6 +121,8 @@ tags: equals hashCode
     }
     
 ### HashMap#getEntry {getEntry}
+
+只有e.hash == hash(key),且e.key == key 或者e.key equals key才返回e.
 
     final Entry<K,V> getEntry(Object key) {
         if (size == 0) {
@@ -146,6 +150,6 @@ tags: equals hashCode
 
 `hashMap.get(new People("foolchild", 24)) -> HashMap#get() -> HashMap#getEntry() -> HashMap#hash(Object k)`
 
-因为只重写了equals没重写hashCode,`e.hash == hash` && ((k = e.key) == key \|\| (key != null && key.equals(k))) 肯定过不去啊,
+因为只重写了equals没重写hashCode,`e.hash == hash` && ((k = e.key) == key \|\| (key != null && key.equals(k))) hash值的条件肯定过不去啊,
 
 所以上述例子返回null

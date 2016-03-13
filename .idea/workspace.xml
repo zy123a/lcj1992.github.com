@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="equal hashCode">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashCode_example.md" afterPath="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashCode_example.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nohup.out" afterPath="$PROJECT_DIR$/nohup.out" />
     </list>
     <ignored path="foolchild.iws" />
@@ -799,7 +800,7 @@
       <workItem from="1457659902660" duration="1020000" />
       <workItem from="1457673348264" duration="3039000" />
       <workItem from="1457743864262" duration="7750000" />
-      <workItem from="1457764754302" duration="15434000" />
+      <workItem from="1457764754302" duration="15453000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -1023,11 +1024,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457837094608</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="equal hashCode">
+      <created>1457838057219</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1457838057219</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54639000" />
+    <option name="totallyTimeSpent" value="54658000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
