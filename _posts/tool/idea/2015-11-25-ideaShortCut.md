@@ -37,28 +37,28 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 
 |mac|pc|作用|
 |---|---|
-|Command + E |Ctrl + E	|最近使用的文件(不一定编辑)|
-|Command + Shift + O|Ctrl + Shift + N	|跳转到指定文件或者目录|
-|Command + Option + O|Ctrl + Shift + Alt + N|	跳转到指定的符号|
-|Command + 1|Alt + 1	|project工具窗口|
+|Cmd + E |Ctrl + E	|最近使用的文件(不一定编辑)|
+|Cmd + Shift + O|Ctrl + Shift + N	|跳转到指定文件或者目录|
+|Cmd + Option + O|Ctrl + Shift + Alt + N|	跳转到指定的符号|
+|Cmd + 1|Alt + 1	|project工具窗口|
 |Esc|Esc	|返回编辑器|
-|Command + B |Ctrl + U	|跳转到父类或者接口|
-|Command + Option + B |Ctrl + Alt + B|	跳转到实现|
+|Cmd + B |Ctrl + U	|跳转到父类或者接口|
+|Cmd + Option + B |Ctrl + Alt + B|	跳转到实现|
 |Ctrl + H |Ctrl  + H|类的继承关系|
 |Ctrl + Option + H |Ctrl + Shift  + H　我的给改成Ctrl + Alt + Shift + H了|方法的继承关系|
-|Command + Shift + H |Ctrl + Alt + H	|方法的调用关系|
-|Command + Shift + Option + U |Ctrl + Alt  + U	|UML图展示类的层次关系 （F5 美化 空格 添加新类）|
-|Command + Option + F7 |Alt + F7|查看使用处 show usages|
-|Command + Shift + E |Ctrl + Shift + E	|最近被编辑过的文件|
-|Command + Shift + \`|Ctrl + Alt + \[|上一个工程|
-|Command + \` |Ctrl + Alt + \]|下一个工程|
+|Cmd + Shift + H |Ctrl + Alt + H	|方法的调用关系|
+|Cmd + Shift + Option + U |Ctrl + Alt  + U	|UML图展示类的层次关系 （F5 美化 空格 添加新类）|
+|Cmd + Option + F7 |Alt + F7|查看使用处 show usages|
+|Cmd + Shift + E |Ctrl + Shift + E	|最近被编辑过的文件|
+|Cmd + Shift + \`|Ctrl + Alt + \[|上一个工程|
+|Cmd + \` |Ctrl + Alt + \]|下一个工程|
 
 
 <h3 id="edit">Editing</h3>
 
 |mac| pc | 作用  |
 |---|---| 
-| |Ctrl + Space| Basic code completion (the name of any class,method or variable)|
+|Ctrl + Space |Ctrl + Space| Basic code completion (the name of any class,method or variable)|
 | |Ctrl + Shift + Space| Smart code completion (filters the list of methods and variables by expected type)|
 | |Ctrl + Shift + Enter| Complete statement
 | |Ctrl + P |Parameter info (within method call arguments)
