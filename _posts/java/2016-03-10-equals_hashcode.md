@@ -107,7 +107,7 @@ ps:
 
 #### hashCode为什么能够提升hash-based的Collection和Map的性能 {#hashCode_hash_based}
  
-想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历,逐一equals判定?如果map中存了一万条数据呢?
+以HashMap为例,想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历,逐一equals判定?如果map中存了一万条数据呢?
 
 看下hashMap#getEntry的实现
 
