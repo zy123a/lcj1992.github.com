@@ -9,7 +9,9 @@ tags: java equal hashcode
 *   [hashCode和equals关系](#relation)
 *   [实现equals](#equals)
 *   [实现hashCode](#hashcode)
-*   [一个例子](#example)
+*   [Q&A](#qAnda)
+    *   [hashCode为什么能够提升hash-based的Collection和Map的性能](#hashCode_hash_based)
+*   [一道题目](#example)
 *   [参考](#ref)
 
 ### 概述 {#summary}
@@ -100,7 +102,14 @@ ps:
 
 还可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html) 
 
-### 例子 {#example}
+### Q&A {#qAnda}
+
+
+#### hashCode为什么能够提升hash-based的Collection和Map的性能 {#hashCode_hash_based}
+ 
+想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历?
+
+### 一道题目 {#example}
 
 [在这](/2016/03/12/equals_hashcode_example)
 

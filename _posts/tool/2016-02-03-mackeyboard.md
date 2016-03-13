@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: mac使用
@@ -25,3 +26,5 @@ categories: tool
 参考
 
 [1]<http://softu.cn/457>
+
+[3]<https://support.apple.com/zh-cn/HT201236>
