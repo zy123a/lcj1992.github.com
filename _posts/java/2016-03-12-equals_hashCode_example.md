@@ -13,7 +13,7 @@ tags: equals hashCode
 *   [HashMap#getEntry](#getEntry)
 *   [结论](#conclusion)
 
-概念原理相关[参见](2016/03/10/equal_hashcode)
+概念原理相关[参见](2016/03/10/equals_hashcode)
 
 ### 下边程序结果是什么? {#question}
 
