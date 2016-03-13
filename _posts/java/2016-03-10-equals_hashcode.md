@@ -25,16 +25,16 @@ equals():
 hashCode():
 
 对于包含容器类型的程序设计语言来说,基本上都会设计到hashCode.在java中也一样,hashCode方法的主要作用是为了配合基于散列的集合一起正常运行,如hashSet,hashMap等
-用于判别集合中是否已经存在该对象.
+用于快速定位对象.
 
 ###  hashCode和equals关系 {#relation}
 
 1.  如果你重写了equals方法,你必须重写hashCode方法
 2.  关系:
-    *   equals(逻辑相等)的对象,hashCode()一定相等; 其逆否命题:hashCode()不等的对象,一定不equals
-    *   hashCode()相等的对象,不一定equals ;  
-3.  equals和hashCode使用相同的域(`same set of "significant" fields`),不一定是所有域
-4.  当使用hash-based的Collection和Map如 HashSet,LinkedHashSet,HashMap,HashTable,WeakHashMap,确保key的hashCode()是不可变的
+    *   ***equals(逻辑相等)的对象,hashCode()一定相等;其逆否命题当然也是成立的,hashCode()不等的对象,一定不equals***
+    *   ***hashCode()相等的对象,不一定equals;***
+3.  equals和hashCode应使用相同的域(`same set of "significant" fields`),当然不一定是所有域,你看着办.
+4.  当使用基于hash的Collection和Map如 HashSet,LinkedHashSet,HashMap,HashTable,WeakHashMap,确保key的hashCode()是不可变的
 
 ### 实现equals {#equals}
  
@@ -91,7 +91,7 @@ hashCode():
     *   long    计算`(int)(f^(f\>\>\>32))`
     *   float   计算`Float.floatToIntBits(f)`
     *   double  计算`Double.doubleToLongBits(f)`得到一个long,然后计算`(int)(f^(f\>\>\>32))`;
-    *   对象引用 递归调用它的hashCode方法`f.hashCode()`
+    *   对象引用 调用它的hashCode方法`f.hashCode()`
     *   数组域,对其中每个元素调用它的hashCode方法.
 3.  将上面计算得到的散列码保存到int变量c中,然后执行`result = 37 * result + c`
 4.  返回result
@@ -105,9 +105,9 @@ ps:
 ### Q&A {#qAnda}
 
 
-#### hashCode为什么能够提升hash-based的Collection和Map的性能 {#hashCode_hash_based}
+#### hashCode为什么能够提升基于hash的Collection和Map的性能 {#hashCode_hash_based}
  
-以HashMap为例,想象一下如果没有hash,你会如何查找一个map中的某个entry,遍历,逐一equals判定?如果map中存了一万条数据呢?
+以HashMap为例,想象一下如果没有hash,你会如何查找一个map中的某个entry. 遍历HashMap中所有entry,逐一equals?这肯定是可以的,但是...
 
 看下hashMap#getEntry的实现
 
@@ -134,7 +134,7 @@ ps:
 
 ### 一道题目 {#example}
 
-[在这](/2016/03/12/equals_hashcode_example)
+[看这里](/2016/03/12/equals_hashcode_example)
 
 ### 参考 {#ref}
 
