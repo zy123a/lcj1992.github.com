@@ -27,12 +27,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016-02-24-HashMap.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016-02-24-HashMap.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.44329897">
-                <caret line="115" column="26" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+              <first_editor vertical-scroll-proportion="2.1134021">
+                <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -53,12 +53,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-03-10-equals_hashcode.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2016-03-10-equals_hashcode.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.13402061">
-                <caret line="107" column="70" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="70" />
+              <first_editor vertical-scroll-proportion="0.22680412">
+                <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -215,8 +215,8 @@
         <option value="$PROJECT_DIR$/_layouts/default.html" />
         <option value="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md" />
         <option value="$PROJECT_DIR$/_posts/tool/2016-02-03-mackeyboard.md" />
-        <option value="$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md" />
         <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
+        <option value="$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md" />
       </list>
     </option>
   </component>
@@ -851,7 +851,7 @@
       <workItem from="1457659902660" duration="1020000" />
       <workItem from="1457673348264" duration="3039000" />
       <workItem from="1457743864262" duration="7750000" />
-      <workItem from="1457764754302" duration="18597000" />
+      <workItem from="1457764754302" duration="18674000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -1105,11 +1105,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457842196944</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="equal hashCode">
+      <created>1457853672252</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1457853672252</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57802000" />
+    <option name="totallyTimeSpent" value="57879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1781,11 +1787,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md">
+    <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.13402061">
-            <caret line="107" column="70" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="70" />
+          <first_editor vertical-scroll-proportion="2.1134021">
+            <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1795,11 +1801,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
+    <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.44329897">
-            <caret line="115" column="26" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+          <first_editor vertical-scroll-proportion="0.22680412">
+            <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
