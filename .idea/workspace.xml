@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/todolist.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/default.html" afterPath="$PROJECT_DIR$/_layouts/default.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" afterPath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md" afterPath="$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nohup.out" afterPath="$PROJECT_DIR$/nohup.out" />
     </list>
     <ignored path="foolchild.iws" />
@@ -41,13 +37,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="default.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_layouts/default.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4040404">
+            <state vertical-scroll-proportion="-5.0">
               <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2016-03-12-equals_hashcode_example.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.6616541">
+                <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -60,16 +72,6 @@
                 <element signature="n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#script#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CNAME" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CNAME">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -185,7 +187,6 @@
         <option value="$PROJECT_DIR$/_posts/java/vm/2015-12-26-jvm_tools.md" />
         <option value="$PROJECT_DIR$/_posts/java/jdk/2016-03-07-Integer.md" />
         <option value="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashCode_example.md" />
-        <option value="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md" />
         <option value="$PROJECT_DIR$/_posts/java/2016-03-10-equal_hashcode.md" />
         <option value="$PROJECT_DIR$/pages/about.md" />
         <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
@@ -195,6 +196,7 @@
         <option value="$PROJECT_DIR$/_site/page3/index.html" />
         <option value="$PROJECT_DIR$/_layouts/page.html" />
         <option value="$PROJECT_DIR$/_layouts/default.html" />
+        <option value="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md" />
       </list>
     </option>
   </component>
@@ -797,7 +799,7 @@
       <workItem from="1457659902660" duration="1020000" />
       <workItem from="1457673348264" duration="3039000" />
       <workItem from="1457743864262" duration="7750000" />
-      <workItem from="1457764754302" duration="14347000" />
+      <workItem from="1457764754302" duration="14416000" />
     </task>
     <task id="LOCAL-00001" summary="eea">
       <created>1457055025199</created>
@@ -997,11 +999,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457776415250</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="equal hashCode">
+      <created>1457836970211</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1457836970211</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53552000" />
+    <option name="totallyTimeSpent" value="53621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1016,7 +1024,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47040972" sideWeight="0.47542372" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45508474" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.92261004" sideWeight="0.49491525" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1520,20 +1528,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="-0.73410404">
-            <caret line="96" column="20" selection-start-line="96" selection-start-column="12" selection-end-line="96" selection-end-column="20" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1699,10 +1693,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4040404">
+        <state vertical-scroll-proportion="-5.0">
           <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.6616541">
+            <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
