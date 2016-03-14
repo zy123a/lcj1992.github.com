@@ -134,7 +134,7 @@ ps:
 
 ### 一道题目 {#example}
 
-[看这里](/2016/03/12/equals_hashcode_example)
+[看这里](/2016/03/12/equals_hashcode_eg)
 
 ### 参考 {#ref}
 
