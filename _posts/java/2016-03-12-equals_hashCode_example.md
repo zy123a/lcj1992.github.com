@@ -13,7 +13,7 @@ tags: equals hashCode
 *   [HashMap#getEntry](#getEntry)
 *   [结论](#conclusion)
 
-概念原理相关[参见](2016/03/10/equals_hashcode)
+概念原理相关 [参见这里](/2016/03/10/equals_hashcode)
 
 ### 下边程序结果是什么? {#question}
 
@@ -98,7 +98,7 @@ tags: equals hashCode
 
 根据hashCode计算该key在table中的index
 
-对于table length 为2^n(n > 0),h & (length - 1) 其实就是 h % length,不过位运算比模运算效率高(之所以采用table采用2^n,这样可以保证品君分配)
+对于table length 为2^n(n > 0),h & (length - 1) 其实就是 h % length,不过位运算比模运算效率高(之所以采用table采用2^n,这样可以保证平均分配,`2^n - 1每一位都是1,然后又是与运算..`)
 
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
@@ -120,7 +120,7 @@ tags: equals hashCode
         return null == entry ? null : entry.getValue();
     }
     
-### HashMap#getEntry {getEntry}
+### HashMap#getEntry {#getEntry}
 
 只有e.hash == hash(key),且e.key == key 或者e.key equals key才返回e.
 
