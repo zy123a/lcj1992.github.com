@@ -161,8 +161,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.6875">
-                <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+              <first_editor vertical-scroll-proportion="0.36631945">
+                <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -850,13 +850,7 @@
       <workItem from="1458053644316" duration="83000" />
       <workItem from="1458053765196" duration="11000" />
       <workItem from="1458053792522" duration="2212000" />
-      <workItem from="1458131058372" duration="2472000" />
-    </task>
-    <task id="LOCAL-00013" summary="hash map loop">
-      <created>1457402057768</created>
-      <option name="number" value="00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1457402057768</updated>
+      <workItem from="1458131058372" duration="2710000" />
     </task>
     <task id="LOCAL-00014" summary="ssh">
       <created>1457429183242</created>
@@ -1146,11 +1140,17 @@
       <option name="project" value="LOCAL" />
       <updated>1458131141484</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="pdb">
+      <created>1458142550793</created>
+      <option name="number" value="00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1458142550794</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85529000" />
+    <option name="totallyTimeSpent" value="85767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1859,8 +1859,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.6875">
-            <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <first_editor vertical-scroll-proportion="0.36631945">
+            <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
             <folding />
           </first_editor>
           <second_editor />

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> logback  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> logback </h2>
+        <h3 id="section">实用版</h3>
+<p>去除wiki的冗杂，能够快速确定项目日志怎么打的。实用为上</p>
+
+<h4 id="appender">常见的appender</h4>
+<p>RollFileAppender 滚动策略一般为TimeBasedRollingPolicy</p>
+
+<p>SiftingAppender  根据一个运行参数分割日志文件（MDC put进去）</p>
+
+<p>AsyncAppender  异步的</p>
+
+<h4 id="pattern-">基本pattern 语法</h4>
+<p>1.MDC put一些运行时参数，用于打日志用</p>
+
+<p>2.File和filenamePattern ${}引用变量，在logback中定义的property，还有mdc put的。</p>
+
+<p>3.encoder中% 格式化输出</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>d | date</td>
+      <td>时间</td>
+    </tr>
+    <tr>
+      <td>t  | thread</td>
+      <td>线程名</td>
+    </tr>
+    <tr>
+      <td>L | line</td>
+      <td>行号</td>
+    </tr>
+    <tr>
+      <td>c | lo</td>
+      <td>logger	logger名</td>
+    </tr>
+    <tr>
+      <td>p | le</td>
+      <td>level	日志级别</td>
+    </tr>
+    <tr>
+      <td>m | msg</td>
+      <td>message	日志内容</td>
+    </tr>
+    <tr>
+      <td>n</td>
+      <td>换行符</td>
+    </tr>
+    <tr>
+      <td>X</td>
+      <td>mdc put的变量  %X{orderId}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="logger">logger</h4>
+<p>1.level 不设置，继承上级级别</p>
+
+<p>2.addticity 不设置，向上级logger传递打印信息。</p>
+
+<p>3.root是根logger</p>
+
+<h3 id="wiki">wiki</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>appender logger  filter
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+1.logback首先会试着查找logback.groovy文件
+2.当没有找到时，继续试着查找logback-test.xml文件
+3.当没有找到时，继续试着查找logback.xml文件
+4.如果仍然没有找到，则使用默认配置（打印到控制台）。
+--&gt;
+
+&lt;!--根节点--&gt;
+&lt;configuration scan="true" scanPeriod="60 seconds" debug="false"&gt;
+    &lt;!--
+    scan:当此属性为true时，配置文件如果发生改变，将会被重现加载，默认值为true
+    scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒，当scan为true时，此属性生效，默认的时间间隔为1分钟
+    debug:当此属性为true时,将打印出logback内部日志信息，实时查看logback运行状态，默认值为false
+    --&gt;
+
+    &lt;!--子节点--&gt;
+    &lt;property name="appName" value="lcj-web"/&gt;
+    &lt;!--定义变量，两个属性name 键,value 值,使用${}来使用--&gt;
+
+    &lt;contextName&gt;${appName}&lt;/contextName&gt;
+    &lt;!--每个logger都关联到logger上下文，默认上下文名称为"default"。但可以使用&lt;contextName&gt;设置成其他名字，用于区分不用应用程序的记录.一旦设置，不能修改--&gt;
+
+    &lt;timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/&gt;
+    &lt;!--两个属性key表示次timestamp的名字，datePattern 设置将当前时间（解析配置文件的时间）转换成字符串的模式，遵循java.txt.SimpleDateFormat的格式
+        例如将解析配置文件的时间作为上下文名称：
+            &lt;configuration scan="true" scanPeriod="60 seconds" debug="false"&gt;
+                &lt;timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/&gt;
+                &lt;contextName&gt;${bySecond}&lt;/contextName&gt;
+            &lt;/configuration&gt;
+    --&gt;
+
+    &lt;!--&lt;appender&gt;是&lt;configuration&gt;的子节点，是负责写日志的组件--&gt;
+    &lt;!--appender有两个必要的属性，name和class。name指定appender名称，class指定appender的全限定名--&gt;
+
+    &lt;!--RollingFileAppender--&gt;
+    &lt;appender name="ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
+        &lt;!--滚动记录文件，先将日志文件记录到指定文件，当符合某个条件时，将日志记录到其他文件，有一下子节点--&gt;
+        &lt;!--encoder:负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流
+        目前PatternLayoutEncoder是唯一有用的且默认的encoder，有一个&lt;pattern&gt;节点，用来设置日志的输入格式，
+        使用"%"+"转换符"的方式，如果要输出%,则必须用"\"转义"\%"
+
+        --&gt;
+        &lt;!--
+        triggeringPolicy:告知RollingFileAppender何时激活滚动
+        prudent：当为true时，不支持FixedWindowRollingPolicy。支持TimeBasedRollingPolicy，但是有两个限制，1不支持也不允许文件压缩，2不能设置file属性，必须留空
+        --&gt;
+
+        &lt;file&gt;xx.log&lt;/file&gt;
+        &lt;!--file:被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值--&gt;
+        &lt;append&gt;true&lt;/append&gt;
+        &lt;!--true：追加，false：覆盖--&gt;
+        &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
+
+            &lt;fileNamePattern&gt;xx.%d{yyy-MM-dd}.log&lt;/fileNamePattern&gt;
+            &lt;!--必要节点,包含文件名以及%d转换符,%d可以包含一个java.text.SimpleDateFormat指定的时间格式，如果直接是用%d,默认格式是??
+            此时RollingFileAppender的file字节点可有可无，通过设置file，可以为活动文件和归档文件指定不同位置，当前日志总是记录到file指定的文件（活动文件），
+            活动文件的名字不会改变；如果没设置file，活动文件的名字会根据fileNamePattern 的值，每隔一段时间改变一次。“/”或者“\”会被当做目录分隔符。--&gt;
+
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+            &lt;!--可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件,&lt;maxHistory&gt;是6，假设设置每月滚动，
+            则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除。--&gt;
+        &lt;/rollingPolicy&gt;
+
+        &lt;rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"&gt;
+            &lt;!--根据固定窗口算法重命名文件的滚动策略，有一下子节点--&gt;
+            &lt;minIndex&gt;10&lt;/minIndex&gt;
+            &lt;!--窗口索引最小值--&gt;
+            &lt;maxIndex&gt;12&lt;/maxIndex&gt;
+            &lt;!--窗口索引最大值,当用户指定的窗口过大时，会自动将窗口设置为12--&gt;
+            &lt;fileNamePattern&gt;xx%i.log&lt;/fileNamePattern&gt;
+            &lt;!--必须包含%i,假设最小值和最大值分别为1和2，命名模式为 mylog%i.log,会产生归档文件mylog1.log和mylog2.log。
+            还可以指定文件压缩选项，例如，mylog%i.log.gz 或者 没有log%i.log.zip--&gt;
+        &lt;/rollingPolicy&gt;
+
+        &lt;triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"&gt;
+            &lt;maxFileSize&gt;10MB&lt;/maxFileSize&gt;
+            &lt;!--只有一个节点，活动文件的大小--&gt;
+        &lt;/triggeringPolicy&gt;
+        &lt;prudent&gt;false&lt;/prudent&gt;
+
+    &lt;/appender&gt;
+
+
+    &lt;appender name="flightguess" class="ch.qos.logback.classic.sift.SiftingAppender"&gt;
+        &lt;discriminator&gt;
+            &lt;key&gt;site&lt;/key&gt;
+            &lt;defaultValue&gt;guess&lt;/defaultValue&gt;
+        &lt;/discriminator&gt;
+        &lt;sift&gt;
+            &lt;appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
+                &lt;File&gt;${catalina.base}/logs/${site}.log&lt;/File&gt;
+                &lt;encoder&gt;
+                    &lt;pattern&gt;%d [%p] [%t] %-17C:%L %X %m%n&lt;/pattern&gt;
+                &lt;/encoder&gt;
+                &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
+                    &lt;fileNamePattern&gt;
+                        ${catalina.base}/logs/${site}.log.%d{yyyy-MM-dd-HH}
+                    &lt;/fileNamePattern&gt;
+                &lt;/rollingPolicy&gt;
+            &lt;/appender&gt;
+        &lt;/sift&gt;
+    &lt;/appender&gt;
+
+    &lt;!--ConsoleAppender--&gt;
+    &lt;appender name="stdout" class="ch.qos.logback.core.ConsoleAppender"&gt;
+        &lt;!--有encoder和targer两个子节点--&gt;
+
+        &lt;encoder charset="UTF-8"&gt;
+            &lt;pattern&gt;%d %t %p %-17c{2} %m%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+        &lt;!--对日志进行格式化--&gt;
+
+        &lt;!--fliter--&gt;
+        &lt;!--执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。
+            返回DENY，日志将立即被抛弃不再经过其他过滤器；
+            返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；
+            返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。
+            过滤器被添加到&lt;Appender&gt; 中，
+            为&lt;Appender&gt; 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。
+            &lt;Appender&gt; 有多个过滤器时，按照配置顺序执行--&gt;
+        &lt;!--levelFilter--&gt;
+        &lt;fliter class="ch.qos.logback.classic.filter.LevelFilter"&gt;
+            &lt;!--
+            级别过滤器，根据日志级别进行过滤。如果日志级别等于配置级别，过滤器会根据onMath 和onMismatch接收或拒绝日志。
+            有以下子节点：
+                &lt;level&gt;:设置过滤级别
+                &lt;onMatch&gt;:用于配置符合过滤条件的操作
+                &lt;onMismatch&gt;:用于配置不符合过滤条件的操作
+            --&gt;
+            &lt;level&gt;info&lt;/level&gt;
+            &lt;onmatch&gt;accept&lt;/onmatch&gt;
+            &lt;onmismatch&gt;deny&lt;/onmismatch&gt;
+        &lt;/fliter&gt;
+
+        &lt;fliter class="ch.qos.logback.classic.filter.ThresholdFilter"&gt;
+            &lt;!--临界值过滤器，过滤掉低于指定临界值的日志。
+            当日志级别等于或高于临界值时，过滤器返回NEUTRAL；当日志级别低于临界值时，日志会被拒绝
+            有节点：
+                &lt;level&gt;:设置过滤级别
+            --&gt;
+            &lt;level&gt;info&lt;/level&gt;
+        &lt;/fliter&gt;
+
+
+        &lt;filter class="ch.qos.logback.core.filter.EvaluatorFilter"&gt;
+            &lt;!--求值过滤器，评估、鉴别日志是否符合指定条件。
+            需要额外的两个JAR包，commons-compiler.jar和janino.jar
+            有以下子节点：
+                &lt;evaluator&gt;:鉴别器，常用的鉴别器是JaninoEventEvaluato，也是默认的鉴别器.
+                它以任意的java布尔值表达式作为求值条件，求值条件在配置文件解释过成功被动态编译，
+                布尔值表达式返回true就表示符合过滤条件。evaluator有个子标签&lt;expression&gt;，用于配置求值条件。
+                见下：
+                &lt;onMatch&gt;:用于配置符合过滤条件的操作
+                &lt;onMismatch&gt;:用于配置不符合过滤条件的操作
+                &lt;matcher&gt; ：匹配器，尽管可以使用String类的matches()方法进行模式匹配，
+                但会导致每次调用过滤器时都会创建一个新的Pattern对象，为了消除这种开销，可以预定义一个或多个matcher对象，
+                定义后就可以在求值表达式中重复引用。&lt;matcher&gt;是&lt;evaluator&gt;的子标签。
+                &lt;matcher&gt;中包含两个子标签，一个是&lt;name&gt;，用于定义matcher的名字，
+                求值表达式中使用这个名字来引用matcher；另一个是&lt;regex&gt;，用于配置匹配条件。
+            --&gt;
+            &lt;evaluator&gt; &lt;!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator --&gt;
+                &lt;!--&lt;expression&gt;return message.contains("billing");&lt;/expression&gt;--&gt;
+                &lt;matcher&gt;
+                    &lt;Name&gt;odd&lt;/Name&gt;
+                    &lt;!-- filter out odd numbered statements --&gt;
+                    &lt;regex&gt;statement [13579]&lt;/regex&gt;
+                &lt;/matcher&gt;
+
+                &lt;expression&gt;odd.matches(formattedMessage)&lt;/expression&gt;
+            &lt;/evaluator&gt;
+            &lt;OnMatch&gt;ACCEPT&lt;/OnMatch&gt;
+            &lt;OnMismatch&gt;DENY&lt;/OnMismatch&gt;
+        &lt;/filter&gt;
+        &lt;target&gt;System.out&lt;/target&gt;
+        &lt;!--target: 字符串System.out或者System.err,默认是System.out--&gt;
+    &lt;/appender&gt;
+
+    &lt;!--FileAppender--&gt;
+    &lt;appender name="FILE" class="ch.qos.logback.core.FileAppender"&gt;
+        &lt;!--有file，appender，encoder，prudent四个子节点--&gt;
+
+        &lt;file&gt;xx.log&lt;/file&gt;
+        &lt;!--被写入的文件名，可以是相对目录，可以是绝对目录，如果上级目录不存在会自动创建，没有默认值--&gt;
+        &lt;append&gt;true&lt;/append&gt;
+        &lt;!--true,日志追加到文件末尾，false，晴空现存文件，默认是true--&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%-4relative [%thread] %-5level %logger{35} - %msg%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+        &lt;prudent&gt;false&lt;/prudent&gt;
+        &lt;!--true,日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是false--&gt;
+    &lt;/appender&gt;
+
+
+    &lt;logger name="com.xxx.guess" level="info"&gt;
+        &lt;!--用来设置某一个包或者具体的某一类的日志打印级别，以及指定&lt;appender&gt;.&lt;logger&gt;仅有一个name属性，一个可选的level和一个可选的addtivity--&gt;
+        &lt;!--
+        name:用来之地功能受此约束的某一个包或者具体的某一个类
+        level:用来设置打印级别，大小写无关：trace,debug,info,warn,error,all,off还有未设置此属性，那么当前logger将会继承上级的级别
+        addtivity:是否向上级logger传递打印信息，默认是true
+        logger可以包含零个或者多个&lt;appender-ref&gt;元素，标识这个appender将会添加到这个logger
+        --&gt;
+        &lt;!--&lt;appender-ref ref="rolling"/&gt;--&gt;
+    &lt;/logger&gt;
+
+    &lt;root level="info"&gt;
+        &lt;!--&lt;root&gt;也是logger元素，但是它是根logger,只有一个level属性，因为已经命名为"root"--&gt;
+        &lt;!--level:用来设置打印级别，大小写无关：trave,debug,info,warn,error,all和off,不能设置为inherited或者同义词null.默认是debug--&gt;
+        &lt;appender-ref ref="flightguess"/&gt;
+    &lt;/root&gt;
+&lt;/configuration&gt;
+
+
+encoder
+&lt;!--
+                            输出日志的logger名，可有一个整形参数，功能是缩短logger名，设置为0表示只输入logger最右边点符号之后的字符串。 Conversion specifier Logger name Result
+                            %logger        mainPackage.sub.sample.Bar mainPackage.sub.sample.Bar
+c {length}                  %logger{0}     mainPackage.sub.sample.Bar Bar
+lo {length }                %logger{5}     mainPackage.sub.sample.Bar s.Bar
+logger {length }            %logger{10}    mainPackage.sub.sample.Bar m.s.s.Bar
+                            %logger{15}    mainPackage.sub.sample.Bar m.s.sample.Bar
+                            %logger{16}    mainPackage.sub.sample.Bar m.sub.sample.Bar
+                            %logger{26}    mainPackage.sub.sample.Bar mainPackage.sub.sample.Bar
+
+
+C {length }
+class {length }             输出执行记录请求的调用者的全限定名。参数与上面的一样。尽量避免使用，除非执行速度不造成任何问题。
+
+
+contextName
+cn                          输出上下文名称。
+
+
+                            输出日志的打印日志，模式语法与java.text.SimpleDateFormat 兼容。 Conversion Pattern Result
+                            %d 2006-10-20 14:06:49,812
+d {pattern }                %date  2006-10-20 14:06:49,812
+date {pattern }             %date{ISO8601} 2006-10-20 14:06:49,812
+                            %date{HH:mm:ss.SSS}    14:06:49.812
+                            %date{dd MMM yyyy ;HH:mm:ss.SSS}   20 oct. 2006;14:06:49.812
+
+
+F / file                    输出执行记录请求的java源文件名。尽量避免使用，除非执行速度不造成任何问题。
+
+
+                            输出生成日志的调用者的位置信息，整数选项表示输出信息深度。
+                            例如， %caller{2}   输出为：
+                            0    [main] DEBUG - logging statement
+caller{depth}               Caller+0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)
+caller{depth,               Caller+1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)
+evaluator-1, ... evaluator-n}
+                            例如， %caller{3}   输出为：
+                16   [main] DEBUG - logging statement
+                            Caller+0   at mainPackage.sub.sample.Bar.sampleMethodName(Bar.java:22)
+                            Caller+1   at mainPackage.sub.sample.Bar.createLoggingRequest(Bar.java:17)
+                            Caller+2   at mainPackage.ConfigTester.main(ConfigTester.java:38)
+
+
+L / line                    输出执行日志请求的行号。尽量避免使用，除非执行速度不造成任何问题。
+
+m / msg / message           输出应用程序提供的信息。
+
+M / method                  输出执行日志请求的方法名。尽量避免使用，除非执行速度不造成任何问题。
+
+n  输出平台无关的分行符“\n”或者“\r\n”。
+
+p / le / level             输出日志级别。
+
+r / relative               输出从程序启动到创建日志记录的时间，单位是毫秒
+
+t / thread                 输出产生日志的线程名。
+
+replace(p ){r, t}          p 为日志内容，r 是正则表达式，将p 中符合r 的内容替换为t 。例如， "%replace(%msg){'\s', ''}"
+
+格式修饰符，与转换符共同使用：
+可选的格式修饰符位于“%”和转换符之间。
+第一个可选修饰符是左对齐标志，符号是减号“-”；
+接着是可选的最小宽度修饰符，用十进制数表示。如果字符小于最小宽度，则左填充或右填充，
+默认是左填充（即右对齐），填充符为空格。如果字符大于最小宽度，字符永远不会被截断。
+最大宽度修饰符，符号是点号"."后面加十进制数。如果字符大于最大宽度，则从前面截断。点符号“.”后面加减号“-”在加数字，表示从尾部截断。
+--&gt;
+
+
+&lt;!--evaluatorFilter--&gt;
+&lt;!--
+求值表达式作用于当前日志，logback向求值表达式暴露日志的各种字段：
+
+Name                      Type                Description
+event                  LoggingEvent       与记录请求相关联的原始记录事件，下面所有变量都来自event，
+                                          例如，event.getMessage()返回下面"message"相同的字符串
+
+message                 String            日志的原始消息，例如，设有logger mylogger，"name"的值是"AUB"，
+                                          对于 mylogger.info("Hello {}",name); "Hello {}"就是原始消息。
+
+formatedMessage         String            日志被各式话的消息，例如，设有logger mylogger，"name"的值是"AUB"，
+                                          对于 mylogger.info("Hello {}",name); "Hello Aub"就是格式化后的消息。
+
+logger                  String                 logger 名。
+
+loggerContext        LoggerContextVO      日志所属的logger上下文。
+
+level                    int              级别对应的整数值，所以 level &gt; INFO 是正确的表达式。
+
+timeStamp               long                 创建日志的时间戳。
+
+marker                  Marker           与日志请求相关联的Marker对象，注意“Marker”有可能为null，所以你要确保它不能是null。
+
+mdc                      Map             包含创建日志期间的MDC所有值得map。访问方法是： mdc.get("myKey") 。mdc.get()
+                                         返回的是Object不是String，要想调用String的方法就要强转，例如，
+                                         ((String) mdc.get("k")).contains("val") .MDC可能为null，调用时注意。
+
+throwable           java.lang.Throwable  如果没有异常与日志关联"throwable" 变量为 null.
+                                         不幸的是， "throwable" 不能被序列化。在远程系统上永远为null，
+                                         对于与位置无关的表达式请使用下面的变量throwableProxy
+
+throwableProxy       IThrowableProxy     与日志事件关联的异常代理。如果没有异常与日志事件关联，则变量"throwableProxy"
+                                         为 null. 当异常被关联到日志事件时，"throwableProxy" 在远程系统上不会为null
+--&gt;
+</code></pre>
+</div>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2014/11/20/buildOpenjdk">编译openJdk</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2014/11/20/maven_conflict">解决maven冲突终极办法</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2014/11/20/logback" data-title="logback"
+             data-url="http://lcj1992.github.io/2014/11/20/logback">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2014/11/20/logback" data-title="logback"
+             data-url="http://lcj1992.github.io/2014/11/20/logback"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2014/11/20/buildOpenjdk";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2014/11/20/maven_conflict";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
