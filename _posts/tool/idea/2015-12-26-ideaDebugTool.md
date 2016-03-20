@@ -91,6 +91,7 @@ idea 默认run的级别是all 改为Thread就可以debug多线程了
 
 run - view Breakpoints - suspend 将All改为Thread就可以了
 
+
 ###  参考
 
 [1]<http://javapapers.com/core-java/top-10-java-debugging-tips-with-eclipse>

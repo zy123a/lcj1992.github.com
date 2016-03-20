@@ -119,7 +119,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + Shift + F7|Ctrl + Shift + F7 |Highlight usages in file
 |Cmd + Opt + F7|Ctrl + Alt + F7 |Show usages
 
-<h3 id="compile_run">编译运行</h3>
+### 编译运行 {#compile_run}
 
 |mac| pc| 作用  |
 |---| -----  | ----- | 
@@ -129,7 +129,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Ctrl + D|Shift + F9 |调试
 
 
-<h3 id="debug">调试</h3>
+### 调试 {#debug}
 
 |mac| 快捷键| 作用  |
 |---| -----  | ----- | 
@@ -143,7 +143,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + F8|Ctrl + F8 |切换断点
 |Cmd + Shift + F8|Ctrl + Shift + F8 |查看所有断点,当鼠标该行有断点时，是更改该行的条件
 
-<h3 id="nav">导航</h3>
+### 导航 {#nav}
 
 |mac| pc| 作用  |
 |----|-----  | ----- | 
@@ -178,7 +178,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + F3|Shift + F11 |显示标签
 ||Alt + F7 |查看方法使用
 
-<h3 id="refactor">重构</h3>
+### 重构 {#refactor}
 
 |mac| pc| 作用  |
 |-----| -----  | ----- | 
@@ -194,7 +194,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + Opt + C|Ctrl + Alt + C |提取常量
 |Cmd + Opt + P|Ctrl + Alt + P |提取参数
 
-<h3 id="vcs">vcs/local history</h3>
+### vcs/local history {#vcs}
 
 |mac| pc| 作用  |
 |---| -----  | ----- | 
@@ -202,7 +202,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + T|Ctrl + T |Update project from VCS
 |Shift + Opt + C|Alt + Shift + C |View recent changes
 
-<h3 id="template">模板</h3>
+### 模板 {#template}
 
 |mac| pc| 作用  |
 |---| -----  | ----- |     
@@ -216,7 +216,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |psf|psf | public static final
 |thr|thr | throw new
 
-<h3 id="general">通用</h3>
+### 通用 {#general}
 
 |mac| pc| 作用  |
 |---| -----  | ----- | 

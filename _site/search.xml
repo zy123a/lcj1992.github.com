@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<articles>
+    
+    <article>
+        <title>一个题目来说equals和hashCode</title>
+        <url>/2016/03/12/equals_hashcode_eg</url>
+        <tag>equalshashCode</tag>
+        <date>2016-03-12</date>
+    </article>
+    
+    <article>
+        <title>sublime text</title>
+        <url>/2016/03/11/sublime</url>
+        <tag>sublime</tag>
+        <date>2016-03-11</date>
+    </article>
+    
+    <article>
+        <title>equal & hashcode</title>
+        <url>/2016/03/10/equals_hashcode</url>
+        <tag>javaequalhashcode</tag>
+        <date>2016-03-10</date>
+    </article>
+    
+    <article>
+        <title>Integer</title>
+        <url>/2016/03/07/Integer</url>
+        <tag>Integerjava</tag>
+        <date>2016-03-07</date>
+    </article>
+    
+    <article>
+        <title>定时任务</title>
+        <url>/2016/03/03/cron</url>
+        <tag>quartzcron</tag>
+        <date>2016-03-03</date>
+    </article>
+    
+    <article>
+        <title>python调试</title>
+        <url>/2016/03/03/pdb</url>
+        <tag>pdb</tag>
+        <date>2016-03-03</date>
+    </article>
+    
+    <article>
+        <title>java坑</title>
+        <url>/2016/03/03/javaHole</url>
+        <tag>hole</tag>
+        <date>2016-03-03</date>
+    </article>
+    
+    <article>
+        <title>memcached基础</title>
+        <url>/2016/02/29/memcached_basic</url>
+        <tag></tag>
+        <date>2016-02-29</date>
+    </article>
+    
+    <article>
+        <title>vi with ctags和cscope</title>
+        <url>/2016/02/28/ctags</url>
+        <tag></tag>
+        <date>2016-02-28</date>
+    </article>
+    
+    <article>
+        <title>concurrentHashMap</title>
+        <url>/2016/02/28/concurrentHashMap</url>
+        <tag></tag>
+        <date>2016-02-28</date>
+    </article>
+    
+    <article>
+        <title>String</title>
+        <url>/2016/02/28/String</url>
+        <tag></tag>
+        <date>2016-02-28</date>
+    </article>
+    
+    <article>
+        <title>java native调用</title>
+        <url>/2016/02/28/native</url>
+        <tag></tag>
+        <date>2016-02-28</date>
+    </article>
+    
+    <article>
+        <title>Thread</title>
+        <url>/2016/02/27/Thread</url>
+        <tag></tag>
+        <date>2016-02-27</date>
+    </article>
+    
+    <article>
+        <title>HashMap</title>
+        <url>/2016/02/24/HashMap</url>
+        <tag></tag>
+        <date>2016-02-24</date>
+    </article>
+    
+    <article>
+        <title>mac使用</title>
+        <url>/2016/02/03/mackeyboard</url>
+        <tag></tag>
+        <date>2016-02-03</date>
+    </article>
+    
+    <article>
+        <title>Mackeyboard</title>
+        <url>/2016/02/03/mackeyboard</url>
+        <tag></tag>
+        <date>2016-02-03</date>
+    </article>
+    
+    <article>
+        <title>Collection常用子类源码注解</title>
+        <url>/2016/01/30/Collections</url>
+        <tag>ListSetMapQueue</tag>
+        <date>2016-01-30</date>
+    </article>
+    
+    <article>
+        <title>guava</title>
+        <url>/2016/01/27/guava</url>
+        <tag></tag>
+        <date>2016-01-27</date>
+    </article>
+    
+    <article>
+        <title>支付相关</title>
+        <url>/2016/01/23/pay</url>
+        <tag></tag>
+        <date>2016-01-23</date>
+    </article>
+    
+    <article>
+        <title>linux的软件安装卸载</title>
+        <url>/2016/01/23/linuxsoft</url>
+        <tag></tag>
+        <date>2016-01-23</date>
+    </article>
+    
+    <article>
+        <title>dubbo基本配置</title>
+        <url>/2016/01/23/dubboConf</url>
+        <tag></tag>
+        <date>2016-01-23</date>
+    </article>
+    
+    <article>
+        <title>js 键盘快捷键</title>
+        <url>/2016/01/19/jshotkeys</url>
+        <tag>hotkeysjavascript</tag>
+        <date>2016-01-19</date>
+    </article>
+    
+    <article>
+        <title>shell参数替换</title>
+        <url>/2016/01/17/args_replace</url>
+        <tag>shellparameterreplace</tag>
+        <date>2016-01-17</date>
+    </article>
+    
+    <article>
+        <title>计算tps,qps</title>
+        <url>/2016/01/15/countTQps</url>
+        <tag>tpsqpsmysql</tag>
+        <date>2016-01-15</date>
+    </article>
+    
+    <article>
+        <title>我的插件</title>
+        <url>/2016/01/09/chrome_tool</url>
+        <tag>chromeideamac</tag>
+        <date>2016-01-09</date>
+    </article>
+    
+    <article>
+        <title>uuid(抄)</title>
+        <url>/2016/01/08/uuid_guid</url>
+        <tag>uuidguid</tag>
+        <date>2016-01-08</date>
+    </article>
+    
+    <article>
+        <title>文件系统</title>
+        <url>/2016/01/07/fileSys</url>
+        <tag>inodedentry</tag>
+        <date>2016-01-07</date>
+    </article>
+    
+    <article>
+        <title>spring基础</title>
+        <url>/2016/01/07/spring_base</url>
+        <tag>spring</tag>
+        <date>2016-01-07</date>
+    </article>
+    
+    <article>
+        <title>过滤器和拦截器</title>
+        <url>/2016/01/07/filter_intercepter</url>
+        <tag>filterintercepter</tag>
+        <date>2016-01-07</date>
+    </article>
+    
+    <article>
+        <title>cookie和session</title>
+        <url>/2016/01/07/cookie_session</url>
+        <tag>cookiesession</tag>
+        <date>2016-01-07</date>
+    </article>
+    
+    <article>
+        <title>系统启动</title>
+        <url>/2016/01/05/system_start</url>
+        <tag>systemstart</tag>
+        <date>2016-01-05</date>
+    </article>
+    
+    <article>
+        <title>系统调用</title>
+        <url>/2015/12/31/system_call</url>
+        <tag>system_callos</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>资源分配与调度</title>
+        <url>/2015/12/31/resource_scheduler</url>
+        <tag>resourcescheduler</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>进程管理</title>
+        <url>/2015/12/31/process</url>
+        <tag>process</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>性能</title>
+        <url>/2015/12/31/performance_os</url>
+        <tag>performanceos</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>内存管理</title>
+        <url>/2015/12/31/memory</url>
+        <tag>osmempry</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>中断</title>
+        <url>/2015/12/31/interupt</url>
+        <tag>interupt</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>cpu调度</title>
+        <url>/2015/12/31/cpu</url>
+        <tag>cpu</tag>
+        <date>2015-12-31</date>
+    </article>
+    
+    <article>
+        <title>idea中编译tomcat源码(译)</title>
+        <url>/2015/12/28/tomcat_source</url>
+        <tag>tomcat</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>tomcat添加管理员</title>
+        <url>/2015/12/28/add_admin_tomcat</url>
+        <tag>tomcatadmin</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>redis基础</title>
+        <url>/2015/12/28/redis_basic</url>
+        <tag>redis</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>nginx简单使用</title>
+        <url>/2015/12/28/nginx_basic</url>
+        <tag>nginx</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>maven工程结构(译)</title>
+        <url>/2015/12/28/maven_project_structure</url>
+        <tag>maven</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>maven基本命令</title>
+        <url>/2015/12/28/maven_command</url>
+        <tag>maven</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>maven依赖机制</title>
+        <url>/2015/12/28/dependency</url>
+        <tag>maven</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>tmux</title>
+        <url>/2015/12/28/tmux</url>
+        <tag>tmux</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>logback日常总结</title>
+        <url>/2015/12/28/logback_common</url>
+        <tag>logbackasyncAppender</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>fiddler使用</title>
+        <url>/2015/12/28/fiddler</url>
+        <tag>fiddler</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>spring事务</title>
+        <url>/2015/12/28/spring_transaction</url>
+        <tag>springtransaction</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>spring启动</title>
+        <url>/2015/12/28/spring_start</url>
+        <tag>springServletContextRootWebApplicationContext</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>spring代理(译)</title>
+        <url>/2015/12/28/spring_proxy</url>
+        <tag>springproxy</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>spring分库</title>
+        <url>/2015/12/28/spring_databases</url>
+        <tag>spring分库</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>spring常用配置</title>
+        <url>/2015/12/28/spring_conf</url>
+        <tag>spring</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>mybatis分表</title>
+        <url>/2015/12/28/mybatis_tables</url>
+        <tag>mybatis分表</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>数据库分库分表</title>
+        <url>/2015/12/28/tables_databases</url>
+        <tag>mybatis</tag>
+        <date>2015-12-28</date>
+    </article>
+    
+    <article>
+        <title>终端快捷键</title>
+        <url>/2015/12/27/terminal_short_cut</url>
+        <tag>bashterminalshort_cut</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>ubuntu (14.04)使用时的一些问题</title>
+        <url>/2015/12/27/some_problem_ubuntu_</url>
+        <tag>chromeflashubuntu</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>同时使用内网和翻墙</title>
+        <url>/2015/12/27/great_wall</url>
+        <tag>great_wall</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>一些速度</title>
+        <url>/2015/12/27/performance_speed</url>
+        <tag>speed</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>死锁了</title>
+        <url>/2015/12/27/deadLock</url>
+        <tag>deadlock</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>xsd</title>
+        <url>/2015/12/27/xsd</url>
+        <tag>xsd</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>http协议(译)</title>
+        <url>/2015/12/27/http</url>
+        <tag>http</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>dtd</title>
+        <url>/2015/12/27/dtd</url>
+        <tag>dtdnetwork</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>vi</title>
+        <url>/2015/12/27/vi</url>
+        <tag>vivim</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>top</title>
+        <url>/2015/12/27/top</url>
+        <tag>tophtopglances</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>内存命令</title>
+        <url>/2015/12/27/memory_command</url>
+        <tag>freememory　vmstat</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>load average</title>
+        <url>/2015/12/27/load_average</url>
+        <tag>load</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>磁盘命令</title>
+        <url>/2015/12/27/disk_command</url>
+        <tag>dudf</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>curl</title>
+        <url>/2015/12/27/curl</url>
+        <tag>curlhttpie</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>尚未安家的</title>
+        <url>/2015/12/27/temp</url>
+        <tag>dateidscpdebugclionctagscscopewhoiswhichwhereiswhatislddscreensublime</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>一些命令组合</title>
+        <url>/2015/12/27/some_compose</url>
+        <tag>commandlinux</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>一些脚本</title>
+        <url>/2015/12/27/some_shell</url>
+        <tag>shell</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>shell 控制语句</title>
+        <url>/2015/12/27/shell_grammer</url>
+        <tag>shell</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>url pattern</title>
+        <url>/2015/12/27/url_pattern</url>
+        <tag>url_pattern</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>视图</title>
+        <url>/2015/12/27/view</url>
+        <tag>view</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>数据库查询性能优化</title>
+        <url>/2015/12/27/sql_performance</url>
+        <tag>performancesql</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>mysql相关配置</title>
+        <url>/2015/12/27/mysql_conf</url>
+        <tag>workbeanch</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>负载均衡算法(notes)</title>
+        <url>/2015/12/27/load_balance</url>
+        <tag>load_balance</tag>
+        <date>2015-12-27</date>
+    </article>
+    
+    <article>
+        <title>idea调试技巧</title>
+        <url>/2015/12/26/ideaDebugTool</url>
+        <tag>ideadebug</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>sed</title>
+        <url>/2015/12/26/sed</url>
+        <tag>sed</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>jvm性能工具(notes)</title>
+        <url>/2015/12/26/jvm_tools</url>
+        <tag>jvmtooljpsjstatjstackjmapjharjcmd</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>常见tomcat应用虚拟机配置</title>
+        <url>/2015/12/26/startenv</url>
+        <tag>jvm</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>java序列化解析</title>
+        <url>/2015/12/26/serialParse</url>
+        <tag>serial</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>动态代理和cglib代理</title>
+        <url>/2015/12/26/java_proxy</url>
+        <tag>proxycglib</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>java基础</title>
+        <url>/2015/12/26/java_basic</url>
+        <tag>javaautoboxingtransientthreadjdbc</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>gc算法</title>
+        <url>/2015/12/26/gc_algo</url>
+        <tag>jvmgc</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>excel解析</title>
+        <url>/2015/12/26/excel_parse</url>
+        <tag>exceljava</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>java并发基础</title>
+        <url>/2015/12/26/concurrent_basic</url>
+        <tag>concurrent</tag>
+        <date>2015-12-26</date>
+    </article>
+    
+    <article>
+        <title>tcp 有限状态机(译)</title>
+        <url>/2015/12/25/tcpFSM</url>
+        <tag>tcp</tag>
+        <date>2015-12-25</date>
+    </article>
+    
+    <article>
+        <title>awk</title>
+        <url>/2015/12/25/awk</url>
+        <tag>awklinux</tag>
+        <date>2015-12-25</date>
+    </article>
+    
+    <article>
+        <title>文本</title>
+        <url>/2015/12/24/text</url>
+        <tag>texttailhead　atnodessortuniqlscuttee</tag>
+        <date>2015-12-24</date>
+    </article>
+    
+    <article>
+        <title>学会使用手册</title>
+        <url>/2015/12/22/manual</url>
+        <tag>manlinuxcommand</tag>
+        <date>2015-12-22</date>
+    </article>
+    
+    <article>
+        <title>能使pg</title>
+        <url>/2015/12/19/pgsql</url>
+        <tag>pg</tag>
+        <date>2015-12-19</date>
+    </article>
+    
+    <article>
+        <title>内存满了</title>
+        <url>/2015/12/17/memoryFull</url>
+        <tag></tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>磁盘满了</title>
+        <url>/2015/12/17/diskFull</url>
+        <tag></tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>cpu高了</title>
+        <url>/2015/12/17/cpuHigh</url>
+        <tag>cpuperformance</tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>ubuntu获取源码</title>
+        <url>/2015/12/17/getSource</url>
+        <tag></tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>文件系统x问</title>
+        <url>/2015/12/17/fileSysQA</url>
+        <tag>inodevnodedentrysuper_blockfile_system</tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>磁盘结构</title>
+        <url>/2015/12/17/disk</url>
+        <tag>disk</tag>
+        <date>2015-12-17</date>
+    </article>
+    
+    <article>
+        <title>常见安全算法</title>
+        <url>/2015/12/08/comSecAlgos</url>
+        <tag></tag>
+        <date>2015-12-08</date>
+    </article>
+    
+    <article>
+        <title>常见web攻击手段</title>
+        <url>/2015/12/08/comAttacks</url>
+        <tag></tag>
+        <date>2015-12-08</date>
+    </article>
+    
+    <article>
+        <title>正则基础</title>
+        <url>/2015/12/08/regexBasic</url>
+        <tag></tag>
+        <date>2015-12-08</date>
+    </article>
+    
+    <article>
+        <title>grep</title>
+        <url>/2015/12/07/grep</url>
+        <tag></tag>
+        <date>2015-12-07</date>
+    </article>
+    
+    <article>
+        <title>结构型</title>
+        <url>/2015/12/02/structure</url>
+        <tag>design_pattern</tag>
+        <date>2015-12-02</date>
+    </article>
+    
+    <article>
+        <title>创建型</title>
+        <url>/2015/12/02/create</url>
+        <tag>design_pattern</tag>
+        <date>2015-12-02</date>
+    </article>
+    
+    <article>
+        <title>行为型</title>
+        <url>/2015/12/02/behavior</url>
+        <tag>design_pattern</tag>
+        <date>2015-12-02</date>
+    </article>
+    
+    <article>
+        <title>系统资源</title>
+        <url>/2015/11/27/resource</url>
+        <tag>topnetstatperformance</tag>
+        <date>2015-11-27</date>
+    </article>
+    
+    <article>
+        <title>常用sql(mysql)</title>
+        <url>/2015/11/26/sql</url>
+        <tag>sqlindexdatestringfunctiondatetime</tag>
+        <date>2015-11-26</date>
+    </article>
+    
+    <article>
+        <title>idea快捷键</title>
+        <url>/2015/11/25/ideaShortCut</url>
+        <tag>idea</tag>
+        <date>2015-11-25</date>
+    </article>
+    
+    <article>
+        <title>Ideashortcut</title>
+        <url>/2015/11/25/ideaShortCut</url>
+        <tag></tag>
+        <date>2015-11-25</date>
+    </article>
+    
+    <article>
+        <title>markdown语法</title>
+        <url>/2015/11/25/markdown</url>
+        <tag>markdown</tag>
+        <date>2015-11-25</date>
+    </article>
+    
+    <article>
+        <title>jekyll安装</title>
+        <url>/2015/11/25/install_jekyll</url>
+        <tag></tag>
+        <date>2015-11-25</date>
+    </article>
+    
+    <article>
+        <title>java并发编程实战笔记与实践</title>
+        <url>/2015/11/25/concurrent</url>
+        <tag></tag>
+        <date>2015-11-25</date>
+    </article>
+    
+    <article>
+        <title>jvm internal(译)</title>
+        <url>/2015/09/03/jvm_internal</url>
+        <tag>jvmbyte_codethreadstack</tag>
+        <date>2015-09-03</date>
+    </article>
+    
+    <article>
+        <title>java8</title>
+        <url>/2015/05/20/java8</url>
+        <tag></tag>
+        <date>2015-05-20</date>
+    </article>
+    
+    <article>
+        <title>selenium</title>
+        <url>/2015/04/20/selenium</url>
+        <tag>selenium</tag>
+        <date>2015-04-20</date>
+    </article>
+    
+    <article>
+        <title>网络</title>
+        <url>/2015/03/20/network</url>
+        <tag></tag>
+        <date>2015-03-20</date>
+    </article>
+    
+    <article>
+        <title>shell基础</title>
+        <url>/2015/03/18/shell_basic</url>
+        <tag>shell</tag>
+        <date>2015-03-18</date>
+    </article>
+    
+    <article>
+        <title>annotation-config与component-scan</title>
+        <url>/2015/01/29/springAnnotation</url>
+        <tag></tag>
+        <date>2015-01-29</date>
+    </article>
+    
+    <article>
+        <title>从启动日志看spring mvc的流程</title>
+        <url>/2015/01/27/springmvc</url>
+        <tag>springmvc</tag>
+        <date>2015-01-27</date>
+    </article>
+    
+    <article>
+        <title>java内存结构与字节码</title>
+        <url>/2015/01/26/memory_byteCode</url>
+        <tag>memorybyteCode</tag>
+        <date>2015-01-26</date>
+    </article>
+    
+    <article>
+        <title>回调函数与函数指针</title>
+        <url>/2015/01/25/function_pointer</url>
+        <tag></tag>
+        <date>2015-01-25</date>
+    </article>
+    
+    <article>
+        <title>字节码角度看jvm内存模型</title>
+        <url>/2015/01/06/jvm_example</url>
+        <tag>jvmbyte_code</tag>
+        <date>2015-01-06</date>
+    </article>
+    
+    <article>
+        <title>解决maven冲突终极办法</title>
+        <url>/2014/11/20/maven_conflict</url>
+        <tag>maven</tag>
+        <date>2014-11-20</date>
+    </article>
+    
+    <article>
+        <title>logback</title>
+        <url>/2014/11/20/logback</url>
+        <tag>logbackjava</tag>
+        <date>2014-11-20</date>
+    </article>
+    
+    <article>
+        <title>编译openJdk</title>
+        <url>/2014/11/20/buildOpenjdk</url>
+        <tag></tag>
+        <date>2014-11-20</date>
+    </article>
+    
+    <article>
+        <title>泛型</title>
+        <url>/2014/11/20/generic</url>
+        <tag></tag>
+        <date>2014-11-20</date>
+    </article>
+    
+    <article>
+        <title>jdk maven git 配置</title>
+        <url>/2014/11/18/jdk-maven-git-conf</url>
+        <tag>tooljdkmavengit</tag>
+        <date>2014-11-18</date>
+    </article>
+    
+    <article>
+        <title>git基础命令</title>
+        <url>/2014/11/17/gitBasic</url>
+        <tag>git</tag>
+        <date>2014-11-17</date>
+    </article>
+    
+    <article>
+        <title>如何设计查询语句</title>
+        <url>/2014/11/16/sql_basic</url>
+        <tag>sql</tag>
+        <date>2014-11-16</date>
+    </article>
+    
+    <article>
+        <title>事务隔离级</title>
+        <url>/2014/11/15/transaction</url>
+        <tag></tag>
+        <date>2014-11-15</date>
+    </article>
+    
+    <article>
+        <title>文件</title>
+        <url>/2014/11/13/file</url>
+        <tag>filecdlsstatchmodchown</tag>
+        <date>2014-11-13</date>
+    </article>
+    
+    <article>
+        <title>文件系统相关</title>
+        <url>/2014/11/12/fileSystem</url>
+        <tag></tag>
+        <date>2014-11-12</date>
+    </article>
+    
+    <article>
+        <title>operating system basic</title>
+        <url>/2014/11/11/OSBasic</url>
+        <tag></tag>
+        <date>2014-11-11</date>
+    </article>
+    
+    <article>
+        <title>内部排序</title>
+        <url>/2014/11/09/sort</url>
+        <tag></tag>
+        <date>2014-11-09</date>
+    </article>
+    
+    <article>
+        <title>kmp</title>
+        <url>/2014/11/08/kmp</url>
+        <tag>kmpalgorithm</tag>
+        <date>2014-11-08</date>
+    </article>
+    
+    <article>
+        <title>python basic</title>
+        <url>/2014/11/07/python</url>
+        <tag></tag>
+        <date>2014-11-07</date>
+    </article>
+    
+    <article>
+        <title>js_basic</title>
+        <url>/2014/11/06/jsBasic</url>
+        <tag></tag>
+        <date>2014-11-06</date>
+    </article>
+    
+    <article>
+        <title>浏览器的工作机制</title>
+        <url>/2014/11/05/how-brower-work</url>
+        <tag></tag>
+        <date>2014-11-05</date>
+    </article>
+    
+    <article>
+        <title>对前端html、css、js的关系的看法</title>
+        <url>/2014/11/04/frontEnd</url>
+        <tag></tag>
+        <date>2014-11-04</date>
+    </article>
+    
+    <article>
+        <title>C++虚函数表解析</title>
+        <url>/2014/11/03/virtual_function_table</url>
+        <tag>c_plus_plusvirtual_function</tag>
+        <date>2014-11-03</date>
+    </article>
+    
+    <article>
+        <title>c_plus_plus basic</title>
+        <url>/2014/11/01/cPlusPlusBasic</url>
+        <tag></tag>
+        <date>2014-11-01</date>
+    </article>
+    
+</articles>

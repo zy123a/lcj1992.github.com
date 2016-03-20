@@ -1,8 +1,10 @@
 ---
 layout: post
-title: linux的软件安装卸载
-categories: tool
+title: linux软件安装
+categories: unix
 ---
+
+
 
 `apt-get`,`yum` ,`dnf`,`pacman`,`pip`,`brew`
 
@@ -15,6 +17,11 @@ categories: tool
 
     sudo yum install xxx
     sudo yum remove xxx
+
+#### mac
+	
+	brew install xxx
+	brew remove xxx
 
 #### 源码安装的
 
