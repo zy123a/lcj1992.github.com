@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="z">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/2014-11-13-file.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/2015-12-22-manual.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/2015-12-27-some_compose.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/2015-12-27-temp.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/2016-02-28-ctags.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/network/2015-03-20-network.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/network/2015-12-27-curl.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/resource/2015-11-27-resource.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/resource/2015-12-27-disk_command.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/resource/2015-12-27-load_average.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/resource/2015-12-27-memory_command.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/resource/2015-12-27-top.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/text/2015-12-07-grep.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/text/2015-12-24-text.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/text/2015-12-25-awk.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/text/2015-12-26-sed.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/linux/text/2015-12-27-vi.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/tool/2015-12-28-tmux.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/tool/2016-01-09-chrome_tool.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2015-11-25-install_jekyll.md" afterPath="$PROJECT_DIR$/_posts/tool/2015-11-25-install_jekyll.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2016-01-23-linuxsoft.md" afterPath="$PROJECT_DIR$/_posts/tool/2016-01-23-linuxsoft.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2016-03-03-cron.md" afterPath="$PROJECT_DIR$/_posts/tool/2016-03-03-cron.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" afterPath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md" afterPath="$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" afterPath="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" />
-    </list>
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="z" />
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -115,7 +87,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-03-11-sublime.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016-03-11-sublime.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
@@ -124,6 +96,22 @@
             <state split_layout="FIRST">
               <first_editor vertical-scroll-proportion="0.45539907">
                 <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2014-11-13-file.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/unix/2014-11-13-file.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -265,6 +253,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="foolchild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foolchild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foolchild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foolchild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foolchild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unix" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -754,7 +774,7 @@
       <workItem from="1458053792522" duration="2212000" />
       <workItem from="1458131058372" duration="5252000" />
       <workItem from="1458187815763" duration="2547000" />
-      <workItem from="1458481965294" duration="19000" />
+      <workItem from="1458481965294" duration="146000" />
     </task>
     <task id="LOCAL-00015" summary="hashMap">
       <created>1457444314641</created>
@@ -1054,21 +1074,21 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90875000" />
+    <option name="totallyTimeSpent" value="91002000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23065251" sideWeight="0.52457625" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22995462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24494143" sideWeight="0.47542372" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22995462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32829046" sideWeight="0.47542372" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1838983" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24661016" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1681,6 +1701,20 @@
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.45539907">
             <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/2014-11-13-file.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
