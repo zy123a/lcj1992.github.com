@@ -43,7 +43,15 @@ windows和mac都有,测试切换hosts，之前是手工改/etc/hosts的，后来
 
 ### theFuck
 
+纠正命令
 [github地址](https://github.com/nvbn/thefuck)
+
+
+### z
+
+目录跳转,真的是神器
+
+[github地址](https://github.com/rupa/z)
 
 
 ## 参考 {#ref}

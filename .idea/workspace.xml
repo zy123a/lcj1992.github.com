@@ -2,251 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/unix/2016-03-21-beatufity_softs.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/01/cPlusPlusBasic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/03/virtual_function_table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/04/frontEnd.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/05/how-brower-work.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/06/jsBasic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/07/python.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/08/kmp.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/09/sort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/11/OSBasic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/12/fileSystem.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/13/file.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/15/transaction.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/16/sql_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/17/gitBasic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/18/jdk-maven-git-conf.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/20/buildOpenjdk.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/20/generic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/20/logback.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2014/11/20/maven_conflict.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/01/06/jvm_example.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/01/25/function_pointer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/01/26/memory_byteCode.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/01/27/springmvc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/01/29/springAnnotation.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/03/18/shell_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/03/20/network.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/04/20/selenium.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/05/20/java8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/09/03/jvm_internal.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/25/concurrent.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/25/ideaShortCut.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/25/install_jekyll.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/25/markdown.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/26/sql.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/11/27/resource.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/02/behavior.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/02/create.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/02/structure.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/07/grep.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/08/comAttacks.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/08/comSecAlgos.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/08/regexBasic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/cpuHigh.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/disk.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/diskFull.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/fileSysQA.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/getSource.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/17/memoryFull.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/19/pgsql.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/22/manual.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/24/text.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/25/awk.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/25/tcpFSM.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/concurrent_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/excel_parse.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/gc_algo.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/ideaDebugTool.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/java_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/java_proxy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/jvm_tools.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/sed.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/serialParse.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/26/startenv.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/curl.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/deadLock.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/disk_command.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/dtd.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/great_wall.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/http.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/load_average.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/load_balance.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/memory_command.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/mysql_conf.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/performance_speed.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/shell_grammer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/some_compose.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/some_problem_ubuntu_.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/some_shell.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/sql_performance.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/temp.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/terminal_short_cut.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/top.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/url_pattern.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/vi.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/view.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/27/xsd.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/add_admin_tomcat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/dependency.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/fiddler.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/logback_common.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/maven_command.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/maven_project_structure.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/mybatis_tables.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/nginx_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/redis_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/spring_conf.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/spring_databases.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/spring_proxy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/spring_start.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/spring_transaction.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/tables_databases.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/tmux.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/28/tomcat_source.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/cpu.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/interupt.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/memory.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/performance_os.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/process.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/resource_scheduler.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2015/12/31/system_call.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/05/system_start.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/07/cookie_session.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/07/fileSys.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/07/filter_intercepter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/07/spring_base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/08/uuid_guid.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/09/tools.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/15/countTQps.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/17/args_replace.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/19/jshotkeys.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/23/dubboConf.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/23/linuxsoft.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/23/pay.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/27/guava.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/01/30/Collections.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/03/mackeyboard.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/24/HashMap.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/27/Thread.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/28/String.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/28/concurrentHashMap.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/28/ctags.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/28/native.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/02/29/memcached_basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/03/cron.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/03/javaHole.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/03/pdb.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/07/Integer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/10/equals_hashcode.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/11/sublime.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/2016/03/12/equals_hashcode_eg.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/CNAME" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/about.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/categories.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/css/codeboy.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/css/default.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/css/small.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/css/syntax.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/foolchild.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/database/explain.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/design_pattern/Bridge.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/disk.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/fork_file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/linuxIo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/open_file.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/open_twice.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/file_system/vir_to_phy.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/git/git.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/Collection.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/Deque.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/List.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/Queue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/concurrentHashMap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/cope.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/dependency.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/executor.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/iterable.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/javaMemory.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/jvm_example.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/list_set.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/map.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/name.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/serial.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java/volatile_static.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java_web/spring.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java_web/url_pattern.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java_web/webStruct.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/java_web/wrappers.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/linux_command/awkFlow.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/linux_command/load_compute.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/network/tcpFsm.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/bestFit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/findaddress.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/firstFit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/page.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/pagetransform.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/process.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/register.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/thread.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/operating_system/worstFit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/performance/cpu.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/performance/dead_lock_block.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/performance/df-i.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/performance/top.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/performance/top_dead_lock.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/search/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/search/search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/thought/peking.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/thought/zhongguancun.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/tool/keyboard_mapping.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/tool/mac_keyboard.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/tool/workbeanch.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/tool/yuanli.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/we_chat.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/web/cookie.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/web/dispatch.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/web/java_cookie.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/web/springMvc.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/work/gotopay.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/work/order.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/images/work/pay.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/bootstrap3-typeahead.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/codeboy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/jquery.hotkeys.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/js/jquery.tagcloud.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/markdown.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/nohup.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page10/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page11/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page12/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page4/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page5/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page6/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page7/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page8/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/page9/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/search.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/sitemap.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/tags.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_site/wiki/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2016-01-09-tools.md" afterPath="$PROJECT_DIR$/_posts/unix/2016-01-09-tools.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nohup.out" afterPath="$PROJECT_DIR$/nohup.out" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2016-03-21-beatufity_softs.md" afterPath="$PROJECT_DIR$/_posts/unix/2016-03-21-beatufity_softs.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -369,8 +126,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/unix/2016-03-21-beatufity_softs.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.45833334">
-                <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+              <first_editor vertical-scroll-proportion="1.265625">
+                <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -512,10 +269,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="58" />
+    <option name="x" value="1280" />
     <option name="y" value="23" />
-    <option name="width" value="1222" />
-    <option name="height" value="777" />
+    <option name="width" value="1920" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -1056,13 +813,7 @@
       <workItem from="1458131058372" duration="5252000" />
       <workItem from="1458187815763" duration="2547000" />
       <workItem from="1458481965294" duration="1037000" />
-      <workItem from="1458520430464" duration="1954000" />
-    </task>
-    <task id="LOCAL-00016" summary="hashMap">
-      <created>1457537142310</created>
-      <option name="number" value="00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1457537142310</updated>
+      <workItem from="1458520430464" duration="4586000" />
     </task>
     <task id="LOCAL-00017" summary="equal and hashmap">
       <created>1457572970599</created>
@@ -1352,15 +1103,21 @@
       <option name="project" value="LOCAL" />
       <updated>1458520806488</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="修改目录">
+      <created>1458522429543</created>
+      <option name="number" value="00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1458522429543</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93847000" />
+    <option name="totallyTimeSpent" value="96479000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="23" width="1222" height="777" extended-state="6" />
-    <editor active="false" />
+    <frame x="1280" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1369,9 +1126,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23065251" sideWeight="0.52457625" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22995462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32776934" sideWeight="0.47542372" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23003195" sideWeight="0.47542372" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24661016" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15495208" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39183056" sideWeight="0.49491525" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2082,8 +1839,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/unix/2016-03-21-beatufity_softs.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.45833334">
-            <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+          <first_editor vertical-scroll-proportion="1.265625">
+            <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
