@@ -27,3 +27,7 @@ ConcurrentHashMap比hashMap多两个内部类
 
 *   Segment ConcurrentHashMap之所以叫做Concurrent,并且性能较好,跟Segment有很大关系
 *   WriteThroughEntry
+
+### 参考
+
+[1]<https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/>
