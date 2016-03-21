@@ -1,7 +1,7 @@
 ---
 layout: post
 title: idea中编译tomcat源码(译)
-categories: tool java_web
+categories: soft java_web
 tags: tomcat 
 ---
 

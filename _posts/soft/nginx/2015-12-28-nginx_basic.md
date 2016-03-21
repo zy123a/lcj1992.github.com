@@ -1,7 +1,7 @@
 ---
 layout: post
 title: nginx简单使用
-categories: tool
+categories: soft
 tags: nginx
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: logback日常总结
-categories: tool java
+categories: soft java
 tags: logback asyncAppender 
 ---
 

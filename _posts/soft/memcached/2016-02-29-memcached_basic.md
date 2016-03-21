@@ -1,7 +1,7 @@
 ---
 layout: post
 title: memcached基础
-categories: tool
+categories: soft
 ---
 
 ### 使用

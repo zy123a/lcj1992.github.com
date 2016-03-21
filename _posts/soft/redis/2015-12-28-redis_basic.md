@@ -1,7 +1,7 @@
 ---
 layout: post
 title: redis基础
-categories: tool
+categories: soft
 tags: redis
 ---
 

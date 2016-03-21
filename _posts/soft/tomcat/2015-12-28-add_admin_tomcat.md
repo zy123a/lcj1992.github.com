@@ -1,7 +1,7 @@
 ---
 layout: post
 title: tomcat添加管理员
-categories: tool
+categories: soft
 tags: tomcat admin
 ---
 

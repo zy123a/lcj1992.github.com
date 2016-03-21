@@ -1,8 +1,8 @@
 ---
 layout: post
 title: jdk maven git 配置
-categories: tool
-tags: tool jdk maven git
+categories: soft
+tags: soft jdk maven git
 ---
 
 ### jdk

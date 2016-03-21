@@ -1,7 +1,7 @@
 ---
 layout: post
 title: dubbo基本配置
-categories: tool
+categories: soft
 ---
 
 #### 流程

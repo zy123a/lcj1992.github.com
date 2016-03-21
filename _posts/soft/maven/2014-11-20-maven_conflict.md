@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 解决maven冲突终极办法
-categories: tool
+categories: soft
 tags: maven
 ---
 

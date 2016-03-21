@@ -1,7 +1,7 @@
 ---
 layout: post
 title: maven工程结构(译)
-categories: tool
+categories: soft
 tags: maven
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: jekyll安装
-categories: tool
+categories: soft
 ---
 
 ### 安装

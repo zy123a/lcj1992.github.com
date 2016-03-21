@@ -1,7 +1,7 @@
 ---
 layout: post
 title: maven依赖机制
-categories: tool
+categories: soft
 tags: maven
 ---
 

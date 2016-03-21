@@ -1,7 +1,7 @@
 ---
 layout: post
 title: maven基本命令
-categories: tool
+categories: soft
 tags: maven
 ---
 
