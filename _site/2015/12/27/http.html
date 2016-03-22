@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> http协议(译)  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> http协议(译) </h2>
+        <p><code class="highlighter-rouge">Each header field consists of a name followed by a colon (":") and the field value. Field names are case-insensitive.</code></p>
+
+<p>每个header域包含一个名字，冒号和值，域名是大小写敏感的．域值从第冒号后第一个非空字符开始，头域可以被扩展为多行，在每行开始处，使用至少一个空格或制表符。</p>
+
+<h4 id="section">请求报文头</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>header field name</th>
+      <th>描述</th>
+      <th>例子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accept</td>
+      <td>响应可以接受的内容类型<a href="https://en.wikipedia.org/wiki/Content_negotiation">详见</a></td>
+      <td><code class="highlighter-rouge">Accept:text/plain</code></td>
+    </tr>
+    <tr>
+      <td>Accept-Charset</td>
+      <td>可以接受的字符集</td>
+      <td><code class="highlighter-rouge">Accept-Charset:utf-8</code></td>
+    </tr>
+    <tr>
+      <td>Accept-Encoding</td>
+      <td>可以接受的编码类型<a href="https://en.wikipedia.org/wiki/Content_negotiation">详见</a></td>
+      <td><code class="highlighter-rouge">Accept-Encoding: gzip, deflate</code></td>
+    </tr>
+    <tr>
+      <td>Accept-Language</td>
+      <td>可以接受的返回的语言(汉语，英语..)<a href="https://en.wikipedia.org/wiki/Content_negotiation">详见</a></td>
+      <td><code class="highlighter-rouge">Accept-Language: en-US</code></td>
+    </tr>
+    <tr>
+      <td><a href="https://en.wikipedia.org/wiki/Web_cache#Cache_control">Cache-Control</a></td>
+      <td>请求响应必须遵守的缓存机制</td>
+      <td><code class="highlighter-rouge">Cache-Control: no-cache</code></td>
+    </tr>
+    <tr>
+      <td>Connection</td>
+      <td>当前连接的控制选项</td>
+      <td><code class="highlighter-rouge">Connection:keep-alive</code>      <code class="highlighter-rouge">Connection:Upgrade</code></td>
+    </tr>
+    <tr>
+      <td>Cookie</td>
+      <td><a href="https://en.wikipedia.org/wiki/HTTP_cookie">cookie</a>是由服务器之前就设置好的<a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#innerlink_set-cookie">Set-Cookie</a></td>
+      <td><code class="highlighter-rouge">Cookie: $Version=1; Skin=new;</code></td>
+    </tr>
+    <tr>
+      <td>Content-length</td>
+      <td>请求体的长度(单位是字节)</td>
+      <td><code class="highlighter-rouge">Content-Length: 348</code></td>
+    </tr>
+    <tr>
+      <td>Content-MD5</td>
+      <td>请求体通过<a href="https://en.wikipedia.org/wiki/Base64">Base64</a>的MD5加密的结果</td>
+      <td><code class="highlighter-rouge">Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</code></td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>请求体的媒体类型<a href="https://en.wikipedia.org/wiki/Media_type">MIME type</a>(用在POST和PUT方法上)</td>
+      <td><code class="highlighter-rouge">Content-Type: application/x-www-form-urlencoded</code></td>
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td>消息被发送的时间</td>
+      <td><code class="highlighter-rouge">Date: Tue, 15 Nov 1994 08:12:31 GMT</code></td>
+    </tr>
+    <tr>
+      <td>Host</td>
+      <td>服务器的域名和服务监听的端口号(可以省略)</td>
+      <td><code class="highlighter-rouge">Host: en.wikipedia.org:80</code>      <code class="highlighter-rouge">Host: en.wikipedia.org</code></td>
+    </tr>
+    <tr>
+      <td>Origin</td>
+      <td>Initiates a request for <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing</a> (asks server for an ‘Access-Control-Allow-Origin’ response field) .</td>
+      <td><code class="highlighter-rouge">Origin: http://www.example-social-network.com</code></td>
+    </tr>
+    <tr>
+      <td>Referer</td>
+      <td>允许的能跳转到当前页面的页面</td>
+      <td><code class="highlighter-rouge">Referer: http://en.wikipedia.org/wiki/Main_Page</code></td>
+    </tr>
+    <tr>
+      <td>User-Agent</td>
+      <td>用户代理</td>
+      <td><code class="highlighter-rouge">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="section-1">响应报文头</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>field name</th>
+      <th>描述</th>
+      <th>例子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Access-Control-Allow-Origin</td>
+      <td>表明哪些web可以参与<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin-resource sharing</a></td>
+      <td><code class="highlighter-rouge">Access-Control-Allow-Origin: *</code></td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>已经cache的时间seconds</td>
+      <td><code class="highlighter-rouge">Age: 12</code></td>
+    </tr>
+    <tr>
+      <td>Allow</td>
+      <td>允许的方法</td>
+      <td><code class="highlighter-rouge">Allow: GET, HEAD</code></td>
+    </tr>
+    <tr>
+      <td>Cache-Control</td>
+      <td>缓存机制</td>
+      <td><code class="highlighter-rouge">Cache-Control: max-age=3600</code></td>
+    </tr>
+    <tr>
+      <td>Connection</td>
+      <td>当前连接的控制选项</td>
+      <td><code class="highlighter-rouge">Connection: close</code></td>
+    </tr>
+    <tr>
+      <td>Content-Encoding</td>
+      <td>编码类型</td>
+      <td><code class="highlighter-rouge">Content-Encoding: gzip</code></td>
+    </tr>
+    <tr>
+      <td>Content-Language</td>
+      <td>语言(汉语，英语..)</td>
+      <td><code class="highlighter-rouge">Content-Language: da</code></td>
+    </tr>
+    <tr>
+      <td>Content-Length</td>
+      <td>response的长度(字节数)</td>
+      <td><code class="highlighter-rouge">Content-Length: 348</code></td>
+    </tr>
+    <tr>
+      <td>Content-Location</td>
+      <td>一个可选的位置</td>
+      <td><code class="highlighter-rouge">Content-Location: /index.htm</code></td>
+    </tr>
+    <tr>
+      <td>Content-MD5</td>
+      <td>请求体通过<a href="https://en.wikipedia.org/wiki/Base64">Base64</a>的MD5加密的结果</td>
+      <td><code class="highlighter-rouge">Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</code></td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>请求体的媒体类型<a href="https://en.wikipedia.org/wiki/Media_type">MIME type</a>(用在POST和PUT方法上)</td>
+      <td><code class="highlighter-rouge">Content-Type: text/html; charset=utf-8</code></td>
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td>时间</td>
+      <td><code class="highlighter-rouge">Date: Tue, 15 Nov 1994 08:12:31 GMT</code></td>
+    </tr>
+    <tr>
+      <td>ETag</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Last-Modified</td>
+      <td>被请求的对象上次修改的时间</td>
+      <td><code class="highlighter-rouge">Last-Modified: Tue, 15 Nov 1994 12:45:26 GMT</code></td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td>用于<a href="https://en.wikipedia.org/wiki/URL_redirection">重定向</a></td>
+      <td><code class="highlighter-rouge">Location: http://www.w3.org/pub/WWW/People.html</code></td>
+    </tr>
+    <tr>
+      <td>Server</td>
+      <td>服务器名</td>
+      <td><code class="highlighter-rouge">Server: Apache/2.4.1 (Unix)</code></td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>状态码</td>
+      <td><code class="highlighter-rouge">Status: 200 OK</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[1]<a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">http://en.wikipedia.org/wiki/List_of_HTTP_header_fields</a></p>
+
+<p>[2]<a href="http://lvwenwen.iteye.com/blog/1570468">http://lvwenwen.iteye.com/blog/1570468</a></p>
+
+<h4 id="section-2">状态码</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>状态码</th>
+      <th>常见状态码</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1xx</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">informational</code></td>
+    </tr>
+    <tr>
+      <td>2xx</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">success</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>200</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <td>3xx</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">redirection</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>301</td>
+      <td>Moved Permanently</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>302</td>
+      <td>Found</td>
+    </tr>
+    <tr>
+      <td>4xx</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">client error</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>400</td>
+      <td>Bad Request</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>401</td>
+      <td>Unauthorized</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>403</td>
+      <td>Forbidden</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>404</td>
+      <td>Not Found</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>405</td>
+      <td>Method Not Allowed</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>415</td>
+      <td>Unsupported Media Type</td>
+    </tr>
+    <tr>
+      <td>5xx</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">server error</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>500</td>
+      <td>Internal Server Error</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>502</td>
+      <td>Bad GateWay</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[1]<a href="https://httpstatuses.com/">https://httpstatuses.com/</a></p>
+
+<p>[2]<a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/27/dtd">dtd</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/27/xsd">xsd</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/27/http" data-title="http协议(译)"
+             data-url="http://lcj1992.github.io/2015/12/27/http">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/27/http" data-title="http协议(译)"
+             data-url="http://lcj1992.github.io/2015/12/27/http"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/27/dtd";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/27/xsd";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

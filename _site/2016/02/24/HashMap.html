@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> HashMap  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> HashMap </h2>
+        <ul>
+  <li><a href="#class_graph">类图</a></li>
+  <li><a href="#map">Map</a></li>
+  <li><a href="#abstractMap">AbstractMap</a></li>
+  <li><a href="#hashMap">HashMap</a></li>
+  <li><a href="#qAnda">HashMap X问</a>
+    <ul>
+      <li><a href="#infiniteLoop">为什么并发下会死循环?</a></li>
+      <li><a href="#table_size">为什么table的length都是2的幂,这样做有什么好处?</a></li>
+      <li><a href="#hashcode">hashCode如何提高HashMap的性能</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="class_graph">类图</h3>
+
+<p><img src="/images/java/map.png" alt="map类图" /></p>
+
+<h3 id="map">Map</h3>
+
+<p>Map内部子接口Entry (条目)</p>
+
+<ul>
+  <li>size() 返回map的键值对数</li>
+  <li>isEmpty() size()为0</li>
+  <li>containsKey(Object key) 是否包含key</li>
+  <li>containsValue(Object value) 是否包含value</li>
+  <li>get(Object key) 返回key对应的value</li>
+  <li>put(K key, V value) 添加键值对</li>
+  <li>remove(Object key) 删除key对应键值对,返回value</li>
+  <li>putAll(Map&lt;? extends K,? extends V&gt; m) 拷贝m到这个map中</li>
+  <li>clear() 清空所有键值对</li>
+  <li>keySet() 返回所有的key的 Set&lt;K&gt;</li>
+  <li>values() 返回所有的values Collection&lt;V&gt;</li>
+  <li>entrySet() 返回所有entry的 Set&lt;Map.Entry&lt;K,V&gt;&gt;</li>
+  <li>Entry&lt;K,V&gt;
+    <ul>
+      <li>getKey() 返回该entry的key</li>
+      <li>getValue()  返回该entry的value</li>
+      <li>setKey()</li>
+      <li>setValue()</li>
+      <li>equals(Object o) 重写equals方法</li>
+      <li>hashCode() 重写了equals方法就要重写hashCode()方法</li>
+    </ul>
+  </li>
+  <li>equals(Object o) 重写equals方法</li>
+  <li>hashCode() 重写了equals方法就要重写hashCode()方法,为什么?请看<a href="/2016/03/12/equals_hashcode_eg">一道题目来说equals和hashCode</a></li>
+</ul>
+
+<h3 id="abstractmap">AbstractMap</h3>
+
+<p>对Map接口的方法进行实现,不对Entry接口进行实现,SimpleEntry(可变的) 和 SimpleImmutableEntry(不可变的),都是只有key value 两个属性</p>
+
+<h3 id="hashmap">HashMap</h3>
+
+<p>HashMap 数据结构为<code class="highlighter-rouge">数组</code>(table[Entry])+ <code class="highlighter-rouge">链表</code>(Entry.next),其Entry四个域,key,value,<code class="highlighter-rouge">next</code>,<code class="highlighter-rouge">hash</code></p>
+
+<p>HashMap两个比较重要的域</p>
+
+<ul>
+  <li>threshold 阈值,代表hashMap存放内容数量的一个临界点，当存放量大于这个值的时候(capacity &gt; threshold)，就需要resize，也就是新建一个两倍大的数组，并将老的元素转移过去。threshold = (int)(capacity * loadFactor);</li>
+  <li>loadFactor 负载因子，通常情况下threshold = capacity * loadFactor，默认大小为0.75</li>
+  <li>Entry&lt;K,V&gt;[] table  hashMap的table<code class="highlighter-rouge">数组</code>,存放Entry</li>
+</ul>
+
+<p>HashMap九个内部类</p>
+
+<ul>
+  <li>Holder</li>
+  <li>
+    <p>Entry hashMap的Entry长这样,<code class="highlighter-rouge">链表</code></p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>final K key;
+V value;
+Entry&lt;K,V&gt; next;
+int hash; // HashMap#hash(Object key)的值
+</code></pre>
+    </div>
+  </li>
+  <li>EntrySet entry的Set</li>
+  <li>KeySet key的Set</li>
+  <li>Values values的collection</li>
+  <li>HashIterator 抽象的hash表的Iterator</li>
+  <li>EntryIterator 继承HashIterator Entry的Iterator</li>
+  <li>KeyIterator 继承HashIterator Key的Iterator</li>
+  <li>ValueIterator 继承HashIterator Value的Iterator</li>
+</ul>
+
+<h3 id="qAnda">HashMap X问</h3>
+
+<h4 id="infiniteLoop">为什么并发下会死循环</h4>
+
+<p>hash死循环发生在两个或多个线程同时对hashMap resize过程中 transfer会造成entry和它的next反转.entry的next又指向了next,造成死循环,照着<a href="http://coolshell.cn/articles/9606.html">耗子叔叔的</a>走一遍就清楚了.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>void transfer(Entry[] newTable)
+{
+    Entry[] src = table;
+    int newCapacity = newTable.length;
+    //  从OldTable里摘一个元素出来，然后放到NewTable中
+    for (int j = 0; j &lt; src.length; j++) {
+        Entry&lt;K,V&gt; e = src[j];
+        if (e != null) {
+            src[j] = null;
+            do {
+                Entry&lt;K,V&gt; next = e.next;
+                int i = indexFor(e.hash, newCapacity);
+                e.next = newTable[i];
+                newTable[i] = e;
+                e = next;
+            } while (e != null);
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>告诉你个调试的小秘密</p>
+
+<p>idea debug 默认是所有工程级别,可以改成线程级别进行多线程的debug</p>
+
+<p><code class="highlighter-rouge">run - View Breakpoints - Suspend 改为Thread 然后make default</code>,以后你的idea就都是线程级别的了,切换不同线程进行多线程的debug</p>
+
+<h4 id="table_size">为什么其内部table的length都是2的幂</h4>
+
+<p>什么,不一定是2的幂?</p>
+
+<p><strong><em>一定的</em></strong>. 详情见HashMap#inflateTable  -&gt; HashMap#roundUpToPowerOf2 -&gt;  <a href="/2016/03/07/Integer">Integer.highestOneBit</a></p>
+
+<p>扩容也是乘以2. 那么为什么要这么做呢?</p>
+
+<p>可以保证entry分配均匀,在这里有讨论<a href="/2016/03/12/equals_hashcode_eg#indexFor">详见这里</a></p>
+
+<h3 id="hashcode">hashCode如何提高HashMap的性能</h3>
+
+<p>具体在在equals hashcode中有讨论<a href="/2016/03/10/equals_hashcode#hashCode_hash_based">详见这里</a></p>
+
+<h3 id="section">参考</h3>
+
+<p>[1]<a href="http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html">http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html</a></p>
+
+<p>[2]<a href="http://coolshell.cn/articles/9606.html">http://coolshell.cn/articles/9606.html</a></p>
+
+<p>[3]<a href="http://nanguocoffee.iteye.com/blog/907824">http://nanguocoffee.iteye.com/blog/907824</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2016/02/03/mackeyboard">mac使用</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2016/02/27/Thread">Thread</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2016/02/24/HashMap" data-title="HashMap"
+             data-url="http://lcj1992.github.io/2016/02/24/HashMap">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2016/02/24/HashMap" data-title="HashMap"
+             data-url="http://lcj1992.github.io/2016/02/24/HashMap"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2016/02/03/mackeyboard";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2016/02/27/Thread";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

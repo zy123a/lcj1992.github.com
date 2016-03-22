@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 负载均衡算法(notes)  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 负载均衡算法(notes) </h2>
+        <p>常用的负载均衡算法包括<code class="highlighter-rouge">轮询法(round robin)</code>，<code class="highlighter-rouge">随机法</code>，<code class="highlighter-rouge">源地址哈希法</code>，<code class="highlighter-rouge">加权轮询法</code>，<code class="highlighter-rouge">加权随机法</code>，<code class="highlighter-rouge">最小连接数算法</code>,<code class="highlighter-rouge">sticky</code></p>
+
+<p>这里初始化一个serverWeightMap的Map变量来表示服务器地址和权重的映射，以此来模拟轮询算法的实现，其中设置的权重值在后面加权算法会使用到</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static Map&lt;String, Integer&gt; serverWeightMap = Maps.newHashMap();
+static Integer pos = 0;
+static {
+    serverWeightMap.put("192.168.1.100", 1);
+    serverWeightMap.put("192.168.1.101", 1);
+    serverWeightMap.put("192.168.1.102", 4);
+    serverWeightMap.put("192.168.1.103", 1);
+    serverWeightMap.put("192.168.1.104", 1);
+    serverWeightMap.put("192.168.1.105", 3);
+    serverWeightMap.put("192.168.1.106", 1);
+    serverWeightMap.put("192.168.1.107", 2);
+    serverWeightMap.put("192.168.1.108", 1);
+    serverWeightMap.put("192.168.1.109", 1);
+    serverWeightMap.put("192.168.1.110", 1);
+}
+</code></pre>
+</div>
+
+<h4 id="section">轮询法</h4>
+<p>将请求按顺序轮流地分配的后端服务器上，它均衡的对待后端每一台服务器，而不关心服务器实际的连接数和当前的系统负载</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static String getByRoundRobin() {
+    Map&lt;String, Integer&gt; serverMap = Maps.newHashMap();
+    serverMap.putAll(serverWeightMap);
+    Set&lt;String&gt; keySet = serverMap.keySet();
+    List&lt;String&gt; keyList = Lists.newArrayList();
+    keyList.addAll(keySet);
+
+    String server = null;
+    synchronized (pos) {
+        if (pos &gt;= keySet.size()) {
+            pos = 0;
+        }
+
+        server = keyList.get(pos);
+        pos++;
+    }
+    return server;
+}
+</code></pre>
+</div>
+
+<p>由于serverWeightMap中的地址列表是动态的，随时可能有机器上线，下线或者宕机，因此，为了避免可能出现的并发问题，如数组越界，通过新建方法内的局部变量serverMap，先将域变量复制到线程本地，以避免被多个线程修改，这样可能会引入新的问题，复制以后serverWeightMap的修改将无法反映给serverMap，也就是说，在这一轮选择服务器的过程中，新增服务器或者下线服务器，负载均衡算法中将无法获知，新增比较好处理，而当服务器下线或者宕机时，服务消费者将有可能访问到不存在的地址。因此，在服务消费者的实现端需要考虑该问题，并且进行相应的容错处理，比如重新发起一次调用。</p>
+
+<p>对于当前轮询的位置变量pos，为了保证服务器选择的顺序性，需要在操作时对其加上synchronized锁，使得在同一时刻只有一个线程能够修改pos的值，否则当pos变量被并发修改，则无法保证服务器选择的顺序性，甚至有可能导致keyList数组越界。</p>
+
+<p>使用轮询策略的目的在于，希望做到请求转移的绝对均衡，但付出的代价也是相当大的。为了pos保证变量修改的互斥性，需要引入重量级的悲观锁synchronized，将会导致该段轮询代码的并发吞吐量发生明显的下降。</p>
+
+<h4 id="section-1">随机法</h4>
+<p>通过系统随机函数，根据后端服务器列表的大小值来随机的选择其中一台进行访问。由概率统计理论可以得知，随着调用量的增大，其实际效果越来越接近于平均分配流量到没一台后端服务器，也就是轮询的效果。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static String getByRondom() {
+    Map&lt;String, Integer&gt; serverMap = Maps.newHashMap();
+    serverMap.putAll(serverWeightMap);
+    Set&lt;String&gt; keySet = serverMap.keySet();
+    List&lt;String&gt; keyList = Lists.newArrayList();
+    keyList.addAll(keySet);
+
+    String server = null;
+
+    Random random = new Random();
+    int randomPos = random.nextInt(keySet.size());
+    server = keyList.get(randomPos);
+    return server;
+}
+</code></pre>
+</div>
+
+<p>基于概率统计的理论，吞吐量越大，随机算法的效果越接近轮询算法的效果。因此，你还会考虑一定要使用需要付出一定代价的轮询算法么？</p>
+
+<h4 id="section-2">源地址哈希法</h4>
+<p>源地址哈希的思想是获取客户端访问的ip地址值，通过哈希函数计算得到一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是要访问的服务器的序号。采用哈希法进行负载均衡，同一个ip地址的客户端，当后端服务器列表不变时，它每次都会被映射到同一台后端服务器进行访问。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static String getServerByConsumerHash(String remoteIp) {
+    Map&lt;String, Integer&gt; serverMap = Maps.newHashMap();
+    serverMap.putAll(serverWeightMap);
+    Set&lt;String&gt; keySet = serverMap.keySet();
+    List&lt;String&gt; keyList = Lists.newArrayList();
+    keyList.addAll(keySet);
+
+    String server = null;
+
+    int hashCode = remoteIp.hashCode();
+    int serverListSize = keyList.size();
+    int serverPos = hashCode % serverListSize;
+    server = keyList.get(serverPos);
+
+    return server;
+}
+</code></pre>
+</div>
+
+<p>通过参数传入的客户端remoteip参数，取得它的哈希值，对服务器列表的大小取模，结果便是选用的服务器在服务器列表中的索引值。该算法保证了相同的客户端ip地址将会被“哈希”到同一台后端服务器，直到后端服务器列表变更。根据此特性可以在服务消费者和服务提供者之间建立有状态的session会话。</p>
+
+<h4 id="section-3">加权轮询法</h4>
+<p>不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此他们的抗压能力也不尽相同，给配置高，负载低的机器配置更高的权重，让其处理更过的请求，而地配置，负载高的机器，则给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static String getByWeightRoundRobin() {
+    Map&lt;String, Integer&gt; serverMap = Maps.newHashMap();
+    serverMap.putAll(serverWeightMap);
+    Set&lt;String&gt; keySet = serverMap.keySet();
+    Iterator&lt;String&gt; it = keySet.iterator();
+    List&lt;String&gt; serverList = Lists.newArrayList();
+
+    while (it.hasNext()) {
+        String server = it.next();
+        Integer weight = serverMap.get(server);
+        for (int i = 0; i &lt; weight; i++) {
+            serverList.add(server);
+        }
+    }
+    String server = null;
+    synchronized (pos) {
+        if (pos &gt;= serverList.size()) {
+            pos = 0;
+        }
+
+        server = serverList.get(pos);
+    pos ++;    }
+
+    return server;
+}
+</code></pre>
+</div>
+
+<p>与轮询算法类似，只是在获取服务器地址之前增加了一段权重计算的代码，根据权重的大小，将地址重复增加到服务器地址列表中，权重越大，该服务器每轮所获得的请求数量越多。</p>
+
+<h4 id="section-4">加权随机法</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static String getByWeightRandom() {
+    Map&lt;String, Integer&gt; serverMap = Maps.newHashMap();
+    serverMap.putAll(serverWeightMap);
+    Set&lt;String&gt; keySet = serverMap.keySet();
+    Iterator&lt;String&gt; it = keySet.iterator();
+    List&lt;String&gt; serverList = Lists.newArrayList();
+
+    while (it.hasNext()) {
+        String server = it.next();
+        Integer weight = serverMap.get(server);
+        for (int i = 0; i &lt; weight; i++) {
+            serverList.add(server);
+        }
+    }
+    String server = null;
+    Random random = new Random();
+    int randomPos = random.nextInt(serverList.size());
+    server = serverList.get(randomPos);
+    return server;
+}
+</code></pre>
+</div>
+
+<h4 id="section-5">最小连接数算法</h4>
+<p>最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它正是根据后端服务器当前的链接情况，动态的选取其中积压连接数最少的一台服务器来处理当前请求，尽可能的提高后端服务器的利用效率，将负载合理的分流到每一台机器。</p>
+
+<h4 id="sticky">sticky</h4>
+<p>保证始终只在一台处理，如果这台服务器挂了，会自动切换到下一台上。</p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/26/sed">sed</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/27/mysql_conf">mysql相关配置</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/27/load_balance" data-title="负载均衡算法(notes)"
+             data-url="http://lcj1992.github.io/2015/12/27/load_balance">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/27/load_balance" data-title="负载均衡算法(notes)"
+             data-url="http://lcj1992.github.io/2015/12/27/load_balance"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/26/sed";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/27/mysql_conf";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

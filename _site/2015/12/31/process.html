@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 进程管理  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 进程管理 </h2>
+        <h4 id="section">基本概念</h4>
+
+<p>进程是一个程序在给定活动空间和初始环境下，在一个处理机上的执行过程</p>
+
+<p><code class="highlighter-rouge">进程</code>与<code class="highlighter-rouge">程序</code>是既有联系又有区别的：</p>
+
+<ol>
+  <li>
+    <p>程序是指令的有序集合，其本身没有任何运行的含义，它是一个静态概念。而进程是程序在处理机上的一次执行过程，它是动态概念。
+程序可以作为一种软件资料长期保存，而进程则是有一定生命周期，它能够动态地产生和消亡。即进程可由“创建”而产生，由调度而执行，因得不到资源而暂停，以致最后由“撤销”而消亡。</p>
+  </li>
+  <li>
+    <p>进程是一个能够独立运行的单位，能与其他进程并行的活动。</p>
+  </li>
+  <li>
+    <p>进程是竞争计算机系统有限资源的基本单位。</p>
+  </li>
+  <li>
+    <p>在支持多任务运行的操作系统中，活动的最小单位是进程。进程一定包含一个程序，因为程序是进程应完成功能的逻辑描述。</p>
+  </li>
+  <li>
+    <p>一个程序可以对应多个进程。</p>
+  </li>
+</ol>
+
+<h4 id="section-1">进程的类型</h4>
+<p><code class="highlighter-rouge">系统进程</code>和<code class="highlighter-rouge">用户进程</code></p>
+
+<ol>
+  <li>
+    <p>系统进程被分配一个初始的资源集合，这些资源可为它所独占，也可以最高优先级资格有限使用，用户进程通过系统服务请求的手段竞争系统资源。</p>
+  </li>
+  <li>
+    <p>用户进程不能直接I/O操作，而系统进程可以。</p>
+  </li>
+  <li>
+    <p>系统进程在管态下活动，而用户进程在用户态下活动。</p>
+  </li>
+</ol>
+
+<h4 id="section-2">进程的状态</h4>
+<p>在一个进程的活动期间至少具备三种基本状态，即<code class="highlighter-rouge">运行状态</code>、<code class="highlighter-rouge">就绪状态</code>、<code class="highlighter-rouge">等待状态（阻塞状态）</code></p>
+
+<ol>
+  <li>
+    <p>就绪状态，当进程获得了除cpu外所有的资源，它已经准备就绪，一旦得到cpu控制权，就可以立即运行，该进程所处的状态为就绪状态</p>
+  </li>
+  <li>
+    <p>运行状态，当进程由调度/分派模块分派后，得到cpu控制权，它的程序正在运行，该进程所处的状态就是运行状态</p>
+  </li>
+  <li>
+    <p>等待状态，若一进程正在等待某一事件发生（如等待输入/输出操作的完成）而暂时停止执行，这时即使给它cpu控制权，它也无法执行，则称该进程处于等待状态，又称阻塞状态。</p>
+  </li>
+</ol>
+
+<p><img src="/images/operating_system/process.jpg" alt="进程的生命周期" /></p>
+
+<h4 id="section-3">进程的描述-进程控制块</h4>
+<p>当某个程序和别的程序并发执行时，产生了动态特征，并由于并发程序之间的相互制约关系而造成了比较负责的一个外界环境。为了描述一个进程和其他进程以及系统资源的关系，为了刻画一个进
+程在各个不同时期所处的状态，引入<code class="highlighter-rouge">进程控制块 pcb</code>（进程描述器）。系统根据pcb而感知进程的存在，故pcb是标识进程存在的实体。当系统创建一个进程时，必须为它设置一个pcb，然后根据pcb
+的信息对进程实施控制管理。进程任务完成后，系统撤销它的pcb，进程也随之消亡。
+从结构上说，每个进程都由一个程序段（包括数据）和一个进程控制块pcb组成。程序和数据描述进程本身应完成的功能，而进程控制块pcb则描述进程的动态特征，进程与其他进程和系统资源的关系。</p>
+
+<p>为了对进程做充分的描述，pcb应具有的信息应有：</p>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">进程标识符</code> name。每个进程都必须有唯一的标识符，可以用字符或编号表示，在创建一个进程时，由创建者给出进程的标识符，另外，为了便于系统管理，进程还应有一个内部标识符（id号）</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">进程当前状态status</code> 。该项说明本进程目前处于何种状态（运行、就绪、等待），作为进程调度时分配处理机的主要依据。为了便于对进程实施管理，通常把具有相同状态的进程链在一起，组成各种队列。比如将所有处于就绪状态的进程链在一起，称为就绪队列。进程当前状体啊可以用进程所属的当前队列头指针来表征。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">当前队列指针next</code>。该项登记了处于同一状态的下一个pcb的地址，以此将处于同一状态的所有进程链接起来</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">总链接指针all_q_next</code>。系统中存在大量的进程，它们依各自的状态分别处于相应的队列中，这便于对进程实施调度控制。但是，当进行某些管理功能，如执行创建新进程的功能时，使用系统所有进程的总链接将是十分方便的。因为进程的标识符必须是唯一的，由创建者给出的被创建进程的名字是否会重名，必须先检查系统已有的进程名，但若分别在各个队列去查询将是十分麻烦的，所以应提供一个进程总链结构，进程pcb中的该项内容是指向总链中的下一个pcb地址。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">程序开始地址start_addr</code>。该进程的程序将从此地址开始执行</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">进程的优先级priority</code>。进程的优先级反映了进程要求cpu的紧迫程度，它通常由用户预先提出或系统指定。进程将一句其优先级的高低去争夺使用cpu的权利</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">cpu现场保护区cpustatus</code>。当进程由于某种原因释放处理机时，cpu现场信息被保存在pcb中的该区域中，以便在该进程重新获得处理机后能继续执行。通常被保护的信息有：工作寄存器、指令计数器以及程序状态字等。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">通信信息communication information</code>。通信信息是指每个进程在运行过程中与别的进程进行通信时所记录的有关信息。比如，可以包含正等待着本进程接受的消息个数，第一个消息的开始地址等。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">家族联系 process family</code>。有的系统允许一个进程创建自己的子进程，这样会组成一个进程家族。在pcb中必须指明本进程与家族的里兰溪，如它的子进程和父进程的标识符</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">占有资源清单own_resource</code>。</p>
+  </li>
+</ol>
+
+<p>不同的操作系统所有用的pcb结构是不同的，对于简单系统 ，pcb结构较小。而在一些较复杂的系统中，pcb所含的内容则比较多，比如，还可能有关于I/O，文件传输等控制信息。</p>
+
+<h4 id="section-4">线程</h4>
+
+<p>线程概念</p>
+
+<ol>
+  <li>线程是比进程更小的活动单位，是进程中的一条执行路径</li>
+  <li>它有自己私有的堆栈和处理机执行环境（尤其是处理器寄存器）</li>
+  <li>它共享分配给父进程的主存</li>
+  <li>它是单个进程所创建的许多个同时存在的线程中的一个</li>
+</ol>
+
+<p>当系统支持多线程处理时，线程是任务调度的单位，但不是系统资源的分配单位，系统资源的分配单位始终是进程。线程完全继承父进程占有的资源，当它活动时，具有自己的运行现场。</p>
+
+<h4 id="section-5">线程的状态变迁</h4>
+<p>如果一个系统支持线程的创建与线程的活动，那么处理机调度的最小单位是线程而不是进程。一个进程可以创建一个线程，那么它具有单一的控制路径，一个进程也可创建多个线程，那么它就具有多个控制路径，这是，线程是争夺cpu的单位。线程也有一个从创建到死亡的生命过程，在这一过程中它具有如下状态</p>
+
+<ol>
+  <li><code class="highlighter-rouge">创建</code>,建立一个新线程，新生的线程将处于新建状态。此时它已经有了相应的主存空间和其他资源，并已被初始化</li>
+  <li><code class="highlighter-rouge">就绪</code>,线程处于线程就绪队列中，等待被调度，此时，它已经具备了运行的条件，一旦分到cpu时间，就可以立即去运行</li>
+  <li><code class="highlighter-rouge">运行</code>,一个线程正占用cpu时间，执行它的程序</li>
+  <li><code class="highlighter-rouge">等待</code>,一个正在执行的线程如果发生某些时间，如被挂起或需要执行费时的输入/输出操作时，将让出cpu，暂时中止自己的执行，进入等待状态。等待另一个线程唤醒它</li>
+  <li><code class="highlighter-rouge">终止</code>,一个线程已经退出，但该信息还没被其他线程所收集</li>
+</ol>
+
+<p>线程的生命周期:
+<img src="/images/operating_system/thread.jpg" alt="线程的生命周期" /></p>
+
+<h4 id="section-6">同步</h4>
+<p><code class="highlighter-rouge">临界资源</code>：通常把一次仅允许一个进程使用的资源成为临界资源</p>
+
+<p><code class="highlighter-rouge">临界区</code>：访问临界资源的那段程序能够从概念上分离出来，称为临界区或临界段</p>
+
+<p><code class="highlighter-rouge">互斥</code>：在操作系统中，当某一个进程正在访问某一存储区域时，就不允许其他进程来读出或者修改该存储区的内容，否则，就会出现无法估计的错误。通常将进程之间的这种相互制约关系称为互斥。</p>
+
+<p>一般采用同步机制来实现进程互斥，操作系统提供的同步机制有锁（上锁，开锁）和信号灯（P、V操作）。</p>
+
+<h4 id="section-7">进程通信</h4>
+<p>信号量，socket通信，管道，共享内存，消息队列等</p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/31/performance_os">性能</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/31/resource_scheduler">资源分配与调度</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/31/process" data-title="进程管理"
+             data-url="http://lcj1992.github.io/2015/12/31/process">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/31/process" data-title="进程管理"
+             data-url="http://lcj1992.github.io/2015/12/31/process"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/31/performance_os";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/31/resource_scheduler";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

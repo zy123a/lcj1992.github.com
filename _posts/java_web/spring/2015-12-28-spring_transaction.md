@@ -18,6 +18,7 @@ tags: spring transaction
 3.  创建一个statement / PrepareStatement, connect.createStatement()
 4.  执行sql,获取结果集ResultSet,解析结果集
 5.  关闭resultSet,关闭connection
+6.  使用PrepareStatement，帮助我们避免了sql注入攻击，自动规避了特殊字符；允许我们执行带参数输入的动态查询；支持批量操作
 
 ps:
 

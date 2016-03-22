@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> sed  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> sed </h2>
+        <p>http://coolshell.cn/articles/9104.html</p>
+
+<h4 id="section">概述</h4>
+<p><code class="highlighter-rouge">sed  [options]  'command'  file(s)</code> // 命令行直接执行
+<code class="highlighter-rouge">sed  [options]  -f scriptfile  file(s)</code>　//把命令写到脚本中
+流编辑器，与普通的交互式编辑器如vi ，可以交互的接受键盘的命令，进行插入、删除和文本替换等操作。
+而流编辑器则是在编辑数据之前，预先指定数据的编辑规则，然后按照规则将数据输出到标准输出。
+在流编辑器的所有规则与输入的行匹配完毕后，编辑器读取下一行，重复之前的规则。处理完所有数据后，流编辑器停止。
+因此，sed是面向行的，并且sed并不会修改文件本身，除非重定向存储输出。command为具体的文本编辑命令，而file为输入的条件</p>
+
+<h5 id="option">option</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-n</td>
+      <td>默认sed处理一行之前会打印输入,-n不打印输入</td>
+    </tr>
+    <tr>
+      <td>-i</td>
+      <td>对文件进行修改</td>
+    </tr>
+    <tr>
+      <td>-e</td>
+      <td>指定命令(默认可不写)，可组合 -e command1 -e command2，也可-e command1;command2</td>
+    </tr>
+    <tr>
+      <td>-f</td>
+      <td>脚本文件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="section-1">定址</h5>
+
+<p>command中首先要定址，你要告诉sed你希望处理的行,</p>
+
+<ol>
+  <li>可以是<code class="highlighter-rouge">数字</code>，或者<code class="highlighter-rouge">模式</code>(首次匹配，可多次),区间以逗号分隔<code class="highlighter-rouge">line1,line2</code>,<code class="highlighter-rouge">line,/pattern/</code>,<code class="highlighter-rouge">/pattern1/,/pattern2/</code></li>
+  <li>无则处理所有行</li>
+</ol>
+
+<h4 id="command">command</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>command</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">i\</code>　</td>
+      <td>匹配行的上一行添加</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">a\</code></td>
+      <td>匹配行的下一行添加</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">c\</code>　</td>
+      <td>将匹配行替换为目标行</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">d</code></td>
+      <td>将匹配航删除</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s/pattern_old/new/g</code></td>
+      <td>将匹配行替换，<code class="highlighter-rouge">g</code>处理该行所有匹配，<code class="highlighter-rouge">无</code>处理第一个，<code class="highlighter-rouge">3g</code>处理第三个之后的所有(vi中必须指定需要更换的行(<code class="highlighter-rouge">%</code>所有行)，不指定默认是当前行)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">p</code></td>
+      <td>输出</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="section-2">特殊字符</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>字符</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">^</code></td>
+      <td>匹配行首</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$</code></td>
+      <td>匹配行尾</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">.</code></td>
+      <td>匹配某个字符</td>
+    </tr>
+    <tr>
+      <td>&amp;</td>
+      <td>可用来代表匹配的字符</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="section-3">例子</h4>
+<p><code class="highlighter-rouge">sed "s/my/Hao Chen's/g" pets.txt</code></p>
+
+<p>匹配pets.txt中所有行，将所有的my替换为Hao chen’s</p>
+
+<p><code class="highlighter-rouge">sed -i "s/my/Hao Chen's/g" pets.txt</code></p>
+
+<p>直接对pets.txt进行修改</p>
+
+<p><code class="highlighter-rouge">sed  's/^/#/g' pets.txt</code></p>
+
+<p>在pets.txt的行首添加#</p>
+
+<p><code class="highlighter-rouge">sed  's/$/ --- /g' pets.txt</code></p>
+
+<p><code class="highlighter-rouge">sed 'a\---' pets.txt</code></p>
+
+<p>在pets.txt的行尾添加 —</p>
+
+<p><code class="highlighter-rouge">sed 's/&lt;[^&gt;]*&gt;//g' html.txt</code></p>
+
+<p>去除html.txt中的标签</p>
+
+<p><code class="highlighter-rouge">sed "3s/my/your/g" pets.txt</code></p>
+
+<p>将pets.txt中的第三行的my替换为your</p>
+
+<p><code class="highlighter-rouge">sed "3,6s/my/your/g" pets.txt</code></p>
+
+<p>将pets.txt中的第三到六行my替换为your</p>
+
+<p><code class="highlighter-rouge">sed 's/s/S/1' my.txt</code></p>
+
+<p>将my.txt中的第一个s替换为S</p>
+
+<p><code class="highlighter-rouge">sed 's/s/S/3g' my.txt</code></p>
+
+<p>将my.txt中的第三个之后的s替换为S</p>
+
+<p><code class="highlighter-rouge">sed '1,3s/my/your/g; 3,$s/This/That/g' my.txt</code></p>
+
+<p><code class="highlighter-rouge">sed -e '1,3s/my/your/g' -e ' 3,$s/This/That/g' my.txt</code></p>
+
+<p>将my.txt中的第一到第三行的my替换为your，并将第三到最后一行的This替换为That</p>
+
+<p><code class="highlighter-rouge">sed 's/my/[&amp;]/g' my.txt</code></p>
+
+<p>将my.txt中的my用中括号括起来。可以用&amp;来当作被匹配的变量</p>
+
+<p><code class="highlighter-rouge">sed 'N;s/my/your/g' pets.txt</code></p>
+
+<p>将pets.txt中的奇数行的my替换为your，N将下一行的内容纳入缓冲区来进行匹配</p>
+
+<p><code class="highlighter-rouge">sed 'N;s/\n/,/' pets.txt</code></p>
+
+<p>将pets.txt中的奇数行的换行符换成逗号</p>
+
+<p><code class="highlighter-rouge">sed "1 i This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>在第一行之前插入This..</p>
+
+<p><code class="highlighter-rouge">sed "1 a This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>在第一行之后插入</p>
+
+<p><code class="highlighter-rouge">sed "$ a This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>在最后一行之前插入</p>
+
+<p><code class="highlighter-rouge">sed "/fish/a This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>在匹配到fish的行后插入</p>
+
+<p><code class="highlighter-rouge">sed "/my/ a --- " my.txt</code></p>
+
+<p>在匹配到my的行后插入—</p>
+
+<p><code class="highlighter-rouge">sed "2 c This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>第二行替换为This…</p>
+
+<p><code class="highlighter-rouge">sed "/fish/ c This is my monkey,my monkey's name is wukong" my.txt</code></p>
+
+<p>将匹配到fish的行，替换为This..</p>
+
+<p><code class="highlighter-rouge">sed '/fish/ d' my.txt</code></p>
+
+<p>将匹配到fish的行，删除/fish/d有没有空格都行</p>
+
+<p><code class="highlighter-rouge">sed -n '/fish/p' my.txt</code></p>
+
+<p>输出匹配到fish的行</p>
+
+<p><code class="highlighter-rouge">sed '/fish/p' my.txt</code>
+打印输入，并输出匹配到fish的行</p>
+
+<p><code class="highlighter-rouge">sed -n '/dog/,/fish/p' my.txt</code>
+输出匹配到dog和fish之间的行</p>
+
+<p><code class="highlighter-rouge">sed -n '1,/fish/p' my.txt</code>
+输出第一行和匹配到fish之间的行</p>
+
+<p><code class="highlighter-rouge">sed '3,6{/This/{/fish/d}}' pets.txt</code>
+删除第三到六行之间的既包含This，又包含fish的行</p>
+
+<p><code class="highlighter-rouge">sed '/This/d;s/^ *//g' pets.txt</code>
+<code class="highlighter-rouge">sed '1,${/This/d;s/^ *//g}' pets.txt</code>
+将包含this的行删除，并将行首空格删除</p>
+
+<p><code class="highlighter-rouge">sed '=' access.log</code>
+显示行号：</p>
+
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/26/ideaDebugTool">idea调试技巧</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/27/load_balance">负载均衡算法(notes)</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/26/sed" data-title="sed"
+             data-url="http://lcj1992.github.io/2015/12/26/sed">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/26/sed" data-title="sed"
+             data-url="http://lcj1992.github.io/2015/12/26/sed"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/26/ideaDebugTool";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/27/load_balance";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

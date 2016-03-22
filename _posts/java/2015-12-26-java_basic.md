@@ -9,7 +9,6 @@ tags: java autoboxing transient thread jdbc
 *   [自动装箱拆箱](#autobox)
 *   [transient](#transient)
 *   [thread](#thread)
-*   [jdbc](#jdbc)
 *   [annotation](#annotation)
 
 
@@ -68,71 +67,6 @@ If the value p being boxed is true, false, a byte, or a char in the range \u0000
 thread.run()和thread.start()
 
 start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。
-
-### jdbc
-
-#### 基本用法
-
-1.  反射实例化一个com.mysql.jdbc.Driver的实例，并将这个实例注册到DriverManager中
-
-2.  DriverManager根据传入的url，用户名，密码建立一个数据库连接
-
-3.  根据sql，同时预编译sql语句，提高性能。
-
-4.  执行sql，拿到对应结果。
-
-5.  关闭数据库相关资源
-
-举例
-
-        @Test
-        public void dbTest() throws
-            Connection con = null;
-            PreparedStatement psm = null;
-            ResultSet rs = null;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8", "root", "root");
-                String sql = "select * from account where id = ? and name =?";
-                psm = con.prepareStatement(sql);
-                psm.setInt(1, 2);
-                psm.setString(2, "lcj");
-                rs = psm.executeQuery();
-                while (rs.next()) {
-                    LOGGER.info("query id = {},name = {}", rs.getInt("id"), rs.getString("name"));
-                }
-            } catch (Exception e) {
-                LOGGER.error("sql exception",
-            } finally {
-                if (rs != null) {
-                   rs.close();
-                }
-                if (psm != null) {
-                   psm.close();
-                }
-                if (con != null) {
-                   con.close();
-                }
-           }
-        }
-
-#### PreparedStatement比Statement
-
-1.  PreparedStatement帮助我们避免了sql注入攻击 参考常见web攻击手段 ，因为它自动的规避了特殊字符。
-
-2.  PreparedStatement允许我们执行带参数输入的动态的查询
-
-3.  PreparedStatement提供了不同类型的set方法来为查询set输入参数
-
-4.  PreparedStatement比Statement更快，当我们进行批量操作时会更加明显
-
-5.  PreparedStatement让我们以面向对象的方法编写sql，set方法而不是拼接String，不容易出错，漂亮。
-
-String name = String.format("lcj' or 1=1");
-String sql = String.format("select * from account where id=%d and name='%s", id, name);
-Statement statement = con.createStatement();
-rs = statement.executeQuery(sql);
 
 ### annotation
 
@@ -249,13 +183,18 @@ Annotaion
             System.out.println(user);
         }
 
-### 位运算符 {#bitOp}
 
-*   \<\<   左移运算符，num \<\< 1,相当于num乘以2
-*   \>\>   右移运算符，num \>\> 1,相当于num除以2
-*   \>\>\> 无符号右移，忽略符号位，空位都以0补齐
+### shallow copy & deep copy
 
-[1]<http://blog.csdn.net/xyang81/article/details/7270002#comments>
+1.  浅拷贝，对于基本类型和String，没有问题，独立的一份，对于对象，只是拷贝了引用，共用同一片内存区域
+2.  深拷贝，两对象独立
+
+参考
+
+[1]<http://javaconceptoftheday.com/difference-between-shallow-copy-vs-deep-copy-in-java/>
+
+[2]<https://www.cs.utexas.edu/~scottm/cs307/handouts/deepCopying.htm>
+
 
 String.format格式化输出%?
 
