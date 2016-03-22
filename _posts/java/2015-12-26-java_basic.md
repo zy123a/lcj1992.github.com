@@ -198,6 +198,11 @@ Annotaion
 [3]<https://en.wikipedia.org/wiki/Object_copying>
 
 
+### Object#wait() &&  Thread.sleep()
+
+[1]<http://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/>
+
+
 String.format格式化输出%?
 
  %%
