@@ -42,7 +42,7 @@ tags: shell parameter replace
 |${var#pattern}|从头开始扫描，将匹配pattern正则表达式的字符过滤掉，最短匹配|
 |${var##pattern}|同上，只不过是最长匹配|
 |${var%pattern}|从尾开始,将匹配pattern正则表达式的字符过滤掉，最短匹配|
-|${var%%pattern}|同上，只不过时最长匹配|
+|${var%%pattern}|同上，只不过是最长匹配|
 |${var/pattern/string}|替换，仅一次|
 |${var//pattern/string}|替换，全部|
 
