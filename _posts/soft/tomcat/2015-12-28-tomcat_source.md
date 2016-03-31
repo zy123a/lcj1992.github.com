@@ -9,7 +9,7 @@ tags: tomcat
 *   [eclipse工程转idea](eclipse_to_idea)
 *   [web项目目录结构](#structure)
 
-<h2 id="module_method">创建子模块方式</h2>
+## 创建子模块方式 {#module_method}
 
 *   下载tomcat，这里用的7.0.42 [二进制发行版](http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz) 
 *   下载tomcat [源码](http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.42/src/apache-tomcat-7.0.42-src.tar.gz)
@@ -129,10 +129,12 @@ tags: tomcat
 
 PS:
 其实只要将catalina-home中的文件全部拷贝到tomcat-source中，全部替换，然后将运行参数catalina-home对应换成tomcat-source，完全可以把catalina-home文件夹删除。对于有代码洁癖的人，简直了！
-<h2 id="eclipse_to_idea">eclipse 转 idea工程</h2>
+
+## eclipse 转 idea工程 {#eclipse_to_idea}
+
 tomcat支持编译为eclipse工程，可以先编译为eclipse工程，然后用idea导入eclipse工程也可。详见参考[2]
 
-<h2 id="structure">web项目目录结构</h2>
+## web项目目录结构 {#structure}
 webapp　　是工程的根路径
 WEB-INF　打包后java的资源文件以及webapp原有的文件都会在这个目录下
 
