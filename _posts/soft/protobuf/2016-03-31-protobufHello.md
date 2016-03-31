@@ -1,6 +1,6 @@
 ---
 layout : post
-tilte: protobuf的helloworld
+tilte: protobuf的helloworld（java）
 categories: soft
 tags: protobuf 
 ---
@@ -10,7 +10,7 @@ tags: protobuf
 
 1.	写xx.proto
 2.  安装protobuf的编译器`brew install protobuf`
-3.	根据xx.proto 编译生成对应的java文件
+3.	根据xx.proto 编译生成对应的java文件,（pom中需引入protobuf－java包）
 4.	根据google提供的api开始码代码
 
 
