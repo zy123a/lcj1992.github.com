@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md" afterPath="$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" afterPath="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" afterPath="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" afterPath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
     </list>
     <ignored path="foolchild.iws" />
@@ -28,22 +28,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016-02-03-mackeyboard.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/tool/2016-02-03-mackeyboard.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
-                <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2016-01-09-tools.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/unix/2016-01-09-tools.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
@@ -80,8 +64,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.6698113">
-                <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+              <first_editor vertical-scroll-proportion="1.5647482">
+                <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -108,12 +92,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-27-temp.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-12-27-temp.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.9056604">
-                <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+              <first_editor vertical-scroll-proportion="0.8651079">
+                <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-03-18-shell_basic.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.8651079">
+                <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -128,8 +128,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.5283019">
-                <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="1.1870503">
+                <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -202,7 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/java/2016-01-27-guava.md" />
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-java_basic.md" />
         <option value="$PROJECT_DIR$/_posts/tool/idea/2015-12-26-ideaDebugTool.md" />
         <option value="$PROJECT_DIR$/nohup.out" />
@@ -253,6 +252,7 @@
         <option value="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" />
         <option value="$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md" />
         <option value="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
+        <option value="$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md" />
       </list>
     </option>
   </component>
@@ -891,13 +891,7 @@
       <workItem from="1458187815763" duration="2547000" />
       <workItem from="1458481965294" duration="1037000" />
       <workItem from="1458520430464" duration="4618000" />
-      <workItem from="1459659493240" duration="2196000" />
-    </task>
-    <task id="LOCAL-00019" summary="equal and hashmap">
-      <created>1457573172263</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1457573172263</updated>
+      <workItem from="1459659493240" duration="6733000" />
     </task>
     <task id="LOCAL-00020" summary="jvm tool">
       <created>1457575846579</created>
@@ -1187,11 +1181,17 @@
       <option name="project" value="LOCAL" />
       <updated>1459660714705</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="iterm">
+      <created>1459687916142</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1459687916143</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98707000" />
+    <option name="totallyTimeSpent" value="103244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1206,9 +1206,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22995462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.47542372" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116949156" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2779661" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3915023" sideWeight="0.49491525" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.030349014" sideWeight="0.49491525" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1259,7 +1259,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="git 本地关联远程仓库" />
     <MESSAGE value="string awk  cron spring_base" />
     <MESSAGE value="delete thx" />
     <MESSAGE value="spring_conf" />
@@ -1284,7 +1283,8 @@
     <MESSAGE value="pdb" />
     <MESSAGE value="z" />
     <MESSAGE value="修改目录" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改目录" />
+    <MESSAGE value="iterm" />
+    <option name="LAST_COMMIT_MESSAGE" value="iterm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1303,32 +1303,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/about.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.2857143">
-            <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/tool/idea/2015-11-25-ideaShortCut.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.6868132">
-            <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-01-30-Collections.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1873,11 +1847,25 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/performance/2015-12-17-cpuHigh.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="-0.80755395">
+            <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.6698113">
-            <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+          <first_editor vertical-scroll-proportion="1.5647482">
+            <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1890,8 +1878,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/tool/2016-03-11-sublime.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.5283019">
-            <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="1.1870503">
+            <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1904,8 +1892,22 @@
     <entry file="file://$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.9056604">
-            <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+          <first_editor vertical-scroll-proportion="0.8651079">
+            <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.8651079">
+            <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
             <folding />
           </first_editor>
           <second_editor />

@@ -5,27 +5,8 @@ categories: language
 tags: shell
 ---
 
-#### 1.SHELL环境变量
 
-BASH
-
-BASH_VERSION
-
-COLUMNS
-
-HOME
-
-LINES
-
-PATH
-
-PWD
-
-SHELL
-
-OSTYPE
-
-#### 2.变量
+#### 变量
 
 1.`name=value`   或者声明一个未赋值的变量`delcare name`
 
@@ -40,15 +21,6 @@ OSTYPE
 4.使用 unset 命令可以删除变量。变量被删除后不能再次使用；unset 命令不能删除只读变量。
 
 5.变量类型：局部变量，环境变量，shell变量
-
-??
-
-Global shell defined as:
-"You can copy old shell's variable to new shell (i.e. first shells variable to seconds shell), such variable is know as Global Shell variable."
-
-To set global varible you have to use export command.
-Syntax:
-export variable1, variable2,.....variableN
 
 #### 特殊变量
 
@@ -135,7 +107,8 @@ sites=(kmair air9 spair)
 遍历数组
 
 `for i in ${sites[*]}`
-参考
+
+#### 参考
 
 [1]<http://www.freeos.com/guides/lsst/>
 
