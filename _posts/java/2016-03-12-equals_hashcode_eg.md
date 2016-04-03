@@ -37,7 +37,7 @@ tags: equals hashCode
         Map<People, Integer> hashMap = new HashMap<People, Integer>();
         hashMap.put(p1, 1);
 
-         System.out.println(hashMap.get(new People("foolchild", 24)));
+        System.out.println(hashMap.get(new People("foolchild", 24)));
     } 
     ...
   
