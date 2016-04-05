@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 正则基础  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/book.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 正则基础 </h2>
+        <ul>
+  <li><a href="#metaChar">元字符</a></li>
+  <li><a href="#count">重复</a></li>
+  <li><a href="#group">分组</a></li>
+  <li><a href="#backwardReference">后向引用</a></li>
+  <li><a href="#greedyAndLazy">贪婪与懒惰</a></li>
+</ul>
+
+<p>抄自：http://deerchao.net/tutorials/regex/regex.htm</p>
+
+<h2 id="metaChar">元字符</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>代码</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>.</td>
+      <td>匹配除换行符以外的任意字符</td>
+    </tr>
+    <tr>
+      <td>\w</td>
+      <td>匹配字母或者数字或下划线或汉字</td>
+    </tr>
+    <tr>
+      <td>\W</td>
+      <td>匹配任意不是字母，数字，下划线，汉字的字符</td>
+    </tr>
+    <tr>
+      <td>\s</td>
+      <td>匹配任意的空白字符</td>
+    </tr>
+    <tr>
+      <td>\S</td>
+      <td>匹配任意非空白字符</td>
+    </tr>
+    <tr>
+      <td>\d</td>
+      <td>匹配数字</td>
+    </tr>
+    <tr>
+      <td>\D</td>
+      <td>匹配任意非数字的字符</td>
+    </tr>
+    <tr>
+      <td>\b</td>
+      <td>匹配单词的开始或结束</td>
+    </tr>
+    <tr>
+      <td>\B</td>
+      <td>匹配不是单词开头或结束的位置</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>匹配字符串的开始</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>匹配字符串的结束</td>
+    </tr>
+    <tr>
+      <td>[^x]</td>
+      <td>匹配非x的任意字符</td>
+    </tr>
+    <tr>
+      <td>[^aeiou]</td>
+      <td>匹配除aeiou的任意字符</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>如果要查找的时元字符本身，就需要进行转义 \. \*</p>
+
+<ol>
+  <li>\ba\w*\b 　　以字母a开头的</li>
+  <li>\d+ 　　　　　匹配１个或更多连续的数字</li>
+  <li>^\d{5,12}$　　5-12位的数字</li>
+</ol>
+
+<h2 id="count">重复</h2>
+<ul>
+  <li>重复0,1,n次</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>代码/语法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*</td>
+      <td>重复0次或更多次</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>重复１次或更多次</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>重复0次或1次</td>
+    </tr>
+    <tr>
+      <td>{n}</td>
+      <td>重复n次</td>
+    </tr>
+    <tr>
+      <td>{n,}</td>
+      <td>重复n次或更多次</td>
+    </tr>
+    <tr>
+      <td>{n,m}</td>
+      <td>重复n到m次</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>Windows\d+　匹配Windows后面跟1个或更多数字</li>
+  <li>^\w+　匹配一行的第一个单词或者整个字符串的第一个单词，具体匹配那个看选项设置　　</li>
+</ol>
+
+<h2 id="branch">分支条件</h2>
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>分支条件指的是有几种规则，如果满足了其中任意一种规则都应该当做匹配，具体方法是用</td>
+          <td>把不同的规则分隔开。</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>从左到右测试每个分支条件，如果满足了某个分支的话，就不会去再管其他的条件了。</li>
+</ol>
+
+<h2 id="group">分组</h2>
+<ul>
+  <li>如果想要重复多个字符，可以用小括号来制定子表达式(分组),然后你就可以指定这个子表达式的重复次数了，你也可以对子表达式进行其他依稀操作　　　　　</li>
+  <li>(\d{1,3}\.}{3}\d{1,3})　\d{1,3}匹配１到3位的数字,(\d{1,3}\.){3})匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复三次，最后…</li>
+</ul>
+
+<h2 id="backwardReference">后向引用</h2>
+<ul>
+  <li>使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其他程序中作进一步的处理。
+ 默认情况下，每个分组会自动拥有一个组号，规则是：从左到右，以分组的左括号为标志，第一个出现的分组的组号为１，第二个为2，以此类推。</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>分类</th>
+      <th>代码/语法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>捕获</td>
+      <td>(exp)</td>
+      <td>匹配exp，并捕获文本到自动命名的组里</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(?<name>exp)</name></td>
+      <td>匹配exp，并捕获文本到名称为name的组里，也可以写成(?’name’exp)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(?:exp)</td>
+      <td>匹配exp，不捕获匹配的文本，也不给此分组分配组号</td>
+    </tr>
+    <tr>
+      <td>零宽断言</td>
+      <td>(?=exp)</td>
+      <td>匹配后面跟的是exp的位置</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(?&lt;=exp)</td>
+      <td>匹配前面是exp的位置</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(?!exp)</td>
+      <td>匹配后面跟的不是exp的位置</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(?&lt;!exp)</td>
+      <td>匹配前面不是exp的位置</td>
+    </tr>
+    <tr>
+      <td>注释</td>
+      <td>(?#comment)</td>
+      <td>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>\b\w+(?=ing\b)　I’m singing while you’re dancing　会匹配sing和danc</li>
+  <li>(?&lt;=\bre) reading a book 会匹配ading</li>
+  <li>\d{3}(?!\d)　匹配三位数字，而且这三位数字的后面不能是数字</li>
+  <li>(?&lt;![a-z])\d{7} 匹配前面不是小写字母的７位数字</li>
+</ul>
+
+<h2 id="greedyAndLazy">贪婪与懒惰</h2>
+<ul>
+  <li>不加?是贪婪，加?是懒惰</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>代码/语法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*?</td>
+      <td>重复任意次,但尽可能少重复</td>
+    </tr>
+    <tr>
+      <td>+?</td>
+      <td>重复1次或更多次，但尽可能少重复</td>
+    </tr>
+    <tr>
+      <td>??</td>
+      <td>重复0次或1次，但尽可能少重复</td>
+    </tr>
+    <tr>
+      <td>{n,m}?</td>
+      <td>重复n到m次，但尽可能少重复</td>
+    </tr>
+    <tr>
+      <td>{n,}?</td>
+      <td>重复n次以上，但尽可能少重复</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>a.*?b　如果应用于aabab的话，它会匹配aab和ab</li>
+</ul>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/07/grep">grep</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/08/comAttacks">常见web攻击手段</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/08/regexBasic" data-title="正则基础"
+             data-url="http://lcj1992.github.io/2015/12/08/regexBasic">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/08/regexBasic" data-title="正则基础"
+             data-url="http://lcj1992.github.io/2015/12/08/regexBasic"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/07/grep";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/08/comAttacks";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

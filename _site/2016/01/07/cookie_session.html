@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> cookie和session  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/book.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> cookie和session </h2>
+        <h3 id="cookie">cookie</h3>
+
+<p>HTTP cookie <strong><em>由<code class="highlighter-rouge">服务端（产生方）</code>发送到<code class="highlighter-rouge">客户端（存储方）</code>，并存储在用户的客户端（浏览器）中．每次用户请求网站时，浏览器会将cookie发回给服务器．</em></strong>cookie可以用来记录一些状态信息（如购物车中的商品）或者记录用户的浏览行为
+#### 属性</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>cookie名</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>cookie值</td>
+    </tr>
+    <tr>
+      <td>domain</td>
+      <td>哪个域名发送的，最长256字符</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>哪个路径发送的</td>
+    </tr>
+    <tr>
+      <td>secure</td>
+      <td>是否允许</td>
+    </tr>
+    <tr>
+      <td>httponly</td>
+      <td>是否仅能通过http和https渠道暴漏．防止客户端js执行，盗取cookie</td>
+    </tr>
+    <tr>
+      <td>max-age</td>
+      <td>持续时间</td>
+    </tr>
+    <tr>
+      <td>expires</td>
+      <td>过期时间,和上类似</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#java_cookie">cookie的实现</a></p>
+
+<p>servlet-api 2.5之前版本（含）没有httpOnly这个字段，需要费点劲来设置httpOnly <code class="highlighter-rouge">cookie.setPath(isHttpOnly ? "/pathxx; HttpOnly;": "/pathxx");</code></p>
+
+<p>chrome中的cookie,<strong><em>如果cookie不设置过期时间(<code class="highlighter-rouge">会话cookie</code>),表示这个cookie的生命周期为浏览器会话时期</em></strong>，下图的过期时间那列Session就是这个意思
+<img src="/images/web/cookie.png" alt="cookie" /></p>
+
+<h3 id="session">session</h3>
+<p>session需要使用cookie作为识别标志。HTTP协议是无状态的，session不能依据HTTP连接来判断是否为同一客户，因此服务器向客户端浏览器发送一个名为JSESSIONID的cookie，其值为该session的ID。该cookie为服务器自动生成的，<strong><em>maxAge属性一般为-1，表示仅当前浏览器内有效，并且各浏览器窗口间不共享，关闭浏览器就会失效。</em></strong>因此同一机器的两个浏览器窗口访问服务器时会生成两个不同的session</p>
+
+<p>cookie的java实现
+<a id="java_cookie"></a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//
+// The value of the cookie itself.
+//
+
+private String name;	// NAME= ... "$Name" style is reserved
+private String value;	// value of NAME
+
+//
+// Attributes encoded in the header's cookie fields.
+//
+
+private String comment;	// ;Comment=VALUE ... describes cookie's use
+			// ;Discard ... implied by maxAge &lt; 0
+private String domain;	// ;Domain=VALUE ... domain that sees cookie
+private int maxAge = -1;	// ;Max-Age=VALUE ... cookies auto-expire
+private String path;	// ;Path=VALUE ... URLs that see the cookie
+private boolean secure;	// ;Secure ... e.g. use SSL
+private int version = 0;	// ;Version=1 ... means RFC 2109++ style
+private boolean isHttpOnly = false;
+</code></pre>
+</div>
+
+<p>参考：</p>
+
+<p>[1]<a href="https://en.wikipedia.org/wiki/HTTP_cookie">https://en.wikipedia.org/wiki/HTTP_cookie</a></p>
+
+<p>[2]<a href="http://www.cnblogs.com/shiyangxt/archive/2008/10/07/1305506.html">http://www.cnblogs.com/shiyangxt/archive/2008/10/07/1305506.html</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2016/01/05/system_start">系统启动</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2016/01/07/filter_intercepter">过滤器和拦截器</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2016/01/07/cookie_session" data-title="cookie和session"
+             data-url="http://lcj1992.github.io/2016/01/07/cookie_session">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2016/01/07/cookie_session" data-title="cookie和session"
+             data-url="http://lcj1992.github.io/2016/01/07/cookie_session"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2016/01/05/system_start";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2016/01/07/filter_intercepter";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

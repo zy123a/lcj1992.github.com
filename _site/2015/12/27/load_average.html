@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> load average  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/book.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> load average </h2>
+        <h4 id="section">基本含义</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>man uptime
+DESCRIPTION
+...
+System load averages is the average number of processes that are either in a runnable or uninterruptable  state.   A  process  in  a
+runnable  state  is  either  using  the  CPU  or waiting to use the CPU.  A process in uninterruptable state is waiting for some I/O
+access, eg waiting for disk.  The averages are taken over the three time intervals.  Load averages are not normalized for the number
+of CPUs in a system, so a load average of 1 means a single CPU system is loaded all the time while on a 4 CPU system it means it was
+idle 75% of the time. 翻译：
+</code></pre>
+</div>
+
+<p>系统负载均值是一个可运行状态和不可中断状态的进程的平均值。可运行状态包含运行着占着cpu的，还有在进程队列中等待着的去占cpu的，还有处于不可中断状态的（为什么叫不可中断状态？）如等待磁盘的。</p>
+
+<p>负载均值有三个时间间隔，1分，5分，15分。负载均值为1在单个cpu的机器上负载满了，但是在4个cpu的表明其在75%的时间内是空闲的。</p>
+
+<h4 id="section-1">计算</h4>
+<p>那么均值是如何均的呢？</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#define FSHIFT   11		/* nr of bits of precision */
+#define FIXED_1  (1&lt;&lt;FSHIFT)	/* 1.0 as fixed-point */
+#define LOAD_FREQ (5*HZ)	/* 5 sec intervals */
+#define EXP_1  1884		/* 1/exp(5sec/1min) as fixed-point */
+#define EXP_5  2014		/* 1/exp(5sec/5min) */
+#define EXP_15 2037		/* 1/exp(5sec/15min) */
+
+#define CALC_LOAD(load,exp,n) \
+   load *= exp; \
+   load += n*(FIXED_1-exp); \
+   load &gt;&gt;= FSHIFT;
+
+unsigned long avenrun[3];
+
+static inline void calc_load(unsigned long ticks)
+{
+   unsigned long active_tasks; /* fixed-point */
+   static int count = LOAD_FREQ;
+
+   count -= ticks;
+   if (count &lt; 0) {
+      count += LOAD_FREQ;
+      active_tasks = count_active_tasks();
+      CALC_LOAD(avenrun[0], EXP_1, active_tasks);
+      CALC_LOAD(avenrun[1], EXP_5, active_tasks);
+      CALC_LOAD(avenrun[2], EXP_15, active_tasks);
+   }
+}
+</code></pre>
+</div>
+
+<p>在linux系统上，负载均值不是每个时钟周期tick都计算的，但是会被一个基于Hz频度设置的变量值触发,也就是调用上边的calc_load函数中if(count &lt; 0)中的代码块（这个值是可以设置的，是linux内核活动的心率，默认情况下1Hz等于1tick，也就是10ms）。虽然Hz的值在某些内核版本中是可配，不过它通常被设为100(就是一秒啦，这里的Hz给我们高中学的频率的单位好像不一样哎)，通过这个值来计算内核负载的计算频度。一般情况是每5Hz触发一次这个算法</p>
+
+<p>（每个时钟周期都检测调用calc_load函数，但是5s才触发一次计算CALC_LOAD）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1 HZ = 100 ticks
+5 HZ = 500 ticks
+1 tick = 10 milliseconds
+500 ticks = 5000 milliseconds (or 5 seconds)
+So, 5 HZ means that CALC_LOAD is called every 5 seconds.
+</code></pre>
+</div>
+
+<p>每个时钟周期都调用一下calc_load方法。LOAD_FREQ是个宏，值为5Hz，count初始值为LOAD_FREQ,没调用一次calc_load，其值减少1ticks，当其减少到小于0时候，触发CALC_LOAD中算法，计算load值，其中avenrun数组分别保存系统当前1分，5分，15分的负载均值。</p>
+
+<p>active_tasks的计算源码,即使遍历tasklist的链表，累加所有task状态为running的，runnable的和uninterruptible的进程的个数。</p>
+
+<p>/* Nr of active tasks - counted in fixed-point numbers
+*/
+static unsigned long count_active_tasks (void) {
+    struct task struct *p;
+    unsigned long nr = 0;</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>read_lock (&amp;tasklist_lock);
+for_each_task(p) {
+    if ( (p-&gt;state == TASK_RUNNING ||
+            (p-&gt;state &amp; TASK_UNINTERRUPTIBLE ) ) )
+    nr += FIXED_1;
+    }
+read_unlock(&amp;tasklist_lock);
+return nr; }
+</code></pre>
+</div>
+
+<p>下边是推导的CALC_LOAD的函数，至于exp为什么要那么计算，其数学背景是什么，等我知道了再补上。</p>
+
+<p><img src="/images/linux_command/load_compute.png" alt="load计算" /></p>
+
+<h4 id="section-2">结论</h4>
+
+<p><code class="highlighter-rouge">load_m = load_m * exp(-5 / 60m) + n * (1 – exp(-5 / 60m))</code></p>
+
+<p>其中m为1或5或15</p>
+
+<p>注：外链二中源码有误（第10页代码631行）</p>
+
+<h4 id="section-3">参考文献</h4>
+<p>load维基百科</p>
+
+<p><a href="http://www.teamquest.com/import/pdfs/whitepaper/ldavg1.pdf">http://www.teamquest.com/import/pdfs/whitepaper/ldavg1.pdf</a></p>
+
+<p><a href="http://www.gracecode.com/posts/2973.html">http://www.gracecode.com/posts/2973.html</a></p>
+
+<p><a href="http://www.penglixun.com/tech/system/how_to_calc_load_cpu.html">http://www.penglixun.com/tech/system/how_to_calc_load_cpu.html</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/27/disk_command">磁盘命令</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/27/memory_command">内存命令</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/27/load_average" data-title="load average"
+             data-url="http://lcj1992.github.io/2015/12/27/load_average">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/27/load_average" data-title="load average"
+             data-url="http://lcj1992.github.io/2015/12/27/load_average"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/27/disk_command";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/27/memory_command";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
