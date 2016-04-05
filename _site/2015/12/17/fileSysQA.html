@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 文件系统x问  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 文件系统x问 </h2>
+        <ul>
+  <li><a href="#empty_file">空文件占空间么，占的话占多少？</a></li>
+  <li><a href="#empty_directory">空目录占空间么，占的话占多少？</a></li>
+  <li><a href="#directory_4096">对于空目录，inode存放文件的元信息，那么4096是干什么的呢？</a></li>
+  <li><a href="#directory_and_file">目录能保存的文件个数是否跟文件名长度相关？</a></li>
+  <li><a href="#empty_file_4k">touch只包含一个空格的文件，为什么占用了我4K的空间？</a></li>
+  <li><a href="#ll_and_du">ll第四列的总和（除去..的）与du -h的区别在哪？</a></li>
+</ul>
+
+<p><a href="http://djt.qq.com/article/view/620">http://djt.qq.com/article/view/620</a>基本上是照着这里走了一遍</p>
+
+<h3 id="empty_file">空文件占空间么，占的话占多少</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~$ touch empty.file; ll | grep empty.file
+-rw-rw-r--  1 lcj  lcj      0 12月 22 17:52 empty.file
+</code></pre>
+</div>
+
+<p>空文件占0，那操作系统是怎么知道空文件在哪的呢?必须肯定以及确定有地方放着其元信息．
+　  　　
+<code class="highlighter-rouge">df -i</code> (查看inode节点使用情况)，然后重新touch一个新文件,然后再df -i下，看下used的数量，然后你会发现used的加了１</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>df -i | grep /dev/sda
+</code></pre>
+</div>
+
+<p>//找你要查看的磁盘分区</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~/test/empty.dir$ sudo fdisk -l //找你要查看的磁盘分区
+
+Disk /dev/sda: 256.1 GB, 256060514304 bytes
+255 heads, 63 sectors/track, 31130 cylinders, total 500118192 sectors
+Units = 扇区 of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x000a89d8
+
+   设备 启动      起点          终点     块数   Id  系统
+/dev/sda1   *        2048   483534847   241766400   83  Linux
+/dev/sda2       483536894   500117503     8290305    5  扩展
+/dev/sda5       483536896   500117503     8290304   82  Linux 交换 / Solaris
+</code></pre>
+</div>
+
+<p>//　查看对应磁盘分区inode的size</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~/test/empty.dir$ sudo dumpe2fs -h /dev/sda1 | grep -i 'inode.*size'
+dumpe2fs 1.42.9 (4-Feb-2014)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent flex_bg sparse_super large_file huge_file uninit_bg dir_nlink extra_isize
+Inode size:	          256
+</code></pre>
+</div>
+
+<p>那么为什么ll显示的文件大小为0呢？ll不带元信息呗,只是文件大小!</p>
+
+<p>结论： <strong><em>空文件的大小至少为inode的size大小，ps: inode size 是在格式化的时候设定的</em></strong> 　　　　　　</p>
+
+<h3 id="empty_directory">空目录占空间么，占的话占多少</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~$ mkdir empty.dir;ll | grep empty.dir
+drwxrwxr-x  2 lcj  lcj   4096 12月 22 18:00 empty.dir/ 空目录占4096,怎么不是0，也不是265?4096是什么玩意？按照上述操作，发现inodes　used的数量也加１了
+</code></pre>
+</div>
+
+<p>//查看对应磁盘分区block的大小</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dumpe2fs -h /dev/sda1 | grep -i 'block.*size' 结论： ***空目录的大小至少为block的size＋inode的size，同样block的size也是在文件系统格式化的时候设定的***
+</code></pre>
+</div>
+
+<h3 id="directory_4096">inode存放文件的元信息，那么这4096是干什么的呢？</h3>
+<p>我们做个猜想，存放文件夹与其中文件的关联信息．</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~/test/empty.dir/empty.fir$ du -h;
+4.0K	.
+lcj@lcj:~/test/empty.dir/empty.fir$ touch empty.file1 empty.file2;du -h
+4.0K	.
+</code></pre>
+</div>
+
+<p>没啥变化，我touch1000个文件呢？脚本如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..1000<span class="o">}</span>
+<span class="k">do
+   </span>touch empty.dir/<span class="nv">$i</span>;
+<span class="k">done </span>du -h 就是128K 结论： <span class="k">***</span>空目录的4096是是用来存目录与文件夹的关系的<span class="k">***</span>
+</code></pre>
+</div>
+
+<h3 id="directory_and_file">文件名长度是否也跟目录能保存的文件个数相关？</h3>
+
+<p>当两个空文件时，du -h仍为4k，但是1000个文件时，就变了(如上图)，那么文件名长度是否也跟目录能保存的文件个数相关？
+将文件名扩展了20多倍，用新的脚本重试上述步骤，然后就128K了，原来的24K.</p>
+
+<p>结论： <strong><em>目录block中能保存的文件名个数和文件名的长度有关，实际上linux操作系统文件名最长为256bytes（你可以试试<code class="highlighter-rouge">touch 1111...1111</code>）</em></strong>
+所以当你的文件数量相当大的时候，你就要考虑你的文件名是否导致你的目录block占用太多．</p>
+
+<h3 id="empty_file_4k">touch只包含一个空格的文件，为什么占用了我4K的空间？</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lcj@lcj:~/test/empty.dir$ stat empty.file
+ 文件："empty.file"
+ 大小：2         	块：8          IO 块：4096   普通文件
+设备：801h/2049d	Inode：6029317     硬链接：1
+权限：(0664/-rw-rw-r--)  Uid：( 1000/     lcj)   Gid：( 1000/     lcj)
+最近访问：2015-12-17 22:17:01.927402539 +0800
+最近更改：2015-12-17 22:17:01.927402539 +0800
+最近改动：2015-12-17 22:17:01.927402539 +0800
+创建时间：- 结论： ***操作系统最小的分配单位就是block,就是上述的IO块，block和inode的size都是在分区时指定的***
+</code></pre>
+</div>
+
+<h3 id="ll_and_du">ll第四列的总和（除去.和..）与du -h的区别在哪？</h3>
+<p>结论： <strong><em>ll显示的是文件内容占用的实际字节数,du显示的占用的<code class="highlighter-rouge">block（IO块）大小* 4</code></em></strong>　
+.与..存放的是目录与文件的关联关系，其数据结构todo</p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/17/disk">磁盘结构</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/17/getSource">ubuntu获取源码</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/17/fileSysQA" data-title="文件系统x问"
+             data-url="http://lcj1992.github.io/2015/12/17/fileSysQA">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/17/fileSysQA" data-title="文件系统x问"
+             data-url="http://lcj1992.github.io/2015/12/17/fileSysQA"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/17/disk";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/17/getSource";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

@@ -16,4 +16,6 @@ tags: protobuf
 
 ### 参考
 
-[1]<https://developers.google.com/protocol-buffers/docs/javatutorial#why-use-protocol-buffers>
+[google官网]<https://developers.google.com/protocol-buffers/docs/javatutorial#why-use-protocol-buffers>
+
+[Protocol Buffer搭建及示例]<http://www.tanhao.me/code/150911.html/>
