@@ -1,6 +1,6 @@
 ---
 layout: post
-tilte: protobuf的helloworld（java）
+title: protobuf的helloworld（java）
 categories: soft
 tags: protobuf 
 ---
