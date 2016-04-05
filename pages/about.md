@@ -13,7 +13,7 @@ Beijing City, China   Computer Software
 *Education:* scholar, CS  HUST
 
 *Contact:* lcj1992@hotmail.com
-
+about
 *Social:*
 
 [github](http://github.com/lcj1992/)
@@ -28,7 +28,7 @@ Beijing City, China   Computer Software
 
 3.  `别人的or笔记`　见上2,3,如[文件系统x问](/2016/01/07/fileSysQA),[并发基础](/2015/11/25/concurrent)
 
-4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[equals和hashCoe](/2016/03/10/equal_hashcode) ,[磁盘满了](/2015/12/17/diskFull)　
+4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[equals和hashCoe](/2016/03/10/equals_hashcode) ,[磁盘满了](/2015/12/17/diskFull)　
 
 ### 博客的快捷键
 
