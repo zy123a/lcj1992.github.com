@@ -33213,4 +33213,13 @@ Configuration file: /Users/fool/work/foolchild/_config.yml
       Regenerating: 1 file(s) changed at 2016-04-05 19:27:11 ...done in 1.128739 seconds.
       Regenerating: 1 file(s) changed at 2016-04-05 19:27:12 ...done in 1.15104 seconds.
       Regenerating: 1 file(s) changed at 2016-04-05 19:27:14 ...done in 1.094431 seconds.
-      Regenerating: 1 file(s) changed at 2016-04-05 19:27:15 
+      Regenerating: 1 file(s) changed at 2016-04-05 19:27:15 Configuration file: /Users/fool/work/foolchild/_config.yml
+            Source: /Users/fool/work/foolchild
+       Destination: /Users/fool/work/foolchild/_site
+ Incremental build: enabled
+      Generating... 
+                    done in 0.509 seconds.
+ Auto-regeneration: enabled for '/Users/fool/work/foolchild'
+Configuration file: /Users/fool/work/foolchild/_config.yml
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.

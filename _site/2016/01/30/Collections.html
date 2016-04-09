@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> Collection常用子类源码注解  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> Collection常用子类源码注解 </h2>
+        <ul>
+  <li><a href="#classPic">类图</a></li>
+  <li><a href="#public">公共部分</a>
+    <ul>
+      <li><a href="#Iterable">Iterable</a></li>
+      <li><a href="#Collection">Collection</a></li>
+      <li><a href="#AbstractCollection">AbstractCollection</a></li>
+    </ul>
+  </li>
+  <li><a href="#List">List</a>
+    <ul>
+      <li><a href="#AbstractList">AbstractList</a></li>
+      <li><a href="#ArrayList">ArrayList</a></li>
+      <li><a href="#Queue">Queue</a></li>
+      <li><a href="#Deque">Deque</a></li>
+      <li><a href="#LinkedList">LinkedList</a></li>
+    </ul>
+  </li>
+  <li><a href="#Set">Set</a>
+    <ul>
+      <li><a href="#SortedSet">SortedSet</a></li>
+      <li><a href="#NavigableSet">NavigableSet</a></li>
+      <li><a href="#TreeSet">TreeSet</a></li>
+      <li><a href="#HashSet">HashSet</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="classPic">类图</h3>
+<p>List和set的
+<img src="/images/java/list_set.png" alt="List_Set" /></p>
+
+<h3 id="public">公共部分</h3>
+
+<h4 id="Iterable">Iterable</h4>
+
+<p><code class="highlighter-rouge">Iterable</code> 只有一个接口返回一组元素的迭代器,实现该接口的类都支持foreach语句</p>
+
+<h4 id="Collection">Collection</h4>
+
+<ul>
+  <li>add(E) 添加一个元素,返回集合是否变更</li>
+  <li>addAll(Collection&lt;? extends E&gt;) 添加一组元素</li>
+  <li>clear() 清空集合</li>
+  <li>contains(Object) 是否包含元素</li>
+  <li>equals(Object) 各子类重写Object的equals方法.例如ArrayList的是:<code class="highlighter-rouge">两个list各个位置的元素是否完全相同</code></li>
+  <li>hashCode() 重写了equals方法就要重写hashCode</li>
+  <li>isEmpty() 是否为空</li>
+  <li>iterator() 返回迭代器</li>
+  <li>remove(Object) 删除元素</li>
+  <li>removeAll(Collection&lt;?&gt;) 删除一组元素</li>
+  <li>retainAll(Collection&lt;?&gt;) 过滤一组元素</li>
+  <li>size()集合大小</li>
+  <li>toArray() 返回对象数组</li>
+  <li>toArray(T[] a) 返回T类型的数组,这里指明了对象类型</li>
+</ul>
+
+<h4 id="AbstractCollection">AbstractCollection</h4>
+
+<p>其中AbstractCollection对Collection的部分方法进行了实现(除了iterator()和size()),包含了一些List和Set共有的操作</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    /**
+    * @param      src      the source array. ***源数组***
+    * @param      srcPos   starting position in the source array. ***源数组起始地址***
+    * @param      dest     the destination array. ***目标数组***
+    * @param      destPos  starting position in the destination data. ***目标数组开始的地址***
+    * @param      length   the number of array elements to be copied. ***要拷贝的长度***
+    * @exception  IndexOutOfBoundsException  if copying would cause
+    *               access of data outside array bounds. ***length不能超过src和dest的任一长度***
+    * @exception  ArrayStoreException  if an element in the &lt;code&gt;src&lt;/code&gt;
+    *               array could not be stored into the &lt;code&gt;dest&lt;/code&gt; array
+    *               because of a type mismatch. ***类型不匹配***
+    * @exception  NullPointerException if either &lt;code&gt;src&lt;/code&gt; or
+    *               &lt;code&gt;dest&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;. ***src或者dest为空***
+    */
+   public static native void arraycopy(Object src,  int  srcPos,
+                                       Object dest, int destPos,
+                                       int length);
+</code></pre>
+</div>
+
+<h3 id="List">List</h3>
+
+<p>List接口在Collection的基础之上增加了部分list独有的操作</p>
+
+<ul>
+  <li>add(int,E) 在list某位置处添加元素</li>
+  <li>addAll(int,Collection&lt;? extends E&gt;)在list某位置处添加元素组</li>
+  <li>get(int) 根据下标获取元素</li>
+  <li>indexOf(Object) 根据元素获取下标,如果多个返回第一个</li>
+  <li>lastIndexOf(Object) 根据元素获取最后一个的下标</li>
+  <li>listIterator() 返回list的迭代器</li>
+  <li>listIterator(int) 从list某下标处返回迭代器</li>
+  <li>remove(int) 删除下标某处的元素,返回删除的元素</li>
+  <li>set(int,E) 设置list某处的元素</li>
+  <li>subList(int,int) 返回下标1和下标2之间的list</li>
+</ul>
+
+<h4 id="AbstractList">AbstractList</h4>
+
+<p>AbstractList对List接口进行了实现,并引入了SubList,Itr和ListItr三个内部类,用于实现subList和listIterator方法,并增加了一个域<code class="highlighter-rouge">modCount</code>structurally modified的次数(transient修饰)</p>
+
+<h4 id="ArrayList">ArrayList</h4>
+
+<p>ArrayList的<code class="highlighter-rouge">elementData</code>,存储list元素的数组,并且这个域是transient(不参与序列化)修饰的,因为ArrayList重写了readObject和writeObject</p>
+
+<p>ArrayList在AbstractList之外多了一些方法</p>
+
+<ul>
+  <li>clone() 重写了Object#clone()方法, 除了clone list对象本身,还clone list的每个元素</li>
+  <li>ensureCapacity(int) 增加ArrayList实例的容量(确保能保存最小的容量)</li>
+  <li>trimToSize() 将list的容量trim到list当前的size</li>
+</ul>
+
+<h4 id="Queue">Queue</h4>
+
+<ul>
+  <li>add(E) 在队列中添加特定的元素,成功则返回true,如果没有多余空间则抛出IllegalStateException</li>
+  <li>element() 返回队首元素,它和peek()方法的不同是,如果队列为空,element()抛出noSuchElementException,peek()返回null</li>
+  <li>offer(E) 类add()方法,When using a capacity-restricted queue, this method is generally preferable to {@link #add}, which can fail to insert an element only by throwing an exception.</li>
+  <li>peek() 返回队首元素,如果队列为空,返回null</li>
+  <li>poll() 返回队首元素,并从队首移除,如果队列为空,返回null</li>
+  <li>remove() 返回队首元素,并从队首移除,如果队列为空,抛出noSuchElementException</li>
+</ul>
+
+<h4 id="Deque">Deque</h4>
+
+<ul>
+  <li>addFirst(E) 在对头添加元素,无返回值</li>
+  <li>addLast(E) 在队尾添加元素,无返回值</li>
+  <li>descendingIterator() 返回插入顺序相反的iterator</li>
+  <li>getFirst() 获取对头元素,和peekFirst()不同的是如果队列为空,getFirst()抛出noSuchElementException异常,peekFirst()返回空</li>
+  <li>getLast() 类getFirst()</li>
+  <li>offerFirst(E) 在对头添加元素,返回添加的元素</li>
+  <li>offerLast(E) 在对头添加元素,返回添加的元素</li>
+  <li>peekFirst() 获取队首元素,如果队列为空,返回null</li>
+  <li>peekLast() 获取队尾元素,如果队列为空,返回null</li>
+  <li>pollFirst() 返回队首元素,并从队列移除,如果队列为空,返回null</li>
+  <li>pollLast() 返回队尾元素,并从队列移除,如果队列为空,返回null</li>
+  <li>pop() 返回队首元素,并从队列移除,方法等价于removeFirst(),如果对列为空,抛出NoSuchElementException</li>
+  <li>push() 等价于addFirst()</li>
+  <li>removeFirst() 见pop()</li>
+  <li>removeFirstOccurrence(Object) 移除对象在队列中的首次出现,如果移除成功,返回true,</li>
+  <li>removeLast() 返回队尾元素,并从队列移除,如果对列为空,抛出NoSuchElementException</li>
+  <li>removeLastOccurrence() 移除对象在队列中的最后次出现,如果移除成功,返回true,</li>
+</ul>
+
+<h4 id="LinkedList">LinkedList</h4>
+
+<p>LinkedList是基于<code class="highlighter-rouge">双向循环链表</code>来实现的,数据结构如下:</p>
+
+<p>类声明,LinkedList只是把所实现的接口统统实现了下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class LinkedList&lt;E&gt; extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+</code></pre>
+</div>
+
+<p>双向链表的结构体</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    private static class Node&lt;E&gt; {
+        E item;
+        Node&lt;E&gt; next;
+        Node&lt;E&gt; prev;
+
+        Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+</code></pre>
+</div>
+
+<h3 id="Set">Set</h3>
+<p>set 接口和collection接口方法完全一样</p>
+
+<h4 id="AbstractSet">AbstractSet</h4>
+
+<ul>
+  <li>重写了equals(Object o)方法,集合A和B size相等,并且A包含B所有元素</li>
+  <li>重写了hashCode() 重写了equals方法就要重写hashCode方法</li>
+  <li>实现了removeAll(Collection&lt;?&gt; c)</li>
+</ul>
+
+<h4 id="SortedSet">SortedSet</h4>
+
+<ul>
+  <li>Comparator&lt;? super E&gt; comparator() 返回这个sortedSet的比较器</li>
+  <li>E first() 返回这个Set的第一个元素</li>
+  <li>E last() 返回这个Set的最后一个元素</li>
+  <li>SortedSet<e> headSet(E toElement) 返回这个set小于toElement的set</e></li>
+  <li>SortedSet<e> tailSet(E fromElement) 返回这个set大于fromElement的set</e></li>
+  <li>SortedSet<e> subSet(E fromElement, E toElement) 返回这个set从fromElement(包括)到toElement(不包括)的set</e></li>
+</ul>
+
+<h4 id="NavigableSet">NavigableSet</h4>
+
+<ul>
+  <li>E lower(E e) 返回集合中小于元素e的最大的元素</li>
+  <li>E floor(E e) 返回集合中小于或等于元素e的最大的元素</li>
+  <li>E ceiling(E e) 返回集合中大于或等于元素e的最大的元素</li>
+  <li>E higher(E e) 返回集合中大于元素e的最大的元素</li>
+  <li>E pollFirst() 类似(#Deque)的,返回集合的最小元素,并从集合中移除</li>
+  <li>E pollLast() 类似(#Deque)的,返回集合的最大元素,并从集合中移除</li>
+  <li>Iterator<e> iterator() ..</e></li>
+  <li>NavigableSet<e> descendingSet() 返回逆序的set</e></li>
+  <li>Iterator<e> descendingIterator() 返回逆序的iterator</e></li>
+  <li>NavigableSet<e> subSet(E fromElement, boolean fromInclusive, E toElement,   boolean toInclusive) ...</e></li>
+  <li>NavigableSet<e> headSet(E toElement, boolean inclusive) ...</e></li>
+  <li>NavigableSet<e> tailSet(E fromElement, boolean inclusive) ...</e></li>
+  <li>SortedSet<e> subSet(E fromElement, E toElement) ==   subSet(fromElement, true, toElement, false)</e></li>
+  <li>SortedSet<e> headSet(E toElement) == headSet(toElement, false)</e></li>
+  <li>SortedSet<e> tailSet(E fromElement) == tailSet(fromElement, true)</e></li>
+</ul>
+
+<h4 id="TreeSet">TreeSet</h4>
+
+<h4 id="HashSet">HashSet</h4>
+
+<ol>
+  <li>实际上是通过HashMap来实现的 <code class="highlighter-rouge">map.put(e, PRESENT)==null;</code></li>
+  <li>不保证集合元素的顺序</li>
+  <li>允许空值</li>
+  <li>Set s = Collections.synchronizedSet(new HashSet(…))</li>
+  <li>其迭代器是fail-fast的,迭代器一旦创建,除了迭代器自己删除元素,
+其他任何的对set的写操作都会导致迭代器抛出<code class="highlighter-rouge">ConcurrentModificationException</code>,
+注意迭代器的fail-fast特性不能保证，正如在非同步化修改中做保也是不可能的.
+因此通过异常来判定程序的正确性是不可取的,只能把它当做检测程序bug的手段</li>
+</ol>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2016/01/27/guava">guava</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2016/02/03/mackeyboard">mac使用</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2016/01/30/Collections" data-title="Collection常用子类源码注解"
+             data-url="http://lcj1992.github.io/2016/01/30/Collections">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2016/01/30/Collections" data-title="Collection常用子类源码注解"
+             data-url="http://lcj1992.github.io/2016/01/30/Collections"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2016/01/27/guava";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2016/02/03/mackeyboard";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

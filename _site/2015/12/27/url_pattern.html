@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> url pattern  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> url pattern </h2>
+        <ul>
+  <li><a href="#web.xml">标准的web.xml</a>
+    <ul>
+      <li><a href="#kind">url-pattern种类</a></li>
+      <li><a href="#handler">tomcat处理顺序</a></li>
+    </ul>
+  </li>
+  <li><a href="#ant_style">ant-style</a></li>
+  <li><a href="#addition">附录</a>
+    <ul>
+      <li><a href="#addWrapper">addWrapper</a></li>
+      <li><a href="#internalMapWrapper">internalMapWrapper</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="web.xml">标准的web.xml的path pattern</h2>
+
+<h3 id="kind">url-pattern种类</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>url-pattern</th>
+      <th>翻译下下</th>
+      <th>对应wrapper(匹配规则)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>path.endsWith(“/<em>”)</em></td>
+      <td>以 /* 结尾的</td>
+      <td><code class="highlighter-rouge">Wildcard wrapper</code>　通配符,匹配/xx /yy.xx</td>
+    </tr>
+    <tr>
+      <td>path.startsWith(“*.”)</td>
+      <td>以 *. 开头的</td>
+      <td><code class="highlighter-rouge">Extension wrapper</code> 扩展,匹配xx.yy</td>
+    </tr>
+    <tr>
+      <td>path.equals(“/”)</td>
+      <td>/</td>
+      <td><code class="highlighter-rouge">Default wrapper</code></td>
+    </tr>
+    <tr>
+      <td>else</td>
+      <td>以上3种之外的</td>
+      <td><code class="highlighter-rouge">Exact wrapper</code> 精确匹配</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>tomcat读取web.xml配置，调用addServletMappings将servlet加入<code class="highlighter-rouge">StandardContext.ServletMappings</code>中，tomcat自己有两个servlet，我们的web应用可以重写（web应用内url-pattern和servlet只能是一一对应的）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>     &lt;!-- The mapping for the default servlet --&gt;
+        &lt;servlet-mapping&gt;
+            &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+            &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+        &lt;/servlet-mapping&gt;
+
+        &lt;!-- The mappings for the JSP servlet --&gt;
+        &lt;servlet-mapping&gt;
+            &lt;servlet-name&gt;jsp&lt;/servlet-name&gt;
+            &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+            &lt;url-pattern&gt;*.jspx&lt;/url-pattern&gt;
+        &lt;/servlet-mapping&gt;
+</code></pre>
+</div>
+
+<p>处理完后结果如下图：其中key是url-pattern value是servlet-name</p>
+
+<p><img src="/images/java_web/url_pattern.png" alt="url-pattern" /></p>
+
+<p>addServletMapping会调用<a href="#addWrapper">addWrapper</a>将对应模式url-pattern加入对应的<code class="highlighter-rouge">Mapper.ContextVersion.*wrappers</code>中``</p>
+
+<p><img src="/images/java_web/wrappers.png" alt="wrappers" /></p>
+
+<p>wrapper代表一个servlet，它负责管理一个Servlet，包括Servlet的装载,初始化,执行以及资源回收</p>
+
+<h3 id="handler">tomcat处理顺序</h3>
+
+<ol>
+  <li>精确匹配 <code class="highlighter-rouge">exact match</code>　对应 exactWrappers</li>
+  <li>前缀匹配 <code class="highlighter-rouge">prefix match</code>　对应wildcardWrappers</li>
+  <li>扩展匹配 <code class="highlighter-rouge">extension　match</code> 对应extensionWrappers</li>
+  <li>使用资源文件来处理servlet，使用contextVersion的welcomeResources属性，这个属性是个字符串数组
+    *   精确匹配
+    *   前缀匹配
+    *   文件夹</li>
+  <li>默认的servlet来处理　对应default wrapper</li>
+</ol>
+
+<p>源码详见<a href="#internalMapWrapper">internalMapWrapper</a></p>
+
+<h2 id="antstyle">ant_style</h2>
+
+<p>Ant path 匹配原则
+路径匹配原则(Path Matching) Spring MVC中的路径匹配要比标准的web.xml要灵活的多。默认的策略实现了 org.springframework.util.AntPathMatcher，就像名字提示的那样，路径模式是使用了Apache Ant的样式路径，Apache Ant样式的路径有三种通配符匹配方法（在下面的表格中列出)
+这些可以组合出很多种灵活的路径模式</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Wildcard</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>?</td>
+      <td>匹配任何单字符</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>匹配0或者任意数量的字符</td>
+    </tr>
+    <tr>
+      <td>**</td>
+      <td>匹配0或者更多的目录</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>例子</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Path</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/app/*.x</td>
+      <td>匹配(Matches)所有在app路径下的.x文件</td>
+    </tr>
+    <tr>
+      <td>/app/p?ttern</td>
+      <td>匹配(Matches) /app/pattern 和 /app/pXttern,但是不包括/app/pttern</td>
+    </tr>
+    <tr>
+      <td>/**/example</td>
+      <td>匹配(Matches) /app/example, /app/foo/example, 和 /example</td>
+    </tr>
+    <tr>
+      <td>/app/**/dir/file.</td>
+      <td>匹配(Matches) /app/dir/file.jsp, /app/foo/dir/file.html,/app/foo/bar/dir/file.pdf, 和 /app/dir/file.java</td>
+    </tr>
+    <tr>
+      <td>/<em>*/</em>.jsp</td>
+      <td>　匹配(Matches)任何的.jsp 文件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="addition">附录</h2>
+
+<p>addWrapper：tomcat读取web.xml，将servlet分别加入对应的wrapper中
+internalMapWrapper: 按照一定的处理顺序，将请求分别打给对应的wrapper，交给该wrapper的servlet处理</p>
+
+<h3 id="addWrapper">addWrapper</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    /**
+     * Adds a wrapper to the given context.
+     *
+     * @param context The context to which to add the wrapper
+     * @param path Wrapper mapping
+     * @param wrapper The Wrapper object
+     * @param jspWildCard true if the wrapper corresponds to the JspServlet
+     * @param resourceOnly true if this wrapper always expects a physical
+     *                     resource to be present (such as a JSP)
+     * and the mapping path contains a wildcard; false otherwise
+     */
+    protected void addWrapper(ContextVersion context, String path,
+            Object wrapper, boolean jspWildCard, boolean resourceOnly) {
+        synchronized (context) {
+            Wrapper newWrapper = new Wrapper();
+            newWrapper.object = wrapper;
+            newWrapper.jspWildCard = jspWildCard;
+            newWrapper.resourceOnly = resourceOnly;
+            if (path.endsWith("/*")) {
+                // Wildcard wrapper
+                newWrapper.name = path.substring(0, path.length() - 2);
+                Wrapper[] oldWrappers = context.wildcardWrappers;
+                Wrapper[] newWrappers =
+                    new Wrapper[oldWrappers.length + 1];
+                if (insertMap(oldWrappers, newWrappers, newWrapper)) {
+                    context.wildcardWrappers = newWrappers;
+                    int slashCount = slashCount(newWrapper.name);
+                    if (slashCount &gt; context.nesting) {
+                        context.nesting = slashCount;
+                    }
+                }
+            } else if (path.startsWith("*.")) {
+                // Extension wrapper
+                newWrapper.name = path.substring(2);
+                Wrapper[] oldWrappers = context.extensionWrappers;
+                Wrapper[] newWrappers =
+                    new Wrapper[oldWrappers.length + 1];
+                if (insertMap(oldWrappers, newWrappers, newWrapper)) {
+                    context.extensionWrappers = newWrappers;
+                }
+            } else if (path.equals("/")) {
+                // Default wrapper
+                newWrapper.name = "";
+                context.defaultWrapper = newWrapper;
+            } else {
+                // Exact wrapper
+                if (path.length() == 0) {
+                    // Special case for the Context Root mapping which is
+                    // treated as an exact match
+                    newWrapper.name = "/";
+                } else {
+                    newWrapper.name = path;
+                }
+                Wrapper[] oldWrappers = context.exactWrappers;
+                Wrapper[] newWrappers =
+                    new Wrapper[oldWrappers.length + 1];
+                if (insertMap(oldWrappers, newWrappers, newWrapper)) {
+                    context.exactWrappers = newWrappers;
+                }
+            }
+        }
+    }
+</code></pre>
+</div>
+
+<h3 id="internalMapWrapper">internalMapWrapper</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    /**
+     * Wrapper mapping.
+     */
+    private final void internalMapWrapper(ContextVersion contextVersion,
+                                          CharChunk path,
+                                          MappingData mappingData)
+        throws Exception {
+
+        int pathOffset = path.getOffset();
+        int pathEnd = path.getEnd();
+        int servletPath = pathOffset;
+        boolean noServletPath = false;
+
+        int length = contextVersion.path.length();
+        if (length != (pathEnd - pathOffset)) {
+            servletPath = pathOffset + length;
+        } else {
+            noServletPath = true;
+            path.append('/');
+            pathOffset = path.getOffset();
+            pathEnd = path.getEnd();
+            servletPath = pathOffset+length;
+        }
+
+        path.setOffset(servletPath);
+
+        // Rule 1 -- Exact Match
+        Wrapper[] exactWrappers = contextVersion.exactWrappers;
+        internalMapExactWrapper(exactWrappers, path, mappingData);
+
+        // Rule 2 -- Prefix Match
+        boolean checkJspWelcomeFiles = false;
+        Wrapper[] wildcardWrappers = contextVersion.wildcardWrappers;
+        if (mappingData.wrapper == null) {
+            internalMapWildcardWrapper(wildcardWrappers, contextVersion.nesting,
+                                       path, mappingData);
+            if (mappingData.wrapper != null &amp;&amp; mappingData.jspWildCard) {
+                char[] buf = path.getBuffer();
+                if (buf[pathEnd - 1] == '/') {
+                    /*
+                     * Path ending in '/' was mapped to JSP servlet based on
+                     * wildcard match (e.g., as specified in url-pattern of a
+                     * jsp-property-group.
+                     * Force the context's welcome files, which are interpreted
+                     * as JSP files (since they match the url-pattern), to be
+                     * considered. See Bugzilla 27664.
+                     */
+                    mappingData.wrapper = null;
+                    checkJspWelcomeFiles = true;
+                } else {
+                    // See Bugzilla 27704
+                    mappingData.wrapperPath.setChars(buf, path.getStart(),
+                                                     path.getLength());
+                    mappingData.pathInfo.recycle();
+                }
+            }
+        }
+
+        if(mappingData.wrapper == null &amp;&amp; noServletPath) {
+            // The path is empty, redirect to "/"
+            mappingData.redirectPath.setChars
+                (path.getBuffer(), pathOffset, pathEnd-pathOffset);
+            path.setEnd(pathEnd - 1);
+            return;
+        }
+
+        // Rule 3 -- Extension Match
+        Wrapper[] extensionWrappers = contextVersion.extensionWrappers;
+        if (mappingData.wrapper == null &amp;&amp; !checkJspWelcomeFiles) {
+            internalMapExtensionWrapper(extensionWrappers, path, mappingData,
+                    true);
+        }
+
+        // Rule 4 -- Welcome resources processing for servlets
+        if (mappingData.wrapper == null) {
+            boolean checkWelcomeFiles = checkJspWelcomeFiles;
+            if (!checkWelcomeFiles) {
+                char[] buf = path.getBuffer();
+                checkWelcomeFiles = (buf[pathEnd - 1] == '/');
+            }
+            if (checkWelcomeFiles) {
+                for (int i = 0; (i &lt; contextVersion.welcomeResources.length)
+                         &amp;&amp; (mappingData.wrapper == null); i++) {
+                    path.setOffset(pathOffset);
+                    path.setEnd(pathEnd);
+                    path.append(contextVersion.welcomeResources[i], 0,
+                            contextVersion.welcomeResources[i].length());
+                    path.setOffset(servletPath);
+
+                    // Rule 4a -- Welcome resources processing for exact macth
+                    internalMapExactWrapper(exactWrappers, path, mappingData);
+
+                    // Rule 4b -- Welcome resources processing for prefix match
+                    if (mappingData.wrapper == null) {
+                        internalMapWildcardWrapper
+                            (wildcardWrappers, contextVersion.nesting,
+                             path, mappingData);
+                    }
+
+                    // Rule 4c -- Welcome resources processing
+                    //            for physical folder
+                    if (mappingData.wrapper == null
+                        &amp;&amp; contextVersion.resources != null) {
+                        Object file = null;
+                        String pathStr = path.toString();
+                        try {
+                            file = contextVersion.resources.lookup(pathStr);
+                        } catch(NamingException nex) {
+                            // Swallow not found, since this is normal
+                        }
+                        if (file != null &amp;&amp; !(file instanceof DirContext) ) {
+                            internalMapExtensionWrapper(extensionWrappers, path,
+                                                        mappingData, true);
+                            if (mappingData.wrapper == null
+                                &amp;&amp; contextVersion.defaultWrapper != null) {
+                                mappingData.wrapper =
+                                    contextVersion.defaultWrapper.object;
+                                mappingData.requestPath.setChars
+                                    (path.getBuffer(), path.getStart(),
+                                     path.getLength());
+                                mappingData.wrapperPath.setChars
+                                    (path.getBuffer(), path.getStart(),
+                                     path.getLength());
+                                mappingData.requestPath.setString(pathStr);
+                                mappingData.wrapperPath.setString(pathStr);
+                            }
+                        }
+                    }
+                }
+
+                path.setOffset(servletPath);
+                path.setEnd(pathEnd);
+            }
+
+        }
+
+        /* welcome file processing - take 2
+         * Now that we have looked for welcome files with a physical
+         * backing, now look for an extension mapping listed
+         * but may not have a physical backing to it. This is for
+         * the case of index.jsf, index.do, etc.
+         * A watered down version of rule 4
+         */
+        if (mappingData.wrapper == null) {
+            boolean checkWelcomeFiles = checkJspWelcomeFiles;
+            if (!checkWelcomeFiles) {
+                char[] buf = path.getBuffer();
+                checkWelcomeFiles = (buf[pathEnd - 1] == '/');
+            }
+            if (checkWelcomeFiles) {
+                for (int i = 0; (i &lt; contextVersion.welcomeResources.length)
+                         &amp;&amp; (mappingData.wrapper == null); i++) {
+                    path.setOffset(pathOffset);
+                    path.setEnd(pathEnd);
+                    path.append(contextVersion.welcomeResources[i], 0,
+                                contextVersion.welcomeResources[i].length());
+                    path.setOffset(servletPath);
+                    internalMapExtensionWrapper(extensionWrappers, path,
+                                                mappingData, false);
+                }
+
+                path.setOffset(servletPath);
+                path.setEnd(pathEnd);
+            }
+        }
+
+
+        // Rule 7 -- Default servlet
+        if (mappingData.wrapper == null &amp;&amp; !checkJspWelcomeFiles) {
+            if (contextVersion.defaultWrapper != null) {
+                mappingData.wrapper = contextVersion.defaultWrapper.object;
+                mappingData.requestPath.setChars
+                    (path.getBuffer(), path.getStart(), path.getLength());
+                mappingData.wrapperPath.setChars
+                    (path.getBuffer(), path.getStart(), path.getLength());
+            }
+            // Redirection to a folder
+            char[] buf = path.getBuffer();
+            if (contextVersion.resources != null &amp;&amp; buf[pathEnd -1 ] != '/') {
+                Object file = null;
+                String pathStr = path.toString();
+                try {
+                    file = contextVersion.resources.lookup(pathStr);
+                } catch(NamingException nex) {
+                    // Swallow, since someone else handles the 404
+                }
+                if (file != null &amp;&amp; file instanceof DirContext) {
+                    // Note: this mutates the path: do not do any processing
+                    // after this (since we set the redirectPath, there
+                    // shouldn't be any)
+                    path.setOffset(pathOffset);
+                    path.append('/');
+                    mappingData.redirectPath.setChars
+                        (path.getBuffer(), path.getStart(), path.getLength());
+                } else {
+                    mappingData.requestPath.setString(pathStr);
+                    mappingData.wrapperPath.setString(pathStr);
+                }
+            }
+        }
+
+        path.setOffset(pathOffset);
+        path.setEnd(pathEnd);
+
+    }
+</code></pre>
+</div>
+
+<p>[1]<a href="http://www.cnblogs.com/fangjian0423/p/servletcontainer-tomcat-urlpattern.html">http://www.cnblogs.com/fangjian0423/p/servletcontainer-tomcat-urlpattern.html</a></p>
+
+<p>[2]<a href="http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern">http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern</a></p>
+
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/27/view">视图</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/27/dtd">dtd</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/27/url_pattern" data-title="url pattern"
+             data-url="http://lcj1992.github.io/2015/12/27/url_pattern">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/27/url_pattern" data-title="url pattern"
+             data-url="http://lcj1992.github.io/2015/12/27/url_pattern"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/27/view";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/27/dtd";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

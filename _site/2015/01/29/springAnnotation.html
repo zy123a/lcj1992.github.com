@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> annotation-config与component-scan  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> annotation-config与component-scan </h2>
+        <p><strong>注：好文章的搬运工！</strong>
+&gt;   *<code class="highlighter-rouge">&lt;context:annotation-config&gt;</code>用来激活已经注册在application context中的beans的注解。（无论他是通过xml还是通过包扫描定义的） <br />
+&gt;   *<code class="highlighter-rouge">&lt;context:component-scan&gt;</code>可以做<code class="highlighter-rouge">&lt;context:annotation-config&gt;</code>做的，而且<code class="highlighter-rouge">&lt;context:component-scan&gt;</code>还可以扫包来发现和向application context中注册beans。</p>
+
+<h2 id="examples">examples</h2>
+<p>类型为A，B，C的三个类，B，C 被注入到A中</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.xxx;
+public class B {
+  public B() {
+    System.out.println("creating bean B: " + this);
+  }
+}
+
+package com.xxx;
+public class C {
+  public C() {
+    System.out.println("creating bean C: " + this);
+  }
+}
+
+package com.yyy;
+import com.xxx.B;
+import com.xxx.C;
+public class A { 
+  private B bbb;
+  private C ccc;
+  public A() {
+    System.out.println("creating bean A: " + this);
+  }
+  public void setBbb(B bbb) {
+    System.out.println("setting A.bbb with " + bbb);
+    this.bbb = bbb;
+  }
+  public void setCcc(C ccc) {
+    System.out.println("setting A.ccc with " + ccc);
+    this.ccc = ccc; 
+  }
+} 配置文件如下：  
+
+&lt;bean id="bBean" class="com.xxx.B" /&gt;
+&lt;bean id="cBean" class="com.xxx.C" /&gt;
+&lt;bean id="aBean" class="com.yyy.A"&gt;
+  &lt;property name="bbb" ref="bBean" /&gt;
+  &lt;property name="ccc" ref="cBean" /&gt;
+&lt;/bean&gt; 当我们load context时，可以得到如下结果：
+
+creating bean B: com.xxx.B@c2ff5
+creating bean C: com.xxx.C@1e8a1f6
+creating bean A: com.yyy.A@1e152c5
+setting A.bbb with com.xxx.B@c2ff5
+setting A.ccc with com.xxx.C@1e8a1f6 这是老式风格的spring，让我们用注解来简化xml 首先，我们诸如BBB 和 CCC 在bean A中向这样：  
+
+package com.yyy;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.xxx.B;
+import com.xxx.C;
+public class A { 
+  private B bbb;
+  private C ccc;
+  public A() {
+    System.out.println("creating bean A: " + this);
+  }
+  @Autowired
+  public void setBbb(B bbb) {
+    System.out.println("setting A.bbb with " + bbb);
+    this.bbb = bbb;
+  }
+  @Autowired
+  public void setCcc(C ccc) {
+    System.out.println("setting A.ccc with " + ccc);
+    this.ccc = ccc;
+  }
+} 这样的话，我们就可以移除xml中的这两行：   
+
+&lt;property name="bbb" ref="bBean" /&gt;
+&lt;property name="ccc" ref="cBean" /&gt; 我的xml就可以简化为：  
+
+&lt;bean id="bBean" class="com.xxx.B" /&gt;
+&lt;bean id="cBean" class="com.xxx.C" /&gt;
+&lt;bean id="aBean" class="com.yyy.A" /&gt; 当我们load context时，可以得到如下结果：   
+
+creating bean B: com.xxx.B@5e5a50
+creating bean C: com.xxx.C@54a328
+creating bean A: com.yyy.A@a3d4cf ok，这不对啊！发生什么了？为什么我的属性没有被注入？ 注解是一个很好的特性，但是他们自己不做任何   事情，他们仅仅是注解，你需要一个processing tool来发现这些注解，然后用他们来做些什么。`&lt;context:annotation-config&gt;`就是来干这个的，他找到和他定义在同一个application context的beans，并激活这些beans中的注解。 如果我更改我的xml如下：  
+
+&lt;context:annotation-config /&gt;
+&lt;bean id="bBean" class="com.xxx.B" /&gt;
+&lt;bean id="cBean" class="com.xxx.C" /&gt;
+&lt;bean id="aBean" class="com.yyy.A" /&gt; 当我load the application context 我得到了合适的结果：  
+
+creating bean B: com.xxx.B@15663a2
+creating bean C: com.xxx.C@cd5f8b
+creating bean A: com.yyy.A@157aa53
+setting A.bbb with com.xxx.B@15663a2
+setting A.ccc with com.xxx.C@cd5f8b
+</code></pre>
+</div>
+
+<p>ok，当我移除了xml中的这两行然后添加了一行，结果很好。那我把xml中全删了，然后用注解来实现呢？</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.xxx;
+import org.springframework.stereotype.Component;
+@Component
+public class B {
+  public B() {
+    System.out.println("creating bean B: " + this);
+  }
+}
+
+package com.xxx;
+import org.springframework.stereotype.Component;
+@Component
+public class C {
+  public C() {
+    System.out.println("creating bean C: " + this);
+  }
+}
+
+package com.yyy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.xxx.B;
+import com.xxx.C;
+@Component
+public class A { 
+  private B bbb;
+  private C ccc;
+  public A() {
+    System.out.println("creating bean A: " + this);
+  }
+  @Autowired
+  public void setBbb(B bbb) {
+    System.out.println("setting A.bbb with " + bbb);
+    this.bbb = bbb;
+  }
+  @Autowired
+  public void setCcc(C ccc) {
+    System.out.println("setting A.ccc with " + ccc);
+    this.ccc = ccc;
+  }
+} xml中仅仅保留：
+
+&lt;context:annotation-config /&gt; 当重新load context时，nothing，没有beans被创建，没有beans被注入。   这是因为，正如我第一段说的，`&lt;context:annotation-config /&gt;`仅仅对已经注册在application context中的beans生效，当移除xml中的配置时，没有beans被创建，`&lt;context:annotation-config /&gt;`没有作用的对象。   但是这对于`&lt;context:component-scan&gt;`不是问题，他可以扫包来创建beans，然后注入。   然后我们更改xml配置如下：  
+
+&lt;context:component-scan base-package="com.xxx" /&gt; 当load context时，得到如下输出：  
+
+creating bean B: com.xxx.B@1be0f0a
+creating bean C: com.xxx.C@80d1ff 还是少了点啥！为什么呢？ 原来A在com.yyy包中，而我xml中只用了包com.xxx,所以会遗漏A，更改xml配置如下：  
+
+&lt;context:component-scan base-package="com.xxx,com.yyy" /&gt;     得到期望的结果. 保持A,B,C的注解，修改xml配置如下：  
+
+&lt;context:component-scan     base-package="com.xxx" /&gt;
+&lt;bean id="aBean" class="com.yyy.A" /&gt; 我们仍然得到正确的结果：  
+
+creating bean B: com.xxx.B@157aa53
+creating bean C: com.xxx.C@ec4a87
+creating bean A: com.yyy.A@1d64c37
+setting A.bbb with com.xxx.B@157aa53
+setting A.ccc with com.xxx.C@ec4a87   即使A类的bean没有被扫描到，`&lt;context:component-scan&gt;`仍然能够对application context中的所有beans起作用，即使A是通过xml注册的。  
+但是如果我们修改我们的xml配置如下，会不会得到重复的beans呢？  
+
+&lt;context:annotation-config /&gt;
+&lt;context:component-scan base-package="com.xxx" /&gt;
+&lt;bean id="aBean" class="com.yyy.A" /&gt;   没有重复，我们仍然得到了期望的结果：  
+
+creating bean B: com.xxx.B@157aa53
+creating bean C: com.xxx.C@ec4a87
+creating bean A: com.yyy.A@1d64c37
+setting A.bbb with com.xxx.B@157aa53
+setting A.ccc with com.xxx.C@ec4a87   这是因为如果有`&lt;context:component-scan&gt;`了，`&lt;context:annotation-config /&gt;`会被忽略，spring只运行他们一次。  
+即使你注册了多个processing tools，Spring仍然会确定你只做了一次，比如你的xml如下：  
+
+&lt;context:annotation-config /&gt;
+&lt;context:component-scan base-package="com.xxx" /&gt;
+&lt;bean id="aBean" class="com.yyy.A" /&gt;
+&lt;bean id="bla" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
+&lt;bean id="bla1" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
+&lt;bean id="bla2" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
+&lt;bean id="bla3" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt; 仍然会得到一样的结果：  
+
+creating bean B: com.xxx.B@157aa53
+creating bean C: com.xxx.C@ec4a87
+creating bean A: com.yyy.A@25d2b2
+setting A.bbb with com.xxx.B@157aa53
+setting A.ccc with com.xxx.C@ec4a87 通过学习，你会发现`&lt;context:component-scan/&gt;`能够识别&lt;`context:annotation-config/&gt;`的超集，也就是 &gt;   *`@Component`, `@Service`, `@Repository`, `@Controller`, `@Endpoint`        &gt;   *`@Configuration`, `@Bean`, `@Lazy`, `@Scope`, `@Order`, `@Primary`, `@Profile`, `@DependsOn`, `@Import`, `@ImportResource`
+</code></pre>
+</div>
+
+<p>As you can see <code class="highlighter-rouge">&lt;context:component-scan/&gt;</code> logically extends <code class="highlighter-rouge">&lt;context:annotation-config/&gt;</code> with CLASSPATH component scanning and Java @Configuration features.</p>
+
+<p>[1]<a href="http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan">http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/01/27/springmvc">从启动日志看spring mvc的流程</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/03/18/shell_basic">shell语法</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/01/29/springAnnotation" data-title="annotation-config与component-scan"
+             data-url="http://lcj1992.github.io/2015/01/29/springAnnotation">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/01/29/springAnnotation" data-title="annotation-config与component-scan"
+             data-url="http://lcj1992.github.io/2015/01/29/springAnnotation"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/01/27/springmvc";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/03/18/shell_basic";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

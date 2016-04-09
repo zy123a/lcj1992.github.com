@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> vi  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> vi </h2>
+        <ul>
+  <li><a href="#edit">编辑</a></li>
+  <li><a href="#insert">插入</a></li>
+  <li><a href="#search_replace">查找替换</a></li>
+  <li><a href="#cut_paste">剪切复制</a></li>
+  <li><a href="#exit">退出</a></li>
+  <li><a href="#multi_files">多文件操作</a></li>
+  <li><a href="#line_num">显示行号</a></li>
+  <li><a href="#block_edit">块编辑模式</a></li>
+  <li><a href="#refereence">参考</a></li>
+</ul>
+
+<h4 id="edit">编辑</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>r</td>
+      <td>替换单一字符（在非insert模式下）</td>
+    </tr>
+    <tr>
+      <td>J</td>
+      <td>将当前行和下一行合并</td>
+    </tr>
+    <tr>
+      <td>cc</td>
+      <td>改变一整行</td>
+    </tr>
+    <tr>
+      <td>cw</td>
+      <td>改变最后一个单词</td>
+    </tr>
+    <tr>
+      <td>c$</td>
+      <td>改变光标到最后一个单词</td>
+    </tr>
+    <tr>
+      <td>u</td>
+      <td>undo</td>
+    </tr>
+    <tr>
+      <td>ctrl-r</td>
+      <td>redo</td>
+    </tr>
+    <tr>
+      <td>.</td>
+      <td>重复上一个命令</td>
+    </tr>
+    <tr>
+      <td>~</td>
+      <td>切换大小写</td>
+    </tr>
+    <tr>
+      <td>g~iw</td>
+      <td>切换当前单词的大小写</td>
+    </tr>
+    <tr>
+      <td>gUiw</td>
+      <td>当前单词大写</td>
+    </tr>
+    <tr>
+      <td>guiw</td>
+      <td>将当前单词改为小写</td>
+    </tr>
+    <tr>
+      <td>&gt;&gt;</td>
+      <td>向右缩进当前行</td>
+    </tr>
+    <tr>
+      <td>&lt;&lt;</td>
+      <td>向左缩进当前行</td>
+    </tr>
+    <tr>
+      <td>==</td>
+      <td>自动缩进当前行</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="insert">插入</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>i</td>
+      <td>在光标处进入插入</td>
+    </tr>
+    <tr>
+      <td>I</td>
+      <td>在当前行行首的非空字符处插入</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>在光标之后插入</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>在行尾插入</td>
+    </tr>
+    <tr>
+      <td>o</td>
+      <td>在当前行下新开一空白行</td>
+    </tr>
+    <tr>
+      <td>O</td>
+      <td>在当前行前新开一空白行</td>
+    </tr>
+    <tr>
+      <td>esc</td>
+      <td>退出insert模式</td>
+    </tr>
+    <tr>
+      <td>Cursor</td>
+      <td>Movement</td>
+    </tr>
+    <tr>
+      <td>ctrl-f</td>
+      <td>向上翻页</td>
+    </tr>
+    <tr>
+      <td>ctrl-b</td>
+      <td>向下翻页</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td>jump to matching brace</td>
+    </tr>
+    <tr>
+      <td>w</td>
+      <td>jump to end of words(标点)</td>
+    </tr>
+    <tr>
+      <td>W</td>
+      <td>jump by words</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td>jump to end of words(标点)</td>
+    </tr>
+    <tr>
+      <td>E</td>
+      <td>jump to end of words</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>jump backward  by words(标点)</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>jump backward  by words</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>行首（含空白字符）</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>行首第一个非空字符</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>行尾</td>
+    </tr>
+    <tr>
+      <td>gg</td>
+      <td>第一行</td>
+    </tr>
+    <tr>
+      <td>gd</td>
+      <td>跳到方法或变量的声明处</td>
+    </tr>
+    <tr>
+      <td>nG</td>
+      <td>跳到第n行</td>
+    </tr>
+    <tr>
+      <td>fx</td>
+      <td>跳到当前行的x字符</td>
+    </tr>
+    <tr>
+      <td>;</td>
+      <td>重复上一个f命令</td>
+    </tr>
+    <tr>
+      <td>tx</td>
+      <td>和fx很像，但是跳到x之前的一个字符</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="search_replace">查找替换</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>　含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/pattern</td>
+      <td>模式匹配</td>
+    </tr>
+    <tr>
+      <td>?pattern</td>
+      <td>模式匹配(倒着来)</td>
+    </tr>
+    <tr>
+      <td>n</td>
+      <td>重复查找</td>
+    </tr>
+    <tr>
+      <td>N</td>
+      <td>重复查找倒序</td>
+    </tr>
+    <tr>
+      <td>s/old/new/</td>
+      <td>替换当前航第一个old -&gt; new</td>
+    </tr>
+    <tr>
+      <td>s/old/new/g</td>
+      <td>替换当前行所有</td>
+    </tr>
+    <tr>
+      <td>s/old/new/gc</td>
+      <td>每个替换都需要确认</td>
+    </tr>
+    <tr>
+      <td>1,$s/old/new/g</td>
+      <td>替换第一行到最后一行, <code class="highlighter-rouge">1,$</code>等价于<code class="highlighter-rouge">%</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="cut_paste">剪切复制</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dd</td>
+      <td>剪切一行</td>
+    </tr>
+    <tr>
+      <td>dw</td>
+      <td>删除当前单词</td>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>删除光标当前字符</td>
+    </tr>
+    <tr>
+      <td>X</td>
+      <td>删除光标之前的字符</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>删除光标所在到行尾</td>
+    </tr>
+    <tr>
+      <td>yy</td>
+      <td>复制一行</td>
+    </tr>
+    <tr>
+      <td>2yy</td>
+      <td>复制两行</td>
+    </tr>
+    <tr>
+      <td>yw</td>
+      <td>复制光标当前单词</td>
+    </tr>
+    <tr>
+      <td>y$</td>
+      <td>复制光标到行尾所有字符</td>
+    </tr>
+    <tr>
+      <td>p</td>
+      <td>粘贴</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>在光标之前粘贴</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="exit">退出</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>w</td>
+      <td>保存</td>
+    </tr>
+    <tr>
+      <td>wq</td>
+      <td>保存并退出</td>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>保存并退出</td>
+    </tr>
+    <tr>
+      <td>q</td>
+      <td>退出，如果不保存会失败</td>
+    </tr>
+    <tr>
+      <td>q!</td>
+      <td>强制退出</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="multi_files">多文件操作</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>e xxx</td>
+      <td>在一个新的buffer中编辑xxx</td>
+    </tr>
+    <tr>
+      <td>bn</td>
+      <td>切换到下一个buffer</td>
+    </tr>
+    <tr>
+      <td>bd</td>
+      <td>删除一个buffer（关闭文件）</td>
+    </tr>
+    <tr>
+      <td>sp xxx</td>
+      <td>在新的buffer中打开文件并分割窗口</td>
+    </tr>
+    <tr>
+      <td>ctrl-w s</td>
+      <td>分割窗口</td>
+    </tr>
+    <tr>
+      <td>ctrl-w w</td>
+      <td>切换窗口</td>
+    </tr>
+    <tr>
+      <td>ctrl-w q</td>
+      <td>退出窗口</td>
+    </tr>
+    <tr>
+      <td>ctrl-w v</td>
+      <td>垂直分割窗口</td>
+    </tr>
+    <tr>
+      <td>table xxx</td>
+      <td>编辑文件在一个新的tab</td>
+    </tr>
+    <tr>
+      <td>gt</td>
+      <td>下一个tab</td>
+    </tr>
+    <tr>
+      <td>gT</td>
+      <td>之前的tabs</td>
+    </tr>
+    <tr>
+      <td>tabr</td>
+      <td>第一个tab</td>
+    </tr>
+    <tr>
+      <td>tabl</td>
+      <td>最后一个tab</td>
+    </tr>
+    <tr>
+      <td>tabm n</td>
+      <td>move当前tab之后的第n个</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="line_num">显示行号</h4>
+
+<ul>
+  <li>方法一：</li>
+</ul>
+
+<p>1、显示当前行行号，在VI的命令模式下输入:nu</p>
+
+<p>2、显示所有行号，在VI的命令模式下输入:set nu</p>
+
+<ul>
+  <li>方法二：</li>
+</ul>
+
+<p>使用vi编辑~/.vimrc文件，在该文件中加入一行”set nu”，添加内容不含引号， 命令如下：vi ~/.vimrc</p>
+
+<ul>
+  <li>方法三：</li>
+</ul>
+
+<p>在UBUNTU中vi的配置文件存放在/etc/vim目录中，配置文件名为vimrc
+在Fedora中vi的配置文件存放在/etc目录中，配置文件名为vimrc</p>
+
+<p>在Red Hat Linux 中vi的配置文件存放在/etc目录中，配置文件名为vimrc</p>
+
+<p>使用vi编辑该文件，在该文件中加入一行”set nu”，添加内容不含引号。如Ubuntu命令：vi /etc/vim/vimrc</p>
+
+<h4 id="block_edit">块编辑模式</h4>
+
+<p>1.ctrl + v 进入虚拟模式</p>
+
+<p>2.上下移动</p>
+
+<p>3.I （大写的i）进行编辑</p>
+
+<p>4.ESC,使其对所有行生效</p>
+
+<h4 id="ps">ps</h4>
+
+<p>显示当前文件名 <code class="highlighter-rouge">ctrl + g</code> 或者 <code class="highlighter-rouge">:f</code></p>
+
+<h4 id="reference">参考</h4>
+
+<p><a href="http://www.freeos.com/guides/lsst/misc.htm#commonvi">http://www.freeos.com/guides/lsst/misc.htm#commonvi</a></p>
+
+<p><a href="http://coolshell.cn/airticles/150.html">vim命令速查卡一</a></p>
+
+<p><a href="http://coolshell.cn/airticles/5479.html">vim命令速查卡二</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/27/top">top</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/28/tables_databases">数据库分库分表</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/27/vi" data-title="vi"
+             data-url="http://lcj1992.github.io/2015/12/27/vi">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/27/vi" data-title="vi"
+             data-url="http://lcj1992.github.io/2015/12/27/vi"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/27/top";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/28/tables_databases";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
