@@ -9,33 +9,37 @@ tags: annotation java
 
 ####  基础 {#basic}
 
-1.java中内置的三种注解
+##### 1.java中内置的三种注解
 
-`@Override`: 重写方法，或者实现接口
+`@Override`: 重写方法，或者实现接口  
+
 `@Deprecated`:不鼓励使用，很危险或者是有更好的替代。
+
 `@SuppressWarnings`: 压制警告
 
-2.元注解
+#####   2.元注解
 
 元注解的作用就是负责注解其他注解。Java5.0定义了4个标准的meta-annotation类型，它们被用来提供对其它annotation类型作说明。
 
 1.@Target
 
 表示该注解可以用于什么地方，可能的ElementType参数包括：
-CONSTRUCTOR：构造器的声明
-FIELD：域声明（包括enum实例）
-LOCAL_VARIABLE:局部变量声明
-METHOD：方法声明
-PACKAGE：包声明
-PARAMETER：参数声明
-TYPE：类，接口（包括注解类型）或enum声明
+
+1.  CONSTRUCTOR：构造器的声明
+2.  FIELD：域声明（包括enum实例）
+3.  LOCAL_VARIABLE:局部变量声明
+4.  METHOD：方法声明
+5.  PACKAGE：包声明
+6.  PARAMETER：参数声明
+7.  TYPE：类，接口（包括注解类型）或enum声明
 
 2.@Retention
 
 表示需要在什么级别保存该注解信息。可选的RetentionPolicy参数包括：
-SOURCE：注解将被编译器丢弃
-CLASS：注解在class文件中可用，但会被VM丢弃
-RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。
+
+1.  SOURCE：注解将被编译器丢弃
+2.  CLASS：注解在class文件中可用，但会被VM丢弃
+3.  RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。
 
 3.@Documented
 
@@ -47,7 +51,7 @@ RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读�
 
 Class，Method，Field等类都实现了AnnotatedElement接口
 
-3.注解元素可用的类型
+#####   3.注解元素可用的类型
 
 八大基本类型,String,Class,enum,Annotaion,以上的数组,注解允许嵌套
 
@@ -70,6 +74,7 @@ Class，Method，Field等类都实现了AnnotatedElement接口
     >   a.如果标记是应用到任何程序元素而不是类或者接口,就必须使用注解  
     >   b.如果标记只是应用到类和接口,并且需要编写一个或多个只针对这种标记的方法,就要考虑使用标记接口,可以提供编译时的类型检查.  
     >   c.如果标记只是应用到类和接口,并且我要永远限制这个标记只用于特殊接口的元素.最好将标记定义成该接口的一个子接口(eg Set)  
+        
         
 #### 自定义注解
 

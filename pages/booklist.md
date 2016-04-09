@@ -4,4 +4,5 @@ title: 书单
 permalink: /booklist.html
 ---
 
-aa
+1.  Effective Java
+2.  
