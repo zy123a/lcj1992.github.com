@@ -284,38 +284,10 @@ In the Hotspot JVM interned string are held in the string table, which is a Hash
 String literals are automatically interned by the compiler and added into the symbol table when the class is loaded. In addition instances of the String class can be explicitly interned by calling String.intern(). When String.intern() is called, if the symbol table already contains the string then a reference to this is returned, if not the string is added to the string table and its reference is returned.
 
 
-### 内存分配   
-[java内存分配](http://www.cnblogs.com/redcreen/archive/2011/05/04/2036387.html)  
-![java内存结构](http://lcj1992.github.io/images/java/javaMemory.png)   
-         
-*	堆：运行时数据区域，所有类实例和数组的内存均从此处分配，在虚拟机启动时创建         
-*	方法栈&本地方法栈：线程创建时产生,方法执行时生成栈帧(sun jdk本地方法栈和方法栈是同一个)       
-*	方法区：存储类的元数据信息 常量等       
-*	本地方法： is a Java method whose implementation is provided by non-java code       
-  
-### class文件结构    
-[class文件](http://blog.csdn.net/dc_726/article/details/7944154)  
-[class文件包含的信息](http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7)
-
-### 字节码    
-[java字节码](https://en.wikipedia.org/wiki/Java_bytecode)    
-[字节码列表](https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings)        
-[字节码列表2](http://cs.au.dk/~mis/dOvs/jvmspec/ref-Java.html)        
-存储指令 （例如：aload_0, istore）       
-算术与逻辑指令 （例如: ladd, fcmpl）    
-类型转换指令 （例如：i2b, d2i）  
-对象创建与操作指令 （例如：new, putfield）  
-堆栈操作指令 （例如：swap, dup2）  
-控制转移指令 （例如：ifeq, goto）  
-方法调用与返回指令 （例如：invokespecial, areturn)  
-
-前/后缀 操作数类型  
-
-i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精度浮点数 z 布尔值 a 引用   
+## 参考
 
 [java内存分配](http://www.cnblogs.com/redcreen/archive/2011/05/04/2036387.html)  
+
 [class文件](http://blog.csdn.net/dc_726/article/details/7944154)  
-[class文件包含的信息](http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7)  
-[java字节码](https://en.wikipedia.org/wiki/Java_bytecode)  
-[字节码列表](https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings)  
-[字节码列表2](http://cs.au.dk/~mis/dOvs/jvmspec/ref-Java.html)  
+
+[class文件包含的信息](http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7)   
