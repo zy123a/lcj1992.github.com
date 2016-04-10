@@ -29,8 +29,6 @@ Bootstrap Classloader是由本地代码实现的，因为它很早的，随着jv
 
 所有已被加载的类都包含有它对classloader的引用。classloader也会包含所有的它加载的类。
 
-
-
 ## 参考
 
 [java内存分配]<http://www.cnblogs.com/redcreen/archive/2011/05/04/2036387.html>
