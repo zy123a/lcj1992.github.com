@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md" afterPath="$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" afterPath="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,22 +26,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2016-03-03-javaHole.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/java/2016-03-03-javaHole.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
-                <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2016-04-09-java_common.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/java/2016-04-09-java_common.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
@@ -94,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-03-07-Integer.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.37716264">
+              <first_editor vertical-scroll-proportion="0.8072917">
                 <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
                 <folding />
               </first_editor>
@@ -113,12 +97,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-01-07-cookie_session.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016-01-07-cookie_session.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.4152249">
-                <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+              <first_editor vertical-scroll-proportion="0.5989583">
+                <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2016-02-24-HashMap.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.390625">
+                <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -197,7 +197,6 @@
         <option value="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_transaction.md" />
         <option value="$PROJECT_DIR$/_posts/java/2016-03-12-equals_hashcode_example.md" />
         <option value="$PROJECT_DIR$/_posts/java/2016-03-10-equals_hashcode.md" />
-        <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-startenv.md" />
         <option value="$PROJECT_DIR$/_posts/operating_system/2015-12-31-performance_os.md" />
         <option value="$PROJECT_DIR$/_posts/linux/text/2015-12-07-grep.md" />
@@ -242,6 +241,7 @@
         <option value="$PROJECT_DIR$/_posts/java/vm/2015-01-06-jvm_example.md" />
         <option value="$PROJECT_DIR$/_posts/java/vm/2015-01-26-memory_byteCode.md" />
         <option value="$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md" />
+        <option value="$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md" />
       </list>
     </option>
   </component>
@@ -820,13 +820,7 @@
       <workItem from="1460271831394" duration="18000" />
       <workItem from="1460275662157" duration="55000" />
       <workItem from="1460284688476" duration="1437000" />
-      <workItem from="1460593656811" duration="290000" />
-    </task>
-    <task id="LOCAL-00034" summary="equal hashCode">
-      <created>1457836970211</created>
-      <option name="number" value="00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1457836970211</updated>
+      <workItem from="1460593656811" duration="1136000" />
     </task>
     <task id="LOCAL-00035" summary="equal hashCode">
       <created>1457837015814</created>
@@ -1116,11 +1110,17 @@
       <option name="project" value="LOCAL" />
       <updated>1460294875779</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="annotation">
+      <created>1460593984792</created>
+      <option name="number" value="00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1460593984793</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133568000" />
+    <option name="totallyTimeSpent" value="134414000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1128,6 +1128,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23065251" sideWeight="0.52457625" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1141,7 +1142,6 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2859425" sideWeight="0.5055644" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1232,19 +1232,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/language/python/2014-11-07-python.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/language/python/2016-03-03-pdb.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1866,10 +1853,29 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/images/web/cookie.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.5989583">
+            <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-03-07-Integer.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.37716264">
+          <first_editor vertical-scroll-proportion="0.8072917">
             <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
             <folding />
           </first_editor>
@@ -1880,16 +1886,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/web/cookie.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md">
+    <entry file="file://$PROJECT_DIR$/_posts/java/jdk/2016-02-24-HashMap.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.4152249">
-            <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+          <first_editor vertical-scroll-proportion="0.390625">
+            <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
