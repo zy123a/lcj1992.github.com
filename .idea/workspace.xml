@@ -165,8 +165,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.6354167">
-                <caret line="176" column="20" selection-start-line="176" selection-start-column="20" selection-end-line="176" selection-end-column="20" />
+              <first_editor vertical-scroll-proportion="0.7395833">
+                <caret line="180" column="29" selection-start-line="180" selection-start-column="29" selection-end-line="180" selection-end-column="29" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -899,13 +899,7 @@
       <workItem from="1460271831394" duration="18000" />
       <workItem from="1460275662157" duration="55000" />
       <workItem from="1460284688476" duration="1437000" />
-      <workItem from="1460593656811" duration="4875000" />
-    </task>
-    <task id="LOCAL-00038" summary="equal hashCode">
-      <created>1457838057219</created>
-      <option name="number" value="00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1457838057219</updated>
+      <workItem from="1460593656811" duration="4914000" />
     </task>
     <task id="LOCAL-00039" summary="equal hashCode">
       <created>1457838077913</created>
@@ -1195,11 +1189,17 @@
       <option name="project" value="LOCAL" />
       <updated>1460599363168</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="annotation">
+      <created>1460600118616</created>
+      <option name="number" value="00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1460600118616</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138153000" />
+    <option name="totallyTimeSpent" value="138192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="0" />
@@ -1971,8 +1971,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.6354167">
-            <caret line="176" column="20" selection-start-line="176" selection-start-column="20" selection-end-line="176" selection-end-column="20" />
+          <first_editor vertical-scroll-proportion="0.7395833">
+            <caret line="180" column="29" selection-start-line="180" selection-start-column="29" selection-end-line="180" selection-end-column="29" />
             <folding />
           </first_editor>
           <second_editor />
