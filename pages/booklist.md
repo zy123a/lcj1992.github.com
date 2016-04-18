@@ -4,10 +4,15 @@ title: 书单
 permalink: /booklist.html
 ---
 
-*   [basic]
+*   [计算机基础](#basic)
+*   [讲语言](#language)
+*   [讲代码的(可复用,健壮,安全等)](#code)
+*   [性能](#performance)
+*   [框架](#framework)
+*   [大学课本](#textBook)
+*   [技术牛人博客](#blog)
 
-
-#### 计算机基础(操作系统,网络协议,db,数据接口,算法等) 语言之上的
+#### 计算机基础(操作系统,网络协议,db,数据接口,算法等) 语言之上的 {#basic}
 
 [深入理解计算机系统](https://book.douban.com/subject/5333562/)
 
@@ -31,7 +36,7 @@ permalink: /booklist.html
 
 [图解网络硬件](https://book.douban.com/subject/25919428/)
 
-#### 讲语言的
+#### 讲语言的 {#language}
 
 [java编程思想4th](https://book.douban.com/subject/2061172/) 
 
@@ -45,7 +50,7 @@ permalink: /booklist.html
 
 [javascript权威指南](https://book.douban.com/subject/2228378/)
 
-#### 讲代码的 (设计模式,可复用的,健壮,安全)
+#### 讲代码的 (设计模式,可复用的,健壮,安全) {#code}
 
 [head first 设计模式](https://book.douban.com/subject/2243615/)
 
@@ -55,7 +60,7 @@ permalink: /booklist.html
 
 [设计模式-可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)
 
-#### 性能
+#### 性能 {#performance}
 
 [java性能优化权威指南](https://book.douban.com/subject/25828043/)
 
@@ -63,7 +68,7 @@ permalink: /booklist.html
 
 [性能之巅](https://book.douban.com/subject/26586598/)
 
-#### 框架,开源软件,架构(工作遇到的使用的)
+#### 框架,开源软件,架构(工作遇到的使用的) {#framework}
 
 [spring实战(第四版)](https://book.douban.com/subject/26767354/)
 
@@ -75,7 +80,7 @@ permalink: /booklist.html
 
 [大型网站技术架构](https://book.douban.com/subject/25723064/)
 
-#### 大学课本
+#### 大学课本 {#textBook}
 
 [计算机组成原理],[操作系统原理],[80X86汇编语言程序设计],[编译原理],[计算机算法基础],[数据结构(c语言版)],[数据库系统概论]
 
