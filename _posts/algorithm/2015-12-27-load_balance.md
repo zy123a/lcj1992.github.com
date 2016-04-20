@@ -5,6 +5,15 @@ categories: algorithm
 tags: load_balance
 ---
 
+*   [轮询法](#polling)   
+*   [随机法](#random)
+*   [源地址哈希法](#source_address)
+*   [加权轮询法](#weighted_polling)
+*   [加权随机法](#weighted_random)
+*   [最小连接数](#min_connections)
+*   [sticky](#sticky)
+*   [一致性hash](#consistent_hash)
+
 常用的负载均衡算法包括`轮询法(round robin)`，`随机法`，`源地址哈希法`，`加权轮询法`，`加权随机法`，`最小连接数算法`,`sticky`
 
 这里初始化一个serverWeightMap的Map变量来表示服务器地址和权重的映射，以此来模拟轮询算法的实现，其中设置的权重值在后面加权算法会使用到
@@ -25,7 +34,8 @@ tags: load_balance
         serverWeightMap.put("192.168.1.110", 1);
     }
 
-#### 轮询法
+#### 轮询法 {#polling}
+
 将请求按顺序轮流地分配的后端服务器上，它均衡的对待后端每一台服务器，而不关心服务器实际的连接数和当前的系统负载
 
     public static String getByRoundRobin() {
@@ -53,7 +63,8 @@ tags: load_balance
 
 使用轮询策略的目的在于，希望做到请求转移的绝对均衡，但付出的代价也是相当大的。为了pos保证变量修改的互斥性，需要引入重量级的悲观锁synchronized，将会导致该段轮询代码的并发吞吐量发生明显的下降。
 
-#### 随机法
+#### 随机法 {#random}
+
 通过系统随机函数，根据后端服务器列表的大小值来随机的选择其中一台进行访问。由概率统计理论可以得知，随着调用量的增大，其实际效果越来越接近于平均分配流量到没一台后端服务器，也就是轮询的效果。
 
     public static String getByRondom() {
@@ -73,7 +84,8 @@ tags: load_balance
 
 基于概率统计的理论，吞吐量越大，随机算法的效果越接近轮询算法的效果。因此，你还会考虑一定要使用需要付出一定代价的轮询算法么？
 
-#### 源地址哈希法
+#### 源地址哈希法 {#source_address}
+    
 源地址哈希的思想是获取客户端访问的ip地址值，通过哈希函数计算得到一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是要访问的服务器的序号。采用哈希法进行负载均衡，同一个ip地址的客户端，当后端服务器列表不变时，它每次都会被映射到同一台后端服务器进行访问。
 
     public static String getServerByConsumerHash(String remoteIp) {
@@ -95,7 +107,8 @@ tags: load_balance
 
 通过参数传入的客户端remoteip参数，取得它的哈希值，对服务器列表的大小取模，结果便是选用的服务器在服务器列表中的索引值。该算法保证了相同的客户端ip地址将会被“哈希”到同一台后端服务器，直到后端服务器列表变更。根据此特性可以在服务消费者和服务提供者之间建立有状态的session会话。
 
-#### 加权轮询法
+#### 加权轮询法 {#weighted_polling}
+
 不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此他们的抗压能力也不尽相同，给配置高，负载低的机器配置更高的权重，让其处理更过的请求，而地配置，负载高的机器，则给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端。
 
     public static String getByWeightRoundRobin() {
@@ -126,7 +139,7 @@ tags: load_balance
 
 与轮询算法类似，只是在获取服务器地址之前增加了一段权重计算的代码，根据权重的大小，将地址重复增加到服务器地址列表中，权重越大，该服务器每轮所获得的请求数量越多。
 
-#### 加权随机法
+#### 加权随机法 {#weighted_random}
 
     public static String getByWeightRandom() {
         Map<String, Integer> serverMap = Maps.newHashMap();
@@ -149,8 +162,12 @@ tags: load_balance
         return server;
     }
 
-#### 最小连接数算法
+#### 最小连接数算法 {#min_connections}
+
 最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它正是根据后端服务器当前的链接情况，动态的选取其中积压连接数最少的一台服务器来处理当前请求，尽可能的提高后端服务器的利用效率，将负载合理的分流到每一台机器。
 
-#### sticky
+#### sticky {sticky}
+
 保证始终只在一台处理，如果这台服务器挂了，会自动切换到下一台上。
+
+#### 一致性hash {consistent_hash}
