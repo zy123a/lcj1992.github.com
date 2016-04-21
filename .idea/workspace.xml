@@ -4,6 +4,7 @@
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" afterPath="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md" afterPath="$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,15 +73,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-17-memoryFull.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-12-17-memoryFull.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.91573036">
-                <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.4522472">
+                <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -88,28 +89,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-27-memory_command.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2015-12-26-gc_algo.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/java/2015-12-26-gc_algo.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.66573036">
+                <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-12-27-memory_command.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.4213483">
-                <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <first_editor vertical-scroll-proportion="0.33707866">
+                <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_layouts/default.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="154" column="37" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -170,7 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/soft/maven/2014-11-20-maven_conflict.md" />
         <option value="$PROJECT_DIR$/_posts/soft/maven/2015-12-28-dependency.md" />
         <option value="$PROJECT_DIR$/_posts/soft/maven/2015-12-28-maven_command.md" />
         <option value="$PROJECT_DIR$/_posts/soft/maven/2015-12-28-maven_project_structure.md" />
@@ -221,6 +227,7 @@
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-gc_algo.md" />
         <option value="$PROJECT_DIR$/_posts/java_web/2016-01-07-cookie_session.md" />
         <option value="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" />
+        <option value="$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md" />
       </list>
     </option>
   </component>
@@ -854,13 +861,7 @@
       <workItem from="1461030280063" duration="2633000" />
       <workItem from="1461162368476" duration="2708000" />
       <workItem from="1461199721980" duration="238000" />
-      <workItem from="1461200094267" duration="1960000" />
-    </task>
-    <task id="LOCAL-00053" summary="hashMap">
-      <created>1457917890322</created>
-      <option name="number" value="00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1457917890322</updated>
+      <workItem from="1461200094267" duration="2312000" />
     </task>
     <task id="LOCAL-00054" summary="hashMap">
       <created>1457918232261</created>
@@ -1150,11 +1151,17 @@
       <option name="project" value="LOCAL" />
       <updated>1461201765635</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="annotation">
+      <created>1461202426796</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1461202426797</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162073000" />
+    <option name="totallyTimeSpent" value="162425000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1767,20 +1774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java/2015-12-26-gc_algo.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.28645834">
-            <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1858,20 +1851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.4213483">
-            <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/performance/memory_full_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1883,8 +1862,36 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.91573036">
-            <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.4522472">
+            <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/java/2015-12-26-gc_algo.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.66573036">
+            <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.33707866">
+            <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

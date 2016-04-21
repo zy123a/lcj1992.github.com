@@ -22,6 +22,7 @@ tags: xmx oomkiller Res Rss
 
 
 [详见](/2015/09/03/jvm_internal)
+
 ### 案例一
 
 现象:行程单系统内存经常吃满,jstat查看基本不fgc,老年代和永久代都远不满呢.
