@@ -26,6 +26,9 @@ HTTP cookie ***由`服务端（产生方）`发送到`客户端（存储方）`�
 
 servlet-api 2.5之前版本（含）没有httpOnly这个字段，需要费点劲来设置httpOnly `cookie.setPath(isHttpOnly ? "/pathxx; HttpOnly;": "/pathxx");`
 
+对于一些静态资源的访问,入css,script等,发送cookie是没有意义的,所以一般静态资源会使用独立的域名,避免请求静态资源时发送cookie,减少cookie传输的次数.
+例如去哪儿的静态资源使用的域名是qunarzz.com而不是qunar.com
+
 chrome中的cookie,***如果cookie不设置过期时间(`会话cookie`),表示这个cookie的生命周期为浏览器会话时期***，下图的过期时间那列Session就是这个意思
 ![cookie](/images/web/cookie.png)
 
