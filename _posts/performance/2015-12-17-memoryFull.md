@@ -22,7 +22,8 @@ vmstat
 
 ![内存1](/images/performance/memory_full_1.png)
 
-参考
+#### 参考
+
 [程物理内存远大于Xmx的问题分析]<http://lovestblog.cn/blog/2015/08/21/rssxmx/>
 
 [JVM源码分析之堆外内存完全解读]<http://lovestblog.cn/blog/2015/05/12/direct-buffer/>

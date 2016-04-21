@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="annotation">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" afterPath="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" />
     </list>
@@ -95,8 +95,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.546875">
-                <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.15625">
+                <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -854,13 +854,7 @@
       <workItem from="1461030280063" duration="2633000" />
       <workItem from="1461162368476" duration="2708000" />
       <workItem from="1461199721980" duration="238000" />
-      <workItem from="1461200094267" duration="1449000" />
-    </task>
-    <task id="LOCAL-00051" summary="hashMap">
-      <created>1457885254127</created>
-      <option name="number" value="00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1457885254127</updated>
+      <workItem from="1461200094267" duration="1469000" />
     </task>
     <task id="LOCAL-00052" summary="hashMap">
       <created>1457917630199</created>
@@ -1150,11 +1144,17 @@
       <option name="project" value="LOCAL" />
       <updated>1461201318664</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="annotation">
+      <created>1461201748420</created>
+      <option name="number" value="00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1461201748420</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161562000" />
+    <option name="totallyTimeSpent" value="161582000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1882,8 +1882,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.546875">
-            <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.15625">
+            <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
