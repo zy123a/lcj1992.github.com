@@ -20,7 +20,7 @@ vmstat
 处理与原理: 对于java进程,其内存分为堆内存和堆外内存.可以推断是堆外内存占用太多,而公司的tomcat的配置`-XX:+DisableExplicitGC`是不让显式gc的,
 在申请ByteBuffer内存时,是调用了System.gc()的,干掉`-XX:+DisableExplicitGC`,然后就fgc了,前后内存情况如下
 
-[内存1](/images/performance/memory_full_1.png)
+![内存1](/images/performance/memory_full_1.png)
 
 参考
 [程物理内存远大于Xmx的问题分析]<http://lovestblog.cn/blog/2015/08/21/rssxmx/>
