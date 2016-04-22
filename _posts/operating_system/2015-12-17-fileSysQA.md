@@ -20,12 +20,12 @@ tags: inode vnode dentry super_block file_system
     lcj@lcj:~$ touch empty.file; ll | grep empty.file
     -rw-rw-r--  1 lcj  lcj      0 12月 22 17:52 empty.file
 
-空文件占0，那操作系统是怎么知道空文件在哪的呢?必须肯定以及确定有地方放着其元信息．
-　  　　
+好奇怪,空文件占0?，那操作系统是怎么知道空文件在哪的呢?必须肯定以及确定有地方放着其元信息．
+
 `df -i` (查看inode节点使用情况)，然后重新touch一个新文件,然后再df -i下，看下used的数量，然后你会发现used的加了１
 
-    df -i | grep /dev/sda
-
+    df -i | grep /dev/sda       
+    
 //找你要查看的磁盘分区
 
     lcj@lcj:~/test/empty.dir$ sudo fdisk -l //找你要查看的磁盘分区

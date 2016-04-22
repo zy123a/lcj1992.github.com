@@ -13,7 +13,6 @@ tags: bash terminal short_cut
 |ctrl c	|杀死当前进程
 |ctrl d	|从shell中注销并关闭，exit
 |ctrl h	|删除光标前一个字符，同backspace
-|ctrl d | 删除光标所在字符
 |ctrl w	|删除光标前的一个单词
 |ctrl u	|删除光标至行首字符
 |ctrl k	|删除光标至行尾字符

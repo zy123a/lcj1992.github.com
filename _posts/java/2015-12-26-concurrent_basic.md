@@ -8,8 +8,7 @@ tags: concurrent
 *   [thread](#thread)
 *   [ThreadLocal](#thread_local)
 *   [CopyOnWriteArrayList](#CopyOnWriteArrayList)
-*   [ReadWriteLock](#ReadWriteLock)
-*   [ConcurrentHashMap](#ConcurrentHashMap)
+*   [ReadWriteLock](#readwritelock)
 *   [volatile_static_threadLocal](#volatile_static_threadLocal)
 *   [ThreadExecutor](#ThreadExecutor)
 
@@ -18,7 +17,7 @@ tags: concurrent
 1.  run()和start()
 2.  join()/join(long millis) 等待当前线程die或者超时
 
-<h3 id="thread_local">ThreadLocal</h3>
+### ThreadLocal {#thread_local}
 
 1.  相当于线程范围的局部变量，Map<Thread,object>。
 2.  线程1set改变ThreadLocal的变量，不会影响线程2get该变量
@@ -28,9 +27,9 @@ tags: concurrent
 
 <h3 id="CopyOnWriteArrayList">CopyOnWriteArrayList</h3>
 
-<h3 id="ReadWriteLock">ReadWriteLock</h3>
+### ReadWriteLock
 
-<h3 id="ConcurrentHashMap">ConcurrentHashMap</h3>
+ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁的,ReentrantLock还是会加锁滴.
 
 <h3 id="volatile_static_threadLocal">volatile vs static  vs  ThreadLocal</h3>
 

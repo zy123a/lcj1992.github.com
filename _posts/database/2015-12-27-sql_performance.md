@@ -62,37 +62,36 @@ select * from task_info where channel = 3 and status = 'CA'; 不会用到
  
 基于 questions  计算qps,基于  com_commit  com_rollback 计算tps
  
-`questions = show global status like 'questions'`;
+`questions` = show global status like 'questions';
  
-`uptime = show global status like 'uptime'`;
+`uptime` = show global status like 'uptime';
  
-`qps=questions/uptime`
+`com_commit` = show global status like 'com_commit';
  
-`com_commit = show global status like 'com_commit';`
+`com_rollback` = show global status like 'com_rollback';
+
+1.`qps` =questions/uptime 
  
-`com_rollback = show global status like 'com_rollback';`
- 
-`uptime = show global status like 'uptime';`
- 
-`tps=(com_commit + com_rollback)/uptime`
+2.`tps` = (com_commit + com_rollback)/uptime
  
  
 #### 方法二
  
 基于 com_* 的status 变量计算tps ,qps
+
 使用如下命令：
  
 `show global status where variable_name in('com_select','com_insert','com_delete','com_update');`
  
 获取间隔1s 的 com_*的值，并作差值运算
  
-`del_diff = (int(mystat2['com_delete'])   - int(mystat1['com_delete']) ) / diff`
+`del_diff` = (int(mystat2['com_delete'])   - int(mystat1['com_delete']) ) / diff
  
-`ins_diff = (int(mystat2['com_insert'])    - int(mystat1['com_insert']) ) / diff`
+`ins_diff` = (int(mystat2['com_insert'])    - int(mystat1['com_insert']) ) / diff
  
-`sel_diff = (int(mystat2['com_select'])    - int(mystat1['com_select']) ) / diff`
+`sel_diff` = (int(mystat2['com_select'])    - int(mystat1['com_select']) ) / diff
  
-`upd_diff = (int(mystat2['com_update'])   - int(mystat1['com_update']) ) / diff`
+`upd_diff` = (int(mystat2['com_update'])   - int(mystat1['com_update']) ) / diff
  
 #### 参考    
 

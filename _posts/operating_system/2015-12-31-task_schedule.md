@@ -2,10 +2,11 @@
 layout: post
 title: cpu调度
 categories: os
-tags: cpu
+tags: cpu thread schedule
 ---
 
-#### 作业调度算法
+#### 作业(任务,线程?)调度算法
+
 周转时间（响应时间）= 完成时间 -进入系统时间    （响应时间假想完成后的时间,周转时间是实际完成后的时间）
 
 带权周转时间=周转时间 / 执行时间

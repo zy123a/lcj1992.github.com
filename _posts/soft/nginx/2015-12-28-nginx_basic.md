@@ -45,8 +45,12 @@ set $app_name $1; $1为第一个/后的值,$2为第二个/后的值
 http://pureage.info?strider=1&strider=2&strider=3&strider=4
 
 1.local strider = ngx.var.arg_strider
+
+
 只会去strider中的第一个   1
+
 2.local strider = ngx.req.get_uri_args["strider"]
+
 这个会取所有  1，2，3，4
 
 参考

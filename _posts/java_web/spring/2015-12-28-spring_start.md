@@ -6,9 +6,11 @@ tags: spring ServletContext RootWebApplicationContext
 ---
 
 ### 概念关系
+
 ServletContext，Root WebApplicationContext，以及每个disPatcherServlet对应的WebApplicationContext。
 
 #### ServletContext
+
 本文以tomcat为例，tomcat的容器分为四个等级，真正管理Servlet的容器的是Context容器，一个Context对应一个web应用。
 
 这个Context提供全局的上下文环境。而这个Context就是ServletContext
@@ -37,15 +39,19 @@ ServletContext，Root WebApplicationContext，以及每个disPatcherServlet对�
      */
 
 #### Root WebApplicationContext
+
 spring Ioc容器。其对应的bean定义的配置由context-param标签指定
 
 #### 每个Servlet对应的WebApplicationContext
+
 每个Servlet对应有自己的WebApplicationContext，共用Root WebApplicationContext中的bean。但其之间相互独立。
 
 ### 启动流程
+
 首先build tomcat源码，然后拷一个web工程，debug
 
 #### Root WebApplicationContext启动
+
 web.xml中的启动遵循context-param》listener》filter》servlet。
 在web容器启动时，会去读取context-param和listener节点，用于向ServletContext提供键值对。
 
@@ -83,6 +89,7 @@ ApplicationContext的官方描述
 至此ContextLoaderListener监听器初始化完毕。
 
 #### DispatcherServlet对应WebApplicationContext
+
 然后开始初始化xml配置中的Servlet，以DispatcherServlet为例。
 
 调用initWebApplicationContext()方法(在FrameWorkServlet.java中)

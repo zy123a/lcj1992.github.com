@@ -26,12 +26,15 @@ HTTP cookie ***由`服务端（产生方）`发送到`客户端（存储方）`�
 
 servlet-api 2.5之前版本（含）没有httpOnly这个字段，需要费点劲来设置httpOnly `cookie.setPath(isHttpOnly ? "/pathxx; HttpOnly;": "/pathxx");`
 
-对于一些静态资源的访问,入css,script等,发送cookie是没有意义的,所以一般静态资源会使用独立的域名,避免请求静态资源时发送cookie,减少cookie传输的次数.
+ps:
+
+1.  对于一些静态资源的访问,入css,script等,发送cookie是没有意义的,所以一般静态资源会使用独立的域名,避免请求静态资源时发送cookie,减少cookie传输的次数.
 例如去哪儿的静态资源使用的域名是qunarzz.com而不是qunar.com
 
-chrome中的cookie,***如果cookie不设置过期时间(`会话cookie`),表示这个cookie的生命周期为浏览器会话时期***，下图的过期时间那列Session就是这个意思
-![cookie](/images/web/cookie.png)
+2.  chrome中的cookie,***如果cookie不设置过期时间(`会话cookie`,就是maxAge=-1),表示这个cookie的生命周期为浏览器会话时期***，下图的过期时间那列Session就是这个意思
 
+
+![cookie](/images/web/cookie.png)
 
 ### session
 session需要使用cookie作为识别标志。HTTP协议是无状态的，session不能依据HTTP连接来判断是否为同一客户，因此服务器向客户端浏览器发送一个名为JSESSIONID的cookie，其值为该session的ID。该cookie为服务器自动生成的，***maxAge属性一般为-1，表示仅当前浏览器内有效，并且各浏览器窗口间不共享，关闭浏览器就会失效。***因此同一机器的两个浏览器窗口访问服务器时会生成两个不同的session

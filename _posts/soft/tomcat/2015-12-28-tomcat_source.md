@@ -8,6 +8,7 @@ tags: tomcat
 *   [子模块方法](#module_method)
 *   [eclipse工程转idea](eclipse_to_idea)
 *   [web项目目录结构](#structure)
+*   [参考](#ref)
 
 ## 创建子模块方式 {#module_method}
 
@@ -24,20 +25,20 @@ tags: tomcat
         
 *   编辑pom.xml
 
-    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
-        <modelVersion>4.0.0</modelVersion>
-        <groupId>net.imtiger</groupId>
-        <artifactId>tomcat-study</artifactId>
-        <name>Tomcat 7.0 Study</name>
-        <version>1.0</version>
-        <packaging>pom</packaging>
-    
-        <modules>
-            <module>tomcat-source</module>
-        </modules>
-    </project>
+        <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>net.imtiger</groupId>
+            <artifactId>tomcat-study</artifactId>
+            <name>Tomcat 7.0 Study</name>
+            <version>1.0</version>
+            <packaging>pom</packaging>
+        
+            <modules>
+                <module>tomcat-source</module>
+            </modules>
+        </project>
     
 *   进入tomcat-source目录，编辑pom.xml
 
@@ -136,6 +137,7 @@ tomcat支持编译为eclipse工程，可以先编译为eclipse工程，然后用
 
 ## web项目目录结构 {#structure}
 webapp　　是工程的根路径
+
 WEB-INF　打包后java的资源文件以及webapp原有的文件都会在这个目录下
 
 *   web-app
@@ -151,7 +153,7 @@ WEB-INF　打包后java的资源文件以及webapp原有的文件都会在这个
     *   css
 
 
-参考
+## 参考 {#ref}
 
 [1]<http://bbs.paris8.org/redirect.php?tid=8474&goto=lastpost>
 

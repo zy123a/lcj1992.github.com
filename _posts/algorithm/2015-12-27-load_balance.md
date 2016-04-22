@@ -170,4 +170,4 @@ tags: load_balance
 
 保证始终只在一台处理，如果这台服务器挂了，会自动切换到下一台上。
 
-#### 一致性hash {consistent_hash}
+#### 一致性hash {#consistent_hash}

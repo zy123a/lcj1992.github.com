@@ -7,18 +7,22 @@ tags: logback asyncAppender
 
 *   打印异常
 
-LOGGER.error("aa{}",e); 是错误的
+1.  LOGGER.error("aa{}",e); 是错误的,异常被吞掉是多么恐怖的一件事啊
+
+2.  LOGGER.error("aa{}",var,e);  这样是可以打印出异常信息的,记得在我转正答辩时候,有个厉害的评委说不可以,转管理之后不搞技术没事,瞎说就不对了.
 
 *   性能
 
      logger.debug("Entry number: " + i + " is " +  String.valueOf(entry[i]));
      logger.debug("Entry number: {} is {}", i, entry[i]);
 
-前者无论是否打都会出发字符串拼接，所以要用后者。
+前者无论是否打都会进行字符串拼接,
 
 *   异步appender
 
-在十线程并发下，输出200字符的INFO日志，AsyncAppender的吞吐量最高能是FileAppender的3.7倍
+在十线程并发下，输出200字符的INFO日志，AsyncAppender的吞吐量最高能是FileAppender的3.7倍,这是下边文章说的,我没考证.
+
+但是官网代购的一次故障就是跟这个有关的.
 
     <appender name="search" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${catalina.base}/logs/search.log</File>

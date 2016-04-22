@@ -22,7 +22,7 @@ tags: spring transaction
 
 ps:
 
-`com.mysql.jdbc.Driver`静态代码块,向DriverManager中注册(code1),等到`java.sql.DriverManager`#getConnection时,会遍历其中含有的registeredDrivers(code2)
+`com.mysql.jdbc.Driver`静态代码块,向DriverManager中注册(code1),等到`java.sql.DriverManager#getConnection()`时,会遍历其中含有的registeredDrivers(code2)
 
 code1
 
@@ -63,7 +63,7 @@ code2
 数据源设置
   
 1.  声明(可以不实例化`abstract="true"`)parentDatasource, 设置driver的className,连接池大小,超时时间等
-2.  实例化各子DataSource(如果有多数据源)parent指定为1声明的 `parent="parentDatasource"`,然后设置该数据源的url,username,password等.
+2.  实例化各子DataSource(如果有多数据源)parent指定为1中声明的 `parent="parentDatasource"`,然后设置该数据源的url,username,password等.
 3.  如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource [做法见](/2015/12/28/spring_databases)
 
 mybatis设置
@@ -129,26 +129,28 @@ mode=“proxy”使用spring的动态代理，但是这种方式有点限制
 1.  对于类内的方法调用，事务不生效
 2.  只作用于public方法
 
-        public class ClassA{
-             public void testMethod1(){
-                 //事务不生效
-            testTransactionMethod();
-             }
-         
-             @Transactional
-             public void testTransactionMethod(){
-             }
-        }
+eg:
+
+    public class ClassA{
+         public void testMethod1(){
+             //事务不生效
+        testTransactionMethod();
+         }
+     
+         @Transactional
+         public void testTransactionMethod(){
+         }
+    }
+    
+    public Class ClassB{
+        @Service
+        private ClassA classA;
         
-        public Class ClassB{
-            @Service
-            private ClassA classA;
-            
-            public void testMethod2(){
-            //事务生效
-                classA.testTransactionMethod();
-            }
+        public void testMethod2(){
+        //事务生效
+            classA.testTransactionMethod();
         }
+    }
 
 mode=“aspectj”上述代码中ClassA和ClassB中的事务都会生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入
 

@@ -48,7 +48,7 @@ spring的配置xsd都有详细说明，然后稍微懂点英语，会看xsd就ok
 
 #### 开启spring mvc controller
 
-1.  如果没有@ResponseBody的话，spring mvc的返回走的时spring的视图渲染器到jsp，可以设置model，可以forword://xxxUrl?orderNo
+1.  如果没有@ResponseBody的话，spring mvc的返回走的是spring的视图渲染器，可以设置model，可以forword://xxxUrl?orderNo
 2.  如果有ResponseBody的话，返回return的结果，可以设置message-Converter处理返回值例如spring自带的MappingJackson2HttpMessageConverter
 
 

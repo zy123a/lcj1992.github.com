@@ -15,6 +15,6 @@ tags: serial
 
 解析顺序：
 
-![serial](http://lcj1992.github.io/images/java/serial.png)
+![serial](/images/java/serial.png)
 
 <http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html>

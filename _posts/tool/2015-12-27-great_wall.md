@@ -25,6 +25,8 @@ vpn：
 killGW.sh
 
     #!/bin/bash
+    # mac 用这个
+    # OLDGW=`route -n get default | grep gateway | awk  '{print $2}'`
     OLDGW=`ip route show | grep '^default' | sed -e 's/default via \([^ ]*\).*/\1/'`
     sudo route add -net xx.xx.0.0 netmask 255.255.0.0 gw $OLDGW
     sudo route add -net xxx.xxx.0.0 netmask 255.255.0.0 gw $OLDGW

@@ -1,9 +1,12 @@
 ---
 layout: post
-title: tomcat添加管理员
+title: tomcat一些配置
 categories: soft
-tags: tomcat admin
+tags: tomcat conf admin
 ---
+
+
+### 添加管理员
 
 conf/tomcat-users.xml
 
