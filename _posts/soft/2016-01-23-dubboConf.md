@@ -22,8 +22,9 @@ consumer
     <!-- Proxy和Crawler之间消息服务 -->
     <dubbo:registry address="zk.xxx.com" protocol="zookeeper" group="autoticket_common_prod" id="messageZK" default="false"/>
     <dubbo:reference id="messageService" interface="com.xxx.common.task.service.ITaskProcessService" registry="messageZK" version="1.0.0" group="autoticket"/>
-    proxy 调用 commonService 的 ITaskProcessService 这个服务。
+   
 
+proxy 调用 commonService 的 ITaskProcessService 这个服务。
 
 #### 参数
 红色为必须参数
@@ -84,3 +85,7 @@ interface 服务接口名
 version
 
 registry (缺省将从所有registry获服务列表后合并结果)
+
+#### 参考
+
+[dubbo官网]<http://dubbo.io>
