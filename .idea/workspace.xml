@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="annotation">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" afterPath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2014-11-13-file.md" afterPath="$PROJECT_DIR$/_posts/unix/2014-11-13-file.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md" afterPath="$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,12 +60,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-27-temp.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-12-27-temp.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.61072665">
-                <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.5086806">
+                <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2014-11-13-file.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/unix/2014-11-13-file.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="-2.1770833">
+                <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-12-24-text.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.140625">
+                <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -89,7 +122,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/java/2015-12-26-gc_algo.md" />
         <option value="$PROJECT_DIR$/_posts/unix/resource/2015-12-27-memory_command.md" />
         <option value="$PROJECT_DIR$/_posts/performance/2015-12-17-memoryFull.md" />
         <option value="$PROJECT_DIR$/_posts/unix/2016-02-28-ctags.md" />
@@ -126,7 +158,6 @@
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-serialParse.md" />
         <option value="$PROJECT_DIR$/_posts/java/2015-12-26-concurrent_basic.md" />
         <option value="$PROJECT_DIR$/_posts/unix/text/2015-12-25-awk.md" />
-        <option value="$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md" />
         <option value="$PROJECT_DIR$/_posts/performance/2015-12-17-diskFull.md" />
         <option value="$PROJECT_DIR$/_posts/operating_system/2015-12-17-fileSysQA.md" />
         <option value="$PROJECT_DIR$/_posts/operating_system/2015-12-17-disk.md" />
@@ -140,6 +171,8 @@
         <option value="$PROJECT_DIR$/_posts/unix/network/2015-03-20-network.md" />
         <option value="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" />
         <option value="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
+        <option value="$PROJECT_DIR$/_posts/unix/2014-11-13-file.md" />
+        <option value="$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md" />
       </list>
     </option>
   </component>
@@ -736,13 +769,7 @@
       <workItem from="1461719833036" duration="2670000" />
       <workItem from="1461729479536" duration="8040000" />
       <workItem from="1461811222097" duration="1189000" />
-      <workItem from="1461832858686" duration="214000" />
-    </task>
-    <task id="LOCAL-00069" summary="iterm">
-      <created>1459703978939</created>
-      <option name="number" value="00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1459703978939</updated>
+      <workItem from="1461832858686" duration="7010000" />
     </task>
     <task id="LOCAL-00070" summary="generic">
       <created>1459765592263</created>
@@ -1032,18 +1059,25 @@
       <option name="project" value="LOCAL" />
       <updated>1461812267190</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="annotation">
+      <created>1461833080661</created>
+      <option name="number" value="00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1461833080661</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196022000" />
+    <option name="totallyTimeSpent" value="202818000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="61" y="23" width="1219" height="777" extended-state="6" />
+    <frame x="61" y="23" width="1219" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23065251" sideWeight="0.52457625" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1057,7 +1091,6 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2859425" sideWeight="0.5055644" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1148,19 +1181,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/soft/nginx/2015-12-28-nginx_basic.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.7050562">
-            <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/soft/2015-12-28-logback_common.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1448,19 +1468,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="1.4488778">
-            <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/performance/2015-12-17-diskFull.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1729,8 +1736,36 @@
     <entry file="file://$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.61072665">
-            <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.5086806">
+            <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/2014-11-13-file.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="-2.1770833">
+            <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.140625">
+            <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
             <folding />
           </first_editor>
           <second_editor />
