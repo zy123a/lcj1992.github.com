@@ -48,7 +48,7 @@ tips: delete 的join
 
 思路: 
 
-1.  按照Department进行分组,找出改组最大的Salary
+1.  按照Department进行分组,找出该组最大的Salary
 2.  关联Employee找到该Salary对应的Employee的Name 
 
 ***[Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/)***
@@ -128,7 +128,6 @@ tips: having vs where [参见](/2014/11/16/sql_basic#sql)
 tips:
 
 1.  not in的另一种写法   select * from xx left join xxx on xx.field1 = xxx.field2 and ***xxx.field2 is null***;
-2.  面试时候这是不是一种比较高效的回答呢?哈哈.
       
 ***[Rank Scores](https://leetcode.com/problems/rank-scores/)***
     
@@ -145,9 +144,9 @@ tips:
         GROUP BY s1.Score) fuck ON s3.Score = fuck.Score
     ORDER BY s3.Score DESC
 
-思路: 最恶的一道了,在回过头来看它,就...
+思路: 最恶的一道了,再回过头来看它,就...
 
-1.  统计大于等于它的,去重后的,记录数既是它的rank
+1.  统计大于等于它的,去重后的记录数既是它的rank,换个思路就ok了
        
 ***[Rising Temperature](https://leetcode.com/problems/rising-temperature/)***
     
