@@ -1,29 +1,12 @@
 ---
 layout: post
-title: 常用sql(mysql)
+title: 常用函数(mysql)
 categories: db
 tags: sql index date string function datetime
 ---
-*   [索引](#index)
+
 *   [日期](#date)
 *   [其他](#other)
-
-## 索引 {#index}
-
-1.  查看表的索引　　
-
-        show index from tb_xx;
-2.  添加表的索引,唯一索引，主键　　
-
-        alter table tb_xx add index `idx_site_channel_status`(`site`,`channel`,`status`)
-        alter table tb_xx unique `uniq_name`(`name`)
-        alter table tb_xx primary key  `id` (`id`)
-3.  删除表的索引　　
-
-        alter table tb_xx drop index `idx_site_channel_status`　　　/　　drop index `idx_site_channel_status` on tb_xx;
-        alter table tb_xx drop index `uniq_name` (*跟删除普通的索引是一样的*)
-        alter table tb_xx drop primary key;
-    ps: **auto_increment只能作用于key,删除有auto_increment约束的索引时，必须先将auto_increment约束删除**
 
 ## 日期 {#date}
 
