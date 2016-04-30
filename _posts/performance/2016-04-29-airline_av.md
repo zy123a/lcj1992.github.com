@@ -1,9 +1,11 @@
 ---
 layout: post
-title: tomcat的server.xml
+title: airlineAv 调优记
 categories: soft
 tags: tomcat source
 ---
+
+airlineAv每隔几周就得重启一次,从前人的前人,再到前人,听说经常这样.
 
 
 

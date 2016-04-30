@@ -50,3 +50,7 @@ vmstat可以查看swap I/O的情况
 
 其中swap列的si表示每秒从磁盘交换到内存的数据量，单位是KB/s，so表示每秒从哦过内存交换到磁盘的数据量，单位也是KB/s
 
+
+#### 参考
+
+[Linux内存中的Cache真的能被回收么?]<http://mp.weixin.qq.com/s?__biz=MzIxNDMyODgyMA==&mid=100000006&idx=1&sn=de6ab2600549b97f5cccf0c7719a412a#rd>
