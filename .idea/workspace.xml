@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="annotation">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/database/2016-04-30-leetcode_sql.md" afterPath="$PROJECT_DIR$/_posts/database/2016-04-30-leetcode_sql.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md" afterPath="$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,12 +42,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-04-30-leetcode_sql.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016-04-30-leetcode_sql.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/database/2016-04-30-leetcode_sql.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="3.3854167">
-                <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.36458334">
+                <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -106,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-04-30-sql_exist.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2016-04-30-sql_exist.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.12266355">
+              <first_editor vertical-scroll-proportion="0.18229167">
                 <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
                 <folding />
               </first_editor>
@@ -247,10 +247,10 @@
         <option value="$PROJECT_DIR$/_posts/performance/2016-04-29-airline_av.md" />
         <option value="$PROJECT_DIR$/_posts/database/2015-11-26-sql.md" />
         <option value="$PROJECT_DIR$/_posts/database/2015-11-26-sql_function.md" />
-        <option value="$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md" />
         <option value="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" />
         <option value="$PROJECT_DIR$/_posts/language/shell/2016-04-30-leetcode_bash.md" />
         <option value="$PROJECT_DIR$/_posts/database/2016-04-30-leetcode_sql.md" />
+        <option value="$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md" />
       </list>
     </option>
   </component>
@@ -881,13 +881,7 @@
       <workItem from="1461811222097" duration="1189000" />
       <workItem from="1461832858686" duration="9471000" />
       <workItem from="1461940110307" duration="8417000" />
-      <workItem from="1462018383443" duration="5140000" />
-    </task>
-    <task id="LOCAL-00080" summary="annotation">
-      <created>1460270299755</created>
-      <option name="number" value="00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1460270299756</updated>
+      <workItem from="1462018383443" duration="5170000" />
     </task>
     <task id="LOCAL-00081" summary="annotation">
       <created>1460293349266</created>
@@ -1177,11 +1171,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462023807173</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="annotation">
+      <created>1462027680788</created>
+      <option name="number" value="00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1462027680788</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218836000" />
+    <option name="totallyTimeSpent" value="218866000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="23" width="1219" height="777" extended-state="6" />
@@ -1840,20 +1840,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.12266355">
-            <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/language/shell/2015-03-18-shell_basic.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1899,8 +1885,22 @@
     <entry file="file://$PROJECT_DIR$/_posts/database/2016-04-30-leetcode_sql.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="3.3854167">
-            <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.36458334">
+            <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/database/2016-04-30-sql_exist.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.18229167">
+            <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
             <folding />
           </first_editor>
           <second_editor />
