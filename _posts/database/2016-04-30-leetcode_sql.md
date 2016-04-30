@@ -5,8 +5,8 @@ categories: db
 tags: leetcode database
 ---
 
-
-####     https://leetcode.com/problems/customers-who-never-order/
+    
+***[Customers Who Nerver Order](https://leetcode.com/problems/customers-who-never-order/)***
     
     SELECT 
         Name
@@ -18,15 +18,13 @@ tags: leetcode database
             FROM
                 Orders
 
-    
-####     https://leetcode.com/problems/delete-duplicate-emails/
+***[Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/)***
     
     DELETE p1 FROM Person p1
             JOIN
         Person p2 ON p1.Id > p2.Id AND p1.Email = p2.Email
-    
-    
-####    https://leetcode.com/problems/department-highest-salary/
+       
+***[Department Highest Salary](https://leetcode.com/problems/department-highest-salary/)***
 
     SELECT 
         d_name, e1.Name, max_salary
@@ -40,10 +38,8 @@ tags: leetcode database
         JOIN Employee e2 ON d.id = e2.departmentId
         GROUP BY d.Name) d_max_salary ON e1.Salary = d_max_salary.max_salary
             AND e1.departmentId = d_max_salary.d_id;
-    
-    
-    
-####     https://leetcode.com/problems/department-top-three-salaries/
+     
+***[Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/)***
 
     SELECT 
         d.name, top3_salary.Name, top3_salary.Salary
@@ -65,7 +61,7 @@ tags: leetcode database
                 HAVING COUNT(DISTINCT e2.Salary) >= 3)) top3_salary ON d.Id = top3_salary.DepartmentId
     
     
-####     https://leetcode.com/problems/duplicate-emails/
+***[Duplicate Emails](https://leetcode.com/problems/duplicate-emails/)***
 
     SELECT 
         Email
@@ -75,7 +71,8 @@ tags: leetcode database
     HAVING COUNT(Email) > 1
     
     
-####     https://leetcode.com/problems/employees-earning-more-than-their-managers/
+***[Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/)***
+
     SELECT 
         e1.Name
     FROM
@@ -85,7 +82,8 @@ tags: leetcode database
             AND e1.Salary > e2.Salary
     
     
-####     https://leetcode.com/problems/nth-highest-salary/
+***[Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/)***
+    
     CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
     BEGIN
       Declare n_1 int ;
@@ -108,7 +106,7 @@ tags: leetcode database
     END
     
     
-####       https://leetcode.com/problems/rank-scores/
+***[Rank Scores](https://leetcode.com/problems/rank-scores/)***
     
     SELECT 
         s3.Score, fuck.nth
@@ -124,8 +122,8 @@ tags: leetcode database
     ORDER BY s3.Score DESC
     
     
-####     https://leetcode.com/problems/rising-temperature/
-    #attention :  date(create_time) + 1 不要用，坑
+***[Rising Temperature](https://leetcode.com/problems/rising-temperature/)***
+    
     SELECT 
         a.Id
     FROM
@@ -134,9 +132,11 @@ tags: leetcode database
         Weather b ON a.Date = DATE_ADD(b.Date, INTERVAL 1 DAY)
     WHERE
         a.Temperature > b.Temperature
+
+attention :  date(create_time) + 1 不要用，坑
+
     
-    
-####    https://leetcode.com/problems/second-highest-salary/
+***[Second Highest Salary](https://leetcode.com/problems/second-highest-salary/)***
 
     SELECT 
         MAX(Salary)
@@ -149,7 +149,7 @@ tags: leetcode database
                 Employee);
     
     
-####    https://leetcode.com/problems/trips-and-users/
+***[Trips And Users](https://leetcode.com/problems/trips-and-users/)***
     
     #method1
     SELECT 
@@ -196,7 +196,7 @@ tags: leetcode database
     GROUP BY t.Request_at;
     
     
-####    https://leetcode.com/problems/combine-two-tables/
+***[Combine Two Tables](https://leetcode.com/problems/combine-two-tables/)***
 
     SELECT 
         Person.FirstName,
@@ -209,7 +209,7 @@ tags: leetcode database
         Address ON Person.PersonId = Address.PersonId
     
     
-####    https://leetcode.com/problems/consecutive-numbers/
+***[Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)***
 
     SELECT 
         distinct c1.Num
