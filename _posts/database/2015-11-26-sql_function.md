@@ -29,7 +29,9 @@ tags: sql index date string function datetime
 
 9.  to_seconds(@dt) 　时间转化成秒　　　　
 
-10. date_add(@dt,interval 1 day) date_add(@dt,interval 1 hour) / minute,second,microsecond,week,month,quarter,year　　
+10. date_add(@dt,interval 1 day) date_add(@dt,interval 1 hour) / minute,second,microsecond,week,month,quarter,year 
+    
+    ps:不要使用date(create_time) + 1, 这样就可能出现20151032这样的结果,可是十月有32号么?　
 
 11. date_add(@dt,interval '01:15:30' hour_second)　　
 
