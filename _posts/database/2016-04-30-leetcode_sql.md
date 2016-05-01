@@ -1,6 +1,6 @@
 ---
 layout: post
-title: leetcode 数据库题目全解
+title: leetcode sql全解
 categories: db
 tags: leetcode database
 ---
@@ -17,7 +17,7 @@ tags: leetcode database
         c.Id NOT IN (SELECT 
                 CustomerId
             FROM
-                Orders
+                Orders)
 
 思路: 遍历Orders的CustomerId,找出不在其中的Customer
 
