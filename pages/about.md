@@ -6,20 +6,15 @@ permalink: /about.html
 
 ### 关于我
 
-Software Engineer at [Qunar, Inc.](http://www.qunar.com)
+华中科技大学计算机学院卓越工程师班15届,去哪儿网服务器端开发工程师
 
-Beijing City, China   Computer Software
-  
-*Education:* scholar, CS  HUST
-
-*Contact:* lcj1992@hotmail.com
-about
-*Social:*
+<a href="mailto:lcj1992@hotmail.com">lcj1992@hotmail.com</a>
 
 [github](http://github.com/lcj1992/)
 
 [微博](http://weibo.com/u/1825339361)
-    
+
+[rss订阅](http://foolchild.cn/feed.xml)
 ### 关于blog
 
 1. `api`　旨在实用,高频的，在地铁上没事看看，毕竟一些东西是需要记忆的,如[vi](/2015/12/27/vi), [sed](/2015/12/26/sed), [awk](/2015/12/25/awk),[idea快捷键](2015/11/25/ideaShortCut)
