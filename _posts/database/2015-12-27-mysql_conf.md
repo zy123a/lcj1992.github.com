@@ -60,4 +60,8 @@ bind-address = 127.0.0.1
 
 set SQL_SAFE_UPDATES = 0;
 
-http://stackoverflow.com/questions/22317204/exporting-only-table-structure-using-mysqlworkbench
+###  参考
+
+[1]<https://aaaaaashu.gitbooks.io/mac-dev-setup/content/MySql/index.html>
+
+[2]<http://stackoverflow.com/questions/22317204/exporting-only-table-structure-using-mysqlworkbench>

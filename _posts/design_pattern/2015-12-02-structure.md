@@ -70,3 +70,5 @@ twin
 [1]<http://linuxtools-rst.readthedocs.org/zh_CN/latest/>
 
 [2]<https://en.wikipedia.org/wiki/Design_pattern>
+
+[图说设计模式]<http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html>
