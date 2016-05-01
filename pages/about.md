@@ -8,7 +8,7 @@ permalink: /about.html
 
 华中科技大学计算机学院卓越工程师班15届,去哪儿网服务器端开发工程师
 
-<a href="mailto:lcj1992@hotmail.com">lcj1992@hotmail.com</a>
+<a href="mailto:lcj1992@hotmail.com">邮箱:lcj1992@hotmail.com</a>
 
 [github](http://github.com/lcj1992/)
 
