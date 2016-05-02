@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" afterPath="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" afterPath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" afterPath="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/booklist.md" afterPath="$PROJECT_DIR$/pages/booklist.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,6 +44,22 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="2016-03-21-mac_softs.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.34895834">
+                <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="2016-04-26-tomcat_source.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
@@ -51,8 +67,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.3125">
-                <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.34895834">
+                <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -67,8 +83,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.32291666">
-                <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+              <first_editor vertical-scroll-proportion="0.6875">
+                <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -76,15 +92,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2014-11-16-sql_basic.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="booklist.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/booklist.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.765625">
+                <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2014-11-16-sql_basic.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.6614583">
-                <caret line="102" column="39" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
+              <first_editor vertical-scroll-proportion="0.41666666">
+                <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -106,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/soft/nginx/2015-12-28-nginx_basic.md" />
         <option value="$PROJECT_DIR$/_posts/soft/2015-12-28-logback_common.md" />
         <option value="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_transaction.md" />
         <option value="$PROJECT_DIR$/_posts/java_web/spring/2015-12-28-spring_start.md" />
@@ -154,9 +185,10 @@
         <option value="$PROJECT_DIR$/_posts/design_pattern/2015-12-02-structure.md" />
         <option value="$PROJECT_DIR$/feed.xml" />
         <option value="$PROJECT_DIR$/pages/about.md" />
+        <option value="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" />
         <option value="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
         <option value="$PROJECT_DIR$/_posts/unix/2015-12-27-temp.md" />
-        <option value="$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md" />
+        <option value="$PROJECT_DIR$/pages/booklist.md" />
       </list>
     </option>
   </component>
@@ -770,13 +802,7 @@
       <workItem from="1461832858686" duration="9471000" />
       <workItem from="1461940110307" duration="8417000" />
       <workItem from="1462018383443" duration="12714000" />
-      <workItem from="1462069700560" duration="2763000" />
-    </task>
-    <task id="LOCAL-00090" summary="annotation">
-      <created>1460865183290</created>
-      <option name="number" value="00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1460865183290</updated>
+      <workItem from="1462069700560" duration="6244000" />
     </task>
     <task id="LOCAL-00091" summary="annotation">
       <created>1460877201969</created>
@@ -1066,11 +1092,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462111701451</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="about">
+      <created>1462152014254</created>
+      <option name="number" value="00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1462152014254</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229173000" />
+    <option name="totallyTimeSpent" value="232654000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1182,19 +1214,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/java/2015-12-26-concurrent_basic.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="-0.07481297">
-            <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-25-awk.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
@@ -1576,20 +1595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="66" column="19" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/design_pattern/2015-12-02-behavior.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
@@ -1748,6 +1753,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.41666666">
+            <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/soft/tomcat/2015-12-28-tomcat_confs.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
@@ -1762,14 +1781,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.34895834">
+            <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.3125">
-            <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.34895834">
+            <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1782,22 +1815,22 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.32291666">
-            <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+          <first_editor vertical-scroll-proportion="0.6875">
+            <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/database/2014-11-16-sql_basic.md">
+    <entry file="file://$PROJECT_DIR$/pages/booklist.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.6614583">
-            <caret line="102" column="39" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
+          <first_editor vertical-scroll-proportion="0.765625">
+            <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

@@ -98,4 +98,8 @@ permalink: /booklist.html
 
 [何登成]<http://hedengcheng.com/>
 
+[淘宝余峰]<http://blog.yufeng.info/>
+
 [hongjiang]<http://hongjiang.info/>
+
+基本都有提供rss,mac上推荐使用reeder订阅管理
