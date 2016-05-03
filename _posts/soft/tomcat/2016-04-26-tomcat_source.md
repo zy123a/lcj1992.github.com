@@ -73,11 +73,6 @@ tomcat的入口为`BootStrap#main`
     *   2.4 如果useShutdownHook为true,添加CatalinaShutdownHook
     *   2.5 Catalina#await(),new 一个server socket to wait on (默认端口号为8005,你懂的)
                 
-               
-            
-            
-    
-        
 #### 状态机 {#fsm}    
     
 

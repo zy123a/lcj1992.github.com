@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/soft/tomcat/2015-12-28-import_tomcat_to_idea.md" afterPath="$PROJECT_DIR$/_posts/soft/tomcat/2015-12-28-import_tomcat_to_idea.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" afterPath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
     </list>
     <ignored path="foolchild.iws" />
@@ -32,8 +30,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.42352942">
-                <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+              <first_editor vertical-scroll-proportion="0.6">
+                <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -686,13 +684,7 @@
       <workItem from="1462018383443" duration="12714000" />
       <workItem from="1462069700560" duration="20460000" />
       <workItem from="1462185696105" duration="526000" />
-      <workItem from="1462189287825" duration="8165000" />
-    </task>
-    <task id="LOCAL-00093" summary="annotation">
-      <created>1460878240262</created>
-      <option name="number" value="00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1460878240263</updated>
+      <workItem from="1462189287825" duration="10039000" />
     </task>
     <task id="LOCAL-00094" summary="annotation">
       <created>1460942726527</created>
@@ -982,14 +974,20 @@
       <option name="project" value="LOCAL" />
       <updated>1462205984036</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="tomcat">
+      <created>1462255802701</created>
+      <option name="number" value="00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1462255802701</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255561000" />
+    <option name="totallyTimeSpent" value="257435000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="23" width="1222" height="777" extended-state="6" />
+    <frame x="58" y="23" width="1222" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1696,8 +1694,8 @@
     <entry file="file://$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.42352942">
-            <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+          <first_editor vertical-scroll-proportion="0.6">
+            <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
             <folding />
           </first_editor>
           <second_editor />
