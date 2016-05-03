@@ -5,9 +5,18 @@ categories: soft
 tags: tomcat source
 ---
 
-基于7.0.42.0,tomcat源码导入idea[参看这篇](/2015/12/28/import_tomcat_to_idea)
+基于7.0.42.0, tomcat源码如何导入idea[参看这篇](/2015/12/28/import_tomcat_to_idea)
 
-#### 启动流程 {#start}
+#### 背景
+
+最早看tomcat源码是为了研究spring mvc的启动,然后有了个了解也就放那了.
+最近airlineav老是跪(听说之前也是经常跪),决定搞下.
+毕竟工作中遇到技术性的问题也不多,再放任其走掉,什么时候能提高,尽自己能力尽可能地深入,总能有所收获.
+尝试着改了下tomcat的参数,发现好像有必要研究下它的源码,毕竟这是工作中接触最广的开源项目之一了.
+
+#### 整体架构
+
+#### 启动关闭流程 {#start_stop}
 
 tomcat的入口为`BootStrap#main`
 
@@ -30,13 +39,13 @@ tomcat的入口为`BootStrap#main`
 1.  Bootstrap#init
     
     *   1.1 设置catalina.home,设置catalina.base (ps: [CATALINA_HOME vs CATALINA_BASE](https://tomcat.apache.org/tomcat-8.0-doc/introduction.html#Directories_and_Files))
-    *   1.2 初始化类加载器,`commonLoader`,`catalinaLoader`,`sharedLoader`,
-    *   1.3 并用catalinaLoader对`org.apache.catalina.startup.Catalina`类进行加载,并进行实例化startupInstance,设置catalinaDaemon为startupInstance,
-    *   1.4 在bootstrap初始化完毕之后,设置daemon为bootstrap.
+    *   1.2 初始化类加载器,`commonLoader`,`catalinaLoader`,`sharedLoader`
+    *   1.3 用catalinaLoader对`org.apache.catalina.startup.Catalina`类进行加载,并进行实例化startupInstance,设置catalinaDaemon为startupInstance
+    *   1.4 在bootstrap初始化完毕之后,设置daemon为bootstrap
     
-2.  根据传入命令, 已start为例,加载,调用Bootstrap#load(args),实际上时调用catalinaDaemon#load方法
+2.  根据传入命令, 已start为例,加载,调用Bootstrap#load(args),实际上是调用catalinaDaemon#load方法
 
-    *   2.1 Catalina#createStartDigester 创建解析规则, 就是创建Server,Service,Executor等元素与相关类的对应关系,根据其配置实例化相应模块,参见附[server.xml](#server.xml),
+    *   2.1 Catalina#createStartDigester 创建解析规则, 就是创建Server,Service,Executor等元素与相关类的对应关系,根据其配置实例化相应模块,参见[server.xml](https://github.com/lcj1992/tomcat_study/blob/master/conf/server.xml),
             
             digester.addObjectCreate("Server","org.apache.catalina.core.StandardServer","className");
             digester.addSetProperties("Server");
@@ -70,135 +79,50 @@ tomcat的入口为`BootStrap#main`
                 *   启动protocol
                     *   启动endpoint,初始化connectionLimitLatch,启动acceptorThreads,启动timeoutThread
                 *   启动mapperListener, addListeners(engine),registerHost(host)
-    *   2.4 如果useShutdownHook为true,添加CatalinaShutdownHook
+    *   2.4 如果useShutdownHook为true,添加CatalinaShutdownHook`
     *   2.5 Catalina#await(),new 一个server socket to wait on (默认端口号为8005,你懂的)
                 
-#### 状态机 {#fsm}    
-    
-
-#### server.xml
-
-    <?xml version='1.0' encoding='utf-8'?>
-    <!-- Note:  A "Server" is not itself a "Container", so you may not
-         define subcomponents such as "Valves" at this level.
-         Documentation at /docs/config/server.html
-     -->
-    <Server port="8005" shutdown="SHUTDOWN">
-      <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
-      <Listener className="org.apache.catalina.core.JasperListener" />
-      <!-- Prevent memory leaks due to use of particular java/javax APIs-->
-      <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
-      <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
-      <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
-      
-      <GlobalNamingResources>
-        <!-- Editable user database that can also be used by
-             UserDatabaseRealm to authenticate users
-        -->
-        <Resource name="UserDatabase" auth="Container"
-                  type="org.apache.catalina.UserDatabase"
-                  description="User database that can be updated and saved"
-                  factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
-                  pathname="conf/tomcat-users.xml" />
-      </GlobalNamingResources>
-    
-      <!-- A "Service" is a collection of one or more "Connectors" that share
-           a single "Container" Note:  A "Service" is not itself a "Container",
-           so you may not define subcomponents such as "Valves" at this level.
-           Documentation at /docs/config/service.html
-       -->
-      <Service name="Catalina">
-    
-        <!--The connectors can use a shared executor, you can define one or more named thread pools-->
-        <!--
-        <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
-            maxThreads="150" minSpareThreads="4"/>
-        -->
-    
-    
-        <!-- A "Connector" represents an endpoint by which requests are received
-             and responses are returned. Documentation at :
-             Java HTTP Connector: /docs/config/http.html (blocking & non-blocking)
-             Java AJP  Connector: /docs/config/ajp.html
-             APR (HTTP/AJP) Connector: /docs/apr.html
-             Define a non-SSL HTTP/1.1 Connector on port 8080
-        -->
-        <Connector port="8080" protocol="HTTP/1.1"
-                   connectionTimeout="20000"
-                   redirectPort="8443" />
-        <!-- A "Connector" using the shared thread pool-->
-        <!--
-        <Connector executor="tomcatThreadPool"
-                   port="8080" protocol="HTTP/1.1"
-                   connectionTimeout="20000"
-                   redirectPort="8443" />
-        -->
-        <!-- Define a SSL HTTP/1.1 Connector on port 8443
-             This connector uses the JSSE configuration, when using APR, the
-             connector should be using the OpenSSL style configuration
-             described in the APR documentation -->
-        <!--
-        <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
-                   maxThreads="150" scheme="https" secure="true"
-                   clientAuth="false" sslProtocol="TLS" />
-        -->
-    
-        <!-- Define an AJP 1.3 Connector on port 8009 -->
-        <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
-    
-    
-        <!-- An Engine represents the entry point (within Catalina) that processes
-             every request.  The Engine implementation for Tomcat stand alone
-             analyzes the HTTP headers included with the request, and passes them
-             on to the appropriate Host (virtual host).
-             Documentation at /docs/config/engine.html -->
-    
-        <!-- You should set jvmRoute to support load-balancing via AJP ie :
-        <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
-        -->
-        <Engine name="Catalina" defaultHost="localhost">
-    
-          <!--For clustering, please take a look at documentation at:
-              /docs/cluster-howto.html  (simple how to)
-              /docs/config/cluster.html (reference documentation) -->
-          <!--
-          <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
-          -->
-    
-          <!-- Use the LockOutRealm to prevent attempts to guess user passwords
-               via a brute-force attack -->
-          <Realm className="org.apache.catalina.realm.LockOutRealm">
-            <!-- This Realm uses the UserDatabase configured in the global JNDI
-                 resources under the key "UserDatabase".  Any edits
-                 that are performed against this UserDatabase are immediately
-                 available for use by the Realm.  -->
-            <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-                   resourceName="UserDatabase"/>
-          </Realm>
-    
-          <Host name="localhost"  appBase="webapps"
-                unpackWARs="true" autoDeploy="true">
-    
-            <!-- SingleSignOn valve, share authentication between web applications
-                 Documentation at: /docs/config/valve.html -->
-            <!--
-            <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-            -->
-    
-            <!-- Access log processes all example.
-                 Documentation at: /docs/config/valve.html
-                 Note: The pattern used is equivalent to using pattern="common" -->
-            <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                   prefix="localhost_access_log." suffix=".txt"
-                   pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-    
-          </Host>
-        </Engine>
-      </Service>
-    </Server>
-
-
-
+#### 状态机 {#fsm} 
+   
+   Lifecycle的实现类都具有如下的状态机,
+   
+                 start()
+       -----------------------------
+       |                           |
+       | init()                    |
+      NEW ->-- INITIALIZING        |
+      | |           |              |     ------------------<-----------------------
+      | |           |auto          |     |                                        |
+      | |          \|/    start() \|/   \|/     auto          auto         stop() |
+      | |      INITIALIZED -->-- STARTING_PREP -->- STARTING -->- STARTED -->---  |
+      | |         |                                                  |         |  |
+      | |         |                                                  |         |  |
+      | |         |                                                  |         |  |
+      | |destroy()|                                                  |         |  |
+      | -->-----<--       auto                    auto               |         |  |
+      |     |       ---------<----- MUST_STOP ---------------------<--         |  |
+      |     |       |                                                          |  |
+      |    \|/      ---------------------------<--------------------------------  ^
+      |     |       |                                                             |
+      |     |      \|/            auto                 auto              start()  |
+      |     |  STOPPING_PREP ------>----- STOPPING ------>----- STOPPED ---->------
+      |     |                                ^                  |  |  ^
+      |     |               stop()           |                  |  |  |
+      |     |       --------------------------                  |  |  |
+      |     |       |                                  auto     |  |  |
+      |     |       |                  MUST_DESTROY------<-------  |  |
+      |     |       |                    |                         |  |
+      |     |       |                    |auto                     |  |
+      |     |       |    destroy()      \|/              destroy() |  |
+      |     |    FAILED ---->------ DESTROYING ---<-----------------  |
+      |     |                        ^     |                          |
+      |     |     destroy()          |     |auto                      |
+      |     -------->-----------------    \|/                         |
+      |                                 DESTROYED                     |
+      |                                                               |
+      |                            stop()                             |
+      --->------------------------------>------------------------------
+     
 #### 参考 {#ref}
 
 [tomcat8官方文档]<https://tomcat.apache.org/tomcat-8.0-doc/config/service.html>
