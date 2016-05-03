@@ -133,7 +133,7 @@ tags: tomcat
     
    1.   下载tomcat某一发行版 以7.0.42 为例 [二进制发行版](http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz) 
    2.   下载对应发行版源码 [源码](http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.42/src/apache-tomcat-7.0.42-src.tar.gz)
-   3.   二进制减压到文件tomcat_xx中, 源码解压到tomcat中
+   3.   二进制减压到文件tomcat_xx目录下, 源码解压到tomcat目录下
    4.   复制tomcat_xx到tomcat中
    5.   进入tomcat目录,生成pom.xml,内容跟上边第二个pom.xml一样
    6.   打开你的idea,跑起来吧,入口是Bootstrap#main()

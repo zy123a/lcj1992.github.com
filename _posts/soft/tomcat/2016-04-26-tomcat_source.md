@@ -62,8 +62,9 @@ tomcat的入口为`BootStrap#main`
         *   启动各services
             *   启动Engine
                 *   findChildren() 获取子容器,比如StandardHost的实例,将这些子容器用StartChild类包装成Callable的类，使用线程池启动
-                *   setState(LifecycleState.STARTING) -> LifecycleBase#setState -> LifecycleBase#setStateInternal -> LifecycleBase#fireLifecycleEvent
-                    *   HostConfig#start() -> HostConfig#deployApps(deploy configBase的xml文件,war包s,加压后的项目s等)
+                    *   child#start() -> (eg)StandardHost#startInternal() -> setState(LifecycleState.STARTING) -> LifecycleBase#setState -> LifecycleBase#setStateInternal -> LifecycleBase#fireLifecycleEvent(LifecycleBase的实现为EngineConfig)
+                        *   HostConfig#deployApps(deploy configBase的xml文件,war包s,加压后的项目s等)
+                            *   以DeployWars为例,new一个DeployWar(HostConfig config,ContextName cn,File war),DeployWar实际上是一个runnable,然后将其扔进host.getStartStopExecutor()中
             *   启动Executors
             *   启动connectors
                 *   启动protocol
