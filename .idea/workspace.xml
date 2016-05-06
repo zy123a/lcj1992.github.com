@@ -75,8 +75,8 @@
       <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41353384">
-              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.60150373">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -761,13 +761,7 @@
       <workItem from="1462383629132" duration="5388000" />
       <workItem from="1462413864773" duration="476000" />
       <workItem from="1462414958270" duration="40000" />
-      <workItem from="1462539745752" duration="1463000" />
-    </task>
-    <task id="LOCAL-00106" summary="annotation">
-      <created>1461347348946</created>
-      <option name="number" value="00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1461347348947</updated>
+      <workItem from="1462539745752" duration="1579000" />
     </task>
     <task id="LOCAL-00107" summary="annotation">
       <created>1461423662046</created>
@@ -1057,11 +1051,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462545845868</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="tomcat">
+      <created>1462545879576</created>
+      <option name="number" value="00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1462545879576</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272262000" />
+    <option name="totallyTimeSpent" value="272378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1768,8 +1768,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41353384">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.60150373">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
           <folding />
         </state>
       </provider>
