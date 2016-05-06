@@ -5,6 +5,7 @@ date_format: "ordinal"
 title: foolchild
 author: foolchild
 paginate: 12
+url: foolchild.cn
 
 # ---------------- #
 #      Jekyll      #
