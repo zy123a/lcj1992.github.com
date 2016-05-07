@@ -1,39 +1,46 @@
 ---
 layout: post
 title: airlineAv调优记
-categories: soft
-tags: tomcat source
+categories: work
+tags: webservice airline av
 ---
 
-airlineAv每隔几周就得重启一次,从前人的前人,再到前人,听说经常这样,而且还修了很多次.
+### 背景
 
-从16年开始多家航司都不合作,只剩下几家小的,量小问题没暴漏,从东航4月6号重新上线,然后就隔个一周左右就跪个一次,所以问题很可能在东航.于是在机器再次跪掉之后,决定搞一下.
+1.  五台机器,十几家航司
 
-ps: 航司接口不一样,有的是http,有的是webservice(axis和cxf的也都有)
+2.  上游对接抓取系统(离线用于旗舰店报价展示),下游对接航司av接口
 
-![airlineAv tcp连接监控](/images/soft/tcp_established.png)
+3.  每隔几周就得重启一次,从前人的前人,再到前人,听说经常这样,而且还修了很多次.
 
-现象是: tomcat的connector配了2000个线程,还老是超.目前就几家航司在线,qps30左右,五台机器,平均每台也就10啊,这连接最高还2000+,好不正常.
+4.  航司接口不一样,有的提供http,有的提供webservice(axis,cxf)
+  
+5.  年后一直保持稳定(多家航司不合作了),在东航4月6号重新上线后,就保持一周左右跪一次的节奏(量大了),于是决定搞一下.
 
-1.先是看了下gc的状况,old区接近100%,堆的设置-Xms2048m -Xmx2048m,要知道这是8g的机器,所以我改了下jvm配置Xms,Xmx都改成了4g.
+6.  tcp established高达2k:
 
-***不管有用没用,有资源不用浪费, 4g + 2000 * 1m(linux hotspot默认栈大小) = 6g***
+![airlineAv tcp连接监控](/images/performance/airlineav_tcp_established.png)
 
-2.tomcat也没死,就是接收不了请求了,healthcheck.html也请求不了.因为tomcat的connector打满了,这点可以理解.
+### 现象与处理
 
-基本可以断定是webservice的没设超时时间,或者超时时间没生效,导致坏连接一直没释放,不断堆积.
+在第一次跪掉之后
 
-webservice又没搞过,所以想通过不改代码,不走发布,直接改tomcat配置,设置tomcat的超时时间来达到目的.
+1.  dump了线程堆栈,大量东航相关runnable的线程,tomcat connector的线程用到了快2000,看了下机器的监控确实tcp连接ESTABLISHED的近2000了(不一般都是Close_wait,time_wait多么?),tomcat还活着,但是接收不了请求了.
 
-找了下tomcat的文档,好像没有一个设置读超时的配置(倒是让我想看一下[tomcat的源码](/2016/04/26/tomcat_source)也是好事)
+2.  先看了下gc的情况,old区吃满了,Xms、Xmx都是配的2g(五台机器都是8g的哎),于是我把它们都改成了4g,把tomcat的连接数改成2500了(可是单机正常的qps就15-25啊).
+4g + 2500 * 1m(linux64位 hotspot默认栈大小) = 6.5g***,然后又重启了.
 
-冰神按照国际旗舰店的超时时间设置,观察了几天还是没生效,最后勇哥道出了其中的要诀,webservice生成客户端的方法不一样,axis与cxf,东航采用的cxf的方式生成webservice client的,而超时时间设置是采用axis的.
+依旧在一周左右时间,连接再次占满,依旧是东航,扒代码,冰神按照国际旗舰店的webservice的超时时间设置方式加了超时时间,问题依旧在一周后出现.
 
-所以又google下,cxf的超时时间设置,写了个demo来测试下.[demo地址](https://github.com/lcj1992/learn/blob/master/java/src/main/java/cxf),超时时间设置见CxfClientUtil.java
+然后debug时,发现webservice似乎也设置timeout,最后勇哥道出了其中的缘由:东航的的webservice client是通过cxf生成的,而国际旗舰店的是按照axis的方式的.
 
-然后直接把util拷进airlineav,引入jar包就提测了,qa测试时候又报找不着方法.没有引到正确地包,发现对应的类在axis-wsdl4j 和wsdl4j都含有,查了下两个包的历史渊源,干掉了axis-wsdl4j,运行时的method找不到也fix了,发不上线.
+于是乎,google之: `cxf webservice 超时时间`(没搞过webservice啊),照着网上的搞了个[demo](https://github.com/lcj1992/learn/blob/master/java/src/main/java/cxf),超时时间设置见CxfClientUtil.java
 
-截止目前,发布一周(4/29 - 5/6)tcp estalished的维持在30左右了,再也不是2k+了(如上图).
+然后引入新的jar包,又报method找不到,包冲突maven选错了jar.对应的类在axis-wsdl4j.jar和wsdl4j.jar,查了下两个包的历史渊源,干掉了axis-wsdl4j,fix了,发布上线.
+
+截止目前,发布一周(4/29 - 5/6)tcp estalished的维持在30左右了,再也不是2k+了(如上图),内存used的也从3g变到了5g.
+
+![airlineav 内存](/images/performance/airlineav_mem.png)
 
 [四种soap引擎vs]<http://blog.sina.com.cn/s/blog_a9fbb4dc01014be5.html>
 
