@@ -24,7 +24,7 @@ tags: tomcat source
 
 所以从功能的角度将tomcat分为5个子模块,他们分别是:
 
-1.  Jsper模块: 负责jsp页面的解析,jsp属性的验证,同时也负责将jsp页面动态转换为java代码并编译成class文件,tomcat源码中org.apache.jasper包及其自爆的源码都属于这个子模块
+1.  Jasper模块: 负责jsp页面的解析,jsp属性的验证,同时也负责将jsp页面动态转换为java代码并编译成class文件,tomcat源码中org.apache.jasper包及其自爆的源码都属于这个子模块
 2.  Servlet和Jsp规范的实现模块: 源码位于javax.servlet包及其子包,javax.servlet.Servlet接口,javax.servlet.http.httpServlet类等就位于这个子模块
 3.  Catalina子模块: 包含org.apache.catalina开头的源码.该子模块的任务是规范Tomcat的总体架构,定义了Server,Service,Host,Connector,Context,Session及Cluster等关键组件及这些组件的实现,这个子模块大量运用了Composite设计模式.同时也规范了Catalina的启动关闭等事件的执行流程.
 4.  Connectors子模块:  如果说上面三个子模块实现了tomcat应用服务器的话,那么这个子模块就是web服务器的实现.所谓连接器就是一个连接客户和应用服务器的桥梁,他接收用户的请求,并把用户请求包装成标准的Http请求(包含协议名称,请求头Head,请求方Get或者Post等)
@@ -110,7 +110,7 @@ tomcat的入口为`BootStrap#main`
             *   初始化Executors(可多个)(StandardThreadExecutor)  
             *   初始化Connectors(可多个)(Connector)  
                 *   初始化protocolHandler(eg: Http11Protocol)    
-                    *   初始化endpoint(eg JioEndpoint),然后endpoint#bind(),绑定地址和端口,设置线程池的大小,并创建serverSocket EndPoint的bindState 有UNBOUND -> BOUND_ON_START  
+                    *   初始化endpoint(eg JioEndpoint),然后endpoint#bind(),绑定地址和端口,设置线程池的大小,并创建`serverSocket` EndPoint的bindState 有UNBOUND -> BOUND_ON_START  
                 *   初始化mapperListener 
     *   2.3 启动各组件,还是调用Catalina#start(),启动时都会动状态机进行校验
         *   globalNamingResources的启动
@@ -123,8 +123,8 @@ tomcat的入口为`BootStrap#main`
             *   启动Executors
             *   启动connectors
                 *   启动protocol
-                    *   启动endpoint,初始化connectionLimitLatch,启动acceptorThreads,启动timeoutThread
-                *   启动mapperListener, addListeners(engine),registerHost(host)
+                    *   启动endpoint,初始化connectionLimitLatch,启动`acceptorThreads`,启动timeoutThread
+                *   启动mapperListener, findDefaultHost(),addListeners(engine),registerHost(host)
     *   2.4 如果useShutdownHook为true,添加CatalinaShutdownHook`
     *   2.5 Catalina#await(),new 一个server socket to wait on (默认端口号为8005,你懂的)
                 
@@ -173,14 +173,63 @@ org.apache.Catalina.Lifecycle的实现类都具有如下的[状态机](https://g
 2.  当组件在STARTING_PREP,STARTING,STARTED,调用start()方法是没有作用的
 3.  当组件在NEW状态时调用start()方式会先调用init()
 4.  当组件在STOPPING_PREP,STOPPING,STOPPED调用stop()方法是不起作用的
-5.  当组件从NEW过渡到STOPPED会调用stop()方法.这进场发生在一个组件没有启动起来,并且没有启动他的所有子组件,当一个组件stopped后,它会试着停止所有它的子组件,即使它没有启动起来
-6.  MUST_STOP经常用在
-7.  MUST_DESTROY
-8.
+5.  当组件从NEW过渡到STOPPED会调用stop()方法.这经常发生在一个组件没有启动起来,并且没有启动他的所有子组件.当一个组件stopped后,它会试着停止所有它的子组件,即使它没有启动起来
+6.  MUST_STOP用来标明从start()中退出后,应该调用stop().这经常用在一个组件启动失败了.
+7.  MUST_DESTROY用来标明从stop()中退出后,应该调用destroy(),这经常用在不需要重启的组件.
+8.  任何别的状态过渡都会抛出LifecycleException
+9.  在调用其中方法时会触发状态变更,触发LifecycleEvents
 
 Lifecycle的子类类图:
 
 ![Lifecycle子类](/images/soft/tomcat_lifecycle.png)
+
+#### tomcat处理请求
+
+![tomcat处理请求](/images/soft/tomcat_handle_request.jpg)
+
+下边这段日志熟悉不,不熟悉,自己写个controller,主动throw个异常 
+
+    at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.7.0_45]
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.7.0_45]
+    at java.lang.reflect.Method.invoke(Method.java:606) ~[na:1.7.0_45]
+    at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219) [spring-web-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132) [spring-web-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:100) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:604) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:565) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:923) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:852) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:882) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:778) [spring-webmvc-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at javax.servlet.http.HttpServlet.service(HttpServlet.java:621) [servlet-api.jar:na]
+    at javax.servlet.http.HttpServlet.service(HttpServlet.java:728) [servlet-api.jar:na]
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210) [catalina.jar:7.0.47]
+    at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) [tomcat7-websocket.jar:7.0.47]
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210) [catalina.jar:7.0.47]
+    at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88) [spring-web-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:76) [spring-web-3.1.4.RELEASE.jar:3.1.4.RELEASE]
+    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123) [catalina.jar:7.0.47]
+    at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171) [catalina.jar:7.0.47]
+    at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100) [catalina.jar:7.0.47]
+    at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953) [catalina.jar:7.0.47]
+    at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118) [catalina.jar:7.0.47]
+    at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408) [catalina.jar:7.0.47]
+    at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041) [tomcat-coyote.jar:7.0.47]
+    at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603) [tomcat-coyote.jar:7.0.47]
+    at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310) [tomcat-coyote.jar:7.0.47]
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_45]
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_45]
+    at java.lang.Thread.run(Thread.java:744) [na:1.7.0_45]
+
     
 #### 参考 {#ref}
 
