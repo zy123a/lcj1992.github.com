@@ -123,7 +123,7 @@ tomcat的入口为`BootStrap#main`
             *   启动Executors
             *   启动connectors
                 *   启动protocol
-                    *   启动endpoint,初始化connectionLimitLatch,启动`acceptorThreads`,启动timeoutThread
+                    *   启动endpoint,初始化connectionLimitLatch,启动`acce  ptorThreads`,启动timeoutThread
                 *   启动mapperListener, findDefaultHost(),addListeners(engine),registerHost(host)
     *   2.4 如果useShutdownHook为true,添加CatalinaShutdownHook`
     *   2.5 Catalina#await(),new 一个server socket to wait on (默认端口号为8005,你懂的)
