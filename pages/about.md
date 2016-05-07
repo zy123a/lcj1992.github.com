@@ -6,19 +6,27 @@ permalink: /about.html
 
 ### 关于我
 
-华中科技大学计算机学院卓越工程师班15届,去哪儿网服务器端开发工程师
+华中科技大学计算机学院卓越工程师班15届
 
-<a href="mailto:lcj1992@hotmail.com">邮箱</a> ,[github](http://github.com/lcj1992/) ,[微博](http://weibo.com/u/1825339361) ,[rss订阅](http://foolchild.cn/feed.xml)
+去哪儿网服务器端开发工程师
+
+<a href="mailto:lcj1992@hotmail.com">邮箱</a> 
+
+[github](http://github.com/lcj1992/)
+ 
+[微博](http://weibo.com/u/1825339361) 
+
+[rss订阅](http://foolchild.cn/feed.xml)
 
 ### 关于blog
 
-1. `api`　旨在实用,高频的，在地铁上没事看看，毕竟一些东西是需要记忆的,如[vi](/2015/12/27/vi), [sed](/2015/12/26/sed), [awk](/2015/12/25/awk),[idea快捷键](2015/11/25/ideaShortCut)
+1. `api`　旨在实用,高频的，在地铁上没事看看，毕竟一些东西是需要记忆的,如[vi](/2015/12/27/vi)  [sed](/2015/12/26/sed) [awk](/2015/12/25/awk) [idea快捷键](2015/11/25/ideaShortCut)
 
 2. `外文翻译`　自己英语水平不够;　自己走一遍比单纯转个连接要强; 之前的认知可能存在偏差，自己的博客自己可以改，不断改认识不断深化，如[jvm　internal](/2015/09/03/jvm_internal),[tcp状态机](/2015/12/25/tcpFSM)
 
-3.  `别人的or笔记`　见上2,3,如[文件系统x问](/2016/01/07/fileSysQA),[并发基础](/2015/11/25/concurrent)
+3.  `别人的or笔记`　见上2,3,如[文件系统x问](/2016/01/07/fileSysQA) [并发基础](/2015/11/25/concurrent)
 
-4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[equals和hashCoe](/2016/03/10/equals_hashcode) ,[磁盘满了](/2015/12/17/diskFull)　
+4.  `自己做的实验，源码研究` 每个程序员都要有research能力(随着能力的提高,这块会越来越多滴)　[equals和hashCoe](/2016/03/10/equals_hashcode) [tomcat启动关闭与请求处理](/2016/04/26/tomcat_source) [磁盘满了](/2015/12/17/diskFull)　
 
 ### 博客的快捷键
 
