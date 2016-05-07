@@ -7,16 +7,32 @@ tags: tomcat source
 
 基于7.0.42.0, tomcat源码如何导入idea[参看这篇](/2015/12/28/import_tomcat_to_idea)
 
-#### 背景
+#### 背景 {#background}
 
-最早看tomcat源码是为了研究spring mvc的启动,然后有了个了解也就放那了.
-最近airlineav老是跪(听说之前也是经常跪),决定搞下.
-毕竟工作中遇到技术性的问题也不多,再放任其走掉,什么时候能提高,尽自己能力尽可能地深入,总能有所收获.
-尝试着改了下tomcat的参数,发现好像有必要研究下它的源码,毕竟这是工作中接触最广的开源项目之一了.
+最早看tomcat源码是为了研究spring mvc的启动,然后有了个了解也就放那了.这次看是源于解决[airlineav的调优](2016/04/29/airline_av)的过程
 
-#### 整体架构
+毕竟工作中遇到技术性的问题也不多,再放任其走掉,什么时候能提高,尽自己能力尽可能地深入总能有所收获. 尝试着改了下tomcat的参数,发现好像有必要研究下它的源码,毕竟这是工作中接触最广的开源项目之一了.
+
+#### 整体架构 {#structure}
 
 #### 启动关闭流程 {#start_stop}
+
+这个日志熟悉么?
+
+    May 06, 2016 10:59:56 PM org.apache.coyote.AbstractProtocol init
+    INFO: Initializing ProtocolHandler ["http-bio-8080"]
+    May 06, 2016 10:59:56 PM org.apache.catalina.startup.Catalina load
+    INFO: Initialization processed in 1157 ms
+    May 06, 2016 10:59:56 PM org.apache.catalina.core.StandardService startInternal
+    INFO: Starting service Catalina
+    May 06, 2016 10:59:56 PM org.apache.catalina.core.StandardEngine startInternal
+    INFO: Starting Servlet Engine: Apache Tomcat/7.0.47
+    May 06, 2016 10:59:56 PM org.apache.catalina.startup.HostConfig deployDirectory
+    INFO: Deploying web application directory /xxx.com/webapps/ROOT
+    May 06, 2016 10:59:58 PM org.apache.coyote.AbstractProtocol start
+    INFO: Starting ProtocolHandler ["http-bio-8080"]
+    May 06, 2016 10:59:58 PM org.apache.catalina.startup.Catalina start
+    INFO: Server startup in 1818 ms
 
 tomcat的入口为`BootStrap#main`
 
