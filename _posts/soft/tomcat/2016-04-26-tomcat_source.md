@@ -9,15 +9,47 @@ tags: tomcat source
 
 #### 背景 {#background}
 
-最早看tomcat源码是为了研究spring mvc的启动,然后有了个了解也就放那了.这次看是源于解决[airlineav的调优](2016/04/29/airline_av)的过程
+最早看tomcat源码是为了研究spring mvc的启动,然后有了个了解也就放那了.这次看是源于[airlineav的调优](2016/04/29/airline_av)
 
 毕竟工作中遇到技术性的问题也不多,再放任其走掉,什么时候能提高,尽自己能力尽可能地深入总能有所收获. 尝试着改了下tomcat的参数,发现好像有必要研究下它的源码,毕竟这是工作中接触最广的开源项目之一了.
 
 #### 整体架构 {#structure}
 
+![tomcat架构](/images/soft/tomcat_structure.jpg)
+
+1.  `Server`(服务器)顶级构成元素,所有一切包含在Server中,Server的实现类StandardServer可以包含一个到多个service
+2.  `Service`(服务)次顶级元素,其实现类为StandardService调用Container(容器)的接口,实际是调用Engine,而且StandardService类中也指明了该Service归属的Server
+3.  `Container` (容器) Host(主机),Context(上下文),Engine(引擎)均继承自Container接口.但是他们是有父子关系的,在Host(主机),Context(上下文)和Engine(引擎)这三类容器中,Engine是顶级容器,直接包含Host,而Host又包含Context,所以Engine,Host和Context从大小上来说又构成父子关系.
+4.  `Connector` (连接器) 将Service和Container链接起来,首先它需要注册到一个Service,它的作用就是把来自客户端的请求转达到Container,这就是它为什么称作连接器的原因.
+
+所以从功能的角度将tomcat分为5个子模块,他们分别是:
+
+1.  Jsper模块: 负责jsp页面的解析,jsp属性的验证,同时也负责将jsp页面动态转换为java代码并编译成class文件,tomcat源码中org.apache.jasper包及其自爆的源码都属于这个子模块
+2.  Servlet和Jsp规范的实现模块: 源码位于javax.servlet包及其子包,javax.servlet.Servlet接口,javax.servlet.http.httpServlet类等就位于这个子模块
+3.  Catalina子模块: 包含org.apache.catalina开头的源码.该子模块的任务是规范Tomcat的总体架构,定义了Server,Service,Host,Connector,Context,Session及Cluster等关键组件及这些组件的实现,这个子模块大量运用了Composite设计模式.同时也规范了Catalina的启动关闭等事件的执行流程.
+4.  Connectors子模块:  如果说上面三个子模块实现了tomcat应用服务器的话,那么这个子模块就是web服务器的实现.所谓连接器就是一个连接客户和应用服务器的桥梁,他接收用户的请求,并把用户请求包装成标准的Http请求(包含协议名称,请求头Head,请求方Get或者Post等)
+同时在请求页面未发现时,connector就会给客户端浏览器发送标准的Http 404错误相应页面
+5.  Resource子模块: 这个子模块包含一些资源文件,如Server.xml及Web.xml配置文件.严格来说,这个子模块不包含java源代码,但是它是tomcat编译运行所必需的.
+
 #### 启动关闭流程 {#start_stop}
 
-这个日志熟悉么?
+这个日志熟悉么? 不熟悉的话,重启下你机器上的任一tomcat项目,熟悉一下
+
+    May 07, 2016 2:13:51 PM org.apache.catalina.core.StandardServer await
+    INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+    May 07, 2016 2:13:51 PM org.apache.coyote.AbstractProtocol pause
+    INFO: Pausing ProtocolHandler ["http-bio-8080"]
+    May 07, 2016 2:13:51 PM org.apache.catalina.core.StandardService stopInternal
+    INFO: Stopping service Catalina
+    May 07, 2016 2:13:52 PM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads
+    SEVERE: The web application [] appears to have started a thread named [AsyncAppender-Worker-Thread-3] but has failed to stop it. This is very likely to create a memory leak.
+    ay 07, 2016 2:13:53 PM org.apache.coyote.AbstractProtocol stop
+    INFO: Stopping ProtocolHandler ["http-bio-8080"]
+    May 07, 2016 2:13:53 PM org.apache.coyote.AbstractProtocol destroy
+    INFO: Destroying ProtocolHandler ["http-bio-8080"]
+    May 07, 2016 2:13:55 PM org.apache.catalina.loader.WebappClassLoader loadClass
+    INFO: Illegal access: this web application instance has been stopped already.  Could not load org.I0Itec.zkclient.ZkClient$8.  The eventual following stack trace is caused by an error thrown for debugging purposes as well as to attempt to
+    ...
 
     May 06, 2016 10:59:56 PM org.apache.coyote.AbstractProtocol init
     INFO: Initializing ProtocolHandler ["http-bio-8080"]
@@ -36,8 +68,6 @@ tags: tomcat source
 
 tomcat的入口为`BootStrap#main`
 
-首先看下BootStrap是干什么的?
-
     Bootstrap loader for Catalina.  This application constructs a class loader
     for use in loading the Catalina internal classes (by accumulating all of the
     JAR files found in the "server" directory under "catalina.home"), and
@@ -48,7 +78,7 @@ tomcat的入口为`BootStrap#main`
 
 大致意思:Catalina的启动加载器,加载catalina.home目录下的classes,并启动容器.
 
-这样保证了Catalina内部的类不在系统的path下,因此对于其他应用是不可见的(应用隔离),自定义类加载器的好处.
+这样保证了Catalina内部的类不在系统的path下,因此对于其他应用是不可见的(应用隔离)(自定义类加载器的用途)
 
 启动:
 
@@ -99,8 +129,8 @@ tomcat的入口为`BootStrap#main`
     *   2.5 Catalina#await(),new 一个server socket to wait on (默认端口号为8005,你懂的)
                 
 #### 状态机 {#fsm} 
-   
-   Lifecycle的实现类都具有如下的状态机,
+  
+org.apache.Catalina.Lifecycle的实现类都具有如下的[状态机](https://github.com/lcj1992/tomcat_study/blob/master/java/org/apache/catalina/Lifecycle.java).
    
                  start()
        -----------------------------
@@ -139,127 +169,19 @@ tomcat的入口为`BootStrap#main`
       |                            stop()                             |
       --->------------------------------>------------------------------
 
-#### server.xml {#server_xml}
-     
-     <?xml version='1.0' encoding='utf-8'?>
-     <!-- Note:  A "Server" is not itself a "Container", so you may not
-          define subcomponents such as "Valves" at this level.
-          Documentation at /docs/config/server.html
-      -->
-     <Server port="8005" shutdown="SHUTDOWN">
-         <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
-         <Listener className="org.apache.catalina.core.JasperListener" />
-         <!-- Prevent memory leaks due to use of particular java/javax APIs-->
-         <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
-         <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
-         <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
-     
-         <GlobalNamingResources>
-             <!-- Editable user database that can also be used by
-                  UserDatabaseRealm to authenticate users
-             -->
-             <Resource name="UserDatabase" auth="Container"
-                       type="org.apache.catalina.UserDatabase"
-                       description="User database that can be updated and saved"
-                       factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
-                       pathname="conf/tomcat-users.xml" />
-         </GlobalNamingResources>
-     
-         <!-- A "Service" is a collection of one or more "Connectors" that share
-              a single "Container" Note:  A "Service" is not itself a "Container",
-              so you may not define subcomponents such as "Valves" at this level.
-              Documentation at /docs/config/service.html
-          -->
-         <Service name="Catalina">
-     
-             <!--The connectors can use a shared executor, you can define one or more named thread pools-->
-             <!--
-             <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
-                 maxThreads="150" minSpareThreads="4"/>
-             -->
-     
-     
-             <!-- A "Connector" represents an endpoint by which requests are received
-                  and responses are returned. Documentation at :
-                  Java HTTP Connector: /docs/config/http.html (blocking & non-blocking)
-                  Java AJP  Connector: /docs/config/ajp.html
-                  APR (HTTP/AJP) Connector: /docs/apr.html
-                  Define a non-SSL HTTP/1.1 Connector on port 8080
-             -->
-             <Connector port="8080" protocol="HTTP/1.1"
-                        connectionTimeout="20000"
-                        redirectPort="8443" />
-             <!-- A "Connector" using the shared thread pool-->
-             <!--
-             <Connector executor="tomcatThreadPool"
-                        port="8080" protocol="HTTP/1.1"
-                        connectionTimeout="20000"
-                        redirectPort="8443" />
-             -->
-             <!-- Define a SSL HTTP/1.1 Connector on port 8443
-                  This connector uses the JSSE configuration, when using APR, the
-                  connector should be using the OpenSSL style configuration
-                  described in the APR documentation -->
-             <!--
-             <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
-                        maxThreads="150" scheme="https" secure="true"
-                        clientAuth="false" sslProtocol="TLS" />
-             -->
-     
-             <!-- Define an AJP 1.3 Connector on port 8009 -->
-             <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
-     
-     
-             <!-- An Engine represents the entry point (within Catalina) that processes
-                  every request.  The Engine implementation for Tomcat stand alone
-                  analyzes the HTTP headers included with the request, and passes them
-                  on to the appropriate Host (virtual host).
-                  Documentation at /docs/config/engine.html -->
-     
-             <!-- You should set jvmRoute to support load-balancing via AJP ie :
-             <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
-             -->
-             <Engine name="Catalina" defaultHost="localhost">
-     
-                 <!--For clustering, please take a look at documentation at:
-                     /docs/cluster-howto.html  (simple how to)
-                     /docs/config/cluster.html (reference documentation) -->
-                 <!--
-                 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
-                 -->
-     
-                 <!-- Use the LockOutRealm to prevent attempts to guess user passwords
-                      via a brute-force attack -->
-                 <Realm className="org.apache.catalina.realm.LockOutRealm">
-                     <!-- This Realm uses the UserDatabase configured in the global JNDI
-                          resources under the key "UserDatabase".  Any edits
-                          that are performed against this UserDatabase are immediately
-                          available for use by the Realm.  -->
-                     <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-                            resourceName="UserDatabase"/>
-                 </Realm>
-     
-                 <Host name="localhost"  appBase="webapps"
-                       unpackWARs="true" autoDeploy="true">
-     
-                     <!-- SingleSignOn valve, share authentication between web applications
-                          Documentation at: /docs/config/valve.html -->
-                     <!--
-                     <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-                     -->
-     
-                     <!-- Access log processes all example.
-                          Documentation at: /docs/config/valve.html
-                          Note: The pattern used is equivalent to using pattern="common" -->
-                     <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                            prefix="localhost_access_log." suffix=".txt"
-                            pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-     
-                 </Host>
-             </Engine>
-         </Service>
-     </Server>
-     
+1.  任何状态都可以过渡到FAILED
+2.  当组件在STARTING_PREP,STARTING,STARTED,调用start()方法是没有作用的
+3.  当组件在NEW状态时调用start()方式会先调用init()
+4.  当组件在STOPPING_PREP,STOPPING,STOPPED调用stop()方法是不起作用的
+5.  当组件从NEW过渡到STOPPED会调用stop()方法.这进场发生在一个组件没有启动起来,并且没有启动他的所有子组件,当一个组件stopped后,它会试着停止所有它的子组件,即使它没有启动起来
+6.  MUST_STOP经常用在
+7.  MUST_DESTROY
+8.
+
+Lifecycle的子类类图:
+
+![Lifecycle子类](/images/soft/tomcat_lifecycle.png)
+    
 #### 参考 {#ref}
 
 [tomcat8官方文档]<https://tomcat.apache.org/tomcat-8.0-doc/config/service.html>
