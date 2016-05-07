@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/performance/2016-04-29-airline_av.md" afterPath="$PROJECT_DIR$/_posts/performance/2016-04-29-airline_av.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" afterPath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" afterPath="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/feed.xml" afterPath="$PROJECT_DIR$/feed.xml" />
     </list>
     <ignored path="foolchild.iws" />
@@ -83,21 +79,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.35657686">
+              <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="feed.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="feed.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feed.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5418719">
-              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            <state vertical-scroll-proportion="-1.875">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -182,8 +178,8 @@
         <option value="$PROJECT_DIR$/_posts/tool/mac/2016-03-21-mac_softs.md" />
         <option value="$PROJECT_DIR$/_posts/performance/2016-04-29-airline_av.md" />
         <option value="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
-        <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/feed.xml" />
+        <option value="$PROJECT_DIR$/_config.yml" />
       </list>
     </option>
   </component>
@@ -202,8 +198,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="58" />
-    <option name="y" value="23" />
+    <option name="x" value="638" />
+    <option name="y" value="158" />
     <option name="width" value="1222" />
     <option name="height" value="777" />
   </component>
@@ -769,13 +765,7 @@
       <workItem from="1462413864773" duration="476000" />
       <workItem from="1462414958270" duration="40000" />
       <workItem from="1462539745752" duration="12012000" />
-      <workItem from="1462587839131" duration="316000" />
-    </task>
-    <task id="LOCAL-00109" summary="annotation">
-      <created>1461579367145</created>
-      <option name="number" value="00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1461579367145</updated>
+      <workItem from="1462587839131" duration="762000" />
     </task>
     <task id="LOCAL-00110" summary="annotation">
       <created>1461638507451</created>
@@ -1065,18 +1055,25 @@
       <option name="project" value="LOCAL" />
       <updated>1462546205082</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="tomcat">
+      <created>1462588181685</created>
+      <option name="number" value="00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1462588181687</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283127000" />
+    <option name="totallyTimeSpent" value="283573000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="23" width="1222" height="777" extended-state="6" />
+    <frame x="638" y="158" width="1222" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23065251" sideWeight="0.52457625" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1092,7 +1089,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2859425" sideWeight="0.5055644" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1689,6 +1685,7 @@
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="2.374663">
             <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1752,18 +1749,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
+    <entry file="file://$PROJECT_DIR$/feed.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.875">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/feed.xml">
+    <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5418719">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.35657686">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
           <folding />
         </state>
       </provider>
