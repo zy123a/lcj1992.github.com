@@ -138,7 +138,7 @@ tags: tomcat
    5.   进入tomcat目录,生成pom.xml,内容跟上边第二个pom.xml一样
    6.   打开你的idea,跑起来吧,入口是Bootstrap#main()
   
-或者你可以直接fork 导入好的工程[tomcat_study](https://github.com/lcj1992/tomcat_study)
+或者你可以直接fork我导入好的工程[tomcat_study](https://github.com/lcj1992/tomcat_study)
 
 ## eclipse 转 idea工程 {#eclipse_to_idea}
 

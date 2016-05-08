@@ -5,7 +5,7 @@ categories: soft
 tags: tomcat source
 ---
 
-基于7.0.42.0, tomcat源码如何导入idea[参看这篇](/2015/12/28/import_tomcat_to_idea)
+基于7.0.42.0, tomcat源码导入idea[参看这篇](/2015/12/28/import_tomcat_to_idea)
 
 #### 背景 {#background}
 
