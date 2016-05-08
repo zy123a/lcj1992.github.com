@@ -26,7 +26,3 @@ markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 使用kramdown,表格前后不能直接挨着,都多个空行就行
-5. \| \> 需转义
-6. 增加iframe　
-
-        <iframe src="xxpath" width="700px" height="500px" frameborder="0" scrolling="no"> </iframe>
