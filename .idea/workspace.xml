@@ -60,8 +60,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="1.796875">
-                <caret line="267" column="3" selection-start-line="267" selection-start-column="3" selection-end-line="267" selection-end-column="3" />
+              <first_editor vertical-scroll-proportion="0.5989583">
+                <caret line="279" column="0" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -887,13 +887,7 @@
       <workItem from="1462592863750" duration="12000" />
       <workItem from="1462592926830" duration="7225000" />
       <workItem from="1462605040213" duration="4610000" />
-      <workItem from="1462629110917" duration="9730000" />
-    </task>
-    <task id="LOCAL-00121" summary="annotation">
-      <created>1461989044358</created>
-      <option name="number" value="00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1461989044360</updated>
+      <workItem from="1462629110917" duration="10202000" />
     </task>
     <task id="LOCAL-00122" summary="annotation">
       <created>1461991077718</created>
@@ -1183,11 +1177,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462676364908</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="tomat source">
+      <created>1462678674653</created>
+      <option name="number" value="00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1462678674653</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309054000" />
+    <option name="totallyTimeSpent" value="309526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1873,8 +1873,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="1.796875">
-            <caret line="267" column="3" selection-start-line="267" selection-start-column="3" selection-end-line="267" selection-end-column="3" />
+          <first_editor vertical-scroll-proportion="0.5989583">
+            <caret line="279" column="0" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

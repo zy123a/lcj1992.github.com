@@ -257,15 +257,30 @@ AbstractEndpoint:
         }
         return true;
 
-然后返回请求,下边这段日志熟悉不.不熟悉,自己写个controller,主动throw个异常 
+然后返回请求, 
 
 请求返回的方法调用链: 
 
 ```
-JIoEndpoint$SocketProcessor#run -> AbstractProtocol$AbstractConnectionHandler#process -> AbstractHttp11Processor#process 
--> CoyoteAdapter#service -> StandardEngineValve#invoke -> AccessLogValve#invoke -> ErrorReportValve#invoke -> StandardHostValve#invoke
--> AuthenticatorBase#invoke -> StandardContextValve#invoke -> StandardWrapperValve#invoke -> ApplicationFilterChain#doFilter -> ApplicationFilterChain#internalDoFilter
+JIoEndpoint$SocketProcessor#run -> 
+AbstractProtocol$AbstractConnectionHandler#process -> 
+AbstractHttp11Processor#process -> 
+CoyoteAdapter#service -> 
+StandardEngineValve#invoke -> 
+AccessLogValve#invoke -> 
+ErrorReportValve#invoke -> 
+StandardHostValve#invoke-> 
+AuthenticatorBase#invoke -> 
+StandardContextValve#invoke -> 
+StandardWrapperValve#invoke -> 
+ApplicationFilterChain#doFilter -> 
+ApplicationFilterChain#internalDoFilter ->
+HttpServlet#service 然后调用doGet 或者doPost
 ```
+
+[HTTPServlet源码](https://github.com/lcj1992/tomcat_study/blob/master/java/javax/servlet/http/HttpServlet.java)
+
+下边这段日志熟悉不.不熟悉,自己写个controller,主动throw个异常
 
     at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]
