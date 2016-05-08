@@ -261,22 +261,21 @@ AbstractEndpoint:
 
 请求返回的方法调用链: 
 
-```
-JIoEndpoint$SocketProcessor#run -> 
-AbstractProtocol$AbstractConnectionHandler#process -> 
-AbstractHttp11Processor#process -> 
-CoyoteAdapter#service -> 
-StandardEngineValve#invoke -> 
-AccessLogValve#invoke -> 
-ErrorReportValve#invoke -> 
-StandardHostValve#invoke-> 
-AuthenticatorBase#invoke -> 
-StandardContextValve#invoke -> 
-StandardWrapperValve#invoke -> 
-ApplicationFilterChain#doFilter -> 
-ApplicationFilterChain#internalDoFilter ->
-HttpServlet#service 然后调用doGet 或者doPost
-```
+1.  JIoEndpoint$SocketProcessor#run  
+2.  AbstractProtocol$AbstractConnectionHandler#process  
+3.  AbstractHttp11Processor#process  
+4.  CoyoteAdapter#service 
+5.  StandardEngineValve#invoke  
+6.  AccessLogValve#invoke 
+7.  ErrorReportValve#invoke  
+8.  StandardHostValve#invoke 
+9.  AuthenticatorBase#invoke  
+10. StandardContextValve#invoke  
+11. StandardWrapperValve#invoke  
+12. ApplicationFilterChain#doFilter  
+13. ApplicationFilterChain#internalDoFilter 
+14. HttpServlet#service 然后调用doGet 或者doPost
+
 
 [HTTPServlet源码](https://github.com/lcj1992/tomcat_study/blob/master/java/javax/servlet/http/HttpServlet.java)
 
