@@ -177,7 +177,7 @@ org.apache.Catalina.Lifecycle的实现类都具有如下的[状态机](https://g
 6.  MUST_STOP用来标明从start()中退出后,应该调用stop().这经常用在一个组件启动失败了.
 7.  MUST_DESTROY用来标明从stop()中退出后,应该调用destroy(),这经常用在不需要重启的组件.
 8.  任何别的状态过渡都会抛出LifecycleException
-9.  在调用其中方法时会触发状态变更,触发LifecycleEvents
+9.  在调用其中方法时触发状态变更,触发LifecycleEvents
 
 Lifecycle的子类类图:
 
@@ -257,9 +257,7 @@ AbstractEndpoint:
         }
         return true;
 
-然后返回请求, 
-
-请求返回的方法调用链: 
+然后返回请求, 请求返回的方法调用链: 
 
 1.  JIoEndpoint$SocketProcessor#run  
 2.  AbstractProtocol$AbstractConnectionHandler#process  
@@ -278,7 +276,7 @@ AbstractEndpoint:
 
 [HTTPServlet源码](https://github.com/lcj1992/tomcat_study/blob/master/java/javax/servlet/http/HttpServlet.java)
 
-下边这段日志熟悉不(验证了上述的调用链).不熟悉的话,自己写个controller,主动throw个异常
+这段日志熟悉不.不熟悉的话,自己写个controller,主动throw个异常
 
     at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]

@@ -28,6 +28,8 @@ permalink: /about.html
 
 4.  `自己做的实验，源码研究` 每个程序员都要有research能力(随着能力的提高,这块会越来越多滴)　[equals和hashCoe](/2016/03/10/equals_hashcode) [tomcat启动关闭与请求处理](/2016/04/26/tomcat_source) [磁盘满了](/2015/12/17/diskFull)　
 
+5.  `todos` 好多只是占了个坑,还没来得及搞的,哈哈
+
 ### 博客的快捷键
 
 1.  双击ctrl 全局搜
