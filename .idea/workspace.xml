@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="tomat source">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" afterPath="$PROJECT_DIR$/_posts/soft/tomcat/2016-04-26-tomcat_source.md" />
     </list>
@@ -59,8 +59,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.44270834">
-                <caret line="273" column="33" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="33" />
+              <first_editor vertical-scroll-proportion="0.375">
+                <caret line="313" column="30" selection-start-line="313" selection-start-column="30" selection-end-line="313" selection-end-column="30" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -886,13 +886,7 @@
       <workItem from="1462592863750" duration="12000" />
       <workItem from="1462592926830" duration="7225000" />
       <workItem from="1462605040213" duration="4610000" />
-      <workItem from="1462629110917" duration="10292000" />
-    </task>
-    <task id="LOCAL-00123" summary="annotation">
-      <created>1461997119731</created>
-      <option name="number" value="00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1461997119731</updated>
+      <workItem from="1462629110917" duration="10400000" />
     </task>
     <task id="LOCAL-00124" summary="annotation">
       <created>1462018961154</created>
@@ -1182,11 +1176,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462679146479</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="tomat source">
+      <created>1462679237195</created>
+      <option name="number" value="00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1462679237195</updated>
+    </task>
+    <option name="localTasksCounter" value="173" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309616000" />
+    <option name="totallyTimeSpent" value="309724000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1222" height="777" extended-state="6" />
@@ -1872,8 +1872,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.44270834">
-            <caret line="273" column="33" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="33" />
+          <first_editor vertical-scroll-proportion="0.375">
+            <caret line="313" column="30" selection-start-line="313" selection-start-column="30" selection-end-line="313" selection-end-column="30" />
             <folding />
           </first_editor>
           <second_editor />

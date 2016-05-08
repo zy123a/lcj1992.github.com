@@ -276,10 +276,9 @@ AbstractEndpoint:
 13. ApplicationFilterChain#internalDoFilter 
 14. HttpServlet#service 然后调用doGet 或者doPost
 
-
 [HTTPServlet源码](https://github.com/lcj1992/tomcat_study/blob/master/java/javax/servlet/http/HttpServlet.java)
 
-下边这段日志熟悉不.不熟悉,自己写个controller,主动throw个异常
+下边这段日志熟悉不(验证了上述的调用链).不熟悉的话,自己写个controller,主动throw个异常
 
     at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]
@@ -321,7 +320,6 @@ AbstractEndpoint:
     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_45]
     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_45]
     at java.lang.Thread.run(Thread.java:744) [na:1.7.0_45]
-
 
 #### 参考 {#ref}
 
