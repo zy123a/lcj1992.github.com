@@ -199,7 +199,9 @@ Lifecycle的子类类图:
 	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:216)
 	at java.lang.Thread.run(Thread.java:745)
 
-Acceptor是这么产生的 
+Acceptor是这么产生的,启动`getAcceptorThreadCount()`个线程,接收请求.
+        
+>   Connector#startInternal() -> AbstractEndpoint#start() -> JIoEndpoint#startInternal() -> AbstractEndpoint#startAcceptorThreads() -> JioEndpoint#createAcceptor() 
 
 ![create_acceptor](/images/soft/create_acceptor.png)
 
@@ -232,7 +234,7 @@ AbstractEndpoint:
 
 1.  countUpAwaitConnection(),如果maxConnections = -1直接返回,否则,acquire 一个共享的latch或者等会
 2.  socket = socket.accept(serverSocket)
-3.  processSocket(socket)
+3.  processSocket(socket),对于Bio http源码如下:
 
         protected boolean processSocket(Socket socket) {
         try {
@@ -256,6 +258,14 @@ AbstractEndpoint:
         return true;
 
 然后返回请求,下边这段日志熟悉不.不熟悉,自己写个controller,主动throw个异常 
+
+请求返回的方法调用链: 
+
+```
+JIoEndpoint$SocketProcessor#run -> AbstractProtocol$AbstractConnectionHandler#process -> AbstractHttp11Processor#process 
+-> CoyoteAdapter#service -> StandardEngineValve#invoke -> AccessLogValve#invoke -> ErrorReportValve#invoke -> StandardHostValve#invoke
+-> AuthenticatorBase#invoke -> StandardContextValve#invoke -> StandardWrapperValve#invoke -> ApplicationFilterChain#doFilter -> ApplicationFilterChain#internalDoFilter
+```
 
     at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]
