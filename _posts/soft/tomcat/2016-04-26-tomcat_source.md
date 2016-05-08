@@ -187,7 +187,75 @@ Lifecycle的子类类图:
 
 ![tomcat处理请求](/images/soft/tomcat_handle_request.jpg)
 
-下边这段日志熟悉不,不熟悉,自己写个controller,主动throw个异常 
+对于BIO模式,tomcat启动后就是使用JioEndPoint.Acceptor来接收外部请求的socket连接. 启动个tomcat,jstack下,你会发现如下线程栈.
+
+    "http-bio-8080-Acceptor-0" daemon prio=5 tid=0x00007fb583ae0000 nid=0x5503 runnable [0x0000700001555000]
+    java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:398)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:530)
+	at java.net.ServerSocket.accept(ServerSocket.java:498)
+	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
+	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:216)
+	at java.lang.Thread.run(Thread.java:745)
+
+Acceptor是这么产生的 
+
+![create_acceptor](/images/soft/create_acceptor.png)
+
+AbstractEndpoint:
+
+    public final void start() throws Exception {
+        if (bindState == BindState.UNBOUND) {
+            bind();
+            bindState = BindState.BOUND_ON_START;
+        }
+        startInternal();
+    }
+
+    protected final void startAcceptorThreads() {
+        int count = getAcceptorThreadCount();
+        acceptors = new Acceptor[count];
+
+        for (int i = 0; i < count; i++) {
+            acceptors[i] = createAcceptor();
+            String threadName = getName() + "-Acceptor-" + i;
+            acceptors[i].setThreadName(threadName);
+            Thread t = new Thread(acceptors[i], threadName);
+            t.setPriority(getAcceptorThreadPriority());
+            t.setDaemon(getDaemon());
+            t.start();
+        }
+    }
+
+接下来就是接收socket,处理socket
+
+1.  countUpAwaitConnection(),如果maxConnections = -1直接返回,否则,acquire 一个共享的latch或者等会
+2.  socket = socket.accept(serverSocket)
+3.  processSocket(socket)
+
+        protected boolean processSocket(Socket socket) {
+        try {
+            SocketWrapper<Socket> wrapper = new SocketWrapper<Socket>(socket);
+            wrapper.setKeepAliveLeft(getMaxKeepAliveRequests());
+            // During shutdown, executor may be null - avoid NPE
+            if (!running) {
+                return false;
+            }
+            getExecutor().execute(new SocketProcessor(wrapper));
+        } catch (RejectedExecutionException x) {
+            log.warn("Socket processing request was rejected for:"+socket,x);
+            return false;
+        } catch (Throwable t) {
+            ExceptionUtils.handleThrowable(t);
+            // This means we got an OOM or similar creating a thread, or that
+            // the pool and its queue are full
+            log.error(sm.getString("endpoint.process.fail"), t);
+            return false;
+        }
+        return true;
+
+然后返回请求,下边这段日志熟悉不.不熟悉,自己写个controller,主动throw个异常 
 
     at com.xx.controller.BookController.order(BookController.java:114) [BookController.class:na]
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_45]
@@ -230,7 +298,7 @@ Lifecycle的子类类图:
     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_45]
     at java.lang.Thread.run(Thread.java:744) [na:1.7.0_45]
 
-    
+
 #### 参考 {#ref}
 
 [tomcat8官方文档]<https://tomcat.apache.org/tomcat-8.0-doc/config/service.html>
