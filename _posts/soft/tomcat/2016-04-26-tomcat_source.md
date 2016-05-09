@@ -199,13 +199,13 @@ Lifecycle的子类类图:
 	at org.apache.tomcat.util.net.JIoEndpoint$Acceptor.run(JIoEndpoint.java:216)
 	at java.lang.Thread.run(Thread.java:745)
 
-Acceptor是这么产生的,启动`getAcceptorThreadCount()`个线程,接收请求.
+JioEndpoint的Acceptor是这么产生的,启动`getAcceptorThreadCount()`个线程,接收请求.
         
 >   Connector#startInternal() -> AbstractEndpoint#start() -> JIoEndpoint#startInternal() -> AbstractEndpoint#startAcceptorThreads() -> JioEndpoint#createAcceptor() 
 
 ![create_acceptor](/images/soft/create_acceptor.png)
 
-AbstractEndpoint:
+其中AbstractEndpoint#start():
 
     public final void start() throws Exception {
         if (bindState == BindState.UNBOUND) {
