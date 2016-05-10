@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/network/ip_header.png" />
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="tcp_header.png">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/unix/text/2016-04-30-tr.md" afterPath="$PROJECT_DIR$/_posts/unix/text/2015-12-25-tr.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/network/2016-05-07-tcpdump_tcp.md" afterPath="$PROJECT_DIR$/_posts/network/2016-05-07-tcpdump_tcp.md" />
     </list>
     <ignored path="foolchild.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,15 +90,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2016-05-07-tcpdump_tcp.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2016-05-07-tcpdump_tcp.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/network/2016-05-07-tcpdump_tcp.md">
           <provider editor-type-id="MultiMarkdownFxPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.8628049">
-                <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <first_editor vertical-scroll-proportion="0.3597561">
+                <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-12-25-tr.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-25-tr.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.3628049">
+                <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -131,8 +145,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.5914634">
-                <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+              <first_editor vertical-scroll-proportion="0.5457317">
+                <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -246,7 +260,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="7" />
+    <option name="x" value="50" />
     <option name="y" value="23" />
     <option name="width" value="1222" />
     <option name="height" value="777" />
@@ -1052,13 +1066,7 @@
       <workItem from="1462605040213" duration="4610000" />
       <workItem from="1462629110917" duration="17166000" />
       <workItem from="1462754346293" duration="977000" />
-      <workItem from="1462766937742" duration="6944000" />
-    </task>
-    <task id="LOCAL-00138" summary="about">
-      <created>1462111701451</created>
-      <option name="number" value="00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1462111701451</updated>
+      <workItem from="1462766937742" duration="8516000" />
     </task>
     <task id="LOCAL-00139" summary="about">
       <created>1462152014254</created>
@@ -1348,14 +1356,20 @@
       <option name="project" value="LOCAL" />
       <updated>1462775319120</updated>
     </task>
-    <option name="localTasksCounter" value="187" />
+    <task id="LOCAL-00187" summary="tcp_header.png">
+      <created>1462845368025</created>
+      <option name="number" value="00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1462845368025</updated>
+    </task>
+    <option name="localTasksCounter" value="188" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="324411000" />
+    <option name="totallyTimeSpent" value="325983000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="7" y="23" width="1222" height="777" extended-state="0" />
+    <frame x="50" y="23" width="1222" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1717,19 +1731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2016-04-30-tr.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.453125">
-            <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/language/2015-12-08-regexBasic.md">
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
@@ -1996,20 +1997,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.5914634">
-            <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Pictures/ip_header.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2035,8 +2022,36 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.8628049">
-            <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <first_editor vertical-scroll-proportion="0.3597561">
+            <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-24-text.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.5457317">
+            <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/unix/text/2015-12-25-tr.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.3628049">
+            <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
