@@ -5,6 +5,13 @@ categories: network
 tag: tcpdump tcp mtu tos segment packet fragment
 ---
 
+*   [基础](#basic)
+*   [ip packet heaer](#ip_header)
+    *   [fragmentation](#fragmentation)
+*   [tcp segment header](#tcp_header)
+*   [practice](#practice)
+*   [参考](#ref)
+
 ### 基础 {#basic}
 
 在网络osi的七层模型中,TCP位于第四层-Transport(传输)层,IP在第三层—Network层，ARP在第二层—Data Link层，
@@ -16,7 +23,7 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 
 大家意见是不统一的,我们这就frame,packet,segment来分别标识链路层,网络层和传输层
 
-#### ip packet heaer {#ip_header}
+### ip packet heaer {#ip_header}
 
 ![IPv4 header](/images/network/ip_header.png)
 
@@ -38,7 +45,7 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 13. `Options`: 松散源路由(给出一连串路由器接口的IP地址,ip包必须沿着这些Ip地址传送,但允许在相继的两个IP地址之间跳过多个路由器);严格源路由;路由记录;时间戳 
 14. `Padding`: 补齐,ip header必须为32bits的倍数 
 
-##### 分片 {#fragmentation}
+#### 分片 {#fragmentation}
 
 网络协议使得网络可以相互的通信.这种设计为多种不同的物理设备提供了便利,它是独立于它所依赖的链路层
 的.不同硬件的网络设备通常具备不同的传输速度,同时也往往有不同的最大传输单元.当一个网络向一个具备较小MTU的网络
@@ -61,7 +68,7 @@ eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) 
 |1|2500|20|2480|1|0|
 |2|2040|20|2020|0|310|
 
-#### tcp segment header {#tcp_header}
+### tcp segment header {#tcp_header}
 
 ![tcp header](/images/network/tcp_header.png)
 
@@ -86,7 +93,7 @@ eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) 
 19. `Options`:
 20. `Padding`: 补0,
 
-#### practice 
+### practice 
 
 好了,有了上述基础,我们来实操下吧.
 dump下线上一个包,[tcpdump入门](/2015/03/20/network#tcpdump)
@@ -171,7 +178,7 @@ ffff: 65535 窗口大小`Window size`
 
 4854 5450 2f31 2e31 2032 3030 ....
 
-#### 参考 {#ref}
+### 参考 {#ref}
 
 [wiki百科ip]<https://en.wikipedia.org/wiki/IPv4#Header>
 
