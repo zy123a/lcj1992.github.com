@@ -117,29 +117,49 @@ dump下线上一个包,[tcpdump入门](/2015/03/20/network#tcpdump)
 ***IP头***
 
 4: Version IPv4 版本4
+
 5: IHL 5 * 4 = 20 bytes ip头大小为20bytes
+
 28: tos 为0x28 ,`tos`
+
 0578: 十进制1400 ip packet的长度为1400bytes,`length`
+
 3fd5: 十进制16341 `id`
+
 0(3bits): DF 与MF都为0 ,说明发生了发片,且不是最后一片
+
 000(13bits): Fragment offset,片偏移为0,分片后的第一片
+
 31: 十进制49 `ttl`
+
 06: 十进制6,对应tcp协议 `Protocol`
+
 a2ff: `Header Checksum`
+
 da50e82c: 0xda十进制218, 0x50十进制80,0xe8十进制232,0x2c十进制44 ,对应源ip218.80.232.44`Source address`
+
 0a56d4b0: 同上`Destination address` 
 
 刚好20个字节,接下来***TCP头***
 
 0050: 十进制80,源端口号`Source port`
+
 8222: 十进制33314,目的端口号`Destination port`
+
 3d17 77c4: 照不上
+
 7ed8eee4:十进制2128146148,`Acknowledgment number`
+
 8: 8 * 4= 32 tcp header的大小为32`Data offset`
+
 0(3bits): 000`Reserved`
+
 010(9bits): 000010000 `ACK`为1 ??
+
 ffff: 65535 窗口大小`Window size`
+
 195c: `Checksum`
+
 0000:`Urgent pointer`
 
 这才20bytes了,还有32-20 =12 bytes 待研究 `0101 080a b194 daf9 39b6 b64b`
