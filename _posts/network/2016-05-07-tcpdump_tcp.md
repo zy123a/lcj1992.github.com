@@ -5,14 +5,12 @@ categories: network
 tag: tcpdump tcp mtu tos segment packet fragment
 ---
 
-*   [基础](#basic)
 *   [ip packet heaer](#ip_header)
     *   [fragmentation](#fragmentation)
 *   [tcp segment header](#tcp_header)
 *   [practice](#practice)
 *   [参考](#ref)
 
-### 基础 {#basic}
 
 在网络osi的七层模型中,TCP位于第四层-Transport(传输)层,IP在第三层—Network层，ARP在第二层—Data Link层，
 在第二层上的数据，我们叫`Frame`，在第三层上的数据叫`Packet&datagram`，第四层的数据叫`Segment`

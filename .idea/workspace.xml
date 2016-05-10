@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.jekyll-metadata" afterPath="$PROJECT_DIR$/.jekyll-metadata" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/network/2016-05-07-tcpdump_tcp.md" afterPath="$PROJECT_DIR$/_posts/network/2016-05-07-tcpdump_tcp.md" />
     </list>
     <ignored path="foolchild.iws" />
@@ -97,8 +98,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.7552083">
-                <caret line="180" column="3" selection-start-line="180" selection-start-column="3" selection-end-line="180" selection-end-column="3" />
+              <first_editor vertical-scroll-proportion="0.18229167">
+                <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -954,13 +955,7 @@
       <workItem from="1462605040213" duration="4610000" />
       <workItem from="1462629110917" duration="17166000" />
       <workItem from="1462754346293" duration="977000" />
-      <workItem from="1462766937742" duration="21579000" />
-    </task>
-    <task id="LOCAL-00143" summary="tomcat">
-      <created>1462272822311</created>
-      <option name="number" value="00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1462272822311</updated>
+      <workItem from="1462766937742" duration="21613000" />
     </task>
     <task id="LOCAL-00144" summary="tomcat">
       <created>1462281901246</created>
@@ -1250,11 +1245,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462905167729</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary="tcp_header.png">
+      <created>1462905331806</created>
+      <option name="number" value="00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1462905331806</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="339046000" />
+    <option name="totallyTimeSpent" value="339080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="23" width="1219" height="777" extended-state="6" />
@@ -1931,8 +1932,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.7552083">
-            <caret line="180" column="3" selection-start-line="180" selection-start-column="3" selection-end-line="180" selection-end-column="3" />
+          <first_editor vertical-scroll-proportion="0.18229167">
+            <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
