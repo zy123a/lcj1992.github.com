@@ -7,20 +7,23 @@ tag: tcpdump tcp mtu tos segment packet fragment
 
 ### 基础 {#basic}
 
-几个术语,wikipedia是这么说的:
-The term TCP packet appears in both informal and formal usage, whereas in more precise terminology segment refers to the TCP protocol data unit (PDU), datagram[4] to the IP PDU, and frame to the data link layer PDU
-
 在网络osi的七层模型中,TCP位于第四层-Transport(传输)层,IP在第三层—Network层，ARP在第二层—Data Link层，
 在第二层上的数据，我们叫`Frame`，在第三层上的数据叫`Packet&datagram`，第四层的数据叫`Segment`
+
+关于这几个术语,wikipedia是这么说的:
+
+The term TCP packet appears in both informal and formal usage, whereas in more precise terminology ***segment*** refers to the TCP protocol data unit (PDU), ***datagram*** [4] to the IP PDU, and ***frame*** to the data link layer PDU
+
+大家意见是不统一的,我们这就frame,packet,segment来分别标识链路层,网络层和传输层
 
 #### ip packet heaer {#ip_header}
 
 ![IPv4 header](/images/network/ip_header.png)
 
-1.  `Version`:前四个字节为版本号: 0100  IPv4   0110 IPv6
-2.  `Internet Header Length`: IHL ,四个字节, 它是32bits字的数量(32 * IHL),最小为5(0101),最大为15(1111),所以ip头的长度\[5*32=160bits=20bytes,15*32=480bits=60bytes\]
-3.  `Differentiated Services Code Point && Explicit Congestion Notification`:  DSCP && ECN 包的优先级
-4.  `Total Length`: 16bits定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节
+1.  `Version`:前四个字节为版本号: 0100  IPv4 , 0110 IPv6
+2.  `Internet Header Length`: IHL ,四个字节, 它是32bits字的数量(32 * IHL),最小为5(0101),最大为15(1111),所以ip头的长度\[5\*32=160bits=20bytes,15\*32=480bits=60bytes\]
+3.  `Differentiated Services Code Point && Explicit Congestion Notification`:  DSCP && ECN 包的优先级??
+4.  `Total Length`: 16bits ˚定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节
 5.  `Identification`: id标识
 6.  `Flags`: 第一位reserved,必须为0;第二位 DF(Don't Fragment),DF位设为1时表明路由器不能对该上层数据包分段。
 如果一个上层数据包无法在不分段的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息;
@@ -114,7 +117,7 @@ dump下线上一个包,[tcpdump入门](/2015/03/20/network#tcpdump)
 -nn 不解析域名和端口名 -vv 显示多的信息 -X 以ascii显示报文信息,不显示frame头,所以上述的就是一个ip packet.
 
 一个字节一个字节来:
-***IP头***
+***首先IP头***
 
 4: Version IPv4 版本4
 
@@ -140,7 +143,7 @@ da50e82c: 0xda十进制218, 0x50十进制80,0xe8十进制232,0x2c十进制44 ,�
 
 0a56d4b0: 同上`Destination address` 
 
-刚好20个字节,接下来***TCP头***
+***刚好20个字节,接下来TCP头***
 
 0050: 十进制80,源端口号`Source port`
 
@@ -164,7 +167,8 @@ ffff: 65535 窗口大小`Window size`
 
 这才20bytes了,还有32-20 =12 bytes 待研究 `0101 080a b194 daf9 39b6 b64b`
 
-再接下来就是HTTP报文了.
+***再接下来就是HTTP报文了***
+
 4854 5450 2f31 2e31 2032 3030 ....
 
 #### 参考 {#ref}
