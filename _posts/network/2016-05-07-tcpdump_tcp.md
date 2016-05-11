@@ -15,7 +15,7 @@ tag: tcpdump tcp mtu tos segment packet fragment
 在网络osi的七层模型中,TCP位于第四层-Transport(传输)层,IP在第三层—Network层，ARP在第二层—Data Link层，
 在第二层上的数据，我们叫`Frame`，在第三层上的数据叫`Packet&datagram`，第四层的数据叫`Segment`
 
-关于这几个术语,wikipedia是这么说的:
+关于这几个术语,[wikipedia是这么说的](https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure):
 
 The term TCP packet appears in both informal and formal usage, whereas in more precise terminology ***segment*** refers to the TCP protocol data unit (PDU), ***datagram*** [4] to the IP PDU, and ***frame*** to the data link layer PDU
 
@@ -59,6 +59,7 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 4.  header checksum被重新计算
 
 eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) / 8 = 185的倍数 
+
 如果一个传输层的segment的大小为4500bytes,ip头为20bytes,所以ip packet的大小为4500.当这个包经过一个MTU为2500的连接时,它会变成如下两片:
 
 |Fragment|Total bytes|Header bytes|Data bytes|MF|Fragment offset(8-byte blocks)|
