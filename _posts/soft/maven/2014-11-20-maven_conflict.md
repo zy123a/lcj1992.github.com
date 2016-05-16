@@ -135,10 +135,15 @@ http://www.cnblogs.com/enjiex/p/3732338.html
 #### 常见冲突解决    
 
 junit :jmockit 冲突问题: 请将 junit 换成 junit-dep
+
 commons-beanutils & commons-collections 冲突问题: 去掉commons-beanutils版本号
+
 jcl-over-slf4j & commons-logging 冲突: 删掉 commons-logging
+
 io.netty:netty & org.jboss.netty:netty 删掉后者（后者改名成前者了）
+
 cglib-nodep & cglib cglib-nodep里包含了asm包，cglib里不包含asm包。asm包和cglib不匹配也会出错。因此用cglib-nodep就不会出现版本不匹配情况
+
 fastxml  codehaus  后者已经不维护了，改名为fastxml了
 
 参考
