@@ -1,6 +1,6 @@
 ---
 layout: post
-title: mac的一些配置
+title: 一些有趣的工具
 categories: tool
 tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder
 ---
