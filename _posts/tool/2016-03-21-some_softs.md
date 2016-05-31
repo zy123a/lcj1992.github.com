@@ -126,6 +126,6 @@ snip 腾讯的,mac自带的不太好用啊
 
 [mac开发配置手册]<https://aaaaaashu.gitbooks.io/mac-dev-setup/content/>
 
-[3]<http://zeroturnaround.com/rebellabs/5-unexpectedly-useful-command-line-tools-you-might-overlook/>
+[5 Unexpectedly Useful Command Line ]<http://zeroturnaround.com/rebellabs/5-unexpectedly-useful-command-line-tools-you-might-overlook/>
 
-[4]<http://www.zhihu.com/question/28182203>
+[GitHub 上有什么好的或者有趣的 Shell 项目？]<http://www.zhihu.com/question/28182203>
