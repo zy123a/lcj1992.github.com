@@ -1,0 +1,2327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>foolchild</title>
+        <description>foolchild的技术博客</description>
+        <link>http://foolchild.cn/</link>
+        <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
+        <pubDate>Thu, 12 May 2016 11:49:02 +0800</pubDate>
+        <lastBuildDate>Thu, 12 May 2016 11:49:02 +0800</lastBuildDate>
+        <generator>Jekyll v3.1.1</generator>
+        
+        <item>
+            <title>通过tcpdump学习网络协议</title>
+            <description></description>
+            <pubDate>Sat, 07 May 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/05/07/tcpdump_tcp</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/05/07/tcpdump_tcp</guid>
+            
+            <category>tcpdump tcp mtu tos segment packet fragment</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>leetcode的脚本全解</title>
+            <description></description>
+            <pubDate>Sat, 30 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/30/leetcode_bash</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/30/leetcode_bash</guid>
+            
+            <category>leetcode</category>
+            
+            <category>shell</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>sql的Exist</title>
+            <description></description>
+            <pubDate>Sat, 30 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/30/sql_exist</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/30/sql_exist</guid>
+            
+            <category>sql</category>
+            
+            <category>exist</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>leetcode sql全解</title>
+            <description></description>
+            <pubDate>Sat, 30 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/30/leetcode_sql</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/30/leetcode_sql</guid>
+            
+            <category>leetcode</category>
+            
+            <category>database</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>airlineAv调优记</title>
+            <description></description>
+            <pubDate>Fri, 29 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/29/airline_av</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/29/airline_av</guid>
+            
+            <category>webservice</category>
+            
+            <category>airline</category>
+            
+            <category>av</category>
+            
+            
+            <category>work</category>
+            
+        </item>
+        
+        <item>
+            <title>tomcat的启动关闭与请求处理</title>
+            <description></description>
+            <pubDate>Tue, 26 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/26/tomcat_source</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/26/tomcat_source</guid>
+            
+            <category>tomcat</category>
+            
+            <category>source</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>方法</title>
+            <description></description>
+            <pubDate>Sat, 09 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/09/method</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/09/method</guid>
+            
+            <category>方法</category>
+            
+            <category>参数校验</category>
+            
+            <category>保护性拷贝</category>
+            
+            <category>方法签名</category>
+            
+            <category>重载</category>
+            
+            <category>可变参数</category>
+            
+            <category>null</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>通用程序设计</title>
+            <description></description>
+            <pubDate>Sat, 09 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/09/java_common</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/09/java_common</guid>
+            
+            <category>foreach</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>一些常用业务逻辑</title>
+            <description></description>
+            <pubDate>Wed, 06 Apr 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/04/06/combusiness</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/04/06/combusiness</guid>
+            
+            <category>短信验证码 订单同步 分布式锁 分布式事务 防抓取</category>
+            
+            
+            <category>work</category>
+            
+        </item>
+        
+        <item>
+            <title>protobuf的helloworld（java）</title>
+            <description></description>
+            <pubDate>Thu, 31 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/31/protobuf_hello</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/31/protobuf_hello</guid>
+            
+            <category>protobuf</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>几个不错的软件(mac&amp;llinux)</title>
+            <description></description>
+            <pubDate>Mon, 21 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/21/beatufity_softs</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/21/beatufity_softs</guid>
+            
+            <category>alfred</category>
+            
+            <category>oh-my-zsh</category>
+            
+            <category>zsh</category>
+            
+            <category>z</category>
+            
+            <category>switchHosts</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>mac的一些配置</title>
+            <description></description>
+            <pubDate>Mon, 21 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/21/mac_softs</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/21/mac_softs</guid>
+            
+            <category>alfred</category>
+            
+            <category>oh-my-zsh</category>
+            
+            <category>zsh</category>
+            
+            <category>z</category>
+            
+            <category>switchHosts</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>一个题目来说equals和hashCode</title>
+            <description></description>
+            <pubDate>Sat, 12 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/12/equals_hashcode_eg</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/12/equals_hashcode_eg</guid>
+            
+            <category>equals</category>
+            
+            <category>hashCode</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>sublime插件</title>
+            <description></description>
+            <pubDate>Fri, 11 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/11/sublime</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/11/sublime</guid>
+            
+            <category>sublime</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>equal &amp; hashcode</title>
+            <description></description>
+            <pubDate>Thu, 10 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/10/equals_hashcode</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/10/equals_hashcode</guid>
+            
+            <category>java</category>
+            
+            <category>equal</category>
+            
+            <category>hashcode</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>Integer</title>
+            <description></description>
+            <pubDate>Mon, 07 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/07/Integer</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/07/Integer</guid>
+            
+            <category>Integer</category>
+            
+            <category>java</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>定时任务</title>
+            <description></description>
+            <pubDate>Thu, 03 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/03/cron</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/03/cron</guid>
+            
+            <category>quartz</category>
+            
+            <category>cron</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>python调试</title>
+            <description></description>
+            <pubDate>Thu, 03 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/03/pdb</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/03/pdb</guid>
+            
+            <category>pdb</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>java坑</title>
+            <description></description>
+            <pubDate>Thu, 03 Mar 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/03/03/javaHole</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/03/03/javaHole</guid>
+            
+            <category>hole</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>memcached基础</title>
+            <description></description>
+            <pubDate>Mon, 29 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/29/memcached_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/29/memcached_basic</guid>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>vi with ctags和cscope</title>
+            <description></description>
+            <pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/28/ctags</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/28/ctags</guid>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>concurrentHashMap</title>
+            <description></description>
+            <pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/28/concurrentHashMap</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/28/concurrentHashMap</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>String</title>
+            <description></description>
+            <pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/28/String</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/28/String</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>java native调用</title>
+            <description></description>
+            <pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/28/native</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/28/native</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>Thread</title>
+            <description></description>
+            <pubDate>Sat, 27 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/27/Thread</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/27/Thread</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>HashMap</title>
+            <description></description>
+            <pubDate>Wed, 24 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/24/HashMap</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/24/HashMap</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>mac使用</title>
+            <description></description>
+            <pubDate>Wed, 03 Feb 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/02/03/mackeyboard</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/02/03/mackeyboard</guid>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>Collection常用子类源码注解</title>
+            <description></description>
+            <pubDate>Sat, 30 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/30/Collections</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/30/Collections</guid>
+            
+            <category>List</category>
+            
+            <category>Set</category>
+            
+            <category>Map</category>
+            
+            <category>Queue</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>支付相关</title>
+            <description></description>
+            <pubDate>Sat, 23 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/23/pay</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/23/pay</guid>
+            
+            
+            <category>work</category>
+            
+        </item>
+        
+        <item>
+            <title>linux软件安装</title>
+            <description></description>
+            <pubDate>Sat, 23 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/23/linuxsoft</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/23/linuxsoft</guid>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>dubbo基本配置</title>
+            <description></description>
+            <pubDate>Sat, 23 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/23/dubboConf</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/23/dubboConf</guid>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>js 键盘快捷键</title>
+            <description></description>
+            <pubDate>Tue, 19 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/19/jshotkeys</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/19/jshotkeys</guid>
+            
+            <category>hotkeys</category>
+            
+            <category>javascript</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>shell参数替换</title>
+            <description></description>
+            <pubDate>Sun, 17 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/17/args_replace</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/17/args_replace</guid>
+            
+            <category>shell</category>
+            
+            <category>parameter</category>
+            
+            <category>replace</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>我的chrome插件</title>
+            <description></description>
+            <pubDate>Sat, 09 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/09/chrome_tools</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/09/chrome_tools</guid>
+            
+            <category>chrome</category>
+            
+            <category>idea</category>
+            
+            <category>mac</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>uuid(抄)</title>
+            <description></description>
+            <pubDate>Fri, 08 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/08/uuid_guid</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/08/uuid_guid</guid>
+            
+            <category>uuid</category>
+            
+            <category>guid</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>文件系统</title>
+            <description></description>
+            <pubDate>Thu, 07 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/07/fileSys</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/fileSys</guid>
+            
+            <category>inode</category>
+            
+            <category>dentry</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>spring基础</title>
+            <description></description>
+            <pubDate>Thu, 07 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/07/spring_base</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/spring_base</guid>
+            
+            <category>spring</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>过滤器和拦截器</title>
+            <description></description>
+            <pubDate>Thu, 07 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/07/filter_intercepter</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/filter_intercepter</guid>
+            
+            <category>filter</category>
+            
+            <category>intercepter</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>cookie和session</title>
+            <description></description>
+            <pubDate>Thu, 07 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/07/cookie_session</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/cookie_session</guid>
+            
+            <category>cookie</category>
+            
+            <category>session</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>系统启动</title>
+            <description></description>
+            <pubDate>Tue, 05 Jan 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/01/05/system_start</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/05/system_start</guid>
+            
+            <category>system</category>
+            
+            <category>start</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>cpu调度</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/task_schedule</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/task_schedule</guid>
+            
+            <category>cpu</category>
+            
+            <category>thread</category>
+            
+            <category>schedule</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>系统调用</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/system_call</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/system_call</guid>
+            
+            <category>system_call</category>
+            
+            <category>os</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>资源分配与调度</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/resource_scheduler</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/resource_scheduler</guid>
+            
+            <category>resource</category>
+            
+            <category>scheduler</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>进程管理</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/process</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/process</guid>
+            
+            <category>process</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>性能</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/performance_os</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/performance_os</guid>
+            
+            <category>performance</category>
+            
+            <category>os</category>
+            
+            
+            <category>os</category>
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>内存管理</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/memory</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/memory</guid>
+            
+            <category>os</category>
+            
+            <category>mempry</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>中断</title>
+            <description></description>
+            <pubDate>Thu, 31 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/31/interupt</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/31/interupt</guid>
+            
+            <category>interupt</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>tmux</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/tmux</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/tmux</guid>
+            
+            <category>tmux</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>tomcat一些配置</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/tomcat_confs</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/tomcat_confs</guid>
+            
+            <category>tomcat</category>
+            
+            <category>conf</category>
+            
+            <category>admin</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>idea中编译tomcat源码(译)</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/import_tomcat_to_idea</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/import_tomcat_to_idea</guid>
+            
+            <category>tomcat</category>
+            
+            
+            <category>soft</category>
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>redis基础</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/redis_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/redis_basic</guid>
+            
+            <category>redis</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>nginx简单使用</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/nginx_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/nginx_basic</guid>
+            
+            <category>nginx</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>maven工程结构(译)</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/maven_project_structure</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/maven_project_structure</guid>
+            
+            <category>maven</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>maven基本命令</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/maven_command</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/maven_command</guid>
+            
+            <category>maven</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>maven依赖机制</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/dependency</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/dependency</guid>
+            
+            <category>maven</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>logback日常总结</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/logback_common</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/logback_common</guid>
+            
+            <category>logback</category>
+            
+            <category>asyncAppender</category>
+            
+            
+            <category>soft</category>
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>fiddler使用</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/fiddler</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/fiddler</guid>
+            
+            <category>fiddler</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>spring事务</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/spring_transaction</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_transaction</guid>
+            
+            <category>spring</category>
+            
+            <category>transaction</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>spring启动</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/spring_start</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_start</guid>
+            
+            <category>spring</category>
+            
+            <category>ServletContext</category>
+            
+            <category>RootWebApplicationContext</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>spring代理(译)</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/spring_proxy</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_proxy</guid>
+            
+            <category>spring</category>
+            
+            <category>proxy</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>spring常用配置</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/spring_conf</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_conf</guid>
+            
+            <category>spring</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>数据库分库分表</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/tables_databases</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/tables_databases</guid>
+            
+            <category>mybatis</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>vi</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/vi</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/vi</guid>
+            
+            <category>vi</category>
+            
+            <category>vim</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>top</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/top</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/top</guid>
+            
+            <category>top</category>
+            
+            <category>htop</category>
+            
+            <category>glances</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>内存命令</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/memory_command</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/memory_command</guid>
+            
+            <category>free</category>
+            
+            <category>memory　vmstat</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>load average</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/load_average</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/load_average</guid>
+            
+            <category>load</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>磁盘命令</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/disk_command</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/disk_command</guid>
+            
+            <category>du</category>
+            
+            <category>df</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>curl</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/curl</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/curl</guid>
+            
+            <category>curl</category>
+            
+            <category>httpie</category>
+            
+            
+            <category>unix</category>
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>终端快捷键</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/terminal_short_cut</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/terminal_short_cut</guid>
+            
+            <category>bash</category>
+            
+            <category>terminal</category>
+            
+            <category>short_cut</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>尚未安家的</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/temp</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/temp</guid>
+            
+            <category>date</category>
+            
+            <category>id</category>
+            
+            <category>scp</category>
+            
+            <category>debug</category>
+            
+            <category>clion</category>
+            
+            <category>ctags</category>
+            
+            <category>cscope</category>
+            
+            <category>whois</category>
+            
+            <category>which</category>
+            
+            <category>whereis</category>
+            
+            <category>whatis</category>
+            
+            <category>ldd</category>
+            
+            <category>screen</category>
+            
+            <category>sublime</category>
+            
+            
+            <category>linux</category>
+            
+        </item>
+        
+        <item>
+            <title>ubuntu (14.04)使用时的一些问题</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/some_problem_ubuntu_</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/some_problem_ubuntu_</guid>
+            
+            <category>chrome</category>
+            
+            <category>flash</category>
+            
+            <category>ubuntu</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>同时使用内网和翻墙</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/great_wall</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/great_wall</guid>
+            
+            <category>great_wall</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>一些速度</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/performance_speed</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/performance_speed</guid>
+            
+            <category>speed</category>
+            
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>死锁了</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/deadLock</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/deadLock</guid>
+            
+            <category>deadlock</category>
+            
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>xsd</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/xsd</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/xsd</guid>
+            
+            <category>xsd</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>http协议(译)</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/http</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/http</guid>
+            
+            <category>http</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>dtd</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/dtd</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/dtd</guid>
+            
+            <category>dtd</category>
+            
+            <category>network</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>url pattern</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/url_pattern</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/url_pattern</guid>
+            
+            <category>url_pattern</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>视图</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/view</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/view</guid>
+            
+            <category>view</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>数据库查询性能优化</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/sql_performance</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/sql_performance</guid>
+            
+            <category>performance</category>
+            
+            <category>sql</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>mysql相关配置</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/mysql_conf</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/mysql_conf</guid>
+            
+            <category>workbeanch</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>负载均衡算法(notes)</title>
+            <description></description>
+            <pubDate>Sun, 27 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/27/load_balance</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/27/load_balance</guid>
+            
+            <category>load_balance</category>
+            
+            
+            <category>algorithm</category>
+            
+        </item>
+        
+        <item>
+            <title>sed</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/sed</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/sed</guid>
+            
+            <category>sed</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>idea调试技巧</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/ideaDebugTool</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/ideaDebugTool</guid>
+            
+            <category>idea</category>
+            
+            <category>debug</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>常见tomcat应用虚拟机配置</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/startenv</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/startenv</guid>
+            
+            <category>jvm</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>jvm性能工具(notes)</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/jvm_tools</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/jvm_tools</guid>
+            
+            <category>jvm</category>
+            
+            <category>tool</category>
+            
+            <category>jps</category>
+            
+            <category>jstat</category>
+            
+            <category>jstack</category>
+            
+            <category>jmap</category>
+            
+            <category>jhar</category>
+            
+            <category>jcmd</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>java序列化解析</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/serialParse</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/serialParse</guid>
+            
+            <category>serial</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>动态代理和cglib代理</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/java_proxy</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/java_proxy</guid>
+            
+            <category>proxy</category>
+            
+            <category>cglib</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>java基础</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/java_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/java_basic</guid>
+            
+            <category>java</category>
+            
+            <category>autoboxing</category>
+            
+            <category>transient</category>
+            
+            <category>thread</category>
+            
+            <category>jdbc</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>gc算法</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/gc_algo</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/gc_algo</guid>
+            
+            <category>jvm</category>
+            
+            <category>gc</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>excel解析</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/excel_parse</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/excel_parse</guid>
+            
+            <category>excel</category>
+            
+            <category>java</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>java并发基础</title>
+            <description></description>
+            <pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/26/concurrent_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/26/concurrent_basic</guid>
+            
+            <category>concurrent</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>tr</title>
+            <description></description>
+            <pubDate>Fri, 25 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/25/tr</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/25/tr</guid>
+            
+            <category>tr</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>awk</title>
+            <description></description>
+            <pubDate>Fri, 25 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/25/awk</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/25/awk</guid>
+            
+            <category>awk</category>
+            
+            <category>unix</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>tcp 有限状态机(译)</title>
+            <description></description>
+            <pubDate>Fri, 25 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/25/tcpFSM</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/25/tcpFSM</guid>
+            
+            <category>tcp</category>
+            
+            
+            <category>network</category>
+            
+        </item>
+        
+        <item>
+            <title>文本</title>
+            <description></description>
+            <pubDate>Thu, 24 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/24/text</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/24/text</guid>
+            
+            <category>text</category>
+            
+            <category>tail</category>
+            
+            <category>head　atnodes</category>
+            
+            <category>sort</category>
+            
+            <category>uniq</category>
+            
+            <category>ls</category>
+            
+            <category>cut</category>
+            
+            <category>tee</category>
+            
+            <category>jq</category>
+            
+            <category>sed</category>
+            
+            <category>awk</category>
+            
+            <category>xml2json</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>学会使用手册</title>
+            <description></description>
+            <pubDate>Tue, 22 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/22/manual</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/22/manual</guid>
+            
+            <category>man</category>
+            
+            <category>unix</category>
+            
+            <category>command</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>能使pg</title>
+            <description></description>
+            <pubDate>Sat, 19 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/19/pgsql</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/19/pgsql</guid>
+            
+            <category>pg</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>内存满了</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/memoryFull</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/memoryFull</guid>
+            
+            <category>xmx</category>
+            
+            <category>oomkiller</category>
+            
+            <category>Res</category>
+            
+            <category>Rss</category>
+            
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>磁盘满了</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/diskFull</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/diskFull</guid>
+            
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>cpu高了</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/cpuHigh</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/cpuHigh</guid>
+            
+            <category>cpu</category>
+            
+            <category>performance</category>
+            
+            
+            <category>performance</category>
+            
+        </item>
+        
+        <item>
+            <title>ubuntu获取源码</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/getSource</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/getSource</guid>
+            
+            
+            <category>os</category>
+            
+            <category>linux</category>
+            
+        </item>
+        
+        <item>
+            <title>文件系统x问</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/fileSysQA</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/fileSysQA</guid>
+            
+            <category>inode</category>
+            
+            <category>vnode</category>
+            
+            <category>dentry</category>
+            
+            <category>super_block</category>
+            
+            <category>file_system</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>磁盘结构</title>
+            <description></description>
+            <pubDate>Thu, 17 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/17/disk</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/17/disk</guid>
+            
+            <category>disk</category>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>常见安全算法</title>
+            <description></description>
+            <pubDate>Tue, 08 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/08/comSecAlgos</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/08/comSecAlgos</guid>
+            
+            
+            <category>secure</category>
+            
+        </item>
+        
+        <item>
+            <title>常见web攻击手段</title>
+            <description></description>
+            <pubDate>Tue, 08 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/08/comAttacks</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/08/comAttacks</guid>
+            
+            
+            <category>secure</category>
+            
+        </item>
+        
+        <item>
+            <title>正则基础</title>
+            <description></description>
+            <pubDate>Tue, 08 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/08/regexBasic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/08/regexBasic</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>grep</title>
+            <description></description>
+            <pubDate>Mon, 07 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/07/grep</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/07/grep</guid>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>结构型</title>
+            <description></description>
+            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/02/structure</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/structure</guid>
+            
+            <category>design_pattern</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>创建型</title>
+            <description></description>
+            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/02/create</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/create</guid>
+            
+            <category>design_pattern</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>行为型</title>
+            <description></description>
+            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/02/behavior</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/behavior</guid>
+            
+            <category>design_pattern</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>系统资源</title>
+            <description></description>
+            <pubDate>Fri, 27 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/27/resource</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/27/resource</guid>
+            
+            <category>top</category>
+            
+            <category>netstat</category>
+            
+            <category>performance</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>常用函数(mysql)</title>
+            <description></description>
+            <pubDate>Thu, 26 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/26/sql_function</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/26/sql_function</guid>
+            
+            <category>sql</category>
+            
+            <category>index</category>
+            
+            <category>date</category>
+            
+            <category>string</category>
+            
+            <category>function</category>
+            
+            <category>datetime</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>idea快捷键</title>
+            <description></description>
+            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/25/ideaShortCut</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/ideaShortCut</guid>
+            
+            <category>idea</category>
+            
+            
+            <category>tool</category>
+            
+        </item>
+        
+        <item>
+            <title>markdown语法</title>
+            <description></description>
+            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/25/markdown</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/markdown</guid>
+            
+            <category>markdown</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>jekyll安装</title>
+            <description></description>
+            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/25/install_jekyll</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/install_jekyll</guid>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>java并发编程实战笔记与实践</title>
+            <description></description>
+            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/11/25/concurrent</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/concurrent</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>jvm internal(译)</title>
+            <description></description>
+            <pubDate>Thu, 03 Sep 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/09/03/jvm_internal</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/09/03/jvm_internal</guid>
+            
+            <category>jvm</category>
+            
+            <category>byte_code</category>
+            
+            <category>thread</category>
+            
+            <category>stack</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>java8</title>
+            <description>java8新特性</description>
+            <pubDate>Wed, 20 May 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/05/20/java8</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/05/20/java8</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>selenium</title>
+            <description></description>
+            <pubDate>Mon, 20 Apr 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/04/20/selenium</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/04/20/selenium</guid>
+            
+            <category>selenium</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>网络</title>
+            <description></description>
+            <pubDate>Fri, 20 Mar 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/03/20/network</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/03/20/network</guid>
+            
+            <category>unix</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>shell语法</title>
+            <description></description>
+            <pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/03/18/shell_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/03/18/shell_basic</guid>
+            
+            <category>shell</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>annotation-config与component-scan</title>
+            <description>spring注解</description>
+            <pubDate>Thu, 29 Jan 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/01/29/springAnnotation</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/29/springAnnotation</guid>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>从启动日志看spring mvc的流程</title>
+            <description></description>
+            <pubDate>Tue, 27 Jan 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/01/27/springmvc</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/27/springmvc</guid>
+            
+            <category>spring</category>
+            
+            <category>mvc</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>类加载机制</title>
+            <description></description>
+            <pubDate>Mon, 26 Jan 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/01/26/memory_byteCode</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/26/memory_byteCode</guid>
+            
+            <category>memory</category>
+            
+            <category>byteCode</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>回调函数与函数指针</title>
+            <description>function_pointer</description>
+            <pubDate>Sun, 25 Jan 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/01/25/function_pointer</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/25/function_pointer</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>class文件和字节码</title>
+            <description></description>
+            <pubDate>Tue, 06 Jan 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/01/06/jvm_example</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/06/jvm_example</guid>
+            
+            <category>jvm</category>
+            
+            <category>字节码</category>
+            
+            <category>操作数栈</category>
+            
+            <category>局部变量表</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>解决maven冲突终极办法</title>
+            <description></description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/maven_conflict</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/maven_conflict</guid>
+            
+            <category>maven</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>logback</title>
+            <description></description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/logback</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/logback</guid>
+            
+            <category>logback</category>
+            
+            <category>java</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>编译openJdk</title>
+            <description>编译openjdk</description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/buildOpenjdk</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/buildOpenjdk</guid>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>泛型</title>
+            <description></description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/generic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/generic</guid>
+            
+            <category>类型擦除</category>
+            
+            <category>类型推导</category>
+            
+            <category>运行时</category>
+            
+            <category>编译时</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>枚举</title>
+            <description></description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/enum</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/enum</guid>
+            
+            <category>enum</category>
+            
+            <category>effectiveJava</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>注解</title>
+            <description></description>
+            <pubDate>Thu, 20 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/20/annotation</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/20/annotation</guid>
+            
+            <category>annotation</category>
+            
+            <category>java</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>jdk maven git 配置</title>
+            <description></description>
+            <pubDate>Tue, 18 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/18/jdk-maven-git-conf</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/18/jdk-maven-git-conf</guid>
+            
+            <category>soft</category>
+            
+            <category>jdk</category>
+            
+            <category>maven</category>
+            
+            <category>git</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>git基础命令</title>
+            <description></description>
+            <pubDate>Mon, 17 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/17/gitBasic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/17/gitBasic</guid>
+            
+            <category>git</category>
+            
+            
+            <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>sql基础</title>
+            <description></description>
+            <pubDate>Sun, 16 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/16/sql_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/16/sql_basic</guid>
+            
+            <category>sql</category>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>事务隔离级</title>
+            <description>事务隔离级</description>
+            <pubDate>Sat, 15 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/15/transaction</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/15/transaction</guid>
+            
+            
+            <category>db</category>
+            
+        </item>
+        
+        <item>
+            <title>文件</title>
+            <description></description>
+            <pubDate>Thu, 13 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/13/file</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/13/file</guid>
+            
+            <category>file</category>
+            
+            <category>cd</category>
+            
+            <category>ls</category>
+            
+            <category>stat</category>
+            
+            <category>chmod</category>
+            
+            <category>chown</category>
+            
+            <category>tree</category>
+            
+            <category>z</category>
+            
+            <category>find</category>
+            
+            <category>locate</category>
+            
+            <category>xargs</category>
+            
+            
+            <category>unix</category>
+            
+        </item>
+        
+        <item>
+            <title>文件系统相关</title>
+            <description>文件系统相关</description>
+            <pubDate>Wed, 12 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/12/fileSystem</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/12/fileSystem</guid>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>operating system basic</title>
+            <description>operating_system的一些基础知识</description>
+            <pubDate>Tue, 11 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/11/OSBasic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/11/OSBasic</guid>
+            
+            
+            <category>os</category>
+            
+        </item>
+        
+        <item>
+            <title>内部排序</title>
+            <description>常用的排序算法</description>
+            <pubDate>Sun, 09 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/09/sort</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/09/sort</guid>
+            
+            
+            <category>ds</category>
+            
+        </item>
+        
+        <item>
+            <title>kmp</title>
+            <description></description>
+            <pubDate>Sat, 08 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/08/kmp</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/08/kmp</guid>
+            
+            <category>kmp</category>
+            
+            <category>algorithm</category>
+            
+            
+            <category>algorithm</category>
+            
+        </item>
+        
+        <item>
+            <title>python basic</title>
+            <description></description>
+            <pubDate>Fri, 07 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/07/python</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/07/python</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>js_basic</title>
+            <description>实习期间学的部分前端知识。</description>
+            <pubDate>Thu, 06 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/06/jsBasic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/06/jsBasic</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>浏览器的工作机制</title>
+            <description></description>
+            <pubDate>Wed, 05 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/05/how-brower-work</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/05/how-brower-work</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>对前端html、css、js的关系的看法</title>
+            <description>暑期实习接触到前端，根据自己的使用谈一下三者的关系</description>
+            <pubDate>Tue, 04 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/04/frontEnd</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/04/frontEnd</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>C++虚函数表解析</title>
+            <description></description>
+            <pubDate>Mon, 03 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/03/virtual_function_table</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/03/virtual_function_table</guid>
+            
+            <category>c_plus_plus</category>
+            
+            <category>virtual_function</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>c_plus_plus basic</title>
+            <description></description>
+            <pubDate>Sat, 01 Nov 2014 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2014/11/01/cPlusPlusBasic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/01/cPlusPlusBasic</guid>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+    </channel>
+</rss>
