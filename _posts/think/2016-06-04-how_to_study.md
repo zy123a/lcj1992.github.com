@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 有效的学习
-categories：think
+categories: think
 tags: efficiency study
 ---
 
