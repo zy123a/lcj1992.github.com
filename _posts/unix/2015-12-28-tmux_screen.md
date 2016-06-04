@@ -5,9 +5,9 @@ categories: unix
 tags: tmux screen
 ---
 
-买了dash，装了alfred，发现这篇文章完全可以废掉了。
+买了alfred和dash后，发现这篇文章完全可以废掉了,因为dash里有tmux和screen的手册，而且清晰简单，不像有些linux命令的手册似的，晦涩难懂。
 
-之前错误的认识以为tmux用来分屏,后来才知道这只是tmux的一小功能,主要是用来保持回话的
+之前错误的认识以为tmux用来分屏,后来才知道这只是tmux的一小功能,主要是用来保持会话的
 在你想下班回家,然后有需要在开发机上执行一些耗时的任务,tmux和screen好处多多.
 
 ### tmux
@@ -23,7 +23,7 @@ tmux attach -t fuck  #进入某个会话
 
 |命令|	作用|
 |-|-|
-|s|	显示已有tmux会话
+|s|	显示已有tmux列表
 |c|	创建一个新的窗口
 |n|	切换到下一个窗口
 |p|	切换到上一个窗口
