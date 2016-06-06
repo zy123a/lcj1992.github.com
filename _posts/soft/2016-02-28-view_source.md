@@ -1,6 +1,6 @@
 ---
 layout: post
-title: vi和它的插件们
+title: 我是这样看源码的
 categories: soft
 tags: vim ctags cscope doxygen code2ebook
 ---
