@@ -8,7 +8,7 @@ tags: vim ctags cscope doxygen code2ebook
 *   [vi分屏](#vi_split)
 *   [ctags](#ctags)
 *   [cscope](#cscope)
-*   [doxygen](#doxygen)
+*   [doxygen+graphviz](#doxygen_graphviz)
 *   [code2ebook](#code2ebook)
 
 ### vi分屏 {#vi_split}
@@ -143,7 +143,7 @@ f: 查找并打开文件
 
     :cs f f filename 将会打开文件名为FIANME的文件
 
-### doxygen
+### doxygen_graphviz
 
 doxygen 可以为我们生成代码类图，调用关系等
 
@@ -156,6 +156,9 @@ doxygen 可以为我们生成代码类图，调用关系等
    * Build: extract_all extract_private extract_package extract_static extract_local_classes extract_local_methods
    * Dot: class_diagrams DOT_PATH:/usr/local/bin
 3. run doxygen
+
+graphviz,下载[graphviz](http://www.graphviz.org/Download..php)
+然后就可以用doxygen生成源代码文档，并通过grapphviz生成调用关系图，类图等
 
 ### code2ebook
 
