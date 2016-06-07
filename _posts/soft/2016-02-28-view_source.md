@@ -2,7 +2,7 @@
 layout: post
 title: 我是这样看源码的
 categories: soft
-tags: vim ctags cscope doxygen code2ebook
+tags: vim ctags cscope doxygen graphviz code2ebook
 ---
 
 *   [vi分屏](#vi_split)
