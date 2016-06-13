@@ -44,11 +44,11 @@ Arrays#asList()
 
 装饰
 
-<h3 id="Facade">门面*<h3>
+### 门面 {#Facade}
 
 门面
 
-<h3 id="Flyweight">享元*</h3>
+### 享元* {#Flyweight}
 
 菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了
 
