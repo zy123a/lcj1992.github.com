@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="tmux&#10;">
+    <list default="true" id="9edea854-95f7-4428-9d79-2d7b5c766d16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_pattern/2015-12-02-structure.md" afterPath="$PROJECT_DIR$/_posts/design_pattern/2015-12-02-structure.md" />
     </list>
@@ -30,8 +30,8 @@
         <entry file="file://$PROJECT_DIR$/_posts/design_pattern/2015-12-02-structure.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.5052083">
-                <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+              <first_editor vertical-scroll-proportion="0.8697917">
+                <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -840,13 +840,7 @@
       <workItem from="1463809821916" duration="3455000" />
       <workItem from="1464615418976" duration="4830000" />
       <workItem from="1464693729735" duration="594000" />
-      <workItem from="1465836581679" duration="1078000" />
-    </task>
-    <task id="LOCAL-00153" summary="tomcat">
-      <created>1462540936748</created>
-      <option name="number" value="00153" />
-      <option name="project" value="LOCAL" />
-      <updated>1462540936748</updated>
+      <workItem from="1465836581679" duration="1112000" />
     </task>
     <task id="LOCAL-00154" summary="tomcat">
       <created>1462545845868</created>
@@ -1136,11 +1130,17 @@
       <option name="project" value="LOCAL" />
       <updated>1465836967280</updated>
     </task>
-    <option name="localTasksCounter" value="202" />
+    <task id="LOCAL-00202" summary="tmux&#10;">
+      <created>1465838197754</created>
+      <option name="number" value="00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1465838197755</updated>
+    </task>
+    <option name="localTasksCounter" value="203" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="359901000" />
+    <option name="totallyTimeSpent" value="359935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="23" width="1225" height="777" extended-state="6" />
@@ -1796,8 +1796,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.5052083">
-            <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+          <first_editor vertical-scroll-proportion="0.8697917">
+            <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
