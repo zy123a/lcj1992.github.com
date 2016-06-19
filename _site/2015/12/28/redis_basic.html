@@ -27,95 +27,80 @@
 
     <div id="main">
         <h2> redis基础 </h2>
-        <h4 id="section">查看命令</h4>
+        <ul>
+  <li><a href="#basic">基本用法</a></li>
+  <li><a href="#ds_object">数据结构与对象</a></li>
+</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>redis-cli  -h host -p port
-</code></pre>
-</div>
+<h3 id="basic">基本用法</h3>
 
-<p>进入客户端之后</p>
+<p><strong><em>首先明确一点这是一个key-value缓存系统，key是字符串，而这个value可以是多样的：string，map，list，set，sort set，bitmaps，hyperLogLogs</em></strong></p>
 
-<p>输入help 然后tab键即可查看redis的命令
-#### 数据类型
-<strong><em>首先明确一点这是一个key-value缓存系统，这个value可以是string，map，list，set，sort set，bitmaps，hyperLogLogs</em></strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 连接
+redis-cli  -h host -p port
 
-<h4 id="section-1">字符串</h4>
+// 查看手册
+help set
 
-<div class="highlighter-rouge"><pre class="highlight"><code>set name lcj
-</code></pre>
-</div>
+// 字符串
+set name lcj
 
-<h4 id="section-2">哈希值</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>hmset user:1 name fuck birth 18400101 phone 15945612345(对象,多个域)
+// hash
+hmset user:1 name fuck birth 18400101 phone 15945612345(对象,多个域)
 hset user:1 name fuck（一个域）
 hget user:1 name
-</code></pre>
-</div>
 
-<h4 id="section-3">列表</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>lpush lcj aa
+// 列表
+lpush lcj aa
 lrange a 0 10
-</code></pre>
-</div>
 
-<h4 id="section-4">集合</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>sadd lcj aa
+// 集合
+sadd lcj aa
 sadd lcj bb
 smembers lcj
-</code></pre>
-</div>
 
-<h4 id="section-5">集合排序</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>    key     score       member
+// 有序集合
+    key     score       member
 zadd     9C.order  -235  235|sueccess
 zadd     9C.order - 234  234|fail
 zrange    9C.order 0 -1
-</code></pre>
-</div>
 
-<h4 id="section-6">位图(节省空间)</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>key   offset  0|1
+// 位图
+key   offset  0|1
 setbit active_user 001 1
 setbit active_user 002 0
 setbit active_user 003 1
 bitcount active_user
 getbit active 003
-</code></pre>
-</div>
 
-<h4 id="hyperloglog">hyperLogLog</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>PFADD ip '192.168.0.1'
+// hyperLogLog
+PFADD ip '192.168.0.1'
 PFADD ip '192.168.0.1'
 PFCOUNT ip
 </code></pre>
 </div>
 
-<h4 id="section-7">发布订阅</h4>
-<p>一端</p>
+<p>除此之外还有发布订阅，事务的支持</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>subscribe heheda
-</code></pre>
-</div>
+<div class="highlighter-rouge"><pre class="highlight"><code>//一端
+subscribe heheda
+//另一端
+publish heheda helloIamHeheda
 
-<p>另一端</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>publish heheda helloIamHeheda
-</code></pre>
-</div>
-
-<p>事务</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>multi
+//事务
+multi
 ...
 exec
 </code></pre>
 </div>
+
+<h3 id="ds_object">数据结构与对象</h3>
+
+<h3 id="ref">参考</h3>
+
+<p>[redis设计与实现]<a href="http://redisbook.com/">http://redisbook.com/</a></p>
+
+<p>[mit公开课算法导论:跳跃表]<a href="http://open.163.com/movie/2010/12/7/S/M6UTT5U0I_M6V2TTJ7S.html">http://open.163.com/movie/2010/12/7/S/M6UTT5U0I_M6V2TTJ7S.html</a></p>
 
         <ul class="prev_next">
             

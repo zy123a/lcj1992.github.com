@@ -2,51 +2,47 @@
 layout: post
 title: redis基础
 categories: soft
-tags: redis
+tags: redis ds 数据结构
 ---
 
-#### 查看命令
 
+* [基本用法](#basic)
+* [数据结构与对象](#ds_object)
+
+### 基本用法 {#basic}
+
+***首先明确一点这是一个key-value缓存系统，key是字符串，而这个value可以是多样的：string，map，list，set，sort set，bitmaps，hyperLogLogs***
+
+    // 连接
     redis-cli  -h host -p port
 
-进入客户端之后
+    // 查看手册
+    help set
 
-输入help 然后tab键即可查看redis的命令
-
-#### 数据类型
-
-***首先明确一点这是一个key-value缓存系统，这个value可以是string，map，list，set，sort set，bitmaps，hyperLogLogs***
-
-#### 字符串
-
+    // 字符串
     set name lcj
 
-#### 哈希值
-
+    // hash
     hmset user:1 name fuck birth 18400101 phone 15945612345(对象,多个域)
     hset user:1 name fuck（一个域）
     hget user:1 name
 
-#### 列表
-
+    // 列表
     lpush lcj aa
     lrange a 0 10
 
-#### 集合
-
+    // 集合
     sadd lcj aa
     sadd lcj bb
     smembers lcj
 
-#### 集合排序
-
+    // 有序集合
         key     score       member
     zadd     9C.order  -235  235|sueccess
     zadd     9C.order - 234  234|fail
     zrange    9C.order 0 -1
 
-#### 位图(节省空间)
-
+    // 位图
     key   offset  0|1
     setbit active_user 001 1
     setbit active_user 002 0
@@ -54,23 +50,28 @@ tags: redis
     bitcount active_user
     getbit active 003
 
-#### hyperLogLog
-
+    // hyperLogLog
     PFADD ip '192.168.0.1'
     PFADD ip '192.168.0.1'
     PFCOUNT ip
 
-#### 发布订阅
-一端
+除此之外还有发布订阅，事务的支持
 
+    //一端
     subscribe heheda
-
-另一端
-
+    //另一端
     publish heheda helloIamHeheda
 
-事务
-
+    //事务
     multi
     ...
     exec
+
+###  数据结构与对象 {#ds_object}
+
+
+### 参考 {#ref}
+
+[redis设计与实现]<http://redisbook.com/>
+
+[mit公开课算法导论:跳跃表]<http://open.163.com/movie/2010/12/7/S/M6UTT5U0I_M6V2TTJ7S.html>
