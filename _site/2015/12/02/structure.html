@@ -50,54 +50,77 @@
 </ol>
 
 <h3 id="Adapter">适配器*</h3>
-<p>将一个接口改成另一个接口
-Arrays#asList()</p>
+
+<p>将一个接口改成另一个接口</p>
+
+<p>Arrays#asList()</p>
+
 <h3 id="Bridge">桥接*</h3>
-<p><code class="highlighter-rouge">client</code>和<code class="highlighter-rouge">provider</code>都经常变化,所以需要<code class="highlighter-rouge">bridge</code>来桥接
-<img src="http://lcj1992.github.io/images/design_pattern/Bridge.png" alt="桥接uml图" /></p>
+
+<p><code class="highlighter-rouge">client</code>和<code class="highlighter-rouge">provider</code>都经常变化,所以需要<code class="highlighter-rouge">bridge</code>来桥接</p>
+
+<p><img src="http://lcj1992.github.io/images/design_pattern/Bridge.png" alt="桥接uml图" /></p>
+
 <h3 id="Composite">组合*</h3>
+
 <p>一个组合可以是单一的对象，也可以是一组对象，一个组合可以代表这两种状态</p>
+
 <h3 id="Decorator">装饰*</h3>
+
 <p>装饰</p>
-<h3 id="Facade">门面*<h3>
-门面
+
+<h3 id="Facade">门面</h3>
+
+<p>门面</p>
+
 <h3 id="Flyweight">享元*</h3>
-菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了
 
-            // Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects
-            class Menu {
-                private Map&lt;String, CoffeeFlavour&gt; flavours = new ConcurrentHashMap&lt;String, CoffeeFlavour&gt;();
+<p>菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了</p>
 
-                CoffeeFlavour lookup(String flavorName) {
-                    if (!flavours.containsKey(flavorName))
-                        flavours.put(flavorName, new CoffeeFlavour(flavorName));
-                    return flavours.get(flavorName);
-                }
+<div class="highlighter-rouge"><pre class="highlight"><code>        // Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects
+        class Menu {
+            private Map&lt;String, CoffeeFlavour&gt; flavours = new ConcurrentHashMap&lt;String, CoffeeFlavour&gt;();
 
-                int totalCoffeeFlavoursMade() {
-                    return flavours.size();
-                }
+            CoffeeFlavour lookup(String flavorName) {
+                if (!flavours.containsKey(flavorName))
+                    flavours.put(flavorName, new CoffeeFlavour(flavorName));
+                return flavours.get(flavorName);
             }
 
+            int totalCoffeeFlavoursMade() {
+                return flavours.size();
+            }
+        }
+</code></pre>
+</div>
+
 <h3 id="FrontController">Front Controller</h3>
-front controller
+
+<p>front controller</p>
+
 <h3 id="Marker">Marker</h3>
-marker
+
+<p>marker</p>
+
 <h3 id="Module">Module</h3>
-module
+
+<p>module</p>
+
 <h3 id="Proxy">代理*</h3>
-代理类和被代理类同时实现接口，代理类通过    **组合** 方式代理被代理类，实现   **额外**  的操作
+
+<p>代理类和被代理类同时实现接口，代理类通过    <strong>组合</strong> 方式代理被代理类，实现   <strong>额外</strong>  的操作</p>
+
 <h3 id="Twin">Twin</h3>
-twin
 
-参考
+<p>twin</p>
 
-[1]&lt;http://linuxtools-rst.readthedocs.org/zh_CN/latest/&gt;
+<h3 id="ref">参考</h3>
 
-[2]&lt;https://en.wikipedia.org/wiki/Design_pattern&gt;
+<p>[1]<a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/">http://linuxtools-rst.readthedocs.org/zh_CN/latest/</a></p>
 
-[图说设计模式]&lt;http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html&gt;
-</h3></h3>
+<p>[2]<a href="https://en.wikipedia.org/wiki/Design_pattern">https://en.wikipedia.org/wiki/Design_pattern</a></p>
+
+<p>[图说设计模式]<a href="http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html">http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html</a></p>
 
         <ul class="prev_next">
             
