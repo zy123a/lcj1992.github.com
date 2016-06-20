@@ -2,8 +2,7 @@
 layout: post
 title: 事务隔离级
 categories: db
-description: 事务隔离级
-keywords: database
+tags : transaction acid
 ---
 
 ### 事务隔离级  
