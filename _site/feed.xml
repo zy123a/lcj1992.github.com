@@ -5,9 +5,23 @@
         <description>foolchild的技术博客</description>
         <link>http://foolchild.cn/</link>
         <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>Mon, 06 Jun 2016 15:37:29 +0800</pubDate>
-        <lastBuildDate>Mon, 06 Jun 2016 15:37:29 +0800</lastBuildDate>
+        <pubDate>Tue, 21 Jun 2016 11:56:17 +0800</pubDate>
+        <lastBuildDate>Tue, 21 Jun 2016 11:56:17 +0800</lastBuildDate>
         <generator>Jekyll v3.1.1</generator>
+        
+        <item>
+            <title>provider &amp;&amp; webservice组内分享</title>
+            <description></description>
+            <pubDate>Mon, 20 Jun 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/06/20/webservice</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/06/20/webservice</guid>
+            
+            <category>webservice</category>
+            
+            <category>cxf</category>
+            
+            
+        </item>
         
         <item>
             <title>有效的学习</title>
@@ -340,14 +354,26 @@
         </item>
         
         <item>
-            <title>vi和它的插件们</title>
+            <title>我是这样看源码的</title>
             <description></description>
             <pubDate>Sun, 28 Feb 2016 00:00:00 +0800</pubDate>
             <link>http://foolchild.cn/2016/02/28/view_source</link>
             <guid isPermaLink="true">http://foolchild.cn/2016/02/28/view_source</guid>
             
+            <category>vim</category>
             
-            <category>unix</category>
+            <category>ctags</category>
+            
+            <category>cscope</category>
+            
+            <category>doxygen</category>
+            
+            <category>graphviz</category>
+            
+            <category>code2ebook</category>
+            
+            
+            <category>soft</category>
             
         </item>
         
@@ -795,6 +821,10 @@
             <guid isPermaLink="true">http://foolchild.cn/2015/12/28/redis_basic</guid>
             
             <category>redis</category>
+            
+            <category>ds</category>
+            
+            <category>数据结构</category>
             
             
             <category>soft</category>
@@ -2157,10 +2187,14 @@
         
         <item>
             <title>事务隔离级</title>
-            <description>事务隔离级</description>
+            <description></description>
             <pubDate>Sat, 15 Nov 2014 00:00:00 +0800</pubDate>
             <link>http://foolchild.cn/2014/11/15/transaction</link>
             <guid isPermaLink="true">http://foolchild.cn/2014/11/15/transaction</guid>
+            
+            <category>transaction</category>
+            
+            <category>acid</category>
             
             
             <category>db</category>

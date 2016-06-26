@@ -2,6 +2,13 @@
 <articles>
     
     <article>
+        <title>provider && webservice组内分享</title>
+        <url>http://foolchild.cn/2016/06/20/webservice</url>
+        <tag>webservicecxf</tag>
+        <date>2016-06-20</date>
+    </article>
+    
+    <article>
         <title>有效的学习</title>
         <url>http://foolchild.cn/2016/06/04/how_to_study</url>
         <tag>efficiencystudy</tag>
@@ -142,9 +149,9 @@
     </article>
     
     <article>
-        <title>vi和它的插件们</title>
+        <title>我是这样看源码的</title>
         <url>http://foolchild.cn/2016/02/28/view_source</url>
-        <tag></tag>
+        <tag>vimctagscscopedoxygengraphvizcode2ebook</tag>
         <date>2016-02-28</date>
     </article>
     
@@ -354,7 +361,7 @@
     <article>
         <title>redis基础</title>
         <url>http://foolchild.cn/2015/12/28/redis_basic</url>
-        <tag>redis</tag>
+        <tag>redisds数据结构</tag>
         <date>2015-12-28</date>
     </article>
     
@@ -956,7 +963,7 @@
     <article>
         <title>事务隔离级</title>
         <url>http://foolchild.cn/2014/11/15/transaction</url>
-        <tag></tag>
+        <tag>transactionacid</tag>
         <date>2014-11-15</date>
     </article>
     
