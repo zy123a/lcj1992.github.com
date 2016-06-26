@@ -1,6 +1,6 @@
 ---
 layout: post
-title: provider && webservice组内分享
+title: webservice入门
 categories:
 tags : webservice cxf
 ---
@@ -49,11 +49,11 @@ Apache CXF and Apache Axis 2 are two implementations of JAX-WS. They also offer 
 
 cxf client:
 
-    ./wsdl2java -d /Users/fool/xx/src/main/java -p com.qunar.flight.flagship.provider.airlines.ceair.webservicenew.refund -client http://unibiz.ceair.com/UnifiedBusiness/services/mub2c_uni_refund_tkt_service?wsdl
+    ./wsdl2java -d /Users/fool/xx/src/main/java -p com.xx.airlines.ceair.webservicenew.refund -client http://unibiz.xx.com/xx/mub2c_uni_refund_tkt_service?wsdl
 
 axis client:
 
-    java -Djava.ext.dirs=lib org.apache.axis.wsdl.WSDL2Java -p com.qunar.flight.flagship.provider.airlines.mfair.webservice http://ebws.travelsky.com/etcwip/services/CWIPService/wsdl/CWIPService.wsdl
+    java -Djava.ext.dirs=lib org.apache.axis.wsdl.WSDL2Java -p com.xx.airlines.mfair.webservice http://ebws.xx.com/etcwip/wsdl/CWIPService.wsdl
 
     <!-- java -classpath.:axis.jar:commons-logging-1.0.4.jar:commons-discovery-0.2.jar:saaj.jar:wsdl4j-1.5.1.jar:jaxrpc.jar:mail-1.4.5.jar \
     org.apache.axis.wsdl.WSDL2Java -p com.qunar.flight.flagship.provider.airlines.mfair.webservice \     
