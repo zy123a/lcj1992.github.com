@@ -16,21 +16,21 @@ tags: vim ctags cscope doxygen graphviz code2ebook
 ***1.直接用终端打开多个文件***
 
 a.横向分屏
-    
+
     vi -o file1 file2
-    
+
 b.纵向分屏
-    
+
     vi -O file1 file2
 
 ***2.如果已经用vi打开了一个文件,想要在窗口中同时打开另一个文件***
 
 a.横向分屏 vs或vsplit
-    
+
     :vs filename
-    
+
 b.纵向分屏 sp 或split
-    
+
     :sp filename
 
 如果文件名不存在,会新建文件并打开
@@ -38,24 +38,24 @@ b.纵向分屏 sp 或split
 ***3.关闭窗口***
 
 a.关闭光标所在窗口
-    
+
     :q 或 :close
-    
+
 b.关闭除光标所在的窗口之外的其他窗口
 
     :only
 
 c.关闭所有窗口
-    
+
     :qa
 
 ***4.切换窗口***
 
 ctrl + w w 或ctrl + w + 方向键
 
-### ctags 
+### ctags
 
-***1.安装*** 
+***1.安装***
 
 ubuntu: `sudo apt-get install ctags`
 mac: 自带的ctags 不支持-R递归,所以想要-R的需要自己安装
@@ -64,7 +64,7 @@ mac: 自带的ctags 不支持-R递归,所以想要-R的需要自己安装
 2.  tar zxvf ctags-5.8.tar.gz
 3.  sudo ./configure && make all && sudo make install
 
-***2.使用*** 
+***2.使用***
 
 进入源码根目录,创建tags `ctags -R *`
 
@@ -87,9 +87,9 @@ mac `brew install cscope`
 
 ***2.使用***
 
-首先需要为你的代码生成一个cscope数据库。生成数据库很简单，在你的项目根目录运行下面的命令： 
+首先需要为你的代码生成一个cscope数据库。生成数据库很简单，在你的项目根目录运行下面的命令：
 
-     cscope -Rbq 
+     cscope -Rbq
 
 这个命令会生成三个文件：cscope.out, cscope.in.out, cscope.po.out。
 
@@ -104,25 +104,42 @@ mac `brew install cscope`
 |I dir| 在-I选项指出的目录中查找头文件
 |u| 扫描所有文件，重新生成交叉索引文件
 
+
+
 ***3.在vim中使用cscope***
 
-1 、用vim编辑的时候 ： 
+1 、用vim编辑的时候 ：
 
-    vim filename.c 
+    vim filename.c
 
-2 把生成的cscope文件导入到vim中来 
+2 把生成的cscope文件导入到vim中来
 
-    :cs add /路径/cscope.out 代码所在目录 
+    :cs add /路径/cscope.out 代码所在目录
 
-我习惯现切换到代码所在目录再操作，所以直接使用： 
+我习惯现切换到代码所在目录再操作，所以直接使用：
 
     :cs add cscope.out 就可以了。
 
-3 查看是否已经连接到对应数据库 
+避免每次都加在cscope，可以在`.vimrc`中添加cscope的配置，自动添加
+
+    if has("cscope")
+      set csprg=/usr/local/bin/cscope
+      set csto=0
+      set cst
+      set csverb
+      if filereadable("cscope.out")
+        cs add cscope.out
+      elseif $CSCOPE_DB !=""
+        cs add $CSCOPE_DB
+      endif
+      set csverb
+    endif
+
+3 查看是否已经连接到对应数据库
 
     :cs s
 
-4 `cs f s xxxx` 查找xxxx出现的地方，它能详细列出哪些文件的哪行的哪个函数引用，以及该行的内容. 
+4 `cs f s xxxx` 查找xxxx出现的地方，它能详细列出哪些文件的哪行的哪个函数引用，以及该行的内容.
 
 s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方
 
@@ -147,7 +164,7 @@ f: 查找并打开文件
 
 doxygen 可以为我们生成代码类图，调用关系等
 
-1. Wizard: 
+1. Wizard:
    * Project:选择源码目录(记着勾选 递归scan recursively)，生成的html存放的目录
    * Mode：All Entities，Include cross-referenced source code in the output,对应的代码类型
    * Output: with navigation panel
