@@ -12,10 +12,13 @@ tags: tmux screen
 
 ### tmux
 
-tmux new -s fuck     #创建会话
-tmux new -s fuck2 -d #在后台建立会话
-tmux ls              #列出会话
-tmux attach -t fuck  #进入某个会话
+`tmux new -s fuck`     #创建会话
+
+`tmux new -s fuck2 -d` #在后台建立会话
+
+`tmux ls`              #列出会话
+
+`tmux attach(a) -t fuck`  #进入某个会话
 
 先按下ctrl + b
 
