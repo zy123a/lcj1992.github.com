@@ -155,7 +155,7 @@ mac: 自带的ctags 不支持-R递归,所以想要-R的需要自己安装</p>
 
 <p>首先需要为你的代码生成一个cscope数据库。生成数据库很简单，在你的项目根目录运行下面的命令：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> cscope -Rbq 
+<div class="highlighter-rouge"><pre class="highlight"><code> cscope -Rbq
 </code></pre>
 </div>
 
@@ -202,19 +202,36 @@ mac: 自带的ctags 不支持-R递归,所以想要-R的需要自己安装</p>
 
 <p>1 、用vim编辑的时候 ：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>vim filename.c 
+<div class="highlighter-rouge"><pre class="highlight"><code>vim filename.c
 </code></pre>
 </div>
 
 <p>2 把生成的cscope文件导入到vim中来</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>:cs add /路径/cscope.out 代码所在目录 
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs add /路径/cscope.out 代码所在目录
 </code></pre>
 </div>
 
 <p>我习惯现切换到代码所在目录再操作，所以直接使用：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>:cs add cscope.out 就可以了。
+</code></pre>
+</div>
+
+<p>避免每次都加在cscope，可以在<code class="highlighter-rouge">.vimrc</code>中添加cscope的配置，自动添加</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if has("cscope")
+  set csprg=/usr/local/bin/cscope
+  set csto=0
+  set cst
+  set csverb
+  if filereadable("cscope.out")
+    cs add cscope.out
+  elseif $CSCOPE_DB !=""
+    cs add $CSCOPE_DB
+  endif
+  set csverb
+endif
 </code></pre>
 </div>
 
