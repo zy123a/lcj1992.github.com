@@ -144,18 +144,23 @@ mac `brew install cscope`
 s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方
 
     :cs f s main
+
 g: 查找函数、宏、枚举等定义的位置。
 
     :cs f g main
+
 d: 查找本函数调用的函数
 
     :cs f d main
+
 c: 查找调用本函数的函数
 
     :cs f c main 会输出找到没有匹配的结果，因为没有函数调用main函数
+
 t: 查找指定的字符串
 
     :cs f t string
+
 f: 查找并打开文件
 
     :cs f f filename 将会打开文件名为FIANME的文件

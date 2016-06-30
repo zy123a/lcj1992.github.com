@@ -245,17 +245,37 @@ endif
 
 <p>s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>:cs f s main g: 查找函数、宏、枚举等定义的位置。
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f s main
+</code></pre>
+</div>
 
-:cs f g main d: 查找本函数调用的函数
+<p>g: 查找函数、宏、枚举等定义的位置。</p>
 
-:cs f d main c: 查找调用本函数的函数
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f g main
+</code></pre>
+</div>
 
-:cs f c main 会输出找到没有匹配的结果，因为没有函数调用main函数 t: 查找指定的字符串
+<p>d: 查找本函数调用的函数</p>
 
-:cs f t string f: 查找并打开文件
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f d main
+</code></pre>
+</div>
 
-:cs f f filename 将会打开文件名为FIANME的文件
+<p>c: 查找调用本函数的函数</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f c main 会输出找到没有匹配的结果，因为没有函数调用main函数
+</code></pre>
+</div>
+
+<p>t: 查找指定的字符串</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f t string
+</code></pre>
+</div>
+
+<p>f: 查找并打开文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:cs f f filename 将会打开文件名为FIANME的文件
 </code></pre>
 </div>
 
