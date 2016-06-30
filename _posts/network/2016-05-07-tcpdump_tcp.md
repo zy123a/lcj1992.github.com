@@ -1,5 +1,5 @@
 ---
-layout: post 
+layout: post
 title: 通过tcpdump学习网络协议
 categories: network
 tag: tcpdump tcp mtu tos segment packet fragment
@@ -21,18 +21,18 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 
 大家意见是不统一的,我们这就frame,packet,segment来分别标识链路层,网络层和传输层
 
-### ip packet heaer {#ip_header}
+### ip packet header {#ip_header}
 
 ![IPv4 header](/images/network/ip_header.png)
 
 1.  `Version`:前四个字节为版本号: 0100  IPv4 , 0110 IPv6
 2.  `Internet Header Length`: IHL ,四个字节, 它是32bits字的数量(32 * IHL),最小为5(0101),最大为15(1111),所以ip头的长度\[5\*32=160bits=20bytes,15\*32=480bits=60bytes\]
 3.  `Differentiated Services Code Point && Explicit Congestion Notification`:  DSCP && ECN 包的优先级??
-4.  `Total Length`: 16bits ˚定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节
+4.  `Total Length`: 16bits 定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节
 5.  `Identification`: id标识
-6.  `Flags`: 第一位reserved,必须为0;第二位 DF(Don't Fragment),DF位设为1时表明路由器不能对该上层数据包分段。
-如果一个上层数据包无法在不分段的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息;
-第三位 MF(More Fragments)当路由器对一个上层数据包分段，则路由器会在除了最后一个分段的IP包的包头中将MF位设为1。
+6.  `Flags`: 第一位reserved,必须为0;第二位 DF(Don't Fragment),DF位设为1时表明路由器不能对上层数据包分片。
+如果一个上层数据包无法在不分片的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息;
+第三位 MF(More Fragments)当路由器对一个上层数据包分片，则路由器会在除了最后一个分片的IP包的包头中将MF位设为1。
 7.  `Fragment Offset`: 片偏移,长度13比特。表示该IP包在该组分片包中位置，接收端靠此来组装还原IP包.如果packet的大小大于MTU(maximum transmission unit 最大传输单元),就要进行[分片](#fragmentation).
 8.  `Time To Live`: TTL  长度8比特。当IP包进行传送时，先会对该字段赋予某个特定的值。当IP包经过每一个沿途的路由器的时候，每个沿途的路由器会将IP包的TTL值减少1。如果TTL减少为0，则该IP包会被丢弃,通常会给发送者发送一个ICMP超时消息。
 这个字段可以防止由于路由环路而导致IP包在网络中不停被转发
@@ -40,15 +40,14 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 10. `Header Checksum`: 16位,用来做IP头部的正确性检测，但不包含数据部分。因为每个路由器要改变TTL的值,所以路由器会为每个通过的数据包重新计算这个值。校验不通过,会丢到该包.
 11. `Source address`: 32位,源ip
 12. `Destination address`: 32位,目的ip
-13. `Options`: 松散源路由(给出一连串路由器接口的IP地址,ip包必须沿着这些Ip地址传送,但允许在相继的两个IP地址之间跳过多个路由器);严格源路由;路由记录;时间戳 
-14. `Padding`: 补齐,ip header必须为32bits的倍数 
+13. `Options`: 松散源路由(给出一连串路由器接口的IP地址,ip包必须沿着这些Ip地址传送,但允许在相继的两个IP地址之间跳过多个路由器);严格源路由;路由记录;时间戳
+14. `Padding`: 补齐,ip header必须为32bits的倍数
 
 #### 分片 {#fragmentation}
 
 网络协议使得网络可以相互的通信.这种设计为多种不同的物理设备提供了便利,它是独立于它所依赖的链路层
 的.不同硬件的网络设备通常具备不同的传输速度,同时也往往有不同的最大传输单元.当一个网络向一个具备较小MTU的网络
-传送数据报时,它可能需要对数据报进行分片.在IPv4中,这个功能被放在了网络层,有IPv4的路由器来实现.而在IPv6中,不允许路由器进行分片.主机在发送数据报之前必须能判定传输路径上的MTU.
-
+传送数据报时,它可能需要对数据报进行分片.在IPv4中,这个功能被放在了网络层,由IPv4的路由器来实现.而在IPv6中,不允许路由器进行分片.主机在发送数据报之前必须能判定传输路径上的MTU.
 
 当一个路由器接收到一个packet时,它检查目的地址,判定即将使用的接口和该接口的MTU.如果Packet的大小大于MTU,并且DF字段被设置为0,路由器就会将packet进行分片
 路由器将packet分为多片,每片的大小最大为MTU - ip头的大小(20-60 bytes).每个fragment packet有以下变化:
@@ -58,7 +57,7 @@ The term TCP packet appears in both informal and formal usage, whereas in more p
 3.  fragment offset被设置,它是以8byte来度量的
 4.  header checksum被重新计算
 
-eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) / 8 = 185的倍数 
+eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) / 8 = 185的倍数
 
 如果一个传输层的segment的大小为4500bytes,ip头为20bytes,所以ip packet的大小为4500.当这个包经过一个MTU为2500的连接时,它会变成如下两片:
 
@@ -76,7 +75,7 @@ eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) 
 3.  `Sequence number`:32位 序列号
 4.  `Acknowledgment number`:  32位    
 5.  `Data offset`: 4位TCP header的size(20-60)bytes
-6.  `Reserved`: 3位 
+6.  `Reserved`: 3位
 7.  `NS`: 1位
 8.  `CWR`: 1位
 9.   `ECE`: 1位
@@ -92,7 +91,7 @@ eg: 如果MTU为1500 bytes,ip头大小为20,fragment的偏移将是(1500 - 20 ) 
 19. `Options`:
 20. `Padding`: 补0,
 
-### practice 
+### practice
 
 好了,有了上述基础,我们来实操下吧.
 dump下线上一个包,[tcpdump入门](/2015/03/20/network#tcpdump)
@@ -147,7 +146,7 @@ a2ff: `Header Checksum`
 
 da50e82c: 0xda十进制218, 0x50十进制80,0xe8十进制232,0x2c十进制44 ,对应源ip218.80.232.44`Source address`
 
-0a56d4b0: 同上`Destination address` 
+0a56d4b0: 同上`Destination address`
 
 ***刚好20个字节,接下来TCP头***
 
@@ -196,4 +195,3 @@ ffff: 65535 窗口大小`Window size`
 [tcp的那些事儿[上]]<http://coolshell.cn/articles/11564.html>
 
 [tcp的那些事儿[下]]<http://coolshell.cn/articles/11609.html>
-

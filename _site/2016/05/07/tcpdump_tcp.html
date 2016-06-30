@@ -47,7 +47,7 @@
 
 <p>大家意见是不统一的,我们这就frame,packet,segment来分别标识链路层,网络层和传输层</p>
 
-<h3 id="ip_header">ip packet heaer</h3>
+<h3 id="ip_header">ip packet header</h3>
 
 <p><img src="/images/network/ip_header.png" alt="IPv4 header" /></p>
 
@@ -55,11 +55,11 @@
   <li><code class="highlighter-rouge">Version</code>:前四个字节为版本号: 0100  IPv4 , 0110 IPv6</li>
   <li><code class="highlighter-rouge">Internet Header Length</code>: IHL ,四个字节, 它是32bits字的数量(32 * IHL),最小为5(0101),最大为15(1111),所以ip头的长度[5*32=160bits=20bytes,15*32=480bits=60bytes]</li>
   <li><code class="highlighter-rouge">Differentiated Services Code Point &amp;&amp; Explicit Congestion Notification</code>:  DSCP &amp;&amp; ECN 包的优先级??</li>
-  <li><code class="highlighter-rouge">Total Length</code>: 16bits ˚定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节</li>
+  <li><code class="highlighter-rouge">Total Length</code>: 16bits 定义了packet的大小,包括头(header)和数据(data),以字节为单位,最小20个字节,最大65535字节</li>
   <li><code class="highlighter-rouge">Identification</code>: id标识</li>
-  <li><code class="highlighter-rouge">Flags</code>: 第一位reserved,必须为0;第二位 DF(Don’t Fragment),DF位设为1时表明路由器不能对该上层数据包分段。
-如果一个上层数据包无法在不分段的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息;
-第三位 MF(More Fragments)当路由器对一个上层数据包分段，则路由器会在除了最后一个分段的IP包的包头中将MF位设为1。</li>
+  <li><code class="highlighter-rouge">Flags</code>: 第一位reserved,必须为0;第二位 DF(Don’t Fragment),DF位设为1时表明路由器不能对上层数据包分片。
+如果一个上层数据包无法在不分片的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息;
+第三位 MF(More Fragments)当路由器对一个上层数据包分片，则路由器会在除了最后一个分片的IP包的包头中将MF位设为1。</li>
   <li><code class="highlighter-rouge">Fragment Offset</code>: 片偏移,长度13比特。表示该IP包在该组分片包中位置，接收端靠此来组装还原IP包.如果packet的大小大于MTU(maximum transmission unit 最大传输单元),就要进行<a href="#fragmentation">分片</a>.</li>
   <li><code class="highlighter-rouge">Time To Live</code>: TTL  长度8比特。当IP包进行传送时，先会对该字段赋予某个特定的值。当IP包经过每一个沿途的路由器的时候，每个沿途的路由器会将IP包的TTL值减少1。如果TTL减少为0，则该IP包会被丢弃,通常会给发送者发送一个ICMP超时消息。
 这个字段可以防止由于路由环路而导致IP包在网络中不停被转发</li>
@@ -75,7 +75,7 @@
 
 <p>网络协议使得网络可以相互的通信.这种设计为多种不同的物理设备提供了便利,它是独立于它所依赖的链路层
 的.不同硬件的网络设备通常具备不同的传输速度,同时也往往有不同的最大传输单元.当一个网络向一个具备较小MTU的网络
-传送数据报时,它可能需要对数据报进行分片.在IPv4中,这个功能被放在了网络层,有IPv4的路由器来实现.而在IPv6中,不允许路由器进行分片.主机在发送数据报之前必须能判定传输路径上的MTU.</p>
+传送数据报时,它可能需要对数据报进行分片.在IPv4中,这个功能被放在了网络层,由IPv4的路由器来实现.而在IPv6中,不允许路由器进行分片.主机在发送数据报之前必须能判定传输路径上的MTU.</p>
 
 <p>当一个路由器接收到一个packet时,它检查目的地址,判定即将使用的接口和该接口的MTU.如果Packet的大小大于MTU,并且DF字段被设置为0,路由器就会将packet进行分片
 路由器将packet分为多片,每片的大小最大为MTU - ip头的大小(20-60 bytes).每个fragment packet有以下变化:</p>
@@ -255,7 +255,6 @@ tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 65535 byte
 <p>[tcp的那些事儿[上]]<a href="http://coolshell.cn/articles/11564.html">http://coolshell.cn/articles/11564.html</a></p>
 
 <p>[tcp的那些事儿[下]]<a href="http://coolshell.cn/articles/11609.html">http://coolshell.cn/articles/11609.html</a></p>
-
 
         <ul class="prev_next">
             
