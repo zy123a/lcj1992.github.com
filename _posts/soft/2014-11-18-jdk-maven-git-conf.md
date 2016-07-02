@@ -1,6 +1,6 @@
 ---
 layout: post
-title: jdk maven git 配置
+title: 各种环境配置
 categories: soft
 tags: soft jdk maven git
 ---
@@ -27,3 +27,15 @@ linux是在家目录下。
 ### idea配置
 
 file->settings
+
+### node
+
+brew install node
+export NODE_PATH=/usr/local/lib/node_modules
+
+### go
+
+brew install go
+export GOPATH=/usr/local/Cellar/go/1.6.2
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN

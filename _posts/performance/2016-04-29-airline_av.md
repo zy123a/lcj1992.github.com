@@ -14,7 +14,7 @@ tags: webservice airline av
 3.  每隔几周就得重启一次,听说经常这样,而且修了很多次.
 
 4.  航司接口不一样,有的提供http,有的提供webservice(axis,cxf)
-  
+
 5.  年后一直保持稳定(多家航司不合作了),在东航4月6号重新上线后,就保持一周左右跪一次的节奏(量大了),于是决定搞一下.
 
 6.  tcp established高达2k:
