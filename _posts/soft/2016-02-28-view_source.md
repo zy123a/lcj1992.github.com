@@ -8,6 +8,7 @@ tags: vim ctags cscope doxygen graphviz code2ebook
 *   [vi分屏](#vi_split)
 *   [ctags](#ctags)
 *   [cscope](#cscope)
+*   [gdb](#gdb)
 *   [doxygen+graphviz](#doxygen_graphviz)
 *   [code2ebook](#code2ebook)
 
@@ -105,7 +106,6 @@ mac `brew install cscope`
 |u| 扫描所有文件，重新生成交叉索引文件
 
 
-
 ***3.在vim中使用cscope***
 
 1 、用vim编辑的时候 ：
@@ -164,6 +164,20 @@ t: 查找指定的字符串
 f: 查找并打开文件
 
     :cs f f filename 将会打开文件名为FIANME的文件
+
+### gdb
+
+安装gdb
+
+    brew install gdb
+
+如果mac上gdb提示签名错误，参照[这篇](http://blog.csdn.net/powerlly/article/details/30323015)解决下。
+已redis为例
+
+    ps -ef | grep redis
+    gdb -p redisPid
+
+ 具体可参考dash（有了dash和alfred这对组合，简直太方便了，强烈推荐）
 
 ### doxygen_graphviz
 
