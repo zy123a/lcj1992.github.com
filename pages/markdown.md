@@ -71,5 +71,3 @@ print 'Hello, World!'
 ```
 
 ![本站favicon](/favicon.ico)
-
-

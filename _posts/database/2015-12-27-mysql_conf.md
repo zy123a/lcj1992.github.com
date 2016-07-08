@@ -15,10 +15,10 @@ tags: workbeanch
      ==> Caveats
     We've installed your MySQL database without a root password. To secure it run:
         mysql_secure_installation
-    
+
     To connect run:
         mysql -uroot
-    
+
     To have launchd start mysql at login:
       ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
     Then to load mysql now:
@@ -27,7 +27,7 @@ tags: workbeanch
       mysql.server start
     ==> Summary
     🍺  /usr/local/Cellar/mysql/5.7.10: 12,677 files, 433.2M
-    
+
  从现有数据库中导出ER图和建表语句
 1. ER图： 打开workbench  连接上数据库，然后 Database---Reverse  engineer (或者直接快捷键 Ctrl + R)
 
