@@ -1,13 +1,25 @@
 ---
 layout: post
-title: redis基础
+title: hello redis
 categories: soft
-tags: redis ds 数据结构
+tags: redis ds
 ---
 
-
+* [介绍](#hello)
 * [基本用法](#basic)
-* [数据结构与对象](#ds_object)
+
+redis是一个开源的内存数据结构存储，被用作数据库，缓存，以及消息中间件。它提供了诸如strings，hashes，lists，sets，带区间查询的sorted sets，bitmaps，hyperloglogs，以及带半径查询的geospatial indexes。redis内置了复制，lua 脚本，LRU逐出，事务以及不同级别的持久化，提供了哨兵和集群自动分区两种高可用的的模式。
+
+### 介绍 {#hello}
+
+    brew install redis
+
+或者源码安装
+
+    wget http://124.202.164.14/files/50340000087E9816/download.redis.io/releases/redis-3.2.1.tar.gz
+    tar -zxf redis-3.2.1.tar.gz
+    cd redis-3.2.1
+    make install
 
 ### 基本用法 {#basic}
 
@@ -67,11 +79,6 @@ tags: redis ds 数据结构
     ...
     exec
 
-###  数据结构与对象 {#ds_object}
-
-
 ### 参考 {#ref}
 
-[redis设计与实现]<http://redisbook.com/>
-
-[mit公开课算法导论:跳跃表]<http://open.163.com/movie/2010/12/7/S/M6UTT5U0I_M6V2TTJ7S.html>
+[redis官网]<http://redis.io>
