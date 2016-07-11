@@ -1,10 +1,9 @@
 ---
 layout: post
-title: protobuf的helloworld（java）
+title: hello protobuf
 categories: soft
-tags: protobuf 
+tags: protobuf
 ---
-
 
 ### helloworld
 
