@@ -45,3 +45,17 @@ tags: speed
 5.  pv  page view
 
 6.  uv  unique vistor
+
+7.  tp50,tp90,tp99:
+
+    tp90 = top percentile 90
+    Imagine you have response times:10s,1000s,100s,2s
+    Calculating TP is very simple:
+
+    1. Sort all times in ascending order: [2s, 10s, 100s,1000s]
+    2. find latest item in portion you need to calculate.
+
+      2.1 For TP50 it will be ceil(4*0.5) = 2 requests. You need 2nd request.
+
+      2.2 For TP90 it will be ceil(4*0.9) = 4. You need 4th request.
+    3. We get time for the item found above. TP50=10s. TP90=1000s
