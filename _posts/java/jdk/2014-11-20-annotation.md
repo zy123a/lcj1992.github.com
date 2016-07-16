@@ -84,18 +84,21 @@ Class，Method，Field等类都实现了AnnotatedElement接口
         public @interface Age {
             public int value() default 0;
         }
+
         //Hometown
         @Target({ ElementType.METHOD, ElementType.FIELD })
         @Retention(RetentionPolicy.RUNTIME)
         public @interface Hometown {
             public String value() default "";
         }
+
         //Name
         @Target({ ElementType.METHOD, ElementType.FIELD })
         @Retention(RetentionPolicy.RUNTIME)
         public @interface Name {
             public String value() default "";
         }
+
         //User
         public class User {
             @Name(value = "lcj")

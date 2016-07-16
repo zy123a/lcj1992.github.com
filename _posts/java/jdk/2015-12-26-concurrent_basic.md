@@ -97,5 +97,3 @@ ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁
 [3]<http://ifeve.com/java-concurrency-thread-directory/>
 
 [4]<http://blog.csdn.net/column/details/concurrency.html>
-
-

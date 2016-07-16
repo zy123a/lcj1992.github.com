@@ -37,7 +37,7 @@ hashCode():
 4.  当使用基于hash的Collection和Map如 HashSet,LinkedHashSet,HashMap,HashTable,WeakHashMap,确保key的hashCode()是不可变的
 
 ### 实现equals {#equals}
- 
+
 当实现equals,根据类型不同,采用不同的比较方法
 
 1.  对象域包括collections :equals
@@ -100,13 +100,13 @@ ps:
 用37这样的素数，可以让各种对象的hashcode值分布散列一些，为了减少下面这种情况的发生，不同对象虽然每个实例变量不同，还是可能计算出来的hashCode值相同
 [详见](http://stackoverflow.com/questions/8577582/on-integer-multiplication-overflow-and-information-loss)
 
-还可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html) 
+还可以使用apache的工具类[HashCodeBuilder](http://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html)
 
 ### Q&A {#qAnda}
 
 
 #### hashCode为什么能够提升基于hash的Collection和Map的性能 {#hashCode_hash_based}
- 
+
 以HashMap为例,想象一下如果没有hash,你会如何查找一个map中的某个entry. 遍历HashMap中所有entry,逐一equals?这肯定是可以的,但是...
 
 看下hashMap#getEntry的实现
@@ -114,7 +114,7 @@ ps:
 1.  `hash(key)` 都是移位运算
 2.  `indexFor()` hash值与table.length - 1 进行与运算,找到hash(key)所在table的index.
 3.  又因为table的length是2的n次幂,保证table数据可以均匀分配.
-4.  然后遍历该table\[index\]的entry,最好情况下时间复杂度为O(1),最坏也是O(n)
+4.  然后遍历该table\[index\]的entry,最好情况下时间复杂度为O(1),最坏才是O(n)，平均也是O(1)
 
 高下立判
 
