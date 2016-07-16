@@ -17,7 +17,7 @@ tags: java equal hashcode
 ### 概述 {#summary}
 equals() 和 hashCode()是java中Object类中两个基本的方法
 
-equals():
+equals():   
 
 *   == (引用相等)是比较两个对象的在内存中的地址是否相同
 *   equals() (逻辑相等)比较的是两个对象的数据是否想等
