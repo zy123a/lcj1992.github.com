@@ -75,6 +75,7 @@ tags: explain select mysql
 explain来解释和分析sql查询语句
 
     explain format=traditional select * from mtp_book_id in (select max(book_id) from book_goods_info order by id)
+
 ![explain](/images/database/explain.png)
 
 ps: format有traditional 和json两种格式
