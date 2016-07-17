@@ -97,7 +97,7 @@ ps: format有traditional 和json两种格式
 |filtered|filtered|被查询条件过滤掉的记录数的占比|||
 |Extra|none|额外信息|||
 
-#### select_type说明 ｛＃select_type｝
+#### select_type说明 ｛#select_type}
 
 |类型|对应json格式的key|含义|
 |-|-|-|
