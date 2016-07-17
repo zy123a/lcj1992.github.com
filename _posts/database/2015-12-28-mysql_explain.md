@@ -22,12 +22,11 @@ tags: explain select mysql
         (10)ORDER BY <order_by_list>
         (11)<LIMIT_specification>
 
-
 执行顺序:
 
 `笛卡尔积---on---join类型---where---group by---with{cube | rollup}---having---select---distinct---order by---limit`
 
-`limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Oracle.`
+ps: limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Oracle.
 
 ### 细解 {#sql}
 
