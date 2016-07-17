@@ -31,14 +31,14 @@ tags: explain select mysql
 
 ### 细解 {#sql}
 
-1.  on与where的区别
+1.  on vs where
     两者效果可能一样，但on是连接两表做笛卡尔积时的连接条件，where连接之后的筛选条件。
 
-2.  where 和 having的区别
+2.  where vs having
 
-    1.  where 子句的作用是在对查询结果进行分组前(`group by 之前`)，将不符合where条件的行去掉，即在分组之前过滤数据， ***where条件中不能包含聚集函数***，使用where条件过滤出特定的行。
+    1.  where 在对查询结果进行分组前(`group by 之前`)，将不符合where条件的行去掉，即在分组之前过滤数据， ***where条件中不能包含聚集函数***，使用where条件过滤出特定的行。
 
-    2.  having 子句的作用是筛选满足条件的组(`group by 之后`,having是专门搭配group by干活的)，即在分组之后过滤数据，条件中经常包含聚集函数，使用having条件过滤出特定的组，也可以使用多个分组标准进行分组。
+    2.  having 筛选满足条件的组(`group by 之后`,having是专门搭配group by干活的)，即在分组之后过滤数据，条件中经常包含聚集函数，使用having条件过滤出特定的组，也可以使用多个分组标准进行分组。
 
 3.  join、left join、right join　　
     eg table_a,table_b
@@ -56,62 +56,70 @@ tags: explain select mysql
     3.  当查询语句中有group by子句时，聚集函数作用的对象是一个分组，而不是整个查询的结果,没有group by的话是整个查询结果
 
         select DepartmentId,Name,count(Salary) from Employee group by Name;
+
         Error Code: 1055. Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test.Employee.DepartmentId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 
 5.  order by
 
-对某一列进行排序,发生在select，distinct之后
+    对某一列进行排序,发生在select，distinct之后
 
 6.  limit
 
-取出结果的几个 eg：limit 1,2从1开始的2个。  查询结果是从0 开始的
+    取出结果的几个 eg：limit 1,2从1开始的2个。  查询结果是从0 开始的,db会扫出这n＋m条记录，然后筛选。所以分页慎用limit m,n
 
 7.  union和union all
 
-跨库查询，union会去重，union all 不会去重
+    跨库查询，union会去重，union all 不会去重
 
 ## 执行计划 {#explain}
 
 explain来解释和分析sql查询语句
 
-    explain format=traditional select * from mtp_book_id in (select max(book_id) from book_goods_info order by id)
+    explain extended format=traditional select * from mtp_book_id in (select max(book_id) from book_goods_info order by id)
 
 ![explain](/images/database/explain.png)
 
-ps: format有traditional 和json两种格式
-
+ps:
+1.  format有traditional 和json两种格式
+2.  认为增加explain时mysql不会执行查询，这是错误的。实际上如果查询在from自居中包含子查询，mysql实际上是会执行子查询的。
+3.  explain只是个近似的结果
 ### explain输出字段说明
 
-|字段|对应json格式的key|含义|备注|case|
+|字段|对应json格式的key|含义|备注|
 |-|-|-|-|-|
-|id|select_id|查询语句的id|mysql按照id从小到大的顺序进行解释，实际上执行是按照id从大到小的顺序||
-|select_type|none|选择的类型|详见[select_type说明](#select_type)||
-|table|table_name|输出列所在的表|详见[table说明](#table)||
-|partitions|partitions|匹配到的分区|||
-|type|access_type|join的类型|详见[type说明](#type)||
-|possible_keys|possiable_keys|可能会选择的索引|||
-|key|key|真实选择的索引|显示的是mysql实际使用的索引||
-|key_len|key_length|选择的索引的长度|mysql决定使用的索引的长度||
-|ref|ref|与索引进行比较的列数|||
-|rows|rows|被检查的记录数的估量|||
-|filtered|filtered|被查询条件过滤掉的记录数的占比|||
-|Extra|none|额外信息|||
+|id|select_id|查询语句的id|mysql按照id从小到大的顺序进行解释，实际上执行是按照id从大到小的顺序|
+|select_type|none|select的类型|select查询分为简单和复杂类型，复杂类型可分为三大类：简单子查询、派生表（在from子句中的子查询）、union查询，详见[select_type说明](#select_type)|
+|table|table_name|显示对应行正砸访问哪张表|可以是一张表，一个子查询、一个union结果。详见[table说明](#table)|
+|partitions|partitions|匹配到的分区||
+|type|access_type|**mysql手册上说这一列是关联类型，但我们认为更准确的说法是访问类型**，参见*高性能mysql 3th p695*，我也觉得这样说比较合适|详见[type说明](#type)|
+|possible_keys|possiable_keys|可能会选择的索引|这是基于查询访问的列和使用的比较操作符来判断的，这个列表是在优化过程中早起创建的，因此罗列出来的索引可能对于后续优化过程是没用的|
+|key|key|真实选择的索引|显示的是mysql实际使用的索引|
+|key_len|key_length|选择的索引的长度|mysql决定使用的索引的长度|
+|ref|ref|与索引进行比较的列数||
+|rows|rows|被检查的记录数的估量||
+|filtered|filtered|被查询条件过滤的记录数的占比|5.7.3之前extended才会显示,总是100%！？参见[总是100%](http://blog.chinaunix.net/uid-20726500-id-5573764.html)|
+|Extra|none|额外信息|using index 使用覆盖索引；using where 使用where过滤|
 
 #### select_type说明 ｛#select_type}
 
 |类型|对应json格式的key|含义|
 |-|-|-|
 |simple|none|`简单的查询（没有使用union或者子查询）`|
-|primary|none|`最外层的select（多层嵌套子查询）`|
-|union|none|多个union时，第二个和更后的查询|
-|dependent union|dependent(true)|多个union时，第二个和更后的查询（依赖于外层的查询）|
-|union result|union_result|union的结果|
-|subquery|none|子查询时的第一个|
-|dependent subquery|dependent(true)|子查询时的第一个，依赖于外层查询|
-|derived|none|`派生表的select`|
+|primary|none|`最外层的select（有子查询或者union时）`|
+|union|none|多个union时，第二个和更后的select|
+|union result|union_result|`从union的匿名临时表检索结果的select被标记为union result`|
+|subquery|none|`包含在select列表中的子查询中的select（不再from子句中）`|
+|derived|none|`包含在from子句中的select，mysql会递归执行并将结果放到一个临时表中，服务器内部称其为‘派生表’，因为该临时表是从子查询中派生来的`|
 |materialized|materialized_from_subquery||
+|dependent subquery|dependent(true)|类subquery，依赖于外层查询|
+|dependent union|dependent(true)|类union，依赖于外层的查询|
 |uncacheable subquery|cacheable (false)||
 |uncacheable union|cacheable (false)||
+
+ps:
+1.  denpendent: select依赖于外层查询中的数据（你就看你的sql单拿出来，是否可以执行）。
+2.  uncacheable: select中的某些特性阻止结果被缓存在一个Item_cache中（Item_cache未被文档记载，它与查询缓存不是一回事，尽管它可以被一些相同类型的构件否定，例如RAND()函数）
+3.  针对select，不出意外的话，应该是你的sql中有多少个select，explain你的sql，就会有多少行，每个select都对应有自己的select_type。
 
 #### table
 
@@ -119,26 +127,26 @@ M，N都是explain结果中的id字段值
 
 |类型|含义|
 |-|-|
-|`<unionM,N>`|第m和第n行的对应的table的union结果|
+|`<unionM,N>`|当select type为union result，table列为参与union的id列表，总是`向后引用`|
 |`<derivedN>` |第n行的派生表的select|
 |`<subqueryN>`| The row refers to the result of a materialized subquery for the row with an id value of N|
 
 #### type
 
-|类型|含义|case|
-|-|-|-|
-|system|表只有一行（系统表），这是const的特殊情形||
-|const|表至多匹配一行，用于和主键或者unique index比较时。非常快，因为只读一次|`SELECT * FROM tbl_name WHERE primary_key=1;`|
-|eq_ref|相等,用于primary key或者unique not null索引|`SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;`|
-|ref|key不能匹配一个记录，而是一些记录|`SELECT * FROM ref_table WHERE key_column=expr;`|
-|fulltext|处理fulltext索引时||
+|类型|含义|备注|case|
+|-|-|-|-|
+|system|表只有一行（系统表），这是const的特殊情形|todo??|
+|const|表至多匹配一行，用于和主键或者unique index比较时。|`SELECT * FROM tbl_name WHERE primary_key=1;`|
+|eq_ref|索引访问（索引查找）|表至多匹配一条记录，用于primary key或者unique not null索引|`SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;`|
+|ref|索引访问|匹配的不是一个记录，而是一些记录，访问只有当使用非唯一性索引或者唯一索引的非唯一性前缀时才会发生|`SELECT * FROM ref_table WHERE key_column=expr;`|
 |ref_or_null|类似ref，多了个null| `SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;`|
-|index_merge|||
-| unique_subquery|类似eq_ref，只不过不是＝，而是in|`value IN (SELECT primary_key FROM single_table WHERE some_expr)`|
+|range|范围扫描|有限制的索引扫描，使用操作符`=, <>, >, >=, <, <=, IS NULL, <=>, BETWEEN, or IN()`、与常量进行比较 ，使用索引列表去查找一系列值，例如in（）和or列表们也会显示范围查询，但访问性能有重要的差异，开销跟索引类型相当|`SELECT * FROM tbl_name WHERE key_column = 10;`  `SELECT * FROM tbl_name WHERE key_column BETWEEN 10 and 20;`|
+|index|全索引扫描|类全表扫描，只是msyql扫描表时按照索引次序进行，而不是行。优点是避免了排序，缺点是要承担按索引读取整个表的开销。当查询结果可以被索引包含时，只扫描索引的数据，而不是按索引次序的每一行，这时Extra列会有`using index`标示（`覆盖索引`）||
+|all|全表扫描|通常意味着mysql必须扫描整张表,也有例外，例如在查询中使用了limit，或者在Extra列显示`using distinct/not exists`||
+|fulltext|处理fulltext索引时||
+|index_merge|访问使用了索引合并优化|todo|
+|unique_subquery|类似eq_ref，只不过不是＝，而是in|`value IN (SELECT primary_key FROM single_table WHERE some_expr)`|
 |index_subquery|类似unique_subquery,只不过作用于非unique索引|`value IN (SELECT key_column FROM single_table WHERE some_expr)`|
-|range|使用索引，使用操作符`=, <>, >, >=, <, <=, IS NULL, <=>, BETWEEN, or IN()`、与常量进行比较 |`SELECT * FROM tbl_name WHERE key_column = 10;`  `SELECT * FROM tbl_name WHERE key_column BETWEEN 10 and 20;`|
-|index|扫描索引树,当查询结果可以被索引包含时，就不扫表了，只扫索引树就ok，这时Extra列会有`using index`标示（`覆盖索引`）||
-|all|全表扫描|||
 
 注：
 
@@ -195,4 +203,3 @@ case4:
 
 [mysql explain详解]<http://www.cnitblog.com/aliyiyi08/archive/2016/04/21/48878.html>
 [官方文档]<https://dev.mysql.com/doc/>
-[]
