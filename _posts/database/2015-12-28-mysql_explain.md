@@ -26,7 +26,9 @@ tags: explain select mysql
 
 `笛卡尔积---on---join类型---where---group by---with{cube | rollup}---having---select---distinct---order by---limit`
 
-ps: limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Oracle.
+ps:
+
+limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Oracle.
 
 ### 细解 {#sql}
 
