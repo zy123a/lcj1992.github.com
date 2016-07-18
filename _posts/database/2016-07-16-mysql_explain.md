@@ -103,11 +103,11 @@ ps:
 |key|key|真实选择的索引|显示的是mysql实际使用的索引|
 |key_len|key_length|选择的索引的长度|mysql决定使用的索引的长度|
 |ref|ref|与索引进行比较的列数||
-|rows|rows|被检查的记录数的估量||
+|rows|rows|被检查的记录数的估量|rows是核心指标，绝大部分rows小的语句执行一定很快（有例外),所以优化语句基本上都是在优化rows。|
 |filtered|filtered|被查询条件过滤的记录数的占比|5.7.3之前extended才会显示,总是100%！？参见[总是100%](http://blog.chinaunix.net/uid-20726500-id-5573764.html)|
 |Extra|none|额外信息|using index 使用覆盖索引；using where 使用where过滤|
 
-#### select_type说明 ｛#select_type}
+#### select_type说明 {#select_type}
 
 |类型|对应json格式的key|含义|
 |-|-|-|
@@ -232,7 +232,13 @@ case4:
 
 ## 底层的数据结构 {#ds}
 
+
+## 查询优化 {#query_performance}
+
 ## 参考 {#ref}
 
 [mysql explain详解]<http://www.cnitblog.com/aliyiyi08/archive/2016/04/21/48878.html>
 [官方文档]<https://dev.mysql.com/doc/>
+[MySQL索引背后的数据结构及算法原理]<http://blog.codinglabs.org/articles/theory-of-mysql-index.html>
+[《高性能MySQL》读书笔记－－索引]<http://blog.csdn.net/xifeijian/article/details/20312557>
+[MySQL索引原理及慢查询优化]<http://tech.meituan.com/mysql-index.html>

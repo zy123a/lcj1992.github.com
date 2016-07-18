@@ -2,7 +2,7 @@
 layout: post
 title: 数据库分库分表
 categories: db
-tags: mybatis 
+tags: mybatis
 ---
 *   [分表](#mybatis_tables)
 *   [分库](#spring_databases)
@@ -25,6 +25,8 @@ mapper.xml  ***"$"动态传入表名 "#"传入列值,传入map***
     <insert id="save" parameterType="Map">
         insert into ${table} (name,gender)values(#{name},#{gender})
     </insert>
+
+ps: $不对变量进行转义 ＃会对变量进行转义
 
 #### 2.Model && Map
 
@@ -61,19 +63,19 @@ ps:
     <bean id="parentDatasource" class="xxxxx" destroy-method="close">
         ...
     </bean>
-    
+
     <bean id="dataSource1" parent="parentDataSource">
         <property name="url" value="jdbc:mysql://localhost:3306/simple"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
-    
+
     <bean id="dataSource2" parent="parentPoolDataSource">
         <property name="url" value="jdbc:mysql://localhost:3306/simple2"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
-    
+
     <bean name="dynamicDataSource" class="com.xxx.web.util.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
@@ -97,11 +99,11 @@ ps:
 
     public class AppContext(){
         private static InheritableThreadLocal<String> context = new InheritableThreadLocal<String>();
-        
+
         public static void setContext(String context){        
             AppContext.context.set(context);    
         }
-        
+
         public static String getContext(){        
             return AppContext.context.get();
         }
