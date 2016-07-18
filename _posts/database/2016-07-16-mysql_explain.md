@@ -7,6 +7,11 @@ tags: explain select mysql
 * [select sql执行顺序](#select)
   * [细解](#sql)
 * [explain](#explain)
+  * [explain输出字段说明](#explain_result)
+    * [select_type说明](#select_type)
+    * [table列说明](#table)
+    * [type列说明](#type)
+  * [case](#case)
 
 ## select sql执行顺序 {#select}
 
@@ -84,7 +89,8 @@ ps:
 1.  format有traditional 和json两种格式
 2.  认为增加explain时mysql不会执行查询，这是错误的。实际上如果查询在from自居中包含子查询，mysql实际上是会执行子查询的。
 3.  explain只是个近似的结果
-### explain输出字段说明
+
+### explain输出字段说明 {#explain_result}
 
 |字段|对应json格式的key|含义|备注|
 |-|-|-|-|-|
@@ -122,7 +128,7 @@ ps:
 2.  uncacheable: select中的某些特性阻止结果被缓存在一个Item_cache中（Item_cache未被文档记载，它与查询缓存不是一回事，尽管它可以被一些相同类型的构件否定，例如RAND()函数）
 3.  针对select，不出意外的话，应该是你的sql中有多少个select，explain你的sql，就会有多少行，每个select都对应有自己的select_type。
 
-#### table
+#### table列说明 {#table}
 
 M，N都是explain结果中的id字段值
 
@@ -132,7 +138,7 @@ M，N都是explain结果中的id字段值
 |`<derivedN>` |第n行的派生表的select|
 |`<subqueryN>`| The row refers to the result of a materialized subquery for the row with an id value of N|
 
-#### type
+#### type {#type}
 
 |类型|含义|备注|case|
 |-|-|-|-|
@@ -154,6 +160,7 @@ M，N都是explain结果中的id字段值
 1. `覆盖索引`(Covering Index)：只用到某个索引，且该索引包含查询需要的数据列，也就没有回表操作。
 2. 覆盖索引必须要存储索引列的值，而哈希索引、空间索引、和全文索引都不能存储列的值，所以MySQL只能使用B-Tree索引做覆盖索引
 
+### case
 case1:
 
     mysql> explain select * from mtp_book_info order by book_id desc limit 10000,10;
@@ -164,9 +171,17 @@ case1:
     +----+-------------+---------------+-------+---------------+---------+---------+------+-------+-------+
     1 row in set (0.05 sec)
 
+1.  没有子查询和union，所以select_type为simple
+2.  type为index,表明为索引扫描，扫描索引数，然后回表拿数据
+3.  book_id 为primary key
+4.  book_id类型为int，字节长度为4
+5.  从10000到10010，但mysql需要读取前10010，然后截取10000-10010
+
 case2:
 
-    mysql> explain select  * from mtp_book_info where book_id >= (select book_id from mtp_book_info order by book_id  desc limit 10000, 1) order by book_id desc  limit 10;   +----+-------------+---------------+-------+---------------+---------+---------+------+-------+-------------+
+    mysql> explain select  * from mtp_book_info where book_id >= (select book_id from mtp_book_info
+    order by book_id  desc limit 10000, 1) order by book_id desc  limit 10;  
+    +----+-------------+---------------+-------+---------------+---------+---------+------+-------+-------------+
     | id | select_type | table         | type  | possible_keys | key     | key_len | ref  | rows  | Extra       |
     +----+-------------+---------------+-------+---------------+---------+---------+------+-------+-------------+
     |  1 | PRIMARY     | mtp_book_info | range | PRIMARY       | PRIMARY | 4       | NULL | 19764 | Using where |
@@ -174,9 +189,17 @@ case2:
     +----+-------------+---------------+-------+---------------+---------+---------+------+-------+-------------+
     2 rows in set (0.04 sec)
 
+1.  解释是按照id从小到大开始解释的，执行是从大到小。
+2.  有子查询，且不在from，join子句中，所以2的select_type是subquery，而不是derived
+3.  id为2: type为index，且Extra为Using index表明使用了覆盖索引优化,索引树中包含所有select的数据，所以就不需要回表拿数据了
+4.  id为1: 使用了book_id索引，且使用了>=,所以为range，
+5.  id为1: 使用了where条件，所以Extra中有Using where
+6.  id为1: rows 19764 ？ todo
+
 case3:
 
-    mysql> explain select * from mtp_book_info as book1 join (select book_id from mtp_book_info order by book_id desc limit 10000, 10) as book2 where  book1.book_id = book2.book_id ;
+    mysql> explain select * from mtp_book_info as book1 join (select book_id from mtp_book_info
+    order by book_id desc limit 10000, 10) as book2 where  book1.book_id = book2.book_id ;
     +----+-------------+---------------+--------+---------------+---------+---------+---------------+-------+-------------+
     | id | select_type | table         | type   | possible_keys | key     | key_len | ref           | rows  | Extra       |
     +----+-------------+---------------+--------+---------------+---------+---------+---------------+-------+-------------+
@@ -185,6 +208,12 @@ case3:
     |  2 | DERIVED     | mtp_book_info | index  | NULL          | PRIMARY | 4       | NULL          | 10010 | Using index |
     +----+-------------+---------------+--------+---------------+---------+---------+---------------+-------+-------------+
     3 rows in set (0.03 sec)
+
+1. id为2: join子句，所以select_type为derived
+2. id为2: 覆盖索引，case2
+3. id为1: 都是最外层的select，所以select_type为primary
+4. id为1的第一个:因为对于派生表来说，book_id只是一个普通字段，所以其type为all，需要进行全表扫描
+5. id为1的第二个:book_id为mtp_book_info的主键，又使用的是＝，对于每个主键，至多又一条记录，所以type为all
 
 case4:
 
@@ -198,7 +227,10 @@ case4:
     +----+--------------+-----------------+-------+---------------+----------------------+---------+------+-------+-------------+
     3 rows in set (0.04 sec)
 
-## 底层的数据结构
+1.  id为2: 多个union时，第二个和更后的select,select_type为union
+2.  id为null: union result 参与union的两张表为id为1和2的select结果
+
+## 底层的数据结构 {#ds}
 
 ## 参考 {#ref}
 
