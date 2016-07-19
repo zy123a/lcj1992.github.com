@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 网络  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 网络 </h2>
+        <ul>
+  <li><a href="#curl">curl</a></li>
+  <li><a href="#lsof">lsof</a></li>
+  <li><a href="#netstat">netstat</a></li>
+  <li><a href="#iftop">iftop</a></li>
+  <li><a href="#nethogs">nethogs</a></li>
+  <li><a href="#tcpdump">tcpdump</a></li>
+  <li><a href="#dig">dig</a></li>
+  <li><a href="#ifconfig">ifconfig</a></li>
+</ul>
+
+<h3 id="iftop">iftop</h3>
+
+<p><img src="/images/network/iftop.png" alt="iftop" /></p>
+
+<ul>
+  <li>
+    <p>TX：发送流量</p>
+  </li>
+  <li>
+    <p>RX：接收流量</p>
+  </li>
+  <li>
+    <p>TOTAL：总流量</p>
+  </li>
+  <li>
+    <p>Cumm：运行iftop到目前时间的总流量</p>
+  </li>
+  <li>
+    <p>peak：流量峰值</p>
+  </li>
+  <li>
+    <p>rates：分别表示过去 2s 10s 40s 的平均流量</p>
+  </li>
+</ul>
+
+<h3 id="tcpdump">tcpdump</h3>
+
+<p>研究网络协议必备</p>
+
+<h4 id="wiki">wiki</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令选项</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-i any</td>
+      <td>监听所有的界面。这样你就知道是不是有流量产生</td>
+    </tr>
+    <tr>
+      <td>-n</td>
+      <td>不要解决主机名，以IP数字形式显示主机</td>
+    </tr>
+    <tr>
+      <td>-nn</td>
+      <td>不要解析主机名或端口名</td>
+    </tr>
+    <tr>
+      <td>-X</td>
+      <td>同时以十六进制和ASCII字符显示包的数据(packet) <code class="highlighter-rouge">网络层+传输层</code></td>
+    </tr>
+    <tr>
+      <td>-XX</td>
+      <td>同-X,但也会显示Ethernet头部(frame) <code class="highlighter-rouge">链路层+网络层+传输层</code></td>
+    </tr>
+    <tr>
+      <td>-v, -vv, -vvv</td>
+      <td>增量输出得到的包信息 v越多信息越丰富</td>
+    </tr>
+    <tr>
+      <td>-c</td>
+      <td>抓取 x 个包后就停下</td>
+    </tr>
+    <tr>
+      <td>-s</td>
+      <td>设置显示前多少个字节的包内容。使用-s0获得所有的数据，除非你要故意获取</td>
+    </tr>
+    <tr>
+      <td>-S</td>
+      <td>打印绝对序号</td>
+    </tr>
+    <tr>
+      <td>-e</td>
+      <td>同时得到Ethernet头部</td>
+    </tr>
+    <tr>
+      <td>-q</td>
+      <td>显示少一点协议信息</td>
+    </tr>
+    <tr>
+      <td>-E</td>
+      <td>解密IPSEC流量提供加密密钥</td>
+    </tr>
+    <tr>
+      <td>-A</td>
+      <td>以ASCII打印每个包,对于网页抓取特别好用</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ps:tcpdump 4.0的snaplength的长度从68字节改成了96字节，这样你就可以看到多些内容了。但仍然看不到所有的内容，指定 -s 1514 得到包的所有内容
+eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tcpdump -nS
+tcpdump -nnvvS
+tcpdump -nnvvXSs 1514
+</code></pre>
+</div>
+
+<h4 id="section">语法</h4>
+
+<p>使用表达式可以让你略去各种各样的流量而只得到你真正关注的。掌握表达式并且会创造性地使用组合技巧才使你真正发挥tcpdump的力量。有三种主要的表达式: type, dir 和 proto.</p>
+
+<p><strong><em>1.主要的表达式:</em></strong></p>
+
+<p>type: <code class="highlighter-rouge">host</code>,<code class="highlighter-rouge">net</code>,<code class="highlighter-rouge">port</code>,<code class="highlighter-rouge">portrange</code></p>
+
+<p>dir: <code class="highlighter-rouge">src</code>,<code class="highlighter-rouge">dst</code></p>
+
+<p>proto:<code class="highlighter-rouge">tcp</code>,<code class="highlighter-rouge">udp</code>,<code class="highlighter-rouge">icmp</code>…</p>
+
+<p><code class="highlighter-rouge">less</code> ,<code class="highlighter-rouge">greater</code>,’&gt;’ ‘&gt;=’</p>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tcpdump host 1.2.3.4
+tcpdump src 2.3.4.5
+tcpdump src port 1025   // 源端口号为1025
+tcpdump src port 1025 and tcp
+tcpdump portrange 21-23
+tcpdump less 32   //只看到包低于或高于一定的大小
+tcpdump &gt; 32
+</code></pre>
+</div>
+
+<p><strong><em>2.与或非:</em></strong></p>
+
+<ol>
+  <li>and 或者 &amp;&amp;, 在使用 &amp;&amp; 的时候，要用单引号或者双引号包住表达式 <code class="highlighter-rouge">tcpdump -nvvv -i any -c 3 'port 22 &amp;&amp; port 60738'</code></li>
+  <li>or 或者 ||</li>
+  <li>not 或者 !</li>
+</ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tcpdump -nnvvS tcp and src 10.5.2.3 and dst port 3389
+</code></pre>
+</div>
+
+<h4 id="section-1">查看指定的包类型</h4>
+
+<p>你还可以根据包里面的某些字段来组合各种条件指定你要关注的包。这个功能在你想要查看SYNs和RSTs非常有用。</p>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tcpdump 'tcp[13] &amp; 32 != 0'  //查看所有的紧急包(URG包)
+tcpdump 'tcp[13] &amp; 16 != 0'  //查看所有的确认包(ACK包)
+tcpdump 'tcp[13] &amp; 8 != 0'  // 查看所有的PSH包
+tcpdump 'tcp[13] &amp; 4 != 0'  //查看所有的RST包
+tcpdump 'tcp[13] &amp; 2 != 0'  //查看所有的SYN包
+tcpdump 'tcp[13] &amp; 1 != 0'  //查看所有的FIN包
+tcpdump 'tcp[13] = 18'  //查看所有的SYN-ACK包
+</code></pre>
+</div>
+
+<p>ps:
+只有PSH, RST, SYN 和 FIN 标志显示在tcpdump的标志域输出中。URG和ACK也会被显示，但显示在其它的地方而不是在标志位中。</p>
+
+<h4 id="section-2">报文详解</h4>
+
+<p>[S] - SYN (开始连接)
+[.] - 没有标记
+[P] - PSH(数据推送)
+[F] - FIN(结束连接)
+[R] - RST(重启连接)
+todo</p>
+
+<h3 id="dig">dig</h3>
+
+<p><img src="/images/network/dig.png" alt="dig" /></p>
+
+<p>A记录和CNAME</p>
+
+<ul>
+  <li>A记录：把一个域名解析到一个IP地址（Address，特制数字IP地址）</li>
+  <li>CNAME记录：把域名解析到另外一个域名。</li>
+  <li>SREVER: dns服务器+端口（53）</li>
+</ul>
+
+<p>其功能是差不多，CNAME将几个主机名指向一个别名，其实跟指向IP地址是一样的，因为这个别名也要做一个A记录的。但是使用CNAME记录可以很方便地变更IP地址。</p>
+
+<p>eg: 如果一台服务器有100个网站，他们都做了别名，该台服务器变更IP时，只需要变更别名的A记录就可以了。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>aa.bb.com  in cname xx.cname.com
+cc.dd.com  in cname xx.cname.com
+ee.ff.com  in cname xx.cname.com
+xx.cname.com in a 223.21.34.23
+</code></pre>
+</div>
+
+<h3 id="ifconfig">ifconfig</h3>
+
+<h3 id="section-3">参考</h3>
+
+<p>[tcp维基百科]<a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">https://en.wikipedia.org/wiki/Transmission_Control_Protocol</a></p>
+
+<p>[tcpdump1]<a href="http://blog.jobbole.com/91631/">http://blog.jobbole.com/91631/</a></p>
+
+<p>[tcpdump入门教程]<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1461728725&amp;ver=1&amp;signature=b1BrTvreiCRq8cd5MvCp4rtefuzjbTgTPSi6yhsoUR6EkFsiRgzP2q5MCoMjZEdzr1WdSiM5sg46uhXG79868TYLLq5-ztt6GjgP62dG2lBmSSmPINxVRJusc-VWBlsePOH4vhRarvrPHk0YXBR8sQ==">http://mp.weixin.qq.com/s?src=3&amp;timestamp=1461728725&amp;ver=1&amp;signature=b1BrTvreiCRq8cd5MvCp4rtefuzjbTgTPSi6yhsoUR6EkFsiRgzP2q5MCoMjZEdzr1WdSiM5sg46uhXG79868TYLLq5-ztt6GjgP62dG2lBmSSmPINxVRJusc-VWBlsePOH4vhRarvrPHk0YXBR8sQ==</a></p>
+
+<p>[Linux 命令神器：lsof 入门]<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1461728725&amp;ver=1&amp;signature=YhWMmVMFsm8GFWX8kDhO6q4vtUEJTeXEicd6bs41iWlRPRfn-h2KAkOc-TNnBXAhPmywNtHhPRsmLGGxrkio*3gW9gBGByCuOLmEb1to75iv9O10EQ31gqiigNFJthDYS-40WA*m29-jAJwyF8aqOQ==">http://mp.weixin.qq.com/s?src=3&amp;timestamp=1461728725&amp;ver=1&amp;signature=YhWMmVMFsm8GFWX8kDhO6q4vtUEJTeXEicd6bs41iWlRPRfn-h2KAkOc-TNnBXAhPmywNtHhPRsmLGGxrkio*3gW9gBGByCuOLmEb1to75iv9O10EQ31gqiigNFJthDYS-40WA*m29-jAJwyF8aqOQ==</a></p>
+
+<p>[A记录和CName]<a href="http://blog.xieyc.com/differences-between-a-record-and-cname-record/">http://blog.xieyc.com/differences-between-a-record-and-cname-record/</a></p>
+
+<p>[understanding-the-dig-command]<a href="https://mediatemple.net/community/products/dv/204644130/understanding-the-dig-command">https://mediatemple.net/community/products/dv/204644130/understanding-the-dig-command</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/03/18/shell_basic">shell语法</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/04/20/selenium">selenium</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/03/20/network" data-title="网络"
+             data-url="http://lcj1992.github.io/2015/03/20/network">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/03/20/network" data-title="网络"
+             data-url="http://lcj1992.github.io/2015/03/20/network"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 书单快捷键
+                $(document).bind('keydown', 'alt+b', function () {
+                    window.location.href = "/booklist.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/03/18/shell_basic";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/04/20/selenium";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

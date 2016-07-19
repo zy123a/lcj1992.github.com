@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="baidu-site-verification" content="vuaTJrjFLn" />
+    <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
+    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
+    <title> 文本  </title>
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
+    <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div class="nav">
+    <div class="nav_nav">
+        <a href="/">首页</a>
+        <a href="/categories.html">分类</a>
+        <a href="/booklist.html">书单</a>
+        <a href="/about.html">关于</a>
+    </div>
+</div>
+
+    <div id="main">
+        <h2> 文本 </h2>
+        <ul>
+  <li><a href="#atnodes">atnodes</a></li>
+  <li><a href="#cat">cat</a></li>
+  <li><a href="#echo">echo</a></li>
+  <li><a href="#tail">tail</a></li>
+  <li><a href="#head">head</a></li>
+  <li><a href="#less">less</a></li>
+  <li><a href="#sort">sort</a></li>
+  <li><a href="#cut">cut</a></li>
+  <li><a href="#paste">paste</a></li>
+  <li><a href="#join">join</a></li>
+  <li><a href="#tr">tr</a></li>
+  <li><a href="#uniq">uniq</a></li>
+  <li><a href="#zxx">zxx</a></li>
+  <li><a href="#expr">expr</a></li>
+  <li><a href="#echo">echo</a></li>
+  <li><a href="#tee">tee</a></li>
+  <li><a href="#grep">grep</a></li>
+  <li><a href="#awk">awk</a></li>
+  <li><a href="#sed">sed</a></li>
+  <li><a href="#jq">jq</a></li>
+  <li><a href="#xml2json">xml2json</a></li>
+  <li><a href="#pbcopy_pbpaste">pbcopy &amp; pbpaste</a></li>
+  <li><a href="#ref">参考</a></li>
+</ul>
+
+<h4 id="atnodes">atnodes</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo cpan SSH::Batch
+atnodes 'xxcommand'
+</code></pre>
+</div>
+
+<p>跳板机免密登陆生产环境机器</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>eval `/usr/local/bin/ssh-attach`
+</code></pre>
+</div>
+
+<p>偶像agentzh写的哎.</p>
+
+<h4 id="cat">cat</h4>
+
+<p>cat -n 显示行号,支持通配符*,可以打开多个文件,类似的还有less,more,tail,head,grep</p>
+
+<h4 id="echo">echo</h4>
+
+<p>echo显示颜色：
+echo -e “\033[31m 红色字 \033[0m”</p>
+
+<h4 id="tail">tail</h4>
+
+<p>显示最后十行</p>
+
+<p>-f 追加显示</p>
+
+<p>-n 8 或者-8   显示八行</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//一般除了看catalina.out和localhost日志,我还会这样看
+tailf bizxx.log | grep ERROR
+</code></pre>
+</div>
+
+<h4 id="head">head</h4>
+
+<p>显示前十行</p>
+
+<p>-n 8或者-8   显示八行</p>
+
+<h4 id="less">less</h4>
+
+<p>追加形式显示</p>
+
+<p>按空格  显示下一页</p>
+
+<p>按F 显示下一屏</p>
+
+<p>按B 显示上一屏</p>
+
+<p>enter　显示下一行</p>
+
+<p>less 比more多的，还可以支持查找 <code class="highlighter-rouge">/pattern</code></p>
+
+<h4 id="sort">sort</h4>
+
+<p>sort -k2 -n (-r)   filename   按第二行排序</p>
+
+<p>-n 数字大小排序</p>
+
+<p>-r　倒序</p>
+
+<p>-t 指定列分割符</p>
+
+<p>-k　按第几个域进行排序，域默认是空格，-t可指定</p>
+
+<h4 id="cut">cut</h4>
+
+<p>-b  字节</p>
+
+<p>cut -b 3-5（3到5）      cut -b -3（到3）     cut -b 3-（3之后）  cut -b 3  第3    cut -b  3-5,7 （3到5和7）
+-c 字符</p>
+
+<p>对于多字节的字符（汉字） -b就呵呵了，此时可以用-nb告诉cut对于多字节的字符不要对其进行拆分处理</p>
+
+<p>-d 指定域分隔符</p>
+
+<p>-f  域</p>
+
+<p>(域分隔符默认是空格，可以通过-d来指定)</p>
+
+<p><code class="highlighter-rouge">cat /etc/passwd \|head -n 5 \|cut -d : -f 1,3-5</code></p>
+
+<h4 id="paste">paste</h4>
+
+<p>将文本合并,将file2的域追加在file1</p>
+
+<p>paste file1 file2</p>
+
+<p>eg:</p>
+
+<p>文件name:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1 ligoudan
+2 lierdan
+3 foolchild
+</code></pre>
+</div>
+
+<p>文件age:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1 23
+2 22
+4 24
+</code></pre>
+</div>
+
+<p>paste name age</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1 ligoudan	1 23
+2 lierdan	2 22
+3 foolchild	4 foolchild
+</code></pre>
+</div>
+
+<h4 id="join">join</h4>
+
+<p>将域内容相同的合并，将域内容不同的分别打出(可以类比数据库的join)</p>
+
+<p>Note that join will only work, if there is common field in both file and if values are identical to each other.</p>
+
+<p>join file1 file2</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>选项</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-j</td>
+      <td><code class="highlighter-rouge">-j field</code> 等同于-1 filed -2 field,第一个文件和第二个文件的第field列相同的显示,不指定参数默认是按第一列join(-j 1)</td>
+    </tr>
+    <tr>
+      <td>-a</td>
+      <td><code class="highlighter-rouge">-a filenum</code> 匹配的行打出,同时将filenum文件中未匹配的行也打出</td>
+    </tr>
+    <tr>
+      <td>-i</td>
+      <td>忽略大小写</td>
+    </tr>
+    <tr>
+      <td>-v</td>
+      <td><code class="highlighter-rouge">-v filenum</code> 类-a,只不过只显示未匹配的行</td>
+    </tr>
+    <tr>
+      <td>-e</td>
+      <td><code class="highlighter-rouge">-e EMPTY</code> 将需要显示但是文件中不存在的域用此选项指定的字符代替</td>
+    </tr>
+    <tr>
+      <td>-o</td>
+      <td><code class="highlighter-rouge">-o FORMAT</code> 以指定格式输出</td>
+    </tr>
+    <tr>
+      <td>-t</td>
+      <td><code class="highlighter-rouge">-t CHAR</code> 以指定字符作为输入输出的分隔符 join 默认以空白字符做分隔符（空格和\t）,可以使用 join -t $’\t’来指定使用tab做分隔符</td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td><code class="highlighter-rouge">-1 FIELD</code> 以file1中FIELD字段进行匹配</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>类上</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ps:</p>
+
+<ol>
+  <li>如果只有-1 field1 或者-2 field2,而不是同时存在的,-1 field1 相当于-j field1.</li>
+  <li>如果1,2,4行都匹配了,也只会打印1,2行, <strong><em>断了也就断了</em></strong></li>
+  <li>真的好像数据库的join 比如 <code class="highlighter-rouge">-j 1</code> 与<code class="highlighter-rouge">select * from file1 join file2 on file1.field1 = file2.field1</code><br />
+<code class="highlighter-rouge">-1 1 -2 3</code>与<code class="highlighter-rouge">select * from file1 join file2 on file1.field1 = file2.field3</code>,当然还是要谨记2条,  <strong><em>断了也就断了</em></strong></li>
+  <li>
+    <p>有时我们需要将多个格式相同的文件join到一起，而join接受的是两个文件的指令，此时我们可以使用管道和字符<code class="highlighter-rouge">-</code>来实现</p>
+
+    <p>join file1 file2 | join - file3 | join - file4</p>
+  </li>
+</ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>join file1.txt file2.txt
+join -j 1 file1.txt file2.txt
+join -1 2 -2 3 file1.txt file2.txt
+join  -v 1  file1.txt file2.txt
+
+//-o 指定 将file1的1,2,3列，file2的1,2,3 列都输出。
+//-a指定将file1中不匹配的行也输出，但是file2中没有与file1后两行对应的字段，因此使用empty补齐。
+join -o 1.1 -o 1.2  -o 1.3 -o 2.1 -o 2.2 -o 2.3   -e 'empty' -a 1  file1.txt file2.txt
+</code></pre>
+</div>
+
+<h4 id="tr">tr</h4>
+
+<p><a href="/2016/04/30/tr">详见</a></p>
+
+<h4 id="wc">wc</h4>
+
+<p>-c (字节)</p>
+
+<p>-m (字符)</p>
+
+<p>-l (lines)</p>
+
+<p>-w  (words)</p>
+
+<p>-L 查看最长的行的长度</p>
+
+<h4 id="uniq">uniq</h4>
+
+<p><strong>uniq 去重针对的只是连续的两行</strong></p>
+
+<p>-c  –count</p>
+
+<p>-u 只会显示出现一次的行</p>
+
+<p>-d 只会显示重复出现的行</p>
+
+<h4 id="zxx">zxx</h4>
+
+<p>zcat zless zmore</p>
+
+<h4 id="expr">expr</h4>
+<p>表达式求值 乘法*需要转义<code class="highlighter-rouge">\*</code>   <br />
+<code class="highlighter-rouge">+ - \* %   /</code></p>
+
+<h4 id="echo-1">echo</h4>
+
+<p>echo -e 高亮</p>
+
+<h4 id="tee">tee</h4>
+
+<p>将标准输入复制到文件甚至标准输出例如 ls -al | tee file.txt</p>
+
+<h4 id="grep">grep</h4>
+
+<p><a href="/2015/12/07/grep">详见</a></p>
+
+<h4 id="awk">awk</h4>
+
+<p><a href="/1025/12/25/awk">详见</a></p>
+
+<h4 id="sed">sed</h4>
+
+<p><a href="/2015/12/26/sed">详见</a></p>
+
+<h4 id="jq">jq</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo 'xxx' \| jq .
+echo 'xxx' \| jq .cabin
+echo 'xxx' \| jq .flight.cabin
+echo 'xxx' \| jq .flight[1].cabin
+</code></pre>
+</div>
+
+<p>使用场景：查日志时，你不用从终端中拷出来，然后再格式化了。直接在终端里搞定了，谁用谁知道，爽的不要不要的。</p>
+
+<h4 id="xml2json">xml2json</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo 'xxx' | xml2json | jq .
+</code></pre>
+</div>
+
+<h4 id="pbcopy_pbpaste">pbcopy,pbpaste</h4>
+
+<p>大段的文本直接管道到pbcopy,应该会快点的(linux上xclip)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ls -l | pbcopy
+pbpaste &gt; test
+</code></pre>
+</div>
+
+<h4 id="ref">参考</h4>
+
+<p>[unix下json的命令行工具]<a href="http://blog.chinaunix.net/uid-24774106-id-3830242.html">http://blog.chinaunix.net/uid-24774106-id-3830242.html</a></p>
+
+<p>[echo显示内容带颜色]<a href="http://www.cnblogs.com/lr-ting/archive/2013/02/28/2936792.html">http://www.cnblogs.com/lr-ting/archive/2013/02/28/2936792.html</a></p>
+
+<p>[xml2json github]<a href="https://github.com/Inist-CNRS/node-xml2json-command">https://github.com/Inist-CNRS/node-xml2json-command</a></p>
+
+<p>[7 command-line tools for data science]<a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a></p>
+
+<p>[join]<a href="http://jjuanxi.blog.163.com/blog/static/17527419720121954756361/">http://jjuanxi.blog.163.com/blog/static/17527419720121954756361/</a></p>
+
+        <ul class="prev_next">
+            
+            <li>
+                <span>上一篇</span>
+                <a href="/2015/12/22/manual">学会使用手册</a>
+            </li>
+            
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2015/12/25/tcpFSM">tcp 有限状态机(译)</a>
+            </li>
+            
+        </ul>
+        <div class="ds-share flat" data-thread-key="/2015/12/24/text" data-title="文本"
+             data-url="http://lcj1992.github.io/2015/12/24/text">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+        <div class="ds-thread" data-thread-key="/2015/12/24/text" data-title="文本"
+             data-url="http://lcj1992.github.io/2015/12/24/text"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name: "lcj1992"};
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/js/codeboy.js"></script>
+
+        <script src="/js/bootstrap3-typeahead.js"></script>
+        <script src="/js/jquery.hotkeys.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-72949519-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- TODO: only load in tag.html -->
+        <script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+        <script language="javascript">
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'}
+            };
+            $(function () {
+                $('#tag_cloud a').tagcloud();
+            });
+        </script>
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document, t = 'script',
+                        o = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener('load', function (e) {
+                        c(null, e);
+                    }, false);
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!-- Highlight.js -->
+        <script>
+            async("https://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () {
+                hljs.initHighlightingOnLoad();
+            })
+        </script>
+        <link href="https://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+        <script>
+            $(document).ready(function () {
+                var time1 = 0;
+                var show = false;
+                var names = new Array(); //文章名字等
+                var urls = new Array(); //文章地址
+                $(document).keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (e.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    } else if (e.keyCode == 27) {
+                        $(".search-tool").css("display", "none");
+                        show = false;
+                        time1 = 0;
+                    }
+                });
+
+                $("#search-content").keyup(function (e) {
+                    var time2 = new Date().getTime();
+                    if (window.event.keyCode == 17) {
+                        var gap = time2 - time1;
+                        time1 = time2;
+                        if (gap < 500) {
+                            if (show) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                            } else {
+                                $(".search-tool").css("display", "block");
+                                show = true;
+                                $("#search-content").val("");
+                                $("#search-content").focus();
+                            }
+                            time1 = 0;
+                        }
+                    }
+                });
+
+                $("#close-btn").click(function () {
+                    $(".search-tool").css("display", "none");
+                    show = false;
+                    time1 = 0;
+                });
+
+                $("#search-btn").click(function () {
+                    $(".search-tool").css("display", "block");
+                    show = true;
+                    $("#search-content").val("");
+                    $("#search-content").focus();
+                    time1 = 0;
+                });
+                // 家目录快捷键
+                $(document).bind('keydown', 'alt+h', function () {
+                    window.location.href = "/";
+                });
+                // 目录快捷键
+                $(document).bind('keydown', 'alt+c', function () {
+                    window.location.href = "/categories.html";
+                });
+                // 书单快捷键
+                $(document).bind('keydown', 'alt+b', function () {
+                    window.location.href = "/booklist.html";
+                });
+                // 个人介绍页快捷键
+                $(document).bind('keydown', 'alt+a', function () {
+                    window.location.href = "/about.html";
+                });
+                // 上一篇
+                $(document).bind('keydown', 'alt+p', function () {
+                    window.location.href = "/2015/12/22/manual";
+                });
+                // 下一篇
+                $(document).bind('keydown', 'alt+n', function () {
+                    window.location.href = "/2015/12/25/tcpFSM";
+                });
+
+                $.getJSON("/search.json").done(function (data) {
+                    if (data.code == 0) {
+                        for (var index in data.data) {
+                            var item = data.data[index];
+                            names.push(item.title);
+                            urls.push(item.url);
+                        }
+
+                        $("#search-content").typeahead({
+                            source: names,
+
+                            afterSelect: function (item) {
+                                $(".search-tool").css("display", "none");
+                                show = false;
+                                window.location.href = (urls[names.indexOf(item)]);
+                                return item;
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+        <style>
+            @media screen and (min-width: 768px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 70%;
+                    margin: 0 15%;
+                }
+
+                .search-tool ul {
+                    width: 70%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 70%;
+                    margin: 0 15%;
+                    position: absolute;
+                    top: 13%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .dropdown-menu {
+                    float: none;
+                    font-size: 20px;
+                    width: 96%;
+                    margin: 0 2%;
+                }
+
+                .search-tool ul {
+                    width: 96%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .search-content {
+                    width: 96%;
+                    margin: 0 2%;
+                    position: absolute;
+                    top: 10%;
+                    left: auto;
+                    right: auto;
+                    font-size: 22px;
+                    height: 50px;
+                    background-color: #eee;
+                    color: black;
+                    opacity: 1.0;
+                }
+            }
+        </style>
+        <div class="search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+            <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">
+
+            <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/images/search/close.png" id="close-btn"/>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">
+            <img src="/images/search/search.png" id="search-btn" title="双击ctrl试一下"/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+

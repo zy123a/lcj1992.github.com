@@ -11,7 +11,8 @@ tags: explain select mysql
     * [select_type说明](#select_type)
     * [table列说明](#table)
     * [type列说明](#type)
-  * [case](#case)
+* [索引的数据结构](#ds)
+* [case](#case)
 
 ## select sql执行顺序 {#select}
 
@@ -160,7 +161,32 @@ M，N都是explain结果中的id字段值
 1. `覆盖索引`(Covering Index)：只用到某个索引，且该索引包含查询需要的数据列，也就没有回表操作。
 2. 覆盖索引必须要存储索引列的值，而哈希索引、空间索引、和全文索引都不能存储列的值，所以MySQL只能使用B-Tree索引做覆盖索引
 
-### case
+## 索引的数据结构 {#ds}
+
+myisam
+
+![myisam_pri](/images/database/myisam_pri.png)
+
+1.  使用[b＋树](https://en.wikipedia.org/wiki/B%2B_tree)
+2.  **索引文件和数据文件是分离的。** 索引文件仅保存数据记录的地址，索引的叶子节点的data域存放的是数据记录的地址
+(上图`标红1处`key为15的叶子节点，只保存数据域的指针0x07,标红2处,是存放数据记录的位置)
+3.  **主索引和二级索引结构上没有任何差别，只是主索引要求key必须是唯一的**
+
+innodb
+
+![innodb_pri](/images/database/innodb_pri.png)
+![innodb_second](/images/database/innodb_second.png)
+
+1.  同样是b+树
+2.  数据文件同样是索引文件，数据文件本身就是按B+Tree组织的一个索引结构，叶子节点data域保存完整的数据记录(primary key图中`标红1处`,key为15的叶子节点，数据域就是数据记录)，这个索引的key是数据表的主键，因此innodb的表数据文件本身就是主索引。
+3.  innodb主索引，叶节点包含了完整的数据记录，这种索引叫做`聚集索引`
+4.  innodb的辅助索引data域存储相应记录主键的值而不是数据记录的地址（`标红2处`,以col3建了个索引，key为col3，value是其对应的主键）。
+5.  联合索引和最左前缀匹配
+6.  主键不一定是一个字段哟！
+
+ps: 因为innodb的数据文件本身要按主键聚集，所以innodb要求表必须有主键（myisam可以没有），如果没有显式指定，则mysql系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则mysql自动为innodb表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。
+
+## case
 case1:
 
     mysql> explain select * from mtp_book_info order by book_id desc limit 10000,10;
@@ -175,7 +201,7 @@ case1:
 2.  type为index,表明为索引扫描，扫描索引数，然后回表拿数据
 3.  book_id 为primary key
 4.  book_id类型为int，字节长度为4
-5.  从10000到10010，但mysql需要读取前10010，然后截取10000-10010
+5.  从10000到10010，但mysql需要读取前10010，然后截取10000-10010? 存疑！
 
 case2:
 
@@ -230,15 +256,18 @@ case4:
 1.  id为2: 多个union时，第二个和更后的select,select_type为union
 2.  id为null: union result 参与union的两张表为id为1和2的select结果
 
-## 底层的数据结构 {#ds}
-
-
-## 查询优化 {#query_performance}
-
 ## 参考 {#ref}
 
 [mysql explain详解]<http://www.cnitblog.com/aliyiyi08/archive/2016/04/21/48878.html>
+
 [官方文档]<https://dev.mysql.com/doc/>
+
 [MySQL索引背后的数据结构及算法原理]<http://blog.codinglabs.org/articles/theory-of-mysql-index.html>
+
 [《高性能MySQL》读书笔记－－索引]<http://blog.csdn.net/xifeijian/article/details/20312557>
+
 [MySQL索引原理及慢查询优化]<http://tech.meituan.com/mysql-index.html>
+
+[Innodb页面存储结构-1]<http://tencentdba.com/blog/innodb%E9%A1%B5%E9%9D%A2%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84-1/>
+
+[Innodb页面存储结构-2]<http://tencentdba.com/blog/innodb%E9%A1%B5%E9%9D%A2%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84-2/>
