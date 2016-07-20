@@ -66,7 +66,7 @@ web.xml中的启动遵循context-param》listener》filter》servlet。
     { this.contextLoader = this; }
     this.contextLoader.initWebApplicationContext(event.getServletContext());
     }
-    
+
 event.getServletContext()拿到事件中的ServletContext(ServletContext是一个接口，这里具体实现为ApplicationContext)
 
 ApplicationContext的官方描述
@@ -76,7 +76,7 @@ ApplicationContext的官方描述
     * a web application's execution environment. An instance of this class is
     * associated with each instance of StandardContext.
     */
-    
+
 后调用initWebApplicationContext()方法(在ClassLoaderListener.java中)，
 
 实例化根Web应用上下文(WebApplicationContext也是一个接口，这里的实现为XmlWebApplicationContext)，
@@ -96,7 +96,7 @@ ApplicationContext的官方描述
 
     WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
     WebApplicationContext wac = null;
-    
+
 这里的rootContext即Spring Ioc容器(Root WebApplicationContext)，并初始化WebApplicationContext。
 
 先找是否存在

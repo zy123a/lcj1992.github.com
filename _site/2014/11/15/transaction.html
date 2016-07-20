@@ -27,14 +27,23 @@
 
     <div id="main">
         <h2> 事务隔离级 </h2>
-        <h3 id="section">事务隔离级</h3>
+        <h3 id="section">概念及其之间的关系</h3>
 
-<p>数据库中的基本锁机制：排它锁（写锁，X锁）和共享锁（读锁，S锁）</p>
+<p>文章开头先理下这些个概念的关系</p>
 
-<p><strong>排它锁</strong>（写锁，X锁）事务T对数据对象A加了X锁，其他事务就不能对A加锁了，直到T释放A上的锁，这样就保证了其他事务在T释放A上的锁之前不能读或者写A  <br />
-<strong>共享锁</strong>（读锁，S锁）事务T对数据对象A加了S锁，可以对读A但是不能写A，其他事务可以对A加S锁，读A，但是不能加X锁，写A，直到事务T释放A上的锁。</p>
+<ol>
+  <li>并发环境下，我们要求我们的事务必须具备<code class="highlighter-rouge">ACID</code>特性。</li>
+  <li>其中对于隔离性，我们制定了四个隔离级(<code class="highlighter-rouge">RU</code>、<code class="highlighter-rouge">RC</code>、<code class="highlighter-rouge">RR</code>、<code class="highlighter-rouge">S</code>)，根据不同的业务场景可进行调整（一般就是RC，RR）</li>
+  <li>不同的隔离级下会产生一些不好的读现象（<code class="highlighter-rouge">脏读</code>、<code class="highlighter-rouge">不可重复读</code>、<code class="highlighter-rouge">幻读</code>）。</li>
+  <li>针对不同的sql，mysql会采用不同的读操作（<code class="highlighter-rouge">快照读</code>、<code class="highlighter-rouge">当前读</code>）</li>
+  <li>而对于当前读，会有不同的加锁策略(<code class="highlighter-rouge">记录锁</code>、<code class="highlighter-rouge">间隙锁</code>、<code class="highlighter-rouge">next－key锁</code>)，某一加锁策略下，可能还会对应不同的加锁类型(<code class="highlighter-rouge">X锁</code>、<code class="highlighter-rouge">S锁</code>)</li>
+</ol>
 
-<h4 id="acid">事务的ACID特性</h4>
+<p>然后接着看下文吧。</p>
+
+<h4 id="acid">acid</h4>
+
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/mysql-acid.html">InnoDB and the ACID Model</a></p>
 
 <ol>
   <li>A 原子性　atomic 事务要么全部完成，要么全部取消，即使它持续运行10个小时。如果事务崩溃，状态回到事务之前（事务回滚）</li>
@@ -43,58 +52,70 @@
   <li>D 持久性  durability 一旦事务提交（也就是成功执行）,不管发生什么（崩溃或者出错），数据要保存在数据库中。</li>
 </ol>
 
-<h4 id="mysql-innodb">mysql innodb的事务隔离级</h4>
-
-<p>MySQL InnoDB存储引擎，实现的是基于多版本的并发控制协议——MVCC (Multi-Version Concurrency Control) (注：与MVCC相对的，是基于锁的并发控制，Lock-Based Concurrency Control)。
-MVCC最大的好处，相信也是耳熟能详：读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能，这也是为什么现阶段，几乎所有的RDBMS，都支持了MVCC。??</p>
-
-<p>在MVCC并发控制中，读操作可以分成两类：快照读 (snapshot read)与当前读 (current read)。快照读，读取的是记录的可见版本 (有可能是历史版本)，不用加锁。
-当前读，读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录。??</p>
-
-<p>快照读：简单的select操作，属于快照读，不加锁。(当然，也有例外，下面会分析)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>select * from table where ?;
-</code></pre>
-</div>
-
-<p>当前读：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>select * from table where ? lock in share mode;
-select * from table where ? for update;
-insert into table values (…);
-update table set ? where ?;
-delete from table where ?;
-</code></pre>
-</div>
-
-<p>MySQL/InnoDB定义的4种隔离级别：</p>
+<h4 id="section-1">事务隔离级</h4>
 
 <ol>
-  <li>Read Uncommited可以读取未提交记录。此隔离级别，不会使用，忽略。</li>
-  <li>
-    <p>Read Committed (RC)</p>
-
-    <p>2.1 快照读忽略，本文不考虑。</p>
-
-    <p>2.2针对当前读，RC隔离级别保证对读取到的记录加锁 (记录锁)，存在幻读现象。</p>
-  </li>
-  <li>
-    <p>Repeatable Read (RR)</p>
-
-    <p>3.1快照读忽略，本文不考虑。</p>
-
-    <p>3.2针对当前读，RR隔离级别保证对读取到的记录加锁 (记录锁)，同时保证对读取的范围加锁，新的满足查询条件的记录不能够插入 (间隙锁)，不存在幻读现象。</p>
-  </li>
-  <li>Serializable    从MVCC并发控制退化为基于锁的并发控制。不区别快照读与当前读，所有的读操作均为当前读，读加读锁 (S锁)，写加写锁 (X锁)。Serializable隔离级别下，读写冲突，因此并发度急剧下降，在MySQL/InnoDB下不建议使用。</li>
+  <li>读未提交 read uncommitted</li>
+  <li>读提交  read committed</li>
+  <li>可重复读 repeatable read</li>
+  <li>串行  serializable</li>
 </ol>
 
-<p>事务隔离级 在没有设置GLOBAL和SESSION时,隔离级的设置只对当前事务有效</p>
+<h4 id="readphenomena">读现象 {read_phenomena}</h4>
 
-<p>所有的<em>写</em>操作都是在内存中，只有当commit时才写回磁盘。</p>
+<ol>
+  <li>脏读 dirty_read</li>
+  <li>不可重复读 Non-repeatable reads</li>
+  <li>幻读 Phantom reads</li>
+</ol>
+
+<h4 id="section-2">锁类型</h4>
+
+<p>数据库中的基本锁机制：排它锁（写锁，X锁）和共享锁（读锁，S锁） <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html">InnoDB Locking</a></p>
+
+<p><strong>排他锁</strong> exclusive (X) lock 事务T对数据对象A加了X锁，其他事务就不能对A加锁了，直到T释放A上的锁，这样就保证了其他事务在T释放A上的锁之前对A加X锁或S锁 <br />
+<strong>共享锁</strong> shared (S) lock事务T对数据对象A加了S锁，可以对读A但是不能写A，其他事务可以对A加S锁，但是不能加X锁，直到事务T释放A上的锁。
+<strong>意向排他锁</strong>
+<strong>意向共享锁</strong></p>
+
+<h4 id="section-3">锁算法</h4>
+
+<ul>
+  <li>记录锁 Record Locks  Record locks always lock index records（这里的索引包含聚集索引和二级索引，都会加锁）</li>
+  <li>间隙锁 Gap Locks  A gap lock is a lock on a gap between index records, or a lock on the gap before the first or after the last index record</li>
+  <li>next-key锁</li>
+</ul>
+
+<h4 id="innodb">innodb的两类读操作</h4>
+
+<ol>
+  <li>快照读 (snapshot read、consistent read) 读取的是记录的可见版本 (有可能是历史版本)，不用加锁。
+    <ol>
+      <li>简单的select操作，属于快照读，不加锁(隔离级为serializable除外)</li>
+      <li>select * from table where ?;</li>
+    </ol>
+  </li>
+  <li>当前读 (current read、locking read) 读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录。
+    <ol>
+      <li>特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。</li>
+      <li>lock in share mode</li>
+      <li>for update</li>
+      <li>insert</li>
+      <li>delete</li>
+      <li>update</li>
+    </ol>
+  </li>
+</ol>
+
+<h4 id="section-4">并发控制协议</h4>
+<ol>
+  <li>多版本并发控制 MVCC（Multi-Version Concurrency Contro） 读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能，这也是为什么现阶段，几乎所有的RDBMS，都支持了MVCC</li>
+  <li>基于锁的并发控制 (Lock-Based Concurrency Control)</li>
+</ol>
 
 <p>结束事务的两种不同的方式：回滚或者提交</p>
 
-<h3 id="section-1">参考</h3>
+<h3 id="section-5">参考</h3>
 
 <p>[SET TRANSACTION Syntax]<a href="http://dev.mysql.com/doc/refman/5.7/en/set-transaction.html#isolevel_read-committed">http://dev.mysql.com/doc/refman/5.7/en/set-transaction.html#isolevel_read-committed</a></p>
 

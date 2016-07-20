@@ -52,7 +52,6 @@ limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Or
 
     1.  left join 以左为准，右可以为空, 记录数>=table_a总数
     2.  right join 以右为准，左可以为空，记录数>=table_b总数
-    3.  如果你有on的连接条件，三个就一样了。
 
 4.  group by
 
@@ -144,17 +143,17 @@ M，N都是explain结果中的id字段值
 |类型|含义|备注|case|
 |-|-|-|-|
 |system|表只有一行（系统表），这是const的特殊情形|todo??|
-|const|表至多匹配一行，用于和主键或者unique index比较时。|`SELECT * FROM tbl_name WHERE primary_key=1;`|
+|const|表至多匹配一行，用于和主键或者unique index比较时。||`SELECT * FROM tbl_name WHERE primary_key=1;`|
 |eq_ref|索引访问（索引查找）|表至多匹配一条记录，用于primary key或者unique not null索引|`SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;`|
 |ref|索引访问|匹配的不是一个记录，而是一些记录，访问只有当使用非唯一性索引或者唯一索引的非唯一性前缀时才会发生|`SELECT * FROM ref_table WHERE key_column=expr;`|
-|ref_or_null|类似ref，多了个null| `SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;`|
+|ref_or_null|类似ref，多了个null|| `SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;`|
 |range|范围扫描|有限制的索引扫描，使用操作符`=, <>, >, >=, <, <=, IS NULL, <=>, BETWEEN, or IN()`、与常量进行比较 ，使用索引列表去查找一系列值，例如in（）和or列表们也会显示范围查询，但访问性能有重要的差异，开销跟索引类型相当|`SELECT * FROM tbl_name WHERE key_column = 10;`  `SELECT * FROM tbl_name WHERE key_column BETWEEN 10 and 20;`|
 |index|全索引扫描|类全表扫描，只是msyql扫描表时按照索引次序进行，而不是行。优点是避免了排序，缺点是要承担按索引读取整个表的开销。当查询结果可以被索引包含时，只扫描索引的数据，而不是按索引次序的每一行，这时Extra列会有`using index`标示（`覆盖索引`）||
 |all|全表扫描|通常意味着mysql必须扫描整张表,也有例外，例如在查询中使用了limit，或者在Extra列显示`using distinct/not exists`||
 |fulltext|处理fulltext索引时||
 |index_merge|访问使用了索引合并优化|todo|
-|unique_subquery|类似eq_ref，只不过不是＝，而是in|`value IN (SELECT primary_key FROM single_table WHERE some_expr)`|
-|index_subquery|类似unique_subquery,只不过作用于非unique索引|`value IN (SELECT key_column FROM single_table WHERE some_expr)`|
+|unique_subquery|类似eq_ref，只不过不是＝，而是in||`value IN (SELECT primary_key FROM single_table WHERE some_expr)`|
+|index_subquery|类似unique_subquery,只不过作用于非unique索引||`value IN (SELECT key_column FROM single_table WHERE some_expr)`|
 
 注：
 

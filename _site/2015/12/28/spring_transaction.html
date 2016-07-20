@@ -28,28 +28,34 @@
     <div id="main">
         <h2> spring事务 </h2>
         <ul>
-  <li><a href="#common_config">常用spring-mybatis的数据库配置</a></li>
+  <li><a href="#common_config">常用spring-mybatis的数据库配置</a>
+    <ul>
+      <li><a href="#origin">原理</a></li>
+      <li><a href="#spring-mybatis">有了spring和mybatis</a></li>
+    </ul>
+  </li>
   <li><a href="#how_to_work">事务流程</a></li>
 </ul>
 
 <h3 id="common_config">常用spring-mybatis的数据库配置</h3>
 
-<h4 id="mysql">不借助框架,自己连接数据库,我们通常是这么干的,以mysql为例:</h4>
+<h4 id="origin">原理</h4>
+
+<p>不借助框架,自己连接数据库,我们是这么干的,以mysql为例:</p>
 
 <ol>
-  <li>实例化一个Driver对象  class.forName(“com.mysql.jdbc.Driver”)</li>
-  <li>获取一个连接, DriverManager.getConnection(“jdbc:mysql://localhost:3306/test?xxxxxx”, “test”, “test”)</li>
+  <li>实例化一个Driver对象  class.forName(“com.mysql.jdbc.Driver”),参看<a href="#code1">code1</a></li>
+  <li>获取一个连接, DriverManager.getConnection(“jdbc:mysql://localhost:3306/test?xxxxxx”, “test”, “test”)，参看<a href="#code2">code2</a></li>
   <li>创建一个statement / PrepareStatement, connect.createStatement()</li>
   <li>执行sql,获取结果集ResultSet,解析结果集</li>
   <li>关闭resultSet,关闭connection</li>
   <li>使用PrepareStatement，帮助我们避免了sql注入攻击，自动规避了特殊字符；允许我们执行带参数输入的动态查询；支持批量操作</li>
+  <li>使用事务<a href="#code3">code3</a></li>
 </ol>
 
-<p>ps:</p>
+<h5 id="code1">code1</h5>
 
-<p><code class="highlighter-rouge">com.mysql.jdbc.Driver</code>静态代码块,向DriverManager中注册(code1),等到<code class="highlighter-rouge">java.sql.DriverManager#getConnection()</code>时,会遍历其中含有的registeredDrivers(code2)</p>
-
-<p>code1</p>
+<p>Class.forName()时，先执行static代码块，会先new一个Driver实例，然后注册进DriverManager</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>static {
     try {
@@ -57,39 +63,62 @@
     } catch (SQLException E) {
         throw new RuntimeException("Can't register driver!");
     }
-}	
+}
 </code></pre>
 </div>
 
-<p>code2</p>
+<h5 id="code2">code2</h5>
+
+<p>在DriverManger#getConnection时，会遍历所有已经注册的Drivers，调用其connect方法进行连接。</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>for(DriverInfo aDriver : registeredDrivers) {
-        // If the caller does not have permission to load the driver then
-        // skip it.
-        if(isDriverAllowed(aDriver.driver, callerCL)) {
-            try {
-                println("    trying " + aDriver.driver.getClass().getName());
-                Connection con = aDriver.driver.connect(url, info);
-                if (con != null) {
-                    // Success!
-                    println("getConnection returning " + aDriver.driver.getClass().getName());
-                    return (con);
-                }
-            } catch (SQLException ex) {
-                if (reason == null) {
-                    reason = ex;
-                }
+    // If the caller does not have permission to load the driver then
+    // skip it.
+    if(isDriverAllowed(aDriver.driver, callerCL)) {
+        try {
+            println("    trying " + aDriver.driver.getClass().getName());
+            Connection con = aDriver.driver.connect(url, info);
+            if (con != null) {
+                // Success!
+                println("getConnection returning " + aDriver.driver.getClass().getName());
+                return (con);
             }
-
-        } else {
-            println("    skipping: " + aDriver.getClass().getName());
+        } catch (SQLException ex) {
+            if (reason == null) {
+                reason = ex;
+            }
         }
+
+    } else {
+        println("    skipping: " + aDriver.getClass().getName());
+    }
+}
 </code></pre>
 </div>
 
-<h4 id="springmybatis">有了spring,mybatis我们通常是这么配置的:</h4>
+<h5 id="code3">code3</h5>
 
-<p>数据源设置</p>
+<p>我们这样管理事务</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> Class.forName("com.mysql.jdbc.Driver");
+ con = DriverManager.getConnection(
+         "jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8", "root", "root");
+ con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+ con.setAutoCommit(false);
+ String sql = "insert into  name values(?,?)";
+ PreparedStatement preparedStatement = con.prepareStatement(sql);
+ preparedStatement.setInt(1,1);
+ preparedStatement.setString(2,"lcj");
+ preparedStatement.execute();
+ con.commit();
+</code></pre>
+</div>
+
+<h4 id="spring-mybatis">有了spring,mybatis</h4>
+
+<p>我们通常是这么配置的,必须清楚知道的是框架只是帮我们封装了这些，里边还是那么掉的:</p>
+
+<p>a.数据源设置</p>
 
 <ol>
   <li>声明(可以不实例化<code class="highlighter-rouge">abstract="true"</code>)parentDatasource, 设置driver的className,连接池大小,超时时间等</li>
@@ -97,7 +126,7 @@
   <li>如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource <a href="/2015/12/28/spring_databases">做法见</a></li>
 </ol>
 
-<p>mybatis设置</p>
+<p>b.mybatis设置</p>
 
 <ol>
   <li>实例化sqlSessionFactory, 设置一般有这四个<code class="highlighter-rouge">dataSource</code>,<code class="highlighter-rouge">mapperLocations</code>,<code class="highlighter-rouge">typeAliasesPackage</code>,<code class="highlighter-rouge">typeHandlersPackage</code>:
@@ -111,7 +140,7 @@
   <li>实例化mapperScannerConfigurer ,指定basePackage, 各种dao包的位置.</li>
 </ol>
 
-<h4 id="section">如果需要事务,通常我们还会加这个配置</h4>
+<p>c.事务配置</p>
 
 <ol>
   <li>声明式事务 实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code>,然后加上<code class="highlighter-rouge">&lt;&lt;tx:annotation-driven transaction-manager="transactionManager"&gt;</code></li>
@@ -122,6 +151,35 @@
 
 <p>例子中以<code class="highlighter-rouge">org.apache.commons.dbcp.BasicDataSource</code>作为我们的DataSource,其创建连接的原理还是一样的
 不详说了,涉及这几个方法,BasicDataSource#getConnection() -&gt; createDataSource() -&gt; createConnectionFactory()</p>
+
+<p>InitializingBean: AbstractAutowireCapableBeanFactory#invokeInitMethods</p>
+
+<p>在spring初始化bean的时候，如果该bean是实现了InitializingBean接口，并且同时在配置文件中指定了init-method，系统则是先调用afterPropertiesSet方法，然后在调用init-method中指定的方法。</p>
+
+<p>aop</p>
+
+<p>cglib和java的动态代理
+cglib：编译时织入的代码。
+java动态代理： 运行时，生成新的代理类</p>
+
+<p>TransactionDefinition</p>
+
+<p>MethodInterceptor#intercept()
+DynamicAdvisedInterceptor
+CglibMethodInvocation#proceed()
+TransactionInterceptor#invoke
+TransactionAspectSupport#invokeWithinTransaction  TransactionInfo txInfo = createTransactionIfNecessary(tm, txAttr, joinpointIdentification) txInfo.bindToThread();</p>
+
+<p>ReflectiveMethodInvocation#proceed()</p>
+
+<p>TransactionAspectSupport有一个属性叫做transactionInfoHolder</p>
+
+<p>Constructor &gt; @PostConstruct &gt; InitializingBean &gt; init-method，构造函数最优先</p>
+
+<p>ApplicationListener<ContextRefreshEvent>
+InitializingBean
+ApplicationContextAware
+BeanFactoryAware</ContextRefreshEvent></p>
 
 <p>涉及的几个重要类:</p>
 
@@ -179,9 +237,9 @@ private static final ThreadLocal&lt;Boolean&gt; actualTransactionActive =
 <div class="highlighter-rouge"><pre class="highlight"><code>public class ClassA{
      public void testMethod1(){
          //事务不生效
-    testTransactionMethod();
+         testTransactionMethod();
      }
- 
+
      @Transactional
      public void testTransactionMethod(){
      }
@@ -190,7 +248,7 @@ private static final ThreadLocal&lt;Boolean&gt; actualTransactionActive =
 public Class ClassB{
     @Service
     private ClassA classA;
-    
+
     public void testMethod2(){
     //事务生效
         classA.testTransactionMethod();

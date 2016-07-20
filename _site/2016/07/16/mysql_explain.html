@@ -98,7 +98,6 @@ eg table_a,table_b</p>
     <ol>
       <li>left join 以左为准，右可以为空, 记录数&gt;=table_a总数</li>
       <li>right join 以右为准，左可以为空，记录数&gt;=table_b总数</li>
-      <li>如果你有on的连接条件，三个就一样了。</li>
     </ol>
   </li>
   <li>
@@ -361,8 +360,8 @@ eg table_a,table_b</p>
     <tr>
       <td>const</td>
       <td>表至多匹配一行，用于和主键或者unique index比较时。</td>
-      <td><code class="highlighter-rouge">SELECT * FROM tbl_name WHERE primary_key=1;</code></td>
       <td> </td>
+      <td><code class="highlighter-rouge">SELECT * FROM tbl_name WHERE primary_key=1;</code></td>
     </tr>
     <tr>
       <td>eq_ref</td>
@@ -379,8 +378,8 @@ eg table_a,table_b</p>
     <tr>
       <td>ref_or_null</td>
       <td>类似ref，多了个null</td>
-      <td><code class="highlighter-rouge">SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;</code></td>
       <td> </td>
+      <td><code class="highlighter-rouge">SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;</code></td>
     </tr>
     <tr>
       <td>range</td>
@@ -415,14 +414,14 @@ eg table_a,table_b</p>
     <tr>
       <td>unique_subquery</td>
       <td>类似eq_ref，只不过不是＝，而是in</td>
-      <td><code class="highlighter-rouge">value IN (SELECT primary_key FROM single_table WHERE some_expr)</code></td>
       <td> </td>
+      <td><code class="highlighter-rouge">value IN (SELECT primary_key FROM single_table WHERE some_expr)</code></td>
     </tr>
     <tr>
       <td>index_subquery</td>
       <td>类似unique_subquery,只不过作用于非unique索引</td>
-      <td><code class="highlighter-rouge">value IN (SELECT key_column FROM single_table WHERE some_expr)</code></td>
       <td> </td>
+      <td><code class="highlighter-rouge">value IN (SELECT key_column FROM single_table WHERE some_expr)</code></td>
     </tr>
   </tbody>
 </table>
