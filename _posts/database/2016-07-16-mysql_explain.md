@@ -12,6 +12,7 @@ tags: explain select mysql
     * [table列说明](#table)
     * [type列说明](#type)
 * [索引的数据结构](#ds)
+* [where条件在数据库中提取](#how_where)
 * [case](#case)
 
 ## select sql执行顺序 {#select}
