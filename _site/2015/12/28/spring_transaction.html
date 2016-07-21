@@ -147,7 +147,7 @@
 <p>c.事务配置</p>
 
 <ol>
-  <li>声明式事务 实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code>,然后加上<code class="highlighter-rouge">&lt;&lt;tx:annotation-driven transaction-manager="transactionManager"&gt;</code></li>
+  <li>声明式事务 实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code>,然后加上<code class="highlighter-rouge">&lt;&lt;tx:annotation-driven transaction-manager="transactionManager"&gt;</code> 实例化AnnotationTransactionAttributeSource 扫描@Transactional注解</li>
   <li>编程式事务 不care</li>
 </ol>
 
@@ -160,8 +160,9 @@
 
 <h3 id="how_to_work">事务流程</h3>
 
-<p>涉及的几个重要类:
-<code class="highlighter-rouge">TransactionAspectSupport</code>  事务的具体操作都在这里类中进行。它又一个属
+<p>涉及的几个重要类:</p>
+
+<p><code class="highlighter-rouge">TransactionAspectSupport</code>  事务的具体操作都在这里类中进行。它又一个属
 性<code class="highlighter-rouge">TransactionInfoHolder</code>，封装了事务的上下文TransactionInfo。</p>
 
 <p><code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager  事务管理器</p>
@@ -183,13 +184,6 @@
 <p><code class="highlighter-rouge">TransactionSynchronization</code></p>
 
 <p><img src="/images/java_web/spring_transaction_source.png" alt="原理" /></p>
-
-<p>对于上述声明式事务的配置方式,</p>
-
-<ol>
-  <li>第一步是实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code> 事务管理,</li>
-  <li>第二步实例化<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code>,扫注解@Transactional</li>
-</ol>
 
 <h3 id="propagation">spring中事务的传播特性</h3>
 

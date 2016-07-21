@@ -105,7 +105,7 @@ ps:  datasource建立连接的内部实现还是跟[原理](#origin)类似
 
 c.事务配置
 
-1.  声明式事务 实例化一个`DataSourceTransactionManager`,然后加上`<<tx:annotation-driven transaction-manager="transactionManager">`
+1.  声明式事务 实例化一个`DataSourceTransactionManager`,然后加上`<<tx:annotation-driven transaction-manager="transactionManager">` 实例化AnnotationTransactionAttributeSource 扫描@Transactional注解
 2.  编程式事务 不care
 
 d.spring中两种不同的mode
@@ -116,6 +116,7 @@ d.spring中两种不同的mode
 ### 事务流程 {#how_to_work}
 
 涉及的几个重要类:
+
 `TransactionAspectSupport`  事务的具体操作都在这里类中进行。它又一个属
 性`TransactionInfoHolder`，封装了事务的上下文TransactionInfo。
 
@@ -138,11 +139,6 @@ d.spring中两种不同的mode
 `TransactionSynchronization`
 
 ![原理](/images/java_web/spring_transaction_source.png)
-
-对于上述声明式事务的配置方式,
-
-1.  第一步是实例化一个`DataSourceTransactionManager` 事务管理,
-2.  第二步实例化`AnnotationTransactionAttributeSource`,扫注解@Transactional
 
 ### spring中事务的传播特性 {#propagation}
 
