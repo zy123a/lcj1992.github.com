@@ -10,10 +10,11 @@ tags : transaction acid
 文章开头先理下这些个概念的关系
 
 1.  并发环境下，我们要求我们的事务必须具备`ACID`特性。
-2.  其中对于隔离性，我们制定了四个隔离级(`RU`、`RC`、`RR`、`S`)，根据不同的业务场景可进行调整（一般就是RC，RR）
+2.  对于1的I（isolation）隔离性，我们制定了四个隔离级(`RU`、`RC`、`RR`、`S`)，根据不同的业务场景可进行调整（一般就是RC，RR）
 3.  不同的隔离级下会产生一些不好的读现象（`脏读`、`不可重复读`、`幻读`）。
 4.  针对不同的sql，mysql会采用不同的读操作（`快照读`、`当前读`）
-5.  而对于当前读，会有不同的加锁策略(`记录锁`、`间隙锁`、`next－key锁`)，某一加锁策略下，可能还会对应不同的加锁类型(`X锁`、`S锁`)
+5.  快照读不加锁（也有例外，比如隔离级为S时,具体[参见](http://mysql.taobao.org/monthly/2016/01/01/)）,而对于当前读，会有不同的加锁策略(`记录锁`、`间隙锁`、`next－key锁`)，某一加锁策略下，可能还会对应不同的加锁类型(`X锁`、`S锁`)
+6.  spring中针对某一隔离级还会有不同的传播特性。
 
 然后接着看下文吧。
 
@@ -35,9 +36,17 @@ tags : transaction acid
 
 #### 读现象 {read_phenomena}
 
-1.  脏读 dirty_read
-2.  不可重复读 Non-repeatable reads
-3.  幻读 Phantom reads
+1.  脏读 dirty_read 读到别人未提交的数据。隔离级为RU时，会出现
+2.  不可重复读 Non-repeatable reads  同一事务中两次读的记录不同。隔离级为RU,RC时会出现
+3.  幻读 Phantom reads 同一事务中，进行count操作，两次结果不一样。隔离级为RU，RC时会出现 [Phantom_reads](https://en.wikipedia.org/wiki/Isolation_%28database_systems%29%23Phantom_reads)
+
+ps: 针对幻读，在隔离级为RR时，各地方说法不一，wiki百科上说会发生幻读，但是何登程说的和我自己实验的都是不会的。
+
+参见
+
+[(Isolation (database systems))](https://en.wikipedia.org/wiki/Isolation_%28database_systems%29)    
+
+[MySQL 加锁处理分析](http://hedengcheng.com/?p=771)
 
 #### 锁类型
 

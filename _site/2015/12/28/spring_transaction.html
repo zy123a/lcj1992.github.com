@@ -149,7 +149,14 @@
 
 <ol>
   <li>声明式事务 实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code>,然后加上<code class="highlighter-rouge">&lt;&lt;tx:annotation-driven transaction-manager="transactionManager"&gt;</code></li>
-  <li>编程式事务 ..todo</li>
+  <li>编程式事务 不care</li>
+</ol>
+
+<p>d.spring中两种不同的mode</p>
+
+<ol>
+  <li>mode=“proxy” 使用spring的动态代理，但是这种方式有点限制,对于类内的方法调用，事务不生效</li>
+  <li>mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，使用方式参见[gist](https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81)</context:load-time-weaver></li>
 </ol>
 
 <h3 id="how_to_work">事务流程</h3>
@@ -220,7 +227,7 @@ BeanFactoryAware</ContextRefreshEvent></p>
     <tr>
       <td>PROPAGATION_REQUIRED</td>
       <td>如果存在一个事务，则支持当前事务。如果没有事务则开启</td>
-      <td> </td>
+      <td>默认的，也基本够用了。</td>
     </tr>
     <tr>
       <td>PROPAGATION_SUPPORTS</td>
@@ -254,105 +261,6 @@ BeanFactoryAware</ContextRefreshEvent></p>
     </tr>
   </tbody>
 </table>
-
-<h4 id="spring-1">spring中配置事务</h4>
-
-<p>mode=“proxy”使用spring的动态代理，但是这种方式有点限制</p>
-
-<ol>
-  <li>对于类内的方法调用，事务不生效</li>
-  <li>只作用于public方法</li>
-</ol>
-
-<p>eg:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>public class ClassA{
-     public void testMethod1(){
-         //事务不生效
-         testTransactionMethod();
-     }
-
-     @Transactional
-     public void testTransactionMethod(){
-     }
-}
-
-public Class ClassB{
-    @Service
-    private ClassA classA;
-
-    public void testMethod2(){
-    //事务生效
-        classA.testTransactionMethod();
-    }
-}
-</code></pre>
-</div>
-
-<p>mode=“aspectj”上述代码中ClassA和ClassB中的事务都会生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入</context:load-time-weaver></p>
-
-<p>maven中使用aspectj编译</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;plugins&gt;
-    &lt;plugin&gt;
-        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-        &lt;artifactId&gt;aspectj-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;1.4&lt;/version&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
-                &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
-                &lt;version&gt;1.6.11&lt;/version&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-        &lt;executions&gt;
-            &lt;execution&gt;
-                &lt;goals&gt;
-                    &lt;goal&gt;compile&lt;/goal&gt;
-                    &lt;goal&gt;test-compile&lt;/goal&gt;
-                &lt;/goals&gt;
-            &lt;/execution&gt;
-        &lt;/executions&gt;
-        &lt;configuration&gt;
-            &lt;Xlint&gt;warning&lt;/Xlint&gt;
-            &lt;aspectLibraries&gt;
-                &lt;aspectLibrary&gt;
-                    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-                    &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
-                &lt;/aspectLibrary&gt;
-            &lt;/aspectLibraries&gt;
-            &lt;source&gt;1.6&lt;/source&gt;
-            &lt;target&gt;1.6&lt;/target&gt;
-        &lt;/configuration&gt;
-    &lt;/plugin&gt;
-    &lt;plugin&gt;
-        &lt;groupId&gt;org.bsc.maven&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-processor-plugin&lt;/artifactId&gt;
-        &lt;version&gt;2.0.5&lt;/version&gt;
-        &lt;executions&gt;
-            &lt;execution&gt;
-                &lt;id&gt;process&lt;/id&gt;
-                &lt;goals&gt;
-                    &lt;goal&gt;process&lt;/goal&gt;
-                &lt;/goals&gt;
-                &lt;phase&gt;process-sources&lt;/phase&gt;
-                &lt;configuration&gt;
-                    &lt;compilerArguments&gt;-encoding UTF-8&lt;/compilerArguments&gt;
-                &lt;/configuration&gt;
-            &lt;/execution&gt;
-        &lt;/executions&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
-                &lt;artifactId&gt;hibernate-validator-annotation-processor&lt;/artifactId&gt;
-                &lt;version&gt;4.2.0.Final&lt;/version&gt;
-                &lt;scope&gt;compile&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/plugin&gt;
-&lt;/plugins&gt;
-</code></pre>
-</div>
 
         <ul class="prev_next">
             

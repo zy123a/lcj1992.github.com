@@ -104,7 +104,12 @@ b.mybatis设置
 c.事务配置
 
 1.  声明式事务 实例化一个`DataSourceTransactionManager`,然后加上`<<tx:annotation-driven transaction-manager="transactionManager">`
-2.  编程式事务 ..todo
+2.  编程式事务 不care
+
+d.spring中两种不同的mode
+
+1.  mode=“proxy” 使用spring的动态代理，但是这种方式有点限制,对于类内的方法调用，事务不生效
+2.  mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，使用方式参见[gist](https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81)
 
 ### 事务流程 {#how_to_work}
 
@@ -161,103 +166,10 @@ BeanFactoryAware
 
 |传播特性|含义|场景|
 |-|-|-|
-|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启||
+|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启|默认的，也基本够用了。|
 |PROPAGATION_SUPPORTS|如果存在一个事务，则支持当前事务。如果没有事务，则非事务的执行||
 |PROPAGATION_MANDATORY|如果存在一个事务，则支持当前事务。如果没有一个活动的事务，则抛出异常。||
 |PROPAGATION_REQUIRES_NEW|总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。||
 |PROPAGATION_NOT_SUPPORTED|总是非事务地执行，并挂起任何存在的事务。||
 |PROPAGATION_NEVER|总是非事务地执行，如果存在一个活动事务，则抛出异常||
 |PROPAGATION_NESTED|如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行||
-
-#### spring中配置事务
-
-mode=“proxy”使用spring的动态代理，但是这种方式有点限制
-
-1.  对于类内的方法调用，事务不生效
-2.  只作用于public方法
-
-eg:
-
-    public class ClassA{
-         public void testMethod1(){
-             //事务不生效
-             testTransactionMethod();
-         }
-
-         @Transactional
-         public void testTransactionMethod(){
-         }
-    }
-
-    public Class ClassB{
-        @Service
-        private ClassA classA;
-
-        public void testMethod2(){
-        //事务生效
-            classA.testTransactionMethod();
-        }
-    }
-
-mode=“aspectj”上述代码中ClassA和ClassB中的事务都会生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入
-
-maven中使用aspectj编译
-
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>aspectj-maven-plugin</artifactId>
-            <version>1.4</version>
-            <dependencies>
-                <dependency>
-                    <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjrt</artifactId>
-                    <version>1.6.11</version>
-                </dependency>
-            </dependencies>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>compile</goal>
-                        <goal>test-compile</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <Xlint>warning</Xlint>
-                <aspectLibraries>
-                    <aspectLibrary>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-aspects</artifactId>
-                    </aspectLibrary>
-                </aspectLibraries>
-                <source>1.6</source>
-                <target>1.6</target>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.bsc.maven</groupId>
-            <artifactId>maven-processor-plugin</artifactId>
-            <version>2.0.5</version>
-            <executions>
-                <execution>
-                    <id>process</id>
-                    <goals>
-                        <goal>process</goal>
-                    </goals>
-                    <phase>process-sources</phase>
-                    <configuration>
-                        <compilerArguments>-encoding UTF-8</compilerArguments>
-                    </configuration>
-                </execution>
-            </executions>
-            <dependencies>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-validator-annotation-processor</artifactId>
-                    <version>4.2.0.Final</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </plugin>
-    </plugins>
