@@ -52,6 +52,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 |Cmd + Shift + E |Ctrl + Shift + E	|最近被编辑过的文件|
 |Cmd + Shift + \`|Ctrl + Alt + \[|上一个工程|
 |Cmd + \` |Ctrl + Alt + \]|下一个工程|
+|Cmd + shift + F12|最大化当前窗口|
 
 
 <h3 id="edit">Editing</h3>
@@ -100,7 +101,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 <h3 id="search_replace">Search/Replace</h3>
 
 |mac|pc| 作用  |
-|----| -----  | ----- | 
+|----| -----  | ----- |
 |Double Shift|Double Shift | 全局搜索
 |Cmd + F|Ctrl + F |文件内查找
 |Cmd + G|F3 |查找下一个
@@ -114,7 +115,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 <h3 id="usage_search">usage search</h3>
 
 |mac| pc | 作用  |
-|---| -----  | ----- | 
+|---| -----  | ----- |
 |Opt + F7|Alt + F7 / Ctrl + F7 |Find usages / Find usages in file
 |Cmd + Shift + F7|Ctrl + Shift + F7 |Highlight usages in file
 |Cmd + Opt + F7|Ctrl + Alt + F7 |Show usages
@@ -122,7 +123,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### 编译运行 {#compile_run}
 
 |mac| pc| 作用  |
-|---| -----  | ----- | 
+|---| -----  | ----- |
 |Ctrl + Opt + R|Alt + Shift + F10 |Select configuration and run
 |Ctrl + Opt + D|Alt + Shift + F9 |Select configuration and debug
 |Ctrl + R|Shift + F10 |运行
@@ -132,7 +133,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### 调试 {#debug}
 
 |mac| 快捷键| 作用  |
-|---| -----  | ----- | 
+|---| -----  | ----- |
 |F8|F8 |单步跳过
 |F7|F7 |单步跳入
 |Shift + F7|Shift + F7 |Smart step into
@@ -146,7 +147,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### 导航 {#nav}
 
 |mac| pc| 作用  |
-|----|-----  | ----- | 
+|----|-----  | ----- |
 |Cmd + O|Ctrl + N |跳到给定名字的类
 |Cmd + Shift + O|Ctrl + Shift + N |跳到给定名字的文件
 |Cmd + Opt +  O |Ctrl + Alt + Shift + N |跳到给定名字的符号(注意，以上这三个快捷键都可以使用缩写，比如要找一个名字为QunarSystem的类，可以只输入QS)
@@ -181,7 +182,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### 重构 {#refactor}
 
 |mac| pc| 作用  |
-|-----| -----  | ----- | 
+|-----| -----  | ----- |
 |F5|F5 |Copy
 |F6|F6 |移动
 |cmd + Del|Alt + Delete |Safe Delete  
@@ -197,7 +198,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### vcs/local history {#vcs}
 
 |mac| pc| 作用  |
-|---| -----  | ----- | 
+|---| -----  | ----- |
 |Cmd + K|Ctrl + K |Commit project to VCS
 |Cmd + T|Ctrl + T |Update project from VCS
 |Shift + Opt + C|Alt + Shift + C |View recent changes
@@ -219,7 +220,7 @@ Command,Shift,Option,Ctrl参看[mac按键](/2016/02/03/mackeyboard)
 ### 通用 {#general}
 
 |mac| pc| 作用  |
-|---| -----  | ----- | 
+|---| -----  | ----- |
 |Cmd + Opt + Y|Ctrl + Alt + Y |Synchronize
 |Cmd + Shift + F12|Ctrl + Shift + F12 |切换最大化编辑模式
 |Cmd + Ctrl + F12||全屏|
