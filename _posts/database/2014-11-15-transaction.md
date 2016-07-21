@@ -82,3 +82,5 @@ tags : transaction acid
 [locking read]<http://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_locking_read>
 
 [mysql 加锁处理分析]<http://hedengcheng.com/?p=771>
+
+[MySQL · 引擎特性 · InnoDB 事务锁系统简介]<http://mysql.taobao.org/monthly/2016/01/01/>

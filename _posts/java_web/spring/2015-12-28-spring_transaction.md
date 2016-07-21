@@ -8,8 +8,8 @@ tags: spring transaction
 *   [常用spring-mybatis的数据库配置](#common_config)
     *   [原理](#origin)
     *   [有了spring和mybatis](#spring-mybatis)
-*   [事务流程](#how_to_work)
-
+*   [spring事务流程](#how_to_work)
+    *   [spring中事务的传播特性](#propagation)
 
 ### 常用spring-mybatis的数据库配置 {#common_config}
 
@@ -79,6 +79,7 @@ Class.forName()时，先执行static代码块，会先new一个Driver实例，�
      preparedStatement.setString(2,"lcj");
      preparedStatement.execute();
      con.commit();
+     con.rollback();
 
 
 #### 有了spring,mybatis {#spring-mybatis}
@@ -139,43 +140,36 @@ InitializingBean
 ApplicationContextAware
 BeanFactoryAware
 
-涉及的几个重要类:
-
-1.  `TransactionInfo`
-2.  `DataSourceTransactionManager` implement PlatformTransactionManager
-3.  `AnnotationTransactionAttributeSource` implement TransactionAttributeSource
-4.  `TransactionStatus` implement SavepointManager
-5.  `TransactionInterceptor` extends TransactionAspectSupport implement MethodInterceptor
-6.  `ConnectionHolder`
-7.  `TransactionSynchronizationManager` 各种ThreadLocal的事务的变量
-8.  `TransactionSynchronization`
-
-        private static final ThreadLocal<Map<Object, Object>> resources =
-                new NamedThreadLocal<Map<Object, Object>>("Transactional resources");
-
-        private static final ThreadLocal<Set<TransactionSynchronization>> synchronizations =
-                new NamedThreadLocal<Set<TransactionSynchronization>>("Transaction synchronizations");
-
-        private static final ThreadLocal<String> currentTransactionName =
-                new NamedThreadLocal<String>("Current transaction name");
-
-        private static final ThreadLocal<Boolean> currentTransactionReadOnly =
-                new NamedThreadLocal<Boolean>("Current transaction read-only status");
-
-        private static final ThreadLocal<Integer> currentTransactionIsolationLevel =
-                new NamedThreadLocal<Integer>("Current transaction isolation level");
-
-        private static final ThreadLocal<Boolean> actualTransactionActive =
-                new NamedThreadLocal<Boolean>("Actual transaction active");
-
-
 
 对于上述声明式事务的配置方式,
 
 1.  第一步是实例化一个`DataSourceTransactionManager` 事务管理,
 2.  第二步实例化`AnnotationTransactionAttributeSource`,扫注解@Transactional
 
-todo
+涉及的几个重要类:
+
+*  `TransactionInfo`
+*  `DataSourceTransactionManager` implement PlatformTransactionManager
+*  `AnnotationTransactionAttributeSource` implement TransactionAttributeSource   determineTransactionAttribute这个方法来扫注解
+*  `TransactionStatus` implement SavepointManager
+*  `TransactionInterceptor` extends TransactionAspectSupport implement MethodInterceptor
+*  `ConnectionHolder`
+*  `TransactionSynchronizationManager` 各种ThreadLocal的事务的变量
+*  `TransactionSynchronization`
+
+#### spring中事务的传播特性
+
+|传播特性|含义|场景|
+|-|-|-|
+|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启||
+|PROPAGATION_SUPPORTS|如果存在一个事务，则支持当前事务。如果没有事务，则非事务的执行||
+|PROPAGATION_MANDATORY|如果存在一个事务，则支持当前事务。如果没有一个活动的事务，则抛出异常。||
+|PROPAGATION_REQUIRES_NEW|总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。||
+|PROPAGATION_NOT_SUPPORTED|总是非事务地执行，并挂起任何存在的事务。||
+|PROPAGATION_NEVER|总是非事务地执行，如果存在一个活动事务，则抛出异常||
+|PROPAGATION_NESTED|如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行||
+
+#### spring中配置事务
 
 mode=“proxy”使用spring的动态代理，但是这种方式有点限制
 

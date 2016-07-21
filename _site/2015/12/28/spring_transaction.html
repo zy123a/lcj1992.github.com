@@ -34,7 +34,11 @@
       <li><a href="#spring-mybatis">有了spring和mybatis</a></li>
     </ul>
   </li>
-  <li><a href="#how_to_work">事务流程</a></li>
+  <li><a href="#how_to_work">spring事务流程</a>
+    <ul>
+      <li><a href="#propagation">spring中事务的传播特性</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="common_config">常用spring-mybatis的数据库配置</h3>
@@ -111,6 +115,7 @@
  preparedStatement.setString(2,"lcj");
  preparedStatement.execute();
  con.commit();
+ con.rollback();
 </code></pre>
 </div>
 
@@ -181,41 +186,6 @@ InitializingBean
 ApplicationContextAware
 BeanFactoryAware</ContextRefreshEvent></p>
 
-<p>涉及的几个重要类:</p>
-
-<ol>
-  <li><code class="highlighter-rouge">TransactionInfo</code></li>
-  <li><code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager</li>
-  <li><code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource</li>
-  <li><code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager</li>
-  <li><code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement MethodInterceptor</li>
-  <li><code class="highlighter-rouge">ConnectionHolder</code></li>
-  <li><code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量</li>
-  <li>
-    <p><code class="highlighter-rouge">TransactionSynchronization</code></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>private static final ThreadLocal&lt;Map&lt;Object, Object&gt;&gt; resources =
-        new NamedThreadLocal&lt;Map&lt;Object, Object&gt;&gt;("Transactional resources");
-
-private static final ThreadLocal&lt;Set&lt;TransactionSynchronization&gt;&gt; synchronizations =
-        new NamedThreadLocal&lt;Set&lt;TransactionSynchronization&gt;&gt;("Transaction synchronizations");
-
-private static final ThreadLocal&lt;String&gt; currentTransactionName =
-        new NamedThreadLocal&lt;String&gt;("Current transaction name");
-
-private static final ThreadLocal&lt;Boolean&gt; currentTransactionReadOnly =
-        new NamedThreadLocal&lt;Boolean&gt;("Current transaction read-only status");
-
-private static final ThreadLocal&lt;Integer&gt; currentTransactionIsolationLevel =
-        new NamedThreadLocal&lt;Integer&gt;("Current transaction isolation level");
-
-private static final ThreadLocal&lt;Boolean&gt; actualTransactionActive =
-        new NamedThreadLocal&lt;Boolean&gt;("Actual transaction active");
-</code></pre>
-    </div>
-  </li>
-</ol>
-
 <p>对于上述声明式事务的配置方式,</p>
 
 <ol>
@@ -223,7 +193,69 @@ private static final ThreadLocal&lt;Boolean&gt; actualTransactionActive =
   <li>第二步实例化<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code>,扫注解@Transactional</li>
 </ol>
 
-<p>todo</p>
+<p>涉及的几个重要类:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TransactionInfo</code></li>
+  <li><code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager</li>
+  <li><code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource   determineTransactionAttribute这个方法来扫注解</li>
+  <li><code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager</li>
+  <li><code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement MethodInterceptor</li>
+  <li><code class="highlighter-rouge">ConnectionHolder</code></li>
+  <li><code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量</li>
+  <li><code class="highlighter-rouge">TransactionSynchronization</code></li>
+</ul>
+
+<h4 id="spring">spring中事务的传播特性</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>传播特性</th>
+      <th>含义</th>
+      <th>场景</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PROPAGATION_REQUIRED</td>
+      <td>如果存在一个事务，则支持当前事务。如果没有事务则开启</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_SUPPORTS</td>
+      <td>如果存在一个事务，则支持当前事务。如果没有事务，则非事务的执行</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_MANDATORY</td>
+      <td>如果存在一个事务，则支持当前事务。如果没有一个活动的事务，则抛出异常。</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_REQUIRES_NEW</td>
+      <td>总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_NOT_SUPPORTED</td>
+      <td>总是非事务地执行，并挂起任何存在的事务。</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_NEVER</td>
+      <td>总是非事务地执行，如果存在一个活动事务，则抛出异常</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>PROPAGATION_NESTED</td>
+      <td>如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="spring-1">spring中配置事务</h4>
 
 <p>mode=“proxy”使用spring的动态代理，但是这种方式有点限制</p>
 
