@@ -101,6 +101,8 @@ b.mybatis设置
     *   `typeHandlersPackage` 自己定制的类型处理器
 2.  实例化mapperScannerConfigurer ,指定basePackage, 各种dao包的位置.
 
+ps:  datasource建立连接的内部实现还是跟[原理](#origin)类似
+
 c.事务配置
 
 1.  声明式事务 实例化一个`DataSourceTransactionManager`,然后加上`<<tx:annotation-driven transaction-manager="transactionManager">`
@@ -113,55 +115,23 @@ d.spring中两种不同的mode
 
 ### 事务流程 {#how_to_work}
 
-例子中以`org.apache.commons.dbcp.BasicDataSource`作为我们的DataSource,其创建连接的原理还是一样的
-不详说了,涉及这几个方法,BasicDataSource#getConnection() -> createDataSource() -> createConnectionFactory()
+涉及的几个重要类:
+`TransactionAspectSupport`  事务的具体操作都在这里类中进行。它又一个属性`TransactionInfoHolder`，封装了事务的上下文TransactionInfo。
+`DataSourceTransactionManager` implement PlatformTransactionManager  事务管理器
+`TransactionInfo`  事务信息
+`AnnotationTransactionAttributeSource` implement TransactionAttributeSource      提供有方法来扫注解@Transactional
+`TransactionStatus` implement SavepointManager
+`TransactionInterceptor` extends TransactionAspectSupport implement `MethodInterceptor`  事务拦截器
+`ConnectionHolder` 封装java.sql.connection
+`TransactionSynchronizationManager` 各种ThreadLocal的事务的变量
+`TransactionSynchronization`
 
-InitializingBean: AbstractAutowireCapableBeanFactory#invokeInitMethods
-
-在spring初始化bean的时候，如果该bean是实现了InitializingBean接口，并且同时在配置文件中指定了init-method，系统则是先调用afterPropertiesSet方法，然后在调用init-method中指定的方法。
-
-aop
-动态代理： 运行时，生成新的代理类
-    cglib: 代理具体的类时，spring会采用这种代理方式[cglib](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop-api.html#aop-pfb-proxy-types)
-    java动态代理：只能代理接口。
-静态织入：编译时候，把class改了。
-    aspectj:
-
-TransactionDefinition
-
-MethodInterceptor#intercept()
-DynamicAdvisedInterceptor
-CglibMethodInvocation#proceed()
-TransactionInterceptor#invoke
-TransactionAspectSupport#invokeWithinTransaction  TransactionInfo txInfo = createTransactionIfNecessary(tm, txAttr, joinpointIdentification) txInfo.bindToThread();
-
-ReflectiveMethodInvocation#proceed()
-
-TransactionAspectSupport有一个属性叫做transactionInfoHolder
-
-Constructor > @PostConstruct > InitializingBean > init-method，构造函数最优先
-
-ApplicationListener<ContextRefreshEvent>
-InitializingBean
-ApplicationContextAware
-BeanFactoryAware
-
+![原理](/images/java_web/spring_transaction_source.png)
 
 对于上述声明式事务的配置方式,
 
 1.  第一步是实例化一个`DataSourceTransactionManager` 事务管理,
 2.  第二步实例化`AnnotationTransactionAttributeSource`,扫注解@Transactional
-
-涉及的几个重要类:
-
-*  `TransactionInfo`
-*  `DataSourceTransactionManager` implement PlatformTransactionManager
-*  `AnnotationTransactionAttributeSource` implement TransactionAttributeSource   determineTransactionAttribute这个方法来扫注解
-*  `TransactionStatus` implement SavepointManager
-*  `TransactionInterceptor` extends TransactionAspectSupport implement MethodInterceptor
-*  `ConnectionHolder`
-*  `TransactionSynchronizationManager` 各种ThreadLocal的事务的变量
-*  `TransactionSynchronization`
 
 #### spring中事务的传播特性
 

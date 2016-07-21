@@ -122,6 +122,29 @@ spring ioc容器读取相应的xsd文件，读取bean的attributes（class类名
 
 done!
 
+
+
+InitializingBean: AbstractAutowireCapableBeanFactory#invokeInitMethods
+
+在spring初始化bean的时候，如果该bean是实现了InitializingBean接口，并且同时在配置文件中指定了init-method，系统则是先调用afterPropertiesSet方法，然后在调用init-method中指定的方法。
+
+aop
+动态代理： 运行时，生成新的代理类
+    cglib: 代理具体的类时，spring会采用这种代理方式[cglib](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop-api.html#aop-pfb-proxy-types)
+    java动态代理：只能代理接口。
+静态织入：编译时候，把class改了。
+    aspectj:
+
+CglibAopProxy-> DynamicAdvisedInterceptor#intercept
+
+
+Constructor > @PostConstruct > InitializingBean > init-method，构造函数最优先
+
+ApplicationListener<ContextRefreshEvent>
+InitializingBean
+ApplicationContextAware
+BeanFactoryAware
+
 参考：
 
 [1]<http://blog.csdn.net/c289054531/article/details/9196149>

@@ -145,6 +145,8 @@
   <li>实例化mapperScannerConfigurer ,指定basePackage, 各种dao包的位置.</li>
 </ol>
 
+<p>ps:  datasource建立连接的内部实现还是跟<a href="#origin">原理</a>类似</p>
+
 <p>c.事务配置</p>
 
 <ol>
@@ -161,38 +163,18 @@
 
 <h3 id="how_to_work">事务流程</h3>
 
-<p>例子中以<code class="highlighter-rouge">org.apache.commons.dbcp.BasicDataSource</code>作为我们的DataSource,其创建连接的原理还是一样的
-不详说了,涉及这几个方法,BasicDataSource#getConnection() -&gt; createDataSource() -&gt; createConnectionFactory()</p>
+<p>涉及的几个重要类:
+<code class="highlighter-rouge">TransactionAspectSupport</code>  事务的具体操作都在这里类中进行。它又一个属性<code class="highlighter-rouge">TransactionInfoHolder</code>，封装了事务的上下文TransactionInfo。
+<code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager  事务管理器
+<code class="highlighter-rouge">TransactionInfo</code>  事务信息
+<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource      提供有方法来扫注解@Transactional
+<code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager
+<code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement <code class="highlighter-rouge">MethodInterceptor</code>  事务拦截器
+<code class="highlighter-rouge">ConnectionHolder</code> 封装java.sql.connection
+<code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量
+<code class="highlighter-rouge">TransactionSynchronization</code></p>
 
-<p>InitializingBean: AbstractAutowireCapableBeanFactory#invokeInitMethods</p>
-
-<p>在spring初始化bean的时候，如果该bean是实现了InitializingBean接口，并且同时在配置文件中指定了init-method，系统则是先调用afterPropertiesSet方法，然后在调用init-method中指定的方法。</p>
-
-<p>aop
-动态代理： 运行时，生成新的代理类
-    cglib: 代理具体的类时，spring会采用这种代理方式<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop-api.html#aop-pfb-proxy-types">cglib</a>
-    java动态代理：只能代理接口。
-静态织入：编译时候，把class改了。
-    aspectj:</p>
-
-<p>TransactionDefinition</p>
-
-<p>MethodInterceptor#intercept()
-DynamicAdvisedInterceptor
-CglibMethodInvocation#proceed()
-TransactionInterceptor#invoke
-TransactionAspectSupport#invokeWithinTransaction  TransactionInfo txInfo = createTransactionIfNecessary(tm, txAttr, joinpointIdentification) txInfo.bindToThread();</p>
-
-<p>ReflectiveMethodInvocation#proceed()</p>
-
-<p>TransactionAspectSupport有一个属性叫做transactionInfoHolder</p>
-
-<p>Constructor &gt; @PostConstruct &gt; InitializingBean &gt; init-method，构造函数最优先</p>
-
-<p>ApplicationListener<ContextRefreshEvent>
-InitializingBean
-ApplicationContextAware
-BeanFactoryAware</ContextRefreshEvent></p>
+<p><img src="/images/java_web/spring_transaction_source.png" alt="原理" /></p>
 
 <p>对于上述声明式事务的配置方式,</p>
 
@@ -200,19 +182,6 @@ BeanFactoryAware</ContextRefreshEvent></p>
   <li>第一步是实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code> 事务管理,</li>
   <li>第二步实例化<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code>,扫注解@Transactional</li>
 </ol>
-
-<p>涉及的几个重要类:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">TransactionInfo</code></li>
-  <li><code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager</li>
-  <li><code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource   determineTransactionAttribute这个方法来扫注解</li>
-  <li><code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager</li>
-  <li><code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement MethodInterceptor</li>
-  <li><code class="highlighter-rouge">ConnectionHolder</code></li>
-  <li><code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量</li>
-  <li><code class="highlighter-rouge">TransactionSynchronization</code></li>
-</ul>
 
 <h4 id="spring">spring中事务的传播特性</h4>
 
