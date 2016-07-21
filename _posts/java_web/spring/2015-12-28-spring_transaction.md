@@ -9,7 +9,7 @@ tags: spring transaction
     *   [原理](#origin)
     *   [有了spring和mybatis](#spring-mybatis)
 *   [spring事务流程](#how_to_work)
-    *   [spring中事务的传播特性](#propagation)
+*   [spring中事务的传播特性](#propagation)
 
 ### 常用spring-mybatis的数据库配置 {#common_config}
 
@@ -116,14 +116,25 @@ d.spring中两种不同的mode
 ### 事务流程 {#how_to_work}
 
 涉及的几个重要类:
-`TransactionAspectSupport`  事务的具体操作都在这里类中进行。它又一个属性`TransactionInfoHolder`，封装了事务的上下文TransactionInfo。
+`TransactionAspectSupport`  事务的具体操作都在这里类中进行。它又一个属
+性`TransactionInfoHolder`，封装了事务的上下文TransactionInfo。
+
 `DataSourceTransactionManager` implement PlatformTransactionManager  事务管理器
+
 `TransactionInfo`  事务信息
+
 `AnnotationTransactionAttributeSource` implement TransactionAttributeSource      提供有方法来扫注解@Transactional
+
 `TransactionStatus` implement SavepointManager
-`TransactionInterceptor` extends TransactionAspectSupport implement `MethodInterceptor`  事务拦截器
+
+`TransactionInterceptor` extends TransactionAspectSupport implement
+
+`MethodInterceptor`  事务拦截器
+
 `ConnectionHolder` 封装java.sql.connection
+
 `TransactionSynchronizationManager` 各种ThreadLocal的事务的变量
+
 `TransactionSynchronization`
 
 ![原理](/images/java_web/spring_transaction_source.png)
@@ -133,7 +144,7 @@ d.spring中两种不同的mode
 1.  第一步是实例化一个`DataSourceTransactionManager` 事务管理,
 2.  第二步实例化`AnnotationTransactionAttributeSource`,扫注解@Transactional
 
-#### spring中事务的传播特性
+### spring中事务的传播特性 {#propagation}
 
 |传播特性|含义|场景|
 |-|-|-|

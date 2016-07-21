@@ -34,11 +34,8 @@
       <li><a href="#spring-mybatis">有了spring和mybatis</a></li>
     </ul>
   </li>
-  <li><a href="#how_to_work">spring事务流程</a>
-    <ul>
-      <li><a href="#propagation">spring中事务的传播特性</a></li>
-    </ul>
-  </li>
+  <li><a href="#how_to_work">spring事务流程</a></li>
+  <li><a href="#propagation">spring中事务的传播特性</a></li>
 </ul>
 
 <h3 id="common_config">常用spring-mybatis的数据库配置</h3>
@@ -164,15 +161,26 @@
 <h3 id="how_to_work">事务流程</h3>
 
 <p>涉及的几个重要类:
-<code class="highlighter-rouge">TransactionAspectSupport</code>  事务的具体操作都在这里类中进行。它又一个属性<code class="highlighter-rouge">TransactionInfoHolder</code>，封装了事务的上下文TransactionInfo。
-<code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager  事务管理器
-<code class="highlighter-rouge">TransactionInfo</code>  事务信息
-<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource      提供有方法来扫注解@Transactional
-<code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager
-<code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement <code class="highlighter-rouge">MethodInterceptor</code>  事务拦截器
-<code class="highlighter-rouge">ConnectionHolder</code> 封装java.sql.connection
-<code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量
-<code class="highlighter-rouge">TransactionSynchronization</code></p>
+<code class="highlighter-rouge">TransactionAspectSupport</code>  事务的具体操作都在这里类中进行。它又一个属
+性<code class="highlighter-rouge">TransactionInfoHolder</code>，封装了事务的上下文TransactionInfo。</p>
+
+<p><code class="highlighter-rouge">DataSourceTransactionManager</code> implement PlatformTransactionManager  事务管理器</p>
+
+<p><code class="highlighter-rouge">TransactionInfo</code>  事务信息</p>
+
+<p><code class="highlighter-rouge">AnnotationTransactionAttributeSource</code> implement TransactionAttributeSource      提供有方法来扫注解@Transactional</p>
+
+<p><code class="highlighter-rouge">TransactionStatus</code> implement SavepointManager</p>
+
+<p><code class="highlighter-rouge">TransactionInterceptor</code> extends TransactionAspectSupport implement</p>
+
+<p><code class="highlighter-rouge">MethodInterceptor</code>  事务拦截器</p>
+
+<p><code class="highlighter-rouge">ConnectionHolder</code> 封装java.sql.connection</p>
+
+<p><code class="highlighter-rouge">TransactionSynchronizationManager</code> 各种ThreadLocal的事务的变量</p>
+
+<p><code class="highlighter-rouge">TransactionSynchronization</code></p>
 
 <p><img src="/images/java_web/spring_transaction_source.png" alt="原理" /></p>
 
@@ -183,7 +191,7 @@
   <li>第二步实例化<code class="highlighter-rouge">AnnotationTransactionAttributeSource</code>,扫注解@Transactional</li>
 </ol>
 
-<h4 id="spring">spring中事务的传播特性</h4>
+<h3 id="propagation">spring中事务的传播特性</h3>
 
 <table>
   <thead>
