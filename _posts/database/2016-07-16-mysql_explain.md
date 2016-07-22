@@ -1,6 +1,6 @@
 ---
 layout: post
-title: mysql执行计划
+title: 一条sql的执行（mysql）
 categories: db
 tags: explain select mysql
 ---
@@ -185,6 +185,28 @@ innodb
 6.  主键不一定是一个字段哟！
 
 ps: 因为innodb的数据文件本身要按主键聚集，所以innodb要求表必须有主键（myisam可以没有），如果没有显式指定，则mysql系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则mysql自动为innodb表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。
+
+## where条件在数据库中提取 {#how_where}
+
+SQL语句中的where条件，使用以上的提取规则，最终都会被提取到`Index Key` (`First Key` & `Last Key`)，`Index Filter`与`Table Filter`之中。
+
+1.  Index Key
+    1.  Index First Key，只是用来定位索引的起始范围，因此只在索引第一次Search Path(沿着索引B+树的根节点一直遍历，到索引正确的叶节点位置)时使用，一次判断即可，
+        1.  从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则
+        2.  若存在并且条件是>=或者>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
+    2.  Index Last Key，用来定位索引的终止范围，因此对于起始范围之后读到的每一条索引记录，均需要判断是否已经超过了Index Last Key的范围，若超过，则当前查询结束；
+        1.  从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则
+        2. 若存在并且条件是 <或<= ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
+
+2.  Index Filter
+    用于过滤索引查询范围中不满足查询条件的记录，因此对于索引范围中的每一条记录，均需要与Index Filter进行对比，若不满足Index Filter则直接丢弃，继续读取索引下一条记录；
+        1.  从索引列的第一列开始，检查其在where条件中是否存在：若存在并且where条件仅为 =，则跳过第一列继续检查索引下一列，下一索引列采取与索引第一列同样的提取规则
+        2.  若where条件为 >=、>、<、<= 其中的几种，则跳过索引第一列，将其余where条件中索引相关列全部加入到Index Filter之中
+        3.  若索引第一列的where条件包含 =、>=、>、<、<= 之外的条件，则将此条件以及其余where条件中索引相关列全部加入到Index Filter之中
+        4.  若第一列不包含查询条件，则将所有索引相关条件均加入到Index Filter之中。
+
+3.  Table Filter
+    最后一道where条件的防线，用于过滤通过前面索引的层层考验的记录，此时的记录已经满足了Index First Key与Index Last Key构成的范围，并且满足Index Filter的条件，回表读取了完整的记录，判断完整记录是否满足Table Filter中的查询条件，同样的，若不满足，跳过当前记录，继续读取索引的下一条记录，若满足，则返回记录，此记录满足了where的所有条件，可以返回给前端用户。
 
 ## case
 case1:
