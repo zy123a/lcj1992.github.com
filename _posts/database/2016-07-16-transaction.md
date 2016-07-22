@@ -82,6 +82,12 @@ ps: 针对幻读，在隔离级为RR时，各地方说法不一，wiki百科上�
 
 结束事务的两种不同的方式：回滚或者提交
 
+#### two-parse locking
+
+2PL就是将加锁/解锁分为两个完全不相交的阶段。加锁阶段：只加锁，不放锁。解锁阶段：只放锁，不加锁。
+
+![2pl](/images/database/2pl.jpg)
+
 ### 参考
 
 [SET TRANSACTION Syntax]<http://dev.mysql.com/doc/refman/5.7/en/set-transaction.html#isolevel_read-committed>
