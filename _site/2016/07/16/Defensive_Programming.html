@@ -38,9 +38,14 @@
             
             <li>
                 <span>上一篇</span>
-                <a href="/2016/07/16/mysql_explain">mysql执行计划</a>
+                <a href="/2016/07/16/transaction">事务隔离级</a>
             </li>
             
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2016/07/21/innodb_lock">innodb加锁分析</a>
+            </li>
             
         </ul>
         <div class="ds-share flat" data-thread-key="/2016/07/16/Defensive_Programming" data-title="防御式编程"
@@ -221,11 +226,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2016/07/16/mysql_explain";
+                    window.location.href = "/2016/07/16/transaction";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "";
+                    window.location.href = "/2016/07/21/innodb_lock";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

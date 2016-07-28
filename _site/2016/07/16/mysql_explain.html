@@ -608,7 +608,7 @@ order by book_id desc limit 10000, 10) as book2 where  book1.book_id = book2.boo
             
             <li>
                 <span>下一篇</span>
-                <a href="/2016/07/16/Defensive_Programming">防御式编程</a>
+                <a href="/2016/07/16/transaction">事务隔离级</a>
             </li>
             
         </ul>
@@ -794,7 +794,7 @@ order by book_id desc limit 10000, 10) as book2 where  book1.book_id = book2.boo
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2016/07/16/Defensive_Programming";
+                    window.location.href = "/2016/07/16/transaction";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

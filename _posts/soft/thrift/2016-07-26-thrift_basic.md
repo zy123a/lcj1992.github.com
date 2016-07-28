@@ -23,7 +23,7 @@ tags: thrift rpc
 
 ### thrift基本概念 {#basic_concept}
 
-![thrift_architecture](/images/thrift_architecture.png)
+![thrift_architecture](/images/soft/thrift_architecture.png)
 
 Thrift通过一个中间语言(IDL, 接口定义语言)来定义RPC的接口和数据类型，然后通过一个编译器生成不同语言的代码（目前支持C++,Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, Smalltalk等）,并由生成的代码负责RPC协议层和传输层的实现。我们只需要去实现具体的接口实现就可以了。
 * 服务层（service）：RPC接口定义与实现
@@ -207,17 +207,27 @@ Thrift has integrated RPC implementation, while for Protobuf RPC solutions are s
 ![thrift_wireshark](/images/soft/thrift_wireshark.png)
 
 看代码可以看出：我们使用的是传输层我们使用的是TSocket，协议层使用了TBinaryProtocol，服务端我们使用的是TSimpleServer。
+
 似乎还没有官方的协议说明，不过可以从代码里找(各个语言都有实现)
+
 wireshark输出字段与thrift对应表可参照[字段说明](https://www.wireshark.org/docs/dfref/t/thrift.html)：
+
 thrift中相关类：
+
 org.apache.thrift.protocal.TMessage
+
 org.apache.thrift.protocol.TMessageType:  CALL,REPLY,EXCEPTION,ONEWAY
+
 org.apache.thrift.protocol.TField: 域类型，域的id（第几个），域名字
+
 org.apache.thrift.protocol.TType: 参见数据类型
+
 ![thrift_request](/images/soft/thrift_request.png)
 
 ![thrift_response](/images/soft/thrift_response.png)
 
 注：不同的协议，报文格式是不同的。
+
 比如将协议由TBinaryProtocol变为TJSONProtocol，发送报文就变成这样了：
+
 ![thrift_json](/images/soft/thrift_json.png)
