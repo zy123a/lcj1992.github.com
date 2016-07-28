@@ -33,6 +33,7 @@ Thrift通过一个中间语言(IDL, 接口定义语言)来定义RPC的接口和�
 #### 数据类型 {#data_types}
 
 参见org.apache.thrift.protocol.TType
+
 * Base Types：基本类型
 * Struct：结构体类型
 * Container：容器类型，即List、Set、Map
@@ -45,6 +46,7 @@ Thrift通过一个中间语言(IDL, 接口定义语言)来定义RPC的接口和�
 参见org.apache.thrift.protocol.TProtocol
 Thrift可以让你选择客户端与服务端之间传输通信协议的类别，在传输协议上总体上划分为文本(text)和二进制(binary)传输协议, 为节约带宽，提供传输效率，一般情况下
 使用二进制类型的传输协议为多数，但有时会还是会使用基于文本类型的协议，这需要根据项目/产品中的实际需求：
+
 * TBinaryProtocol – 二进制编码格式进行数据传输。
 * TCompactProtocol – 这种协议非常有效的，使用Variable-Length Quantity (VLQ) 编码对数据进行压缩。
 * TJSONProtocol – 使用JSON的数据编码协议进行数据传输。
@@ -54,6 +56,7 @@ Thrift可以让你选择客户端与服务端之间传输通信协议的类别�
 #### 传输层类型 {#transport_types}
 
 参见org.apache.thrift.transport.TTransport
+
 * TSocket – 使用堵塞式I/O进行传输，也是最常见的模式。
 * THttpTransport – 采用Http传输协议进行数据传输
 * TFileTransport – 顾名思义按照文件的方式进程传输，虽然这种方式不提供Java的实现，但是实现起来非常简单。
@@ -67,6 +70,7 @@ Thrift可以让你选择客户端与服务端之间传输通信协议的类别�
 #### 服务端类型 {#server_types}
 
 参见org.apache.thrift.server.TServer
+
 * TSimpleServer– 简单的单线程服务模型，常用于测试
 * TThreadedServer – 多线程服务模型，使用阻塞式IO，每个请求创建一个线程。
 * TThreadPoolServer – 线程池服务模型，使用标准的阻塞式IO，预先创建一组线程处理请求。
