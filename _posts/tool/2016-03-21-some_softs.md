@@ -24,7 +24,13 @@ tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder
 *   **通过find、open、in等关键词搜索文件,find是定位文件，open是定位并打开文件，in是在文件中进行全文检索**
 *   计算器
 *   输入>即可直接运行shell命令 (收费)
-    
+
+#### 我用的workflow
+
+* [搜索chrome的书签](https://github.com/blainesch/alfred-chrome-bookmarks)
+
+![alfred_workflow.png](/images/tool/alfred_workflow.png)
+
 ### switchHosts
 
 windows和mac都有,测试切换hosts，之前是手工改/etc/hosts的，后来感觉还是慢。[github地址](https://github.com/oldj/SwitchHosts)
@@ -34,7 +40,7 @@ windows和mac都有,测试切换hosts，之前是手工改/etc/hosts的，后来
 AppStore中就有,各种文档,每个开发必备
 
 ### homebrew
-    
+
 mac homebrew 安装
 
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -54,13 +60,13 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 1.  设置热键,在iterm中设置F12,`preference-key-hotkey-show...`
 2.  `cmd + enter` 全屏显示
 3.  `cmd + 左/右,cmd + 数字` 切换标签
-4.  `view-show tabs in fullscreen`,在全局模式下显示标签 
+4.  `view-show tabs in fullscreen`,在全局模式下显示标签
 5.  切分屏幕：`cmd + d` 水平切分，`cmd + Shift + d` 垂直切分
 6.  `cmd + ;`弹出自动补齐窗口
 7.  `cmd + Shift + h`弹出历史记录窗口
 8.  `cmd + option + e`所有tab查找
 9.  `cmd + /`高亮当前鼠标的位置
-10. `preferences->profiles->keys` 最下面的Left/Right Option，把normal改成esc Option + B/F 光标逐词移动 
+10. `preferences->profiles->keys` 最下面的Left/Right Option，把normal改成esc Option + B/F 光标逐词移动
 
 1,2使用场景: 新开一个桌面,专门放终端,然后cmd+enter全屏显示,然后切换到终端F12,对于经常要登服务器的码农们,简直不要太赞哦
 
@@ -77,7 +83,7 @@ snip 腾讯的,mac自带的不太好用啊
 
 ***1.安装zsh***
 
-*   `cat /etc/shells`你会发现mac是有自带zsh的,但是和linux一样，默认的终端都是bash(ubuntu安装`sudo apt-get install zsh`) 
+*   `cat /etc/shells`你会发现mac是有自带zsh的,但是和linux一样，默认的终端都是bash(ubuntu安装`sudo apt-get install zsh`)
 *   安装完成之后设置当前用户使用zsh: `chsh -s /bin/zsh`。但因为其配置复杂，所以很多人无人问津，
 *   然后有人开发了个让你快速上手zsh的项目叫做［oh－my－zsh］
 
@@ -107,7 +113,7 @@ snip 腾讯的,mac自带的不太好用啊
 [github地址](https://github.com/rupa/z)
 
 ## 参考 {#ref}
- 
+
 [终极 Shell]<http://macshuo.com/?p=676>
 
 [神兵利器——Alfred]<http://www.cnblogs.com/chijianqiang/p/alfred.html>
