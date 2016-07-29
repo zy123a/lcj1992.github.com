@@ -6,7 +6,7 @@ tags: load
 ---
 
 #### 基本含义
- 
+
     man uptime
     DESCRIPTION
     ...
@@ -85,7 +85,7 @@ static unsigned long count_active_tasks (void) {
 
 下边是推导的CALC_LOAD的函数，至于exp为什么要那么计算，其数学背景是什么，等我知道了再补上。
 
-![load计算](/images/linux_command/load_compute.png)
+![load计算](/images/unix/load_compute.png)
 
 #### 结论
 
