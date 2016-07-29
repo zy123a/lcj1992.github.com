@@ -13,16 +13,11 @@ foolchild
 
 4.  `自己做的实验，源码研究` 每个程序员都要有research能力　[cpu高了](/2015/12/17/cpuHigh) ,[磁盘满了](/2015/12/17/diskFull)　
 
-关于2,3　
+### 快捷键
 
-### 写博注意点
-
-1. toc link中的字母要全小写。
-2. post title categories后必须有个空格
-3. 标题id命名以word1_word2形式命名
-4. 如果git pages支持table
-使用redcarpet，需在_config.xml中添加如下配置(<http://stackoverflow.com/questions/16099153/table-not-render-when-use-redcarpet-in-jekyll-github-pages>)
-markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-使用kramdown,表格前后不能直接挨着,都多个空行就行
+1.  双击ctrl 全局搜
+2.  alt + h 博客主页
+3.  alt + a 关于
+4.  alt + n 下篇文章
+5.  alt + p 上篇文章
+6.  alt + c 目录
