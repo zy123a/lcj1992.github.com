@@ -1,6 +1,6 @@
 ---
 layout: post
-title:
+title: 享元模式
 categories: design_pattern
 ---
 

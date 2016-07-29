@@ -1,5 +1,5 @@
 ---
 layout: post
-title:
+title: 原型模式
 categories: design_pattern
 ---

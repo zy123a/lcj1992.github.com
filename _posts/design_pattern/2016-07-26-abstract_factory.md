@@ -1,6 +1,6 @@
 ---
 layout: post
-title:
+title: 抽象工厂模式
 categories: design_pattern
 ---
 

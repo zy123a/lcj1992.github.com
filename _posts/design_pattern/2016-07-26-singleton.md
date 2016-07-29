@@ -1,6 +1,6 @@
 ---
 layout: post
-title:
+title: 单例模式
 categories: design_pattern
 ---
 

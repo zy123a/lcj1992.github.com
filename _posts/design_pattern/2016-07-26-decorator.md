@@ -1,5 +1,5 @@
 ---
 layout: post
-title:
+title: 装饰器模式
 categories: design_pattern
 ---
