@@ -2,7 +2,7 @@
 layout: post
 title: 设计模式
 categories: design_pattern
-tags: proxy factory adapter
+tags: proxy factory adapter facade decorator
 ---
 
 ### 创建型 {#create}
@@ -22,14 +22,14 @@ tags: proxy factory adapter
 |责任链||链式|报销需要层层审批|1.[wikipedia](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) 2.[foolchild](/2016/07/26/chain_of_responsibility)|
 |命令||||1.[wikipedia](https://en.wikipedia.org/wiki/Command_pattern) 2.[foolchild](/2016/07/26/command)|
 |迭代器||||1.[wikipedia](https://en.wikipedia.org/wiki/Iterator_pattern) 2.[foolchild](/2016/07/26/iterator)|
-|解释器||||1.[wikipedia](https://en.wikipedia.org/wiki/Interpreter_pattern) 2.[foolchild](/2016/07/26/interperter)|
+|解释器||||1.[wikipedia](https://en.wikipedia.org/wiki/Interpreter_pattern) 2.[foolchild](/2016/07/26/interpreter)|
 |中介者||||1.[wikipedia](https://en.wikipedia.org/wiki/Mediator_pattern) 2.[foolchild](/2016/07/26/mediator)|
 |备忘录||||1.[wikipedia](https://en.wikipedia.org/wiki/Memento_pattern) 2.[foolchild](/2016/07/26/memento)|
 |观察者||||1.[wikipedia](https://en.wikipedia.org/wiki/Observer_pattern) 2.[foolchild](/2016/07/26/observer)|
 |状态||||1.[wikipedia](https://en.wikipedia.org/wiki/State_pattern) 2.[foolchild](/2016/07/26/state)|
 |策略||||1.[wikipedia](https://en.wikipedia.org/wiki/Strategy_pattern) 2.[foolchild](/2016/07/26/strategy)|
 |模板方法|定义一个算法的框架，子类可以实现具体的某些步骤。|||1.[wikipedia](https://en.wikipedia.org/wiki/Template_method_pattern) 2.[foolchild](/2016/07/26/template)|
-|访问者||||1.[wikipedia](https://en.wikipedia.org/wiki/Visitor_pattern) 2.[foolchild](/2016/07/26/vistor)|
+|访问者||||1.[wikipedia](https://en.wikipedia.org/wiki/Visitor_pattern) 2.[foolchild](/2016/07/26/visitor)|
 
 ### 结构型 {#structure}
 

@@ -2,6 +2,7 @@
 layout: post
 title: 单例模式
 categories: design_pattern
+tags: singleton
 ---
 
 Runtime#getRuntime()　　　
