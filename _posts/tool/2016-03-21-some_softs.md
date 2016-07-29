@@ -12,9 +12,9 @@ tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder
 *   [iterm2](#iterm2)
 *   [reeder](#reeder)
 *   [zsh](#zsh)
-*	[theFuck](#thefuck)
-*	[z](#z)
-*	[参考](#ref)
+*	  [theFuck](#thefuck)
+*	  [z](#z)
+*	  [参考](#ref)
 
 ### alfred
 
