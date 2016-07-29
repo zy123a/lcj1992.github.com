@@ -29,7 +29,7 @@
         <h2> awk </h2>
         <h4 id="picture">原理图</h4>
 
-<p><img src="/images/linux_command/awkFlow.jpg" alt="原理图" /></p>
+<p><img src="/images/unix/awkFlow.jpg" alt="原理图" /></p>
 
 <p>awk提供一个类似于编程的开放环境，让你能够自定义文本处理的规则，修改和重新组织文件中的内容。awk在流编辑法方面比sed更为先进的是：它提供一种编程语言而不是一组文本编辑的命令，在编程语言的内部，可以定义保存数据的变量，使用算术和字符串操作函数对数据进行运算，支持结构化编程概念，能够使用if和循环语句等。</p>
 
@@ -165,7 +165,6 @@
 <p><code class="highlighter-rouge">netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr</code></p>
 
 <p>-f 选项来指定包含文本处理程序的脚本文件</p>
-
 
         <ul class="prev_next">
             

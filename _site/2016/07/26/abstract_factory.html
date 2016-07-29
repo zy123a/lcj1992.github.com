@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> 行为型  </title>
+    <title> 抽象工厂模式  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,115 +26,25 @@
 </div>
 
     <div id="main">
-        <h2> 行为型 </h2>
-        <ul>
-  <li><a href="#summary">概述</a></li>
-  <li><a href="#blackboard">blackboard</a></li>
-  <li><a href="#ChainOfRes">责任链*</a></li>
-  <li><a href="#command">命令*</a></li>
-  <li><a href="#iterator">迭代器*</a></li>
-  <li><a href="#interpreter">解释器*</a></li>
-  <li><a href="#mediator">中介者*</a></li>
-  <li><a href="#memento">备忘录*</a></li>
-  <li><a href="#nullObject">nullObject</a></li>
-  <li><a href="#observer">观察者*</a></li>
-  <li><a href="#servant">servant</a></li>
-  <li><a href="#specification">specification</a></li>
-  <li><a href="#state">状态*</a></li>
-  <li><a href="#strategy">策略*</a></li>
-  <li><a href="#templateMethod">模板方法*</a></li>
-  <li><a href="#visitor">访问者*</a></li>
-</ul>
-
-<h4 id="summary">概述</h4>
-
-<h4 id="blackboard">blackboard</h4>
-
-<h4 id="ChainOfRes">责任链*</h4>
-
-<ol>
-  <li>链</li>
-  <li>报销需要层层审批</li>
-</ol>
-
-<h4 id="command">命令*</h4>
-<ol>
-  <li>三类对象：<code class="highlighter-rouge">invoker</code>,<code class="highlighter-rouge">receiver</code>和具体的<code class="highlighter-rouge">commands</code></li>
-  <li><code class="highlighter-rouge">invoker</code>发送<code class="highlighter-rouge">commands</code>给<code class="highlighter-rouge">receiver</code>，<code class="highlighter-rouge">receiver</code>执行<code class="highlighter-rouge">invoker</code>发送来的<code class="highlighter-rouge">commands</code></li>
-  <li><code class="highlighter-rouge">commands</code>包含有<code class="highlighter-rouge">receiver</code>的实例，<code class="highlighter-rouge">command</code>的execute方法实际上是调用<code class="highlighter-rouge">receiver</code>的某个行为方法</li>
-</ol>
-
-<h2 id="iterator">迭代器*</h2>
-<p>xxx</p>
-<h2 id="interpreter">解释器*</h2>
-<p>xxx</p>
-<h2 id="mediator">中介者*</h2>
-
-<ol>
-  <li>中介者接口申明一个联络方法</li>
-  <li>租房者和房主都需要持有中介的信息(组合)</li>
-  <li>中介者也需要知道租房者和房主的信息(组合)</li>
-  <li>租房者和房主的联络方法实际上都会调用中介的联络方法</li>
-</ol>
-
-<h2 id="memento">备忘录*</h2>
-
-<h2 id="nullObject">nullObject</h2>
-<p>xxx</p>
-<h2 id="observer">观察者*</h2>
-
-<h2 id="servant">servant</h2>
-<p>xxx</p>
-<h2 id="specification">specification</h2>
-<p>xxx</p>
-<h2 id="state">状态*</h2>
-
-<ol>
-  <li>context、state、concreteState</li>
-  <li>context的execute()会调用当前state的execute()，其中各concreteState都会实现自己的execute()</li>
-</ol>
-
-<h2 id="strategy">策略*</h2>
-<ol>
-  <li>定义一组算法，客户端和算法之间可以独立的变</li>
-  <li>同样是叫，狗和猫叫声不同</li>
-</ol>
-
-<h2 id="templateMethod">模板方法*</h2>
-<ol>
-  <li>定义一个算法的框架，子类可以实现具体的某些步骤。</li>
-</ol>
-
-<h2 id="visitor">访问者*</h2>
-<ol>
-  <li>抽象被访问者，抽象访问者，被访问者，访问者，结构对象</li>
-</ol>
-
-<p>参考</p>
-
-<p>[1]<a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/">http://linuxtools-rst.readthedocs.org/zh_CN/latest/</a></p>
-
-<p>[2]<a href="https://en.wikipedia.org/wiki/Design_pattern">https://en.wikipedia.org/wiki/Design_pattern</a></p>
-
-<p>[图书设计模式]<a href="http://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/behavioral.html">http://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/behavioral.html</a></p>
-
+        <h2> 抽象工厂模式 </h2>
+        <p>抽象工厂创建具体的工厂,每一个工厂创建一个产品族</p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/11/27/resource">系统资源</a>
+                <a href="/2016/07/21/innodb_lock">innodb加锁分析</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2015/12/02/create">创建型</a>
+                <a href="/2016/07/26/adapter">适配器模式</a>
             </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2015/12/02/behavior" data-title="行为型"
-             data-url="http://lcj1992.github.io/2015/12/02/behavior">
+        <div class="ds-share flat" data-thread-key="/2016/07/26/abstract_factory" data-title="抽象工厂模式"
+             data-url="http://lcj1992.github.io/2016/07/26/abstract_factory">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -147,8 +57,8 @@
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/12/02/behavior" data-title="行为型"
-             data-url="http://lcj1992.github.io/2015/12/02/behavior"></div>
+        <div class="ds-thread" data-thread-key="/2016/07/26/abstract_factory" data-title="抽象工厂模式"
+             data-url="http://lcj1992.github.io/2016/07/26/abstract_factory"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -311,11 +221,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/11/27/resource";
+                    window.location.href = "/2016/07/21/innodb_lock";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/12/02/create";
+                    window.location.href = "/2016/07/26/adapter";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

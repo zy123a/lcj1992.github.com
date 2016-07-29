@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> 一些有趣的工具  </title>
+    <title> 访问者模式  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,171 +26,27 @@
 </div>
 
     <div id="main">
-        <h2> 一些有趣的工具 </h2>
-        <ul>
-  <li><a href="#alfred">alfred</a></li>
-  <li><a href="#switchhosts">switchHosts</a></li>
-  <li><a href="#dash">Dash</a></li>
-  <li><a href="#homebrew">homebrew</a></li>
-  <li><a href="#iterm2">iterm2</a></li>
-  <li><a href="#reeder">reeder</a></li>
-  <li><a href="#zsh">zsh</a></li>
-  <li><a href="#thefuck">theFuck</a></li>
-  <li><a href="#z">z</a></li>
-  <li><a href="#ref">参考</a></li>
-</ul>
-
-<h3 id="alfred">alfred</h3>
-
-<ul>
-  <li>快捷键 opt + space</li>
-  <li>打开应用程序</li>
-  <li>查找文件 回车定位文件 cmd + 回车 定位文件所在文件夹</li>
-  <li><strong>通过find、open、in等关键词搜索文件,find是定位文件，open是定位并打开文件，in是在文件中进行全文检索</strong></li>
-  <li>计算器</li>
-  <li>输入&gt;即可直接运行shell命令 (收费)</li>
-</ul>
-
-<h4 id="workflow">我用的workflow</h4>
-
-<ul>
-  <li><a href="https://github.com/blainesch/alfred-chrome-bookmarks">搜索chrome的书签</a></li>
-</ul>
-
-<p><img src="/images/tool/alfred_workflow.png" alt="alfred_workflow.png" /></p>
-
-<h3 id="switchhosts">switchHosts</h3>
-
-<p>windows和mac都有,测试切换hosts，之前是手工改/etc/hosts的，后来感觉还是慢。<a href="https://github.com/oldj/SwitchHosts">github地址</a></p>
-
-<h3 id="dash">Dash</h3>
-
-<p>AppStore中就有,各种文档,每个开发必备</p>
-
-<h3 id="homebrew">homebrew</h3>
-
-<p>mac homebrew 安装</p>
-
-<p><code class="highlighter-rouge">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></p>
-
-<p>homebrew有个插件也不错cask,主要用来管理非终端软件</p>
-
-<p>安装cask</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>brew install caskroom/cask/brew-cask
-</code></pre>
-</div>
-
-<p>使用cask来安装谷歌浏览器</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>brew cask install google-chrome
-</code></pre>
-</div>
-
-<h3 id="iterm2">iterm2</h3>
-
-<ol>
-  <li>设置热键,在iterm中设置F12,<code class="highlighter-rouge">preference-key-hotkey-show...</code></li>
-  <li><code class="highlighter-rouge">cmd + enter</code> 全屏显示</li>
-  <li><code class="highlighter-rouge">cmd + 左/右,cmd + 数字</code> 切换标签</li>
-  <li><code class="highlighter-rouge">view-show tabs in fullscreen</code>,在全局模式下显示标签</li>
-  <li>切分屏幕：<code class="highlighter-rouge">cmd + d</code> 水平切分，<code class="highlighter-rouge">cmd + Shift + d</code> 垂直切分</li>
-  <li><code class="highlighter-rouge">cmd + ;</code>弹出自动补齐窗口</li>
-  <li><code class="highlighter-rouge">cmd + Shift + h</code>弹出历史记录窗口</li>
-  <li><code class="highlighter-rouge">cmd + option + e</code>所有tab查找</li>
-  <li><code class="highlighter-rouge">cmd + /</code>高亮当前鼠标的位置</li>
-  <li><code class="highlighter-rouge">preferences-&gt;profiles-&gt;keys</code> 最下面的Left/Right Option，把normal改成esc Option + B/F 光标逐词移动</li>
+        <h2> 访问者模式 </h2>
+        <ol>
+  <li>抽象被访问者，抽象访问者，被访问者，访问者，结构对象</li>
 </ol>
-
-<p>1,2使用场景: 新开一个桌面,专门放终端,然后cmd+enter全屏显示,然后切换到终端F12,对于经常要登服务器的码农们,简直不要太赞哦</p>
-
-<h3 id="reeder">reeder</h3>
-
-<p>mac上我的第一个掏钱的软件,阅读利器</p>
-
-<h3 id="snip">snip</h3>
-
-<p>snip 腾讯的,mac自带的不太好用啊</p>
-
-<h3 id="zsh">zsh-终极shell</h3>
-
-<p><strong><em>1.安装zsh</em></strong></p>
-
-<ul>
-  <li><code class="highlighter-rouge">cat /etc/shells</code>你会发现mac是有自带zsh的,但是和linux一样，默认的终端都是bash(ubuntu安装<code class="highlighter-rouge">sudo apt-get install zsh</code>)</li>
-  <li>安装完成之后设置当前用户使用zsh: <code class="highlighter-rouge">chsh -s /bin/zsh</code>。但因为其配置复杂，所以很多人无人问津，</li>
-  <li>然后有人开发了个让你快速上手zsh的项目叫做［oh－my－zsh］</li>
-</ul>
-
-<p><strong><em>2.安装oh－my－zsh</em></strong></p>
-
-<p><a href="https://github.com/robbyrussell/oh-my-zsh">github地址</a></p>
-
-<p>安装：<code class="highlighter-rouge">sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</code></p>
-
-<ol>
-  <li>quick-look filename 可以直接预览文件，man-preview grep 可以生成 grep手册 的pdf 版本等</li>
-  <li>强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令</li>
-  <li>各种补全：路径补全、命令补全，命令参数补全，插件内容补全等等。触发补全只需要按一下或两下 tab 键，补全项可以使用 ctrl+n/p/f/b上下左右切换。比如你想杀掉 java 的进程，只需要输入 kill java + tab键，如果只有一个 java 进程，zsh 会自动替换为进程的 pid，如果有多个则会出现选择项供你选择。ssh + 空格 + 两个tab键，zsh会列出所有访问过的主机和用户名进行补全</li>
-</ol>
-
-<p><strong><em>3.使用zsh</em></strong></p>
-
-<ol>
-  <li>安装z插件，只需在～／.zshrc的plugin中添加<code class="highlighter-rouge">plugins=(git xx z)</code>,然后你就可以z xx目录之间随意跳转了.如果你没有使用oh-my-zsh框架，也可以使用z命令，下载z.sh,<a href="https://github.com/rupa/z/">git地址</a>,然后在环境变量中指定z.sh的路径<code class="highlighter-rouge">. /home/lcj/tool/z.sh</code></li>
-</ol>
-
-<h3 id="thefuck">theFuck</h3>
-
-<p>纠正命令
-<a href="https://github.com/nvbn/thefuck">github地址</a></p>
-
-<h3 id="z">z</h3>
-
-<p>目录跳转,真的是神器</p>
-
-<p><a href="https://github.com/rupa/z">github地址</a></p>
-
-<h2 id="ref">参考</h2>
-
-<p>[终极 Shell]<a href="http://macshuo.com/?p=676">http://macshuo.com/?p=676</a></p>
-
-<p>[神兵利器——Alfred]<a href="http://www.cnblogs.com/chijianqiang/p/alfred.html">http://www.cnblogs.com/chijianqiang/p/alfred.html</a></p>
-
-<p>[高效程序员的MacBook工作环境配置]<a href="http://www.codeceo.com/article/programmer-macbook-workplace.html">http://www.codeceo.com/article/programmer-macbook-workplace.html</a></p>
-
-<p>[我在用的mac软件(1)–终端环境之iTerm2]<a href="http://foocoder.com/blog/wo-zai-yong-de-macruan-jian.html/">http://foocoder.com/blog/wo-zai-yong-de-macruan-jian.html/</a></p>
-
-<p>[你应该知道的iterm2使用方法]<a href="http://wulfric.me/2015/08/iterm2/">http://wulfric.me/2015/08/iterm2/</a></p>
-
-<p>[cask官网]<a href="https://caskroom.github.io/">https://caskroom.github.io/</a></p>
-
-<p>[brew官网]<a href="http://brew.sh/">http://brew.sh/</a></p>
-
-<p>[iterm2有什么酷功能?]<a href="http://www.zhihu.com/question/27447370">http://www.zhihu.com/question/27447370</a></p>
-
-<p>[mac开发配置手册]<a href="https://aaaaaashu.gitbooks.io/mac-dev-setup/content/">https://aaaaaashu.gitbooks.io/mac-dev-setup/content/</a></p>
-
-<p>[5 Unexpectedly Useful Command Line ]<a href="http://zeroturnaround.com/rebellabs/5-unexpectedly-useful-command-line-tools-you-might-overlook/">http://zeroturnaround.com/rebellabs/5-unexpectedly-useful-command-line-tools-you-might-overlook/</a></p>
-
-<p>[GitHub 上有什么好的或者有趣的 Shell 项目？]<a href="http://www.zhihu.com/question/28182203">http://www.zhihu.com/question/28182203</a></p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2016/03/12/equals_hashcode_eg">一个题目来说equals和hashCode</a>
+                <a href="/2016/07/26/template">模版方法</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2016/03/31/protobuf_hello">hello protobuf</a>
+                <a href="/2016/07/26/es_basic">es基础</a>
             </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2016/03/21/some_softs" data-title="一些有趣的工具"
-             data-url="http://lcj1992.github.io/2016/03/21/some_softs">
+        <div class="ds-share flat" data-thread-key="/2016/07/26/visitor" data-title="访问者模式"
+             data-url="http://lcj1992.github.io/2016/07/26/visitor">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -203,8 +59,8 @@
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2016/03/21/some_softs" data-title="一些有趣的工具"
-             data-url="http://lcj1992.github.io/2016/03/21/some_softs"></div>
+        <div class="ds-thread" data-thread-key="/2016/07/26/visitor" data-title="访问者模式"
+             data-url="http://lcj1992.github.io/2016/07/26/visitor"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -367,11 +223,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2016/03/12/equals_hashcode_eg";
+                    window.location.href = "/2016/07/26/template";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2016/03/31/protobuf_hello";
+                    window.location.href = "/2016/07/26/es_basic";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

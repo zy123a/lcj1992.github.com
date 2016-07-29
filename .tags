@@ -12,3 +12,51 @@ marvel插件	/Users/lichuangjian/work/foolchild/_posts/soft/elasticsearch/2016-0
 行为型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 行为型 {#behavior}$/;"	function	line:18
 结构型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 结构型 {#structure}$/;"	function	line:34
 参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 参考 {#ref}$/;"	function	line:46
+div	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^<div id="post-pagination" class="paginator">$/;"	function	line:1
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a href="\/"><前页<\/a>$/;"	function	line:5
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a href="\/page{{paginator.previous_page}}"><前页<\/a>$/;"	function	line:7
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <span class="previous disabled"><前页<\/span>$/;"	function	line:10
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <span class="current-page">1<\/span>$/;"	function	line:14
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <a href="\/">1<\/a>$/;"	function	line:16
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <span class="current-page">{{count}}<\/span>$/;"	function	line:21
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <a href="\/page{{count}}">{{count}}<\/a>$/;"	function	line:23
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a class="next" href="\/page{{paginator.next_page}}">后页><\/a>$/;"	function	line:28
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <span class="next disabled" >后页><\/span>$/;"	function	line:30
+html	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^<html>$/;"	function	line:2
+head	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^<head>$/;"	function	line:3
+meta	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <meta http-equiv="content-type" content="text\/html;charset=utf-8"\/>$/;"	function	line:4
+meta	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <meta name="viewport" content="width=device-width, initial-scale=1" \/>$/;"	function	line:5
+meta	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <meta name="baidu-site-verification" content="vuaTJrjFLn" \/>$/;"	function	line:6
+meta	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <meta name="keywords" content="foolchild,linux,java,技术,互联网" \/>$/;"	function	line:7
+meta	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" \/>$/;"	function	line:8
+title	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <title>{% if page.title %} {{ page.title }} {% else %} {{ site.title }} {% endif %} <\/title>$/;"	function	line:9
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="stylesheet" href="{{ site.baseurl }}\/css\/default.css" type="text\/css" \/>$/;"	function	line:10
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="stylesheet" href="{{ site.baseurl }}\/css\/small.css" type="text\/css" media="(max-width: 720px)"\/>$/;"	function	line:11
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="stylesheet" href="{{ site.baseurl }}\/css\/syntax.css" type="text\/css" \/>$/;"	function	line:12
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="stylesheet" href="{{ site.baseurl }}\/css\/bootstrap.css" type="text\/css" \/>$/;"	function	line:13
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="stylesheet" href="{{ site.baseurl }}\/css\/codeboy.css" type="text\/css" \/>$/;"	function	line:14
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link rel="shortcut icon" href="{{ site.baseurl }}\/favicon.ico" type="image\/x-icon" \/>$/;"	function	line:15
+body	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^<body>$/;"	function	line:17
+div	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^<div id="container">$/;"	function	line:18
+div	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <div id="main">$/;"	function	line:20
+h	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^        <h2> {% if page.title %} {{ page.title }} {% else %} {{ site.title }} {% endif %} <\/h2>$/;"	function	line:21
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/jquery.js"><\/script>$/;"	function	line:25
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/bootstrap.js"><\/script>$/;"	function	line:28
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/codeboy.js"><\/script>$/;"	function	line:31
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/bootstrap3-typeahead.js"><\/script>$/;"	function	line:33
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/jquery.hotkeys.js"><\/script>$/;"	function	line:34
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script>$/;"	function	line:35
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script src="\/js\/jquery.tagcloud.js" type="text\/javascript" charset="utf-8"><\/script>$/;"	function	line:54
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script language="javascript">$/;"	function	line:55
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script>$/;"	function	line:66
+async	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^        function async(u, c) {$/;"	function	line:67
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script>$/;"	function	line:78
+link	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <link href="https:\/\/cdn.bootcss.com\/highlight.js\/8.6\/styles\/github.min.css" rel="stylesheet">$/;"	function	line:83
+script	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <script>$/;"	function	line:86
+style	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <style>$/;"	function	line:199
+input	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^        <input type="text" class="form-control search-content" id="search-content" placeholder="文章标题 日期 标签">$/;"	function	line:262
+div	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^        <div style="position: fixed; top: 16px; right: 16px;">$/;"	function	line:264
+img	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^            <img src="\/images\/search\/close.png"  id="close-btn"\/>$/;"	function	line:265
+div	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^    <div style="position: fixed; right: 12px; top: 50%;bottom: 50%;">$/;"	function	line:269
+img	/Users/lichuangjian/work/foolchild/_layouts/default.html	/^        <img src="\/images\/search\/search.png" id="search-btn" title="双击ctrl试一下"\/>$/;"	function	line:270
+关于我	/Users/lichuangjian/work/foolchild/pages/about.md	/^### 关于我$/;"	function	line:7

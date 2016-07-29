@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> 结构型  </title>
+    <title> 备忘录模式  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,118 +26,25 @@
 </div>
 
     <div id="main">
-        <h2> 结构型 </h2>
-        <ul>
-  <li><a href="#Summary">概述</a></li>
-  <li><a href="#Adapter">适配器*</a></li>
-  <li><a href="#Bridge">桥接*</a></li>
-  <li><a href="#Composite">组合*</a></li>
-  <li><a href="#Decorator">装饰*</a></li>
-  <li><a href="#Facade">门面*</a></li>
-  <li><a href="#Flyweight">享元*</a></li>
-  <li><a href="#FrontController">FrontController</a></li>
-  <li><a href="#Marker">Marker</a></li>
-  <li><a href="#Module">Module</a></li>
-  <li><a href="#Proxy">代理*</a></li>
-  <li><a href="#Twin">Twin</a></li>
-</ul>
-
-<h3 id="Summary">概述</h3>
-<ol>
-  <li>适配器：将一个接口改成另一个接口</li>
-  <li>装饰： 通过包装增加接口的功能</li>
-  <li>门面：提供一个简单的接口</li>
-</ol>
-
-<h3 id="Adapter">适配器*</h3>
-
-<p>将一个接口改成另一个接口</p>
-
-<p>Arrays#asList()</p>
-
-<h3 id="Bridge">桥接*</h3>
-
-<p><code class="highlighter-rouge">client</code>和<code class="highlighter-rouge">provider</code>都经常变化,所以需要<code class="highlighter-rouge">bridge</code>来桥接</p>
-
-<p><img src="http://lcj1992.github.io/images/design_pattern/Bridge.png" alt="桥接uml图" /></p>
-
-<h3 id="Composite">组合*</h3>
-
-<p>一个组合可以是单一的对象，也可以是一组对象，一个组合可以代表这两种状态</p>
-
-<h3 id="Decorator">装饰*</h3>
-
-<p>装饰</p>
-
-<h3 id="Facade">门面</h3>
-
-<p>门面</p>
-
-<h3 id="Flyweight">享元*</h3>
-
-<p>菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>        // Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects
-        class Menu {
-            private Map&lt;String, CoffeeFlavour&gt; flavours = new ConcurrentHashMap&lt;String, CoffeeFlavour&gt;();
-
-            CoffeeFlavour lookup(String flavorName) {
-                if (!flavours.containsKey(flavorName))
-                    flavours.put(flavorName, new CoffeeFlavour(flavorName));
-                return flavours.get(flavorName);
-            }
-
-            int totalCoffeeFlavoursMade() {
-                return flavours.size();
-            }
-        }
-</code></pre>
-</div>
-
-<h3 id="FrontController">Front Controller</h3>
-
-<p>front controller</p>
-
-<h3 id="Marker">Marker</h3>
-
-<p>marker</p>
-
-<h3 id="Module">Module</h3>
-
-<p>module</p>
-
-<h3 id="Proxy">代理*</h3>
-
-<p>代理类和被代理类同时实现接口，代理类通过    <strong>组合</strong> 方式代理被代理类，实现   <strong>额外</strong>  的操作</p>
-
-<h3 id="Twin">Twin</h3>
-
-<p>twin</p>
-
-<h3 id="ref">参考</h3>
-
-<p>[1]<a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/">http://linuxtools-rst.readthedocs.org/zh_CN/latest/</a></p>
-
-<p>[2]<a href="https://en.wikipedia.org/wiki/Design_pattern">https://en.wikipedia.org/wiki/Design_pattern</a></p>
-
-<p>[图说设计模式]<a href="http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html">http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/structural.html</a></p>
+        <h2> 备忘录模式 </h2>
+        
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/12/02/create">创建型</a>
+                <a href="/2016/07/26/mediator">中介者模式</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2015/12/07/grep">grep</a>
+                <a href="/2016/07/26/observer">观察者模式</a>
             </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2015/12/02/structure" data-title="结构型"
-             data-url="http://lcj1992.github.io/2015/12/02/structure">
+        <div class="ds-share flat" data-thread-key="/2016/07/26/memento" data-title="备忘录模式"
+             data-url="http://lcj1992.github.io/2016/07/26/memento">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -150,8 +57,8 @@
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/12/02/structure" data-title="结构型"
-             data-url="http://lcj1992.github.io/2015/12/02/structure"></div>
+        <div class="ds-thread" data-thread-key="/2016/07/26/memento" data-title="备忘录模式"
+             data-url="http://lcj1992.github.io/2016/07/26/memento"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -314,11 +221,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/12/02/create";
+                    window.location.href = "/2016/07/26/mediator";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/12/07/grep";
+                    window.location.href = "/2016/07/26/observer";
                 });
 
                 $.getJSON("/search.json").done(function (data) {
