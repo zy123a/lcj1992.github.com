@@ -22,5 +22,5 @@ permalink: /about.html
 ### 联系 {#contact}
 
 * [github@lcj1992](http://github.com/lcj1992/)
-* [微博@foolchild](http://weibo.com/u/1825339361)  
+* [微博@fool_child](http://weibo.com/u/1825339361)  
 * [rss订阅](http://foolchild.cn/feed.xml)

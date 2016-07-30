@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+div	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^<div id="post-pagination" class="paginator">$/;"	function	line:1
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a href="\/"><前页<\/a>$/;"	function	line:5
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a href="\/page{{paginator.previous_page}}"><前页<\/a>$/;"	function	line:7
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <span class="previous disabled"><前页<\/span>$/;"	function	line:10
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <span class="current-page">1<\/span>$/;"	function	line:14
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <a href="\/">1<\/a>$/;"	function	line:16
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <span class="current-page">{{count}}<\/span>$/;"	function	line:21
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^      <a href="\/page{{count}}">{{count}}<\/a>$/;"	function	line:23
+a	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <a class="next" href="\/page{{paginator.next_page}}">后页><\/a>$/;"	function	line:28
+span	/Users/lichuangjian/work/foolchild/_includes/pagination.html	/^    <span class="next disabled" >后页><\/span>$/;"	function	line:30
