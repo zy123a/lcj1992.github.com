@@ -48,12 +48,7 @@
       <li><a href="#allThread">线程共享</a>
         <ul>
           <li><a href="#heap">堆</a></li>
-          <li><a href="#nonHeap">非堆</a>
-            <ul>
-              <li><a href="#methodArea">方法区</a></li>
-              <li><a href="#interned_string">internedString</a></li>
-            </ul>
-          </li>
+          <li><a href="#nonHeap">非堆</a></li>
         </ul>
       </li>
     </ul>
@@ -185,23 +180,16 @@
 
 <h4 id="nonHeap">非堆内存</h4>
 
-<p>非堆内存与java堆一样，是各个线程共享的内存区域，存储jvm加载的类信息、常量、静态变量、即时编译器编译后的代码（code cache）等
+<p>非堆内存(方法区)与java堆一样，是各个线程共享的内存区域，存储jvm加载的类信息、常量、静态变量、即时编译器编译后的代码（code cache）等
 。虽然jvm规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫non-heap，目的是与java堆区分开来（从jconsole可以看出来）。</p>
-
-<p>ps: 对于hotspot，很多人更愿意把方法区称为“永久代”，本质上两者并不等价，或者说用永久代来时间方法区而已，这样hotspot的垃圾回收器就可以像管理java堆一样管理这部分内存了，对于其他虚拟机（如jRockit，IBM J9）来说不存在永久代的概念。对于hotspot，更容易遇到内存溢出的问题（-XX:MaxPermSize的上限）。而J9和JRockit只要没有触碰到进程可用内存上限就不会溢出。根据hotspot的官方发布路线图也有放弃永久代并逐步改为采用native memory来实现方法区的规划了。<code class="highlighter-rouge">在1.7的hotspot中，已经把原本放在永久代的字符串常量池移出了。
-1.8已经把永久代完全移除了</code>。具体参见<a href="http://www.infoq.com/cn/articles/Java-PERMGEN-Removed">Java永久代去哪儿了</a></p>
-
-<p>即时编译(just in time（jit）compilation): java字节码被解释执行，然而它没有本地代码快，为了提高性能，hotspot jvm寻找字节码中的“hot”区域，并把他们编译成本地代码，这个本地代码被保存在code cache在非堆内存中。</p>
-
-<h5 id="methodArea">方法区</h5>
-
-<p>方法区存储一些类的信息，诸如：</p>
 
 <p><img src="/images/java/method_area.png" alt="方法区" /></p>
 
-<p>所有的线程共享方法区，所以访问方法区数据和动态链接的过程必须是线程安全的。如果两个线程同时尝试去访问一个还没有被加载的类的域或者方法，它必须仅被加载一次，两个线程必须等到类被加载之后才能执行。</p>
+<p>ps: 对于hotspot，很多人更愿意把方法区称为“永久代”，本质上两者并不等价，或者说用永久代来时间方法区而已，这样hotspot的垃圾回收器就可以像管理java堆一样管理这部分内存了，对于其他虚拟机（如jRockit，IBM J9）来说不存在永久代的概念。对于hotspot，更容易遇到内存溢出的问题（-XX:MaxPermSize的上限）。而J9和JRockit只要没有触碰到进程可用内存上限就不会溢出。根据hotspot的官方发布路线图也有放弃永久代并逐步改为采用native memory来实现方法区的规划了。</p>
 
-<p>虽然方法区逻辑上来说是堆的一部分，但是通常的实现，可能选择不垃圾回收它。 然而oracle jvm的jconsole显示了方法区和code cache是在non-heap。openjdk的源码也表明code cache也是独立于堆的。</p>
+<p><code class="highlighter-rouge">在1.7的hotspot中，已经把原本放在永久代的字符串常量池移出了。1.8已经把永久代完全移除了</code>。具体参见<a href="http://www.infoq.com/cn/articles/Java-PERMGEN-Removed">Java永久代去哪儿了</a></p>
+
+<p>即时编译(just in time（jit）compilation): java字节码被解释执行，然而它没有本地代码快，为了提高性能，hotspot jvm寻找字节码中的“hot”区域，并把他们编译成本地代码，这个本地代码被保存在code cache在非堆内存中。</p>
 
 <h2 id="direct_memory">直接内存</h2>
 
