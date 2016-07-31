@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://foolchild.cn/2016/07/31/thread_safe</loc>
+<lastmod>2016-07-31T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://foolchild.cn/2016/07/28/design_overview</loc>
 <lastmod>2016-07-28T00:00:00+08:00</lastmod>
 </url>
@@ -625,7 +629,7 @@
 <lastmod>2015-01-27T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/01/26/memory_byteCode</loc>
+<loc>http://foolchild.cn/2015/01/26/load_class</loc>
 <lastmod>2015-01-26T00:00:00+08:00</lastmod>
 </url>
 <url>
@@ -633,7 +637,7 @@
 <lastmod>2015-01-25T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/01/06/jvm_example</loc>
+<loc>http://foolchild.cn/2015/01/06/jvm_execute_engine</loc>
 <lastmod>2015-01-06T00:00:00+08:00</lastmod>
 </url>
 <url>

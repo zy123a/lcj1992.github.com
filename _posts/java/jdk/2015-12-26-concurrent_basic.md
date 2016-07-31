@@ -7,14 +7,27 @@ tags: concurrent
 
 *   [thread](#thread)
 *   [ThreadLocal](#thread_local)
-*   [CopyOnWriteArrayList](#CopyOnWriteArrayList)
-*   [ReadWriteLock](#readwritelock)
-*   [volatile_static_threadLocal](#volatile_static_threadLocal)
+*   [CopyOnWriteArrayList](#copy_on_write_array_list)
+*   [ReadWriteLock](#read_write_lock)
+*   [volatile](#volatile)
+*   [volatile_static_threadLocal](#volatile_static_thread_local)
 *   [ThreadExecutor](#ThreadExecutor)
 
 ### thread
 
-1.  run()和start()
+结合[jvm内存模型](/2015/09/03/java_internal)
+
+在Java当中，线程通常都有五种状态，`创建`、`就绪`、`运行`、`阻塞`和`死亡`。
+
+|状态 |说明|
+|--|--|
+|创建|在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。|
+|就绪|当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后，也会处于就绪状态。|
+|运行|线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。|
+|阻塞|线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。|
+|死亡|如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪。|
+
+1.  run()和start():  start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。
 2.  join()/join(long millis) 等待当前线程die或者超时
 
 ### ThreadLocal {#thread_local}
@@ -25,18 +38,52 @@ tags: concurrent
 4.  ThreadLocal只是本线程有效,InheritableThreadLocal对由本线程创建的子线程也有效.
 
 
-<h3 id="CopyOnWriteArrayList">CopyOnWriteArrayList</h3>
+### CopyOnWriteArrayList {#copy_on_write_array_list}
 
-### ReadWriteLock
+### ReadWriteLock {#read_write_lock}
 
 ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁的,ReentrantLock还是会加锁滴.
 
-<h3 id="volatile_static_threadLocal">volatile vs static  vs  ThreadLocal</h3>
+### volatile
+
+
+
+### volatile vs static  vs  ThreadLocal {#volatile_static_thread_local}
 
 1.  volatile 不同线程的同一对象之间共享
 2.  static  同一线程的不同对象之间共享
 3.  static volatile 不同线程的不同对象之间共享[他人的讨论](http://stackoverflow.com/questions/2423622/volatile-vs-static-in-java)
-4.  threadLocal 同一线程之间共享，不同线程之间互斥,声明为ThreadLocal，通常需要声明为static,一个是per thread per object,一个是per thread
+4.  threadLocal 同一线程之间共享，不同线程之间互斥,声明为ThreadLocal，通常需要声明为static,一个是per thread per object,一个是per thread，但对于单例的加不加就无所谓了。
+
+eg:
+
+      public class DoubleCheckVersion {
+          private static volatile DoubleCheckVersion instance;
+
+          private InheritableThreadLocal<String> type =  new InheritableThreadLocal<String>();
+
+          private DoubleCheckVersion() {}
+          public static DoubleCheckVersion getInstance() {
+              if (instance == null) {
+                  synchronized (DoubleCheckVersion.class) {
+                      if (instance == null) {
+                          instance = new DoubleCheckVersion();
+                      }
+                  }
+              }
+              return instance;
+          }
+
+          public String getType() {
+              return type.get();
+          }
+          public void setType(String type) {
+              this.type.set(type);
+          }
+      }
+
+
+
 [他人的讨论](http://stackoverflow.com/questions/2784009/why-should-java-threadlocal-variables-be-static)
 
 ![volatile_static](/images/java/volatile_static.png)

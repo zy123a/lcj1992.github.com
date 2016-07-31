@@ -1,9 +1,10 @@
 ---
 layout: post
-title: class文件和字节码
+title: jvm执行引擎
 categories: java
-tags: jvm 字节码 操作数栈 局部变量表 
+tags: jvm byte_code operand_stack local_var_table class_file
 ---
+
 
 *   [class文件](#class_file)
     *   [运行时常量池](#constants_pool)
@@ -64,7 +65,7 @@ jvm维护一个常量池，一个运行时的数据结构，它和符号表很�
 >7.Class                 指向一个utf8格式的条目，那里是class的名字（jvm格式，这会在动态链接的过程中用到）    
 >8.NameAndType           冒号分割的一对值，都指向常量池中utf8类型的一个条目，冒号前是方法名或者域名，对于域来说，冒号后是全类名，对于方法来说，冒号后是类名加参数    
 >9.Fieldref，Methodref  逗号分割的一对之，逗号前指向的常量池中的Class类型的一个条目，逗号后指向的常量池中NameAndType类型的一个条目。    
-  
+
 例如下边的代码
 
 `Object foo = new Object();`
@@ -135,11 +136,11 @@ i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精
 
         stack=3, locals=3, arg_size=0
 *  将常量池中#index为5的string（含有#index指向utf8类型的常量，那才是真的"ab"的bytes）压入操作数栈，然后pop出栈保存在局部变量0中,`栈深为0,局部变量表size为1`.
-        
+
          0: ldc             #5    // String ab
          2: astore_0    
 *  同样，将常量池中#index为6的string保存在局部变量1中，`栈深为0,局部变量表size为2`。
-    
+
          3: ldc             #6    // Sting b
          5: astore_1
 *  新建一个栈帧，在堆中实例化一个StringBuilder对象，并将其引用压入操作数栈中。`栈深为1`
@@ -153,15 +154,15 @@ i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精
         10: invokesepcial   #8    // Method java/lang/StringBuilder."<init>";()V
 *  将常量a压入操作数栈,栈深为2
 
-        13: ldc             #9    // String a 
+        13: ldc             #9    // String a
 *   栈顶两个元素pop出栈，栈顶的字符串a的引用（方法参数）和StringBuilder对象的引用（相关对象引用）。然后将返回值压入操作数栈，还是那个StringBuilder的引用，只不过现在不是空的了，为“a”;`栈深为1`.
 
         15: invokevirtual  #10    // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
 注：invokespecial和invokevirtual等方法调用，`方法参数`和`相关对象的引用`都需要pop出栈，不然jvm如何创建新的栈帧啊。invokestatic就不需要了。
-   
+
 *   将局部变量1压入操作数栈,`栈深为2`
-    
-        18: aload_1 
+
+        18: aload_1
 *   调用append方法,栈顶元素为StringBuilder引用，”ab“,调用append方法
 
         19: invokevirtual  #10    // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -173,7 +174,7 @@ i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精
         25: astore_2
 
 *   将类型为Ljava/io/PrintStream的静态域System.out压入栈中
-        
+
         26: getstatic      #3     // Field java/lang/System.out:Ljava/io/printStream;
 
 *   将局部变量0压入栈中
@@ -189,9 +190,9 @@ i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精
 
 *   将常量1入栈
 
-        34: iconst_1 
-        
-*   然后跳到39 
+        34: iconst_1
+
+*   然后跳到39
 
         35: goto           39
 *   将常量0入栈
@@ -203,14 +204,14 @@ i 整数 l 长整数 s 短整数 b 字节 c 字符 f 单精度浮点数 d 双精
 *   pop栈顶元素(其实栈顶为空,其他类型另说)
 
         42: return
-        
+
 *   行号表源代码14行,对应于字节码前的序号.
-    
+
         >a.字节码前的序号为相对于该栈帧的偏移量.
         >b.字节码都是单字节的,为什么字节码前的序号不是连续的?
         >b1.有的指令不需要参数,有的需要多个参数
         >b2.有的参数为单字节的,有的参数是多字节的
-    
+
         LineNumberTable
            line 14: 0
            line 15: 3
@@ -229,4 +230,3 @@ ps：栈和线程，栈帧和方法是对应关系，不要搞混哟。
 [class文件]<http://blog.csdn.net/dc_726/article/details/7944154>
 
 [class文件包含的信息]<http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7>
-    

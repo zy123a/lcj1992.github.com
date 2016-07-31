@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> class文件和字节码  </title>
+    <title> jvm执行引擎  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,7 +26,7 @@
 </div>
 
     <div id="main">
-        <h2> class文件和字节码 </h2>
+        <h2> jvm执行引擎 </h2>
         <ul>
   <li><a href="#class_file">class文件</a>
     <ul>
@@ -269,7 +269,7 @@ e.异常表</p>
   <li>
     <p>将常量a压入操作数栈,栈深为2</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> 13: ldc             #9    // String a 
+    <div class="highlighter-rouge"><pre class="highlight"><code> 13: ldc             #9    // String a
 </code></pre>
     </div>
   </li>
@@ -283,7 +283,7 @@ e.异常表</p>
   <li>
     <p>将局部变量1压入操作数栈,<code class="highlighter-rouge">栈深为2</code></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>18: aload_1 
+    <div class="highlighter-rouge"><pre class="highlight"><code>18: aload_1
 </code></pre>
     </div>
   </li>
@@ -339,7 +339,7 @@ e.异常表</p>
   <li>
     <p>将常量1入栈</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>34: iconst_1 
+    <div class="highlighter-rouge"><pre class="highlight"><code>34: iconst_1
 </code></pre>
     </div>
   </li>
@@ -402,7 +402,6 @@ LineNumberTable
 
 <p>[class文件包含的信息]<a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7">http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7</a></p>
 
-
         <ul class="prev_next">
             
             <li>
@@ -417,8 +416,8 @@ LineNumberTable
             </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2015/01/06/jvm_example" data-title="class文件和字节码"
-             data-url="http://lcj1992.github.io/2015/01/06/jvm_example">
+        <div class="ds-share flat" data-thread-key="/2015/01/06/jvm_execute_engine" data-title="jvm执行引擎"
+             data-url="http://lcj1992.github.io/2015/01/06/jvm_execute_engine">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -431,8 +430,8 @@ LineNumberTable
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/01/06/jvm_example" data-title="class文件和字节码"
-             data-url="http://lcj1992.github.io/2015/01/06/jvm_example"></div>
+        <div class="ds-thread" data-thread-key="/2015/01/06/jvm_execute_engine" data-title="jvm执行引擎"
+             data-url="http://lcj1992.github.io/2015/01/06/jvm_execute_engine"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">

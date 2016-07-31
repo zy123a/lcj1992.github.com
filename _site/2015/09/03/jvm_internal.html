@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> jvm internal(译)  </title>
+    <title> jvm内存模型  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,11 +26,12 @@
 </div>
 
     <div id="main">
-        <h2> jvm internal(译) </h2>
+        <h2> jvm内存模型 </h2>
         <ul>
-  <li><a href="#thread">线程</a>
+  <li><a href="#overview">概述</a></li>
+  <li><a href="#jvm">jvm的组织架构</a></li>
+  <li><a href="#jmm">jvm内存模型</a>
     <ul>
-      <li><a href="#sysThread">系统线程</a></li>
       <li><a href="#perThread">线程私有</a>
         <ul>
           <li><a href="#pc">程序计数器</a></li>
@@ -41,83 +42,72 @@
               <li><a href="#dynamicLink">动态链接</a></li>
             </ul>
           </li>
+          <li><a href="#native_stack">本地方法栈</a></li>
+        </ul>
+      </li>
+      <li><a href="#allThread">线程共享</a>
+        <ul>
+          <li><a href="#heap">堆</a></li>
+          <li><a href="#nonHeap">非堆</a>
+            <ul>
+              <li><a href="#methodArea">方法区</a></li>
+              <li><a href="#interned_string">internedString</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#heap">堆</a></li>
-  <li><a href="#nonHeap">非堆</a>
-    <ul>
-      <li><a href="#methodArea">方法区</a></li>
-      <li><a href="#symbol_table">符号表</a></li>
-      <li><a href="#interned_string">internedString</a></li>
-    </ul>
-  </li>
+  <li><a href="#direct_memory">直接内存</a></li>
 </ul>
 
-<p>这篇文章解释了java虚拟机jvm内部的架构。下边这幅图展示了符合jvm版本7规范的典型的jvm的内部关键的组成部分。
-上图所示的组件会在下边的两节中逐一解释。第一部分讲的是每个线程创建的，第二部分展示的独立于线程的。</p>
+<h2 id="overview">概述</h2>
 
-<h2 id="thread">线程</h2>
-<p><img src="http://blog.jamesdbloom.com/images_2013_11_17_17_56/JVM_Internal_Architecture.png" alt="jvm memory" /></p>
+<p>本文在介绍jvm的内存模型之前，我们先介绍下jvm的模型，然后分线程私有和线程共享两个方面详细阐述jvm内存各部分的内容，针对jdk 7 hotspot虚拟机。</p>
+
+<h2 id="jvm">jvm的组织架构</h2>
+
+<p><img src="/images/java/JvmSpec7.png" alt="jvm的组织架构" /></p>
+
+<ol>
+  <li>classloader:详见<a href="/2015/01/26/load_class">load class</a></li>
+  <li>程序计数器: 线程私有，当前线程所执行代码的行号指示器</li>
+  <li>栈：线程私有，生命周期和线程相同。每个栈可能包含多个栈帧，每个方法在执行时都会创建一个栈帧。</li>
+  <li>本地(native)方法栈：线程私有，与jvm栈锁发挥的作用非常相似</li>
+  <li>堆：线程共享，很大，GC的主要区域，几乎所有的对象实例及数组都要在堆上分配</li>
+  <li>方法区：有个别名（non-heap）非堆。存储已被jvm加载的类信息，常量、静态变量、即使编译器编译后的代码。</li>
+  <li>执行引擎：执行字节码，具体可以参照这个<a href="/2015/01/26/jvm_execute_engine">例子</a></li>
+</ol>
+
+<h2 id="jmm">jvm内存模型</h2>
+
+<p>然后我们以线程私有和线程共享两个方面来详细说下jvm内存各部分的细节</p>
+
+<p><img src="/images/java/JVM_Internal_Architecture.png" alt="jvm memory" /></p>
+
+<h3 id="perThread">线程私有</h3>
 
 <p>jvm允许一个应用程序拥有多线程，并发地运行。在hotspot虚拟机中在java线程和操作系统的线程有一个直接的映射关系。在准备好java线程所有的状态（state）诸如thread-local的存储，分配的buffers，同步的对象，栈和程序计数器之后，会创建本地线程。一旦java线程终止了，本地线程就会被回收。操作系统调度所有的线程并分发给任意可用的cpu。一旦本地的线程被初始化后，它调用java线程的run()方法。当run方法返回时，未被捕获的异常将被处理，线程终止，然后本地线程确认jvm是否需要被终止（比如如果该线程是最终的非守护线程的话，jvm就应该被teminated）。当线程被终止时，本地线程和jvm线程所需要的所有资源都会被释放。</p>
 
-<h3 id="sysThread">系统线程</h3>
+<p>每个线程的执行都有下列的组成部分:<code class="highlighter-rouge">程序计数器</code>，<code class="highlighter-rouge">栈</code>。每个栈有许多<code class="highlighter-rouge">栈帧</code>组成；每个栈帧又包含<code class="highlighter-rouge">局部变量表</code>,<code class="highlighter-rouge">操作数栈</code>,<code class="highlighter-rouge">当前方法所在类的运行时常量池引用</code>等。</p>
 
-<p>如果你用jconsole或者任意的debugger，可以看到许多线程都在后台运行。除了主线程，这些在调用public static void main(String[] args)作为一部分被创建的线程也会运行。所有的线程都是有主线程创建的。jvm中主要的一些后台线程如下：</p>
+<h4 id="pc">程序计数器（program counter PC）</h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>系统线程　</th>
-      <th>作用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>vm thread</td>
-      <td>这个线程等待一些操作出现，这需要jvm到达安全点。这些操作的必须发生在一个独立的线程中，因为他们都需要在jvm在安全点，这时候堆不能被改变，这种类型的此操作诸如”stop the world”垃圾回收，线程栈dump，线程阻塞（thread suspension），biased locking revocation ？？？</td>
-    </tr>
-    <tr>
-      <td>Periodic task thread</td>
-      <td>这个线程主要是为一些需要调度一些周期性操作的定时任务（如中断）</td>
-    </tr>
-    <tr>
-      <td>gc threads</td>
-      <td>这些线程为jvm中不同类型的垃圾回收活动提供支持</td>
-    </tr>
-    <tr>
-      <td>compiler threads</td>
-      <td>这些线程在运行时将字节码编译成本地代码</td>
-    </tr>
-    <tr>
-      <td>Signal dispatcher thread</td>
-      <td>这个线程接收发给jvm的信号，同时通过调用合适的jvm方法在jvm中对其进行处理</td>
-    </tr>
-    <tr>
-      <td>Signal dispatcher thread</td>
-      <td>这个线程接收发给jvm的信号，同时通过调用合适的jvm方法在jvm中对其进行处理</td>
-    </tr>
-  </tbody>
-</table>
+<p>程序计数器是当前的指令instruction或者叫操作码opcode的地址，native除外。如果当前的方法是native，程序计数器是空的(undefined)，所有的cpu都有一个程序计数器，一般情况下，在一条指令执行完后程序计数器加一，然后指向下一条将要被执行的指令的地址。jvm使用pc来追踪程序现在在哪执行指令，可以看做是当前线程所执行的字节码的行号指示器。字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖程序计数器来完成。 事实上，pc指向的是方法区中的一个内存地址.</p>
 
-<h3 id="perThread">线程私有</h3>
-<p>每个线程的执行都有下列的组成部分,<code class="highlighter-rouge">程序计数器</code>，<code class="highlighter-rouge">栈</code>；每个栈有许多<code class="highlighter-rouge">栈帧</code>组成；每个栈帧又包含<code class="highlighter-rouge">局部变量表</code>,<code class="highlighter-rouge">操作数栈</code>,<code class="highlighter-rouge">当前方法所在类的运行时常量池引用</code>等。</p>
+<p>由于jvm的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数。</p>
 
-<h4 id="program-counter-pcpc">程序计数器（program counter PC）{#pc}</h4>
-
-<p>当前的指令instruction或者叫操作码opcode的地址，native除外。如果当前的方法是native，程序计数器是未定义的，所有的cpu都有一个程序计数器，一般情况下，在一条指令执行完后程序计数器加一，然后指向下一条将要被执行的指令的地址。jvm使用pc来追踪程序现在在哪执行指令，事实上，pc指向的是方法区中的一个内存地址.</p>
+<p>程序计数器所在的内存区域是jvm规范唯一一个没有规定任何OutOfMemoryError情况的区域。</p>
 
 <h4 id="stack">栈</h4>
 
-<p>每个线程都有它自己的栈（线程私有），持有这个线程要执行的每个方法的栈帧。栈是后进先出的数据结构，所以要被执行的方法是位于栈顶的。当一个方法被调用时，一个新的栈帧将被创建并add（push）到栈顶。当这个方法return或者在执行过程中未捕获的异常被throw，这个栈帧将会被remove（pop）出栈。栈不是直接被操作的 ，除了push和pop帧对象，因此，帧对象可以在堆中分配，并且内存也不需要连续。（The stack is not directly manipulated, except to push and pop frame objects, and therefore the frame objects may be allocated in the Heap and the memory does not need to be contiguous.）???</p>
+<p>每个线程都有它自己的栈（线程私有），持有这个线程要执行的每个方法对应的栈帧。栈是后进先出的数据结构，所以要被执行的方法是位于栈顶的。当一个方法被调用时，一个新的栈帧将被创建并add（push）到栈顶。当这个方法return或者在执行过程中未捕获的异常被throw，这个栈帧将会被remove（pop）出栈。</p>
 
-<p>native栈,不是所有的java虚拟机都支持本地方法，支持的都会创建一个本地方法栈。如果一个jvm用C的连接模型来实现本地方法调用（java native Invocation，本地方法栈就是一个C的栈。这种情况下，本地方法栈中的参数的顺序和返回值将和典型的c程序一样。通常情况下，一个本地方法可以call back into jvm，并且调用java方法。这样的本地到java的调用将发生在栈上（通常是java栈）。线程将离开native栈，并创建一个新的栈帧在栈上（通常是java栈）</p>
+<p>native栈,不是所有的java虚拟机都支持本地方法，支持的会创建一个本地方法栈。如果一个jvm用C的连接模型来实现本地方法调用（java native Invocation，本地方法栈就是一个C的栈。这种情况下，本地方法栈中的参数的顺序和返回值将和典型的c程序一样。通常情况下，一个本地方法可以call back into jvm，并且调用java方法。这样的本地到java的调用将发生在栈上（通常是java栈）。线程将离开native栈，并创建一个新的栈帧在栈上（通常是java栈）</p>
 
 <p>一个栈可以是动态的，也可以固定大小的。如果一个线程需要超过允许的大小，就会报栈溢出错误StackOverFlowError，如果一个栈需要一个新的栈帧，但是没有足够的内存来分配它，就会报内存溢出OutOfMemoryError。</p>
 
-<p>每个方法调用时，一个新的栈帧就会被创建并add（push）到栈顶。当方法return或者在执行过程中未捕获的异常被抛出时，栈帧会被removed（pop）。</p>
+<p>每个方法被执行时都会创建一个栈帧（Stack Frame）。</p>
 
 <p>每个栈帧包含：</p>
 
@@ -125,30 +115,26 @@
   <li>局部变量表</li>
   <li>返回值</li>
   <li>操作数栈</li>
-  <li>当前方法所在类的运行时常量池的引用</li>
+  <li>动态链接等</li>
 </ol>
 
 <h5 id="localVarTable">局部变量表</h5>
-<p>局部变量表包含执行该方法时，所有用到的局部变量，包括this引用，所有的方法参数和一些定义的局部变量，对于类方法（如static方法）来说，方法参数从0开始，对于实例方法，0 slot为this引用。</p>
+
+<p>局部变量表包含执行该方法时，所有用到的局部变量，包括this引用，所有的方法参数和一些定义的局部变量。对于类方法（如static方法）来说，方法参数从0开始，对于实例方法，0 slot为this引用。</p>
 
 <p>一个局部变量可以是：</p>
 
 <ol>
-  <li>boolean</li>
-  <li>byte</li>
-  <li>char</li>
-  <li>long</li>
-  <li>short</li>
-  <li>int</li>
-  <li>float</li>
-  <li>double</li>
-  <li>reference</li>
-  <li>returnAddress</li>
+  <li>基本数据类型:boolean、byte、char、long、short、int、float、double</li>
+  <li>reference（它不等同于对象本身）</li>
+  <li>returnAddress（指向了一条字节码指令的地址）</li>
 </ol>
 
 <p>在局部变量表除了long和double外，所有的类型占用一个slot，long和double占用连续的两个slot因为这些类型是64bit而不是32bit。</p>
 
-<h5 id="operandstack">操作数栈{#operandStack}</h5>
+<p>局部变量表的所需的内存空间在编译后已经确定了的，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
+
+<h5 id="operandStack">操作数栈</h5>
 
 <p>操作数栈在字节码执行的过程中使用，作用和cpu的寄存器差不多。大多数jvm的字节码在入栈，出栈，复制栈顶元素，交换，执行产生值消费值的操作。因此，在字节码中，交换局部变量表和操作数栈的指令是非常频繁的。例如，一个简单的变量初始化编译成字节码后是两条与操作数栈交互的字节码。</p>
 
@@ -168,16 +154,23 @@
 
 <p>当一个java的class文件被编译，所有指向变量的引用，方法名都被作为符号链接存储在class的常量池中。一个符号链接是逻辑引用而不是指向真实的内存地址。jvm实现可以选择在什么时候来处理这些符号链接，可以在class文件加载之后，被验证的时候，这叫做急切的或者静态的解析（eager or static resolution）；或者这可以发生在符号链接第一次被使用的时候，这叫做延迟解析（lazy or late resolution）。然而在每个引用第一次被使用的时候，jvm必须表现的好像这个解析发生过，不能抛出任何处理异常？？？（However the JVM has to behave as if the resolution occurred when each reference is first used and throw any resolution errors at this point）。绑定是这些有符号链接标识的域，方法或者类被一个直接引用代替的过程，这仅仅发生一次，因为符号链接已经完全有直接引用代替。如果指向类的符号链接没有被处理，这个类会被加载。每个直接引用作为一个相对于存储结构的偏移地址，这个存储结构和运行时的变量和方法相关。</p>
 
-<h2 id="heap">堆</h2>
+<h4 id="native_stack">本地方法栈</h4>
 
-<p>堆被用作在运行时分配类的实例和数组。数组和对象不能存储在栈中，因为一个栈帧在创建之后就不能改变大小。栈帧仅仅存储堆中对象或者数组的指针。不像基本类型和局部变量表中的引用（在每个栈帧中）对象总是存储在堆中，因此当一个方法结束时,它们不被移除。对象仅会被垃圾收集器收集。</p>
+<p>本地方法栈（native method stack）与jvm栈所发挥的作用是非常相似的，不同的是jvm栈为jvm执行字节码服务，而本地方法栈则为jvm使用到的native方法服务。在jvm规范中对本地方法使用的语言、使用的方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。对于hotspot，本地方法栈和虚拟机栈是合二为一的。</p>
+
+<h3 id="allThread">线程共享</h3>
+
+<h4 id="heap">堆</h4>
+
+<p>所有的对象实例以及数组都要在堆上分配。数组和对象不能存储在栈中，因为一个栈帧在创建之后就不能改变大小。栈帧仅仅存储堆中对象或者数组的引用。不像基本类型和局部变量表中的引用（在每个栈帧中），对象总是存储在堆中，因此当一个方法结束时,它们不被移除。对象仅会被垃圾收集器收集。</p>
+
+<p>ps：随着jit编译器的发展与逃逸分析技术逐渐成熟，栈上分配，标量替换优化技术将会导致一些微妙的变化发生，所有对象都分配在堆上也渐渐变得不那么“绝对了”。</p>
 
 <p>为了支持垃圾回收，堆被划分为这三个部分：</p>
 
 <ol>
   <li>年轻代(经常被划分为eden和survivor)</li>
   <li>老年代</li>
-  <li>永久代 ?</li>
 </ol>
 
 <p>对象和数组只会被垃圾回收器回收。<br />
@@ -190,111 +183,53 @@
   <li>当老年代被回收的时候，永久代也会被回收，他们任一满的时候都会触发full gc来对他们进行回收。</li>
 </ol>
 
-<h2 id="nonHeap">非堆内存</h2>
+<h4 id="nonHeap">非堆内存</h4>
 
-<p>非堆内存包括：</p>
+<p>非堆内存与java堆一样，是各个线程共享的内存区域，存储jvm加载的类信息、常量、静态变量、即时编译器编译后的代码（code cache）等
+。虽然jvm规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫non-heap，目的是与java堆区分开来（从jconsole可以看出来）。</p>
 
-<ul>
-  <li>永久代
-    <ul>
-      <li>方法区</li>
-      <li>interned strings</li>
-    </ul>
-  </li>
-  <li>code cache 被用来编译，并存储被jit编译器编译成本地代码的方法</li>
-</ul>
+<p>ps: 对于hotspot，很多人更愿意把方法区称为“永久代”，本质上两者并不等价，或者说用永久代来时间方法区而已，这样hotspot的垃圾回收器就可以像管理java堆一样管理这部分内存了，对于其他虚拟机（如jRockit，IBM J9）来说不存在永久代的概念。对于hotspot，更容易遇到内存溢出的问题（-XX:MaxPermSize的上限）。而J9和JRockit只要没有触碰到进程可用内存上限就不会溢出。根据hotspot的官方发布路线图也有放弃永久代并逐步改为采用native memory来实现方法区的规划了。<code class="highlighter-rouge">在1.7的hotspot中，已经把原本放在永久代的字符串常量池移出了。
+1.8已经把永久代完全移除了</code>。具体参见<a href="http://www.infoq.com/cn/articles/Java-PERMGEN-Removed">Java永久代去哪儿了</a></p>
 
-<p>即时编译just in time（jit）compilation</p>
+<p>即时编译(just in time（jit）compilation): java字节码被解释执行，然而它没有本地代码快，为了提高性能，hotspot jvm寻找字节码中的“hot”区域，并把他们编译成本地代码，这个本地代码被保存在code cache在非堆内存中。</p>
 
-<p>java字节码被解释执行，然而它没有本地代码快，为了提高性能，hotspot jvm寻找字节码中的“hot”区域，并把他们编译成本地代码，这个本地代码被保存在code cache在非堆内存中。</p>
-
-<h3 id="methodArea">方法区</h3>
+<h5 id="methodArea">方法区</h5>
 
 <p>方法区存储一些类的信息，诸如：</p>
 
-<ul>
-  <li>classloader引用</li>
-  <li>运行时常量池
-    <ul>
-      <li>数字型常量</li>
-      <li>域引用</li>
-      <li>方法引用</li>
-      <li>属性</li>
-    </ul>
-  </li>
-  <li>域数据
-    <ul>
-      <li>每个域
-        <ul>
-          <li>名字</li>
-          <li>类型</li>
-          <li>标识符</li>
-          <li>属性</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>方法数据
-    <ul>
-      <li>每个方法
-        <ul>
-          <li>名字</li>
-          <li>返回值</li>
-          <li>参数（有序）</li>
-          <li>标识符</li>
-          <li>属性</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>方法代码
-    <ul>
-      <li>每个方法
-        <ul>
-          <li>字节码</li>
-          <li>操作数栈的大小</li>
-          <li>局部变量表的大小</li>
-          <li>局部变量表</li>
-          <li>异常表
-            <ul>
-              <li>每个异常handler</li>
-              <li>开始点</li>
-              <li>结束点</li>
-              <li>程序计数器偏移for handler code</li>
-              <li>常量池中被捕获的异常类的索引</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p><img src="/images/java/method_area.png" alt="方法区" /></p>
 
 <p>所有的线程共享方法区，所以访问方法区数据和动态链接的过程必须是线程安全的。如果两个线程同时尝试去访问一个还没有被加载的类的域或者方法，它必须仅被加载一次，两个线程必须等到类被加载之后才能执行。</p>
 
 <p>虽然方法区逻辑上来说是堆的一部分，但是通常的实现，可能选择不垃圾回收它。 然而oracle jvm的jconsole显示了方法区和code cache是在non-heap。openjdk的源码也表明code cache也是独立于堆的。</p>
 
-<h3 id="symbol_table">符号表</h3>
-<p>jvm有一个存在于永久代的符号表。这个符号表是一个符号指针到符号映射的哈希表，包含一个指向每个类中所有符号的指针。</p>
+<h2 id="direct_memory">直接内存</h2>
 
-<p>当一个符号被从符号表中移除时，引用计数用来控制。例如，当一个类被卸载之后，常量池中的所有引用基数就会减少。当一个符号的引用计数减为0时，符号表知道这个符号不再被引用，这个符号会被从符号表中卸载。符号表和下边的字符串表，所有的条目被以一种规范化的格式，用来提高效率并确保每个条目只出现一次。</p>
+<p>直接内存并不是虚拟机运行时数据区的一部分呢，要不是jvm规范中定义的区域，但是这部分内存也被频繁的使用，而且也可能导致OutOfMemoryError异常出现。</p>
 
-<h3 id="interned_string">interned Strings（String table）</h3>
-<p>java语言规范规定相同的字符串(string literals)，包含有相同的unicode 序列,必须引用相同的String实例。如果String.intern()方法被调用在一个String引用上，必须返回和字符串（string literals）相同的引用。所以下边返回true</p>
+<p>在jdk1.4中新加入了NIO（new input/output）类，引入了一种基于通道（ Channel）和缓冲区（Buffer）的I/O方式，它可以使用Native函数库直接分配堆外内存，然后通过存储在java堆中的DirectByteBuffer对象作为这块内存的引用进行操作，这样能在一些场合显著提高性能，因此避免了java堆和native堆中来回复制数据。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>("j" + "v" + "m").intern() == "jvm"
-</code></pre>
-</div>
+<p>关于DirectByteBuffer的gc</p>
 
-<p>In the Hotspot JVM interned string are held in the string table, which is a Hashtable mapping object pointers to symbols (i.e. Hashtable&lt;oop, Symbol&gt;), and is held in the permanent generation. For both the symbol table (see above) and the string table all entries are held in a canonicalized form to improve efficiency and ensure each entry only appears once.</p>
+<ol>
+  <li>虽然是堆外内存，这部分内存也是有jvm的垃圾回收器负责回收的。Hotspot在gc时会扫描DirectByteBuffer对象是否有引用，如没有则同时也会回收其占用的堆外内存。</li>
+  <li>DirectByteBuffer对象晋升到old区，这时候就只能等full gc触发了（cms gc的情况下等cms gc），因此在DirectByteBuffer使用较多，存活时间较长的情况下，有可能会导致堆外内存耗光（因为DirectByteBuffer本身对象占用的空间是很小的）</li>
+  <li>对于2中所说的情况，最好的启动参数中增加<code class="highlighter-rouge">XX:MaxDirectMemorySize=x[m|g],例如X:MaxDirectMemorySize=500m</code>，这个参数默认的大小是-Xmx的值，参数的含义是在DirectByteBuffer分配的堆外内存到达指定大小后，触发Full GC</li>
+</ol>
 
-<p>String literals are automatically interned by the compiler and added into the symbol table when the class is loaded. In addition instances of the String class can be explicitly interned by calling String.intern(). When String.intern() is called, if the symbol table already contains the string then a reference to this is returned, if not the string is added to the string table and its reference is returned.</p>
+<p>很多时候我们会看到java进程占用的内存超过-Xmx的大小，原因就是类似DirectByteBuffer、Unsafe、GC、编译、自己写的JNI模块等这些是需要占用堆外内存的。</p>
 
-<p>参考</p>
+<p>遇到java进程占用内存超过-Xmx大小的情况，可以尝试强制执行Full GC（强制执行的方位为执行jmap -history:live）看看，多执行两次，看堆外内存下降的话，很有可能就是DirectByteBuffer造成的，对于这种情况，通常加上上面的启动参数就可解决。</p>
 
-<p>[1]<a href="http://blog.jamesdbloom.com/JVMInternals.html">http://blog.jamesdbloom.com/JVMInternals.html</a></p>
+<h2 id="section">参考</h2>
 
-<p>[2]<a href="http://www.artima.com/insidejvm/ed2/jvm4.html">http://www.artima.com/insidejvm/ed2/jvm4.html</a></p>
+<p>[jvm internals]<a href="http://blog.jamesdbloom.com/JVMInternals.html">http://blog.jamesdbloom.com/JVMInternals.html</a></p>
+
+<p>[Java virtual machine]<a href="https://en.wikipedia.org/wiki/Java_virtual_machine">https://en.wikipedia.org/wiki/Java_virtual_machine</a></p>
+
+<p>[Java永久代去哪儿了]<a href="http://www.infoq.com/cn/articles/Java-PERMGEN-Removed">http://www.infoq.com/cn/articles/Java-PERMGEN-Removed</a></p>
+
+<p>[CMS GC会不会回收Direct ByteBuffer的内存]<a href="http://hellojava.info/?p=56">http://hellojava.info/?p=56</a></p>
 
         <ul class="prev_next">
             
@@ -310,7 +245,7 @@
             </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2015/09/03/jvm_internal" data-title="jvm internal(译)"
+        <div class="ds-share flat" data-thread-key="/2015/09/03/jvm_internal" data-title="jvm内存模型"
              data-url="http://lcj1992.github.io/2015/09/03/jvm_internal">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
@@ -324,7 +259,7 @@
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/09/03/jvm_internal" data-title="jvm internal(译)"
+        <div class="ds-thread" data-thread-key="/2015/09/03/jvm_internal" data-title="jvm内存模型"
              data-url="http://lcj1992.github.io/2015/09/03/jvm_internal"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->

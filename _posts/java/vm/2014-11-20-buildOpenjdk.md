@@ -22,7 +22,7 @@ keywords: openjdk
 
 编译
 
-    make clean 
+    make clean
     make
 
 出现的问题

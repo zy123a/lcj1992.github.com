@@ -30,16 +30,52 @@
         <ul>
   <li><a href="#thread">thread</a></li>
   <li><a href="#thread_local">ThreadLocal</a></li>
-  <li><a href="#CopyOnWriteArrayList">CopyOnWriteArrayList</a></li>
-  <li><a href="#readwritelock">ReadWriteLock</a></li>
-  <li><a href="#volatile_static_threadLocal">volatile_static_threadLocal</a></li>
+  <li><a href="#copy_on_write_array_list">CopyOnWriteArrayList</a></li>
+  <li><a href="#read_write_lock">ReadWriteLock</a></li>
+  <li><a href="#volatile">volatile</a></li>
+  <li><a href="#volatile_static_thread_local">volatile_static_threadLocal</a></li>
   <li><a href="#ThreadExecutor">ThreadExecutor</a></li>
 </ul>
 
 <h3 id="thread">thread</h3>
 
+<p>结合<a href="/2015/09/03/java_internal">jvm内存模型</a></p>
+
+<p>在Java当中，线程通常都有五种状态，<code class="highlighter-rouge">创建</code>、<code class="highlighter-rouge">就绪</code>、<code class="highlighter-rouge">运行</code>、<code class="highlighter-rouge">阻塞</code>和<code class="highlighter-rouge">死亡</code>。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>状态</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>创建</td>
+      <td>在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。</td>
+    </tr>
+    <tr>
+      <td>就绪</td>
+      <td>当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后，也会处于就绪状态。</td>
+    </tr>
+    <tr>
+      <td>运行</td>
+      <td>线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。</td>
+    </tr>
+    <tr>
+      <td>阻塞</td>
+      <td>线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。</td>
+    </tr>
+    <tr>
+      <td>死亡</td>
+      <td>如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪。</td>
+    </tr>
+  </tbody>
+</table>
+
 <ol>
-  <li>run()和start()</li>
+  <li>run()和start():  start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。</li>
   <li>join()/join(long millis) 等待当前线程die或者超时</li>
 </ol>
 
@@ -52,21 +88,53 @@
   <li>ThreadLocal只是本线程有效,InheritableThreadLocal对由本线程创建的子线程也有效.</li>
 </ol>
 
-<h3 id="CopyOnWriteArrayList">CopyOnWriteArrayList</h3>
+<h3 id="copy_on_write_array_list">CopyOnWriteArrayList</h3>
 
-<h3 id="readwritelock">ReadWriteLock</h3>
+<h3 id="read_write_lock">ReadWriteLock</h3>
 
 <p>ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁的,ReentrantLock还是会加锁滴.</p>
 
-<h3 id="volatile_static_threadLocal">volatile vs static  vs  ThreadLocal</h3>
+<h3 id="volatile">volatile</h3>
+
+<h3 id="volatile_static_thread_local">volatile vs static  vs  ThreadLocal</h3>
 
 <ol>
   <li>volatile 不同线程的同一对象之间共享</li>
   <li>static  同一线程的不同对象之间共享</li>
   <li>static volatile 不同线程的不同对象之间共享<a href="http://stackoverflow.com/questions/2423622/volatile-vs-static-in-java">他人的讨论</a></li>
-  <li>threadLocal 同一线程之间共享，不同线程之间互斥,声明为ThreadLocal，通常需要声明为static,一个是per thread per object,一个是per thread
-<a href="http://stackoverflow.com/questions/2784009/why-should-java-threadlocal-variables-be-static">他人的讨论</a></li>
+  <li>threadLocal 同一线程之间共享，不同线程之间互斥,声明为ThreadLocal，通常需要声明为static,一个是per thread per object,一个是per thread，但对于单例的加不加就无所谓了。</li>
 </ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  public class DoubleCheckVersion {
+      private static volatile DoubleCheckVersion instance;
+
+      private InheritableThreadLocal&lt;String&gt; type =  new InheritableThreadLocal&lt;String&gt;();
+
+      private DoubleCheckVersion() {}
+      public static DoubleCheckVersion getInstance() {
+          if (instance == null) {
+              synchronized (DoubleCheckVersion.class) {
+                  if (instance == null) {
+                      instance = new DoubleCheckVersion();
+                  }
+              }
+          }
+          return instance;
+      }
+
+      public String getType() {
+          return type.get();
+      }
+      public void setType(String type) {
+          this.type.set(type);
+      }
+  }
+</code></pre>
+</div>
+
+<p><a href="http://stackoverflow.com/questions/2784009/why-should-java-threadlocal-variables-be-static">他人的讨论</a></p>
 
 <p><img src="/images/java/volatile_static.png" alt="volatile_static" /></p>
 

@@ -2,45 +2,86 @@
 layout: post
 title: java基础
 categories:  java
-tags: java autoboxing transient thread jdbc
+tags: java autoboxing transient thread jdbc shallow_deep_copy final
 ---
+* [初始化顺序](#class_init)
+* [自动装箱拆箱](#box_unbox)
+* [transient](#transient)
+* [shallow_deep_copy](#shallow_deep_copy)
+* [object#wait VS thread#sleep](#object_wait_thread_sleep)
+* [unSafe](#unsafe)
+* [final](#final)
 
-*   [java初始化顺序](#init)
-*   [自动装箱拆箱](#autobox)
-*   [transient](#transient)
-*   [thread](#thread)
 
-### 初始化顺序 {#init}
+#### 初始化顺序 {#class_init}
 
 1.  静态变量（类变量）、静态初始化块 > 实例变量、 初始化块 > 构造器
 
 2.  父类 > 子类  子类的静态初始化在父类的实例变量初始化之前
 
-3.  静态代码块是在类加载时主动执行的，静态方法是在被调用的时候被动执行的
+3.  静态代码块是在类加载时主动执行的，静态方法是在被调用的时候被动执行的 todo
 
-### 自动装箱拆箱 {#autobox}
+#### 自动装箱拆箱 {#box_unbox}
 
-装箱
-基本类型-》引用类型
+装箱：基本类型 -> 引用类型
+拆箱：引用类型 -> 基本类型
 
-The Java compiler applies autoboxing when a primitive value is:
+##### 什么时候
 
-1.  Passed as a parameter to a method that expects an object of the corresponding wrapper class.
+1.  接受一个对象类型的参数，但是我们传入的是基本类型，发生自动装箱；相反情形，发生自动拆箱
+2.  赋值时
+3.  引用类型不参与计算，比较等操作，会发生自动拆箱。
 
-2.  Assigned to a variable of the corresponding wrapper class.
+eg:
 
-拆箱
-引用类型-》基本类型
+    List<Integer> list = new ArrayList<Integer>();
+    list.add(1); //auto boxing对应情况1
 
-The Java compiler applies unboxing when an object of a wrapper class is:
+    Integer i = 10; //auto boxing 对应情况2
+    int j = i; // auto unboxing
+    if(i > 11){ // auto unboxing
+      System.out.println("fuck");
+    }
 
-1.  Passed as a parameter to a method that expects a value of the corresponding primitive type.
 
-2.  Assigned to a variable of the corresponding primitive type.
+##### 注意事项
 
-If the value p being boxed is true, false, a byte, or a char in the range \u0000 to \u007f, or an int or short number between -128 and 127 (inclusive), then let r1 and r2 be the results of any two boxing conversions of p. It is always the case that r1 == r2.
+1.  避免在循环参与计算时，使用引用类型，会造成不必要的装箱拆箱操作，可能生成大量无用对象，增大GC压力。
+2.  缓存的对象：基本类型true,false,\u0000到\u007f的byte或char，-128到127的int或short会被缓存起来。
+3.  如果这个对象没有进行初始化或者为Null，在自动拆箱过程中会报空指针异常
 
-### transient
+eg:
+
+    Integer sum = 0;
+    for(int i=1000; i<5000; i++){
+        sum+=i;
+    }
+
+    // Example 1: == comparison pure primitive – no autoboxing
+    int i1 = 1;
+    int i2 = 1;
+    System.out.println("i1==i2 : " + (i1 == i2)); // true
+
+    // Example 2: equality operator mixing object and primitive
+    Integer num1 = 1; // autoboxing
+    int num2 = 1;
+    System.out.println("num1 == num2 : " + (num1 == num2)); // true
+
+    // Example 3: special case - arises due to autoboxing in Java
+    Integer obj1 = 1; // autoboxing will call Integer.valueOf()
+    Integer obj2 = 1; // same call to Integer.valueOf() will return same cached Object
+    System.out.println("obj1 == obj2 : " + (obj1 == obj2)); // true
+
+    // Example 4: equality operator - pure object comparison
+    Integer one = new Integer(1); // no autoboxing
+    Integer anotherOne = new Integer(1);
+    System.out.println("one == anotherOne : " + (one == anotherOne)); // false
+
+参考
+
+[Java中的自动装箱与拆箱](http://droidyue.com/blog/2015/04/07/autoboxing-and-autounboxing-in-java/index.html)
+
+#### transient
 
 1.  一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
 
@@ -48,25 +89,7 @@ If the value p being boxed is true, false, a byte, or a char in the range \u0000
 
 3.  被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。
 
-### thread
-
-结合[jvm内存模型](http://lcj1992.github.io/2015/09/03/java_internal)
-
-在Java当中，线程通常都有五种状态，`创建`、`就绪`、`运行`、`阻塞`和`死亡`。
-
-|状态 |说明|
-|--|--|
-|创建|在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。|
-|就绪|当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后，也会处于就绪状态。|
-|运行|线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。|
-|阻塞|线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。|
-|死亡|如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪。|
-
-thread.run()和thread.start()
-
-start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。
-
-### shallow copy & deep copy
+#### shallow copy & deep copy {#shallow_deep_copy}
 
 1.  浅拷贝，对于基本类型和String，没有问题，独立的一份，对于对象，只是拷贝了引用，共用同一片内存区域
 2.  深拷贝，两对象独立
@@ -80,27 +103,40 @@ start方法会新起一个线程，而run方法只是普通的方法调用，还
 [3]<https://en.wikipedia.org/wiki/Object_copying>
 
 
-### Object#wait() &&  Thread.sleep()
+#### Object#wait() &&  Thread.sleep() {#object_wait_thread_sleep}
 
 [1]<http://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/>
 
 
-### Unsafe
+#### Unsafe
 
 [1]<http://blog.csdn.net/fenglibing/article/details/17138079>
 
-String.format格式化输出%?
+#### final
 
- %%
+不想做改变可能出于两种理由：1.`设计`；2.`效率`
+可能用到final的三种情况：1.`数据`;2.`方法`;3.`类`
+
+
+##### final数据
+
+一经确定就不能再改了：
+
+1.  在编译时已经确定的常量
+2.  在运行时初始化(static、非static、构造器)，但在初始化（对象创建）后，不能再被改变了。
+3.  空白final： 在构造器中初始化final变量的值，这样就可以做到final域根据对象的不同而有所不同，却又保持其恒定不变的特性。
+4.  final参数： 无法再方法中更改参数引用所指的对象。这一特性，主要用于向匿名内部类传递参数。
+
+##### final方法
+
+1.  把方法缩影，防止继承类override重写该方法
+2.  类中所有的private方法都隐式地指定为是final的了，类似的还有interface的方法隐式都指定为public，想想就知道了。
+
+##### final类
+
+1.  不希望该类有任何改动，不希望有子类
+2.  由于final类禁止继承，所以final类中的所有方法都隐式的指定为final的。
+
+ps: static的变量都是放在方法区的。这个我觉得说的很对[27楼说的挺对](http://bbs.csdn.net/topics/370001490#post-371813857)
 
 所有的Serializable的类必须含有serialVersionUID属性，这是出于性能考虑，如果没有serialVersionUID属性，jre会自己计算一个值，这个值的计算很消耗资源。
-能double check最好double check，真的，不要让别人的不靠谱性影响自己的不靠谱性
-加了事务的方法，不要catch异常，抛出来才能rollback
-
-httpclient使用完后要release
-文件打开之后要close
-封装的线程上下文要remove
-
-   
-
-    

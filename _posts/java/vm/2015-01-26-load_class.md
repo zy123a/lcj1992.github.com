@@ -5,11 +5,22 @@ categories: java
 tags: memory byteCode
 ---
 
-### 类加载器classloader
+### classloader
+
+字节码的组织单元是一个class。一个class loader的实现必须能够识别和加载一切符合java class文件格式的东东(.class只是其中一种哟)。类从加载到虚拟机中开始，到卸载出内存为止，它的整个生命周期包括：加载（load）、验证（verification）、准备（preparation）、解析（resolution）、初始化（initialization）、使用（using）和卸载（unloading）。
+
+
+class loader加载类时按照顺序执行三个基本步骤。
+
+1.   加载（load）：查找并导入类的二进制数据
+2.   链接（link）：验证（verification）、准备（preparation）、解析(可选)(resolution)
+     1.   验证： 确保导入的类的正确性  
+
+
 
 jvm通过bootstrap classloader加载一个初始化类。这个类在调用public static void main方法之前被链接并初始化。这个方法的执行会反过来驱动其他类和接口的加载，链接，初始化。
 
-加载是通过唯一的名字找到代表这个类或者接口的class文件，并以字节数组的方式读入内存的过程。接下来这些字节流会被解析来确认它代表一个class对象，有正确的major和minor版本号。它的直接父类也会被加载。一旦这个过程完成了，一个类或者接口对象就从二进制的格式被创建在jvm中。
+加载是通过唯一的名字找到代表这个类或者接口的class文件，并以字节数组的方式读入内存的过程。接下来这些字节流会被解析来确认它代表一个class对象，有正确的major（45是jdk1，52是jdk8）和minor版本号。它的直接父类也会被加载。一旦这个过程完成了，一个类或者接口对象就从二进制的格式被创建在jvm中。
 
 链接验证类或者接口并准备它的直接父类或者父接口的过程。链接包含验证verifying，准备preparing和选择性的解析resolving。
 
@@ -34,4 +45,3 @@ Bootstrap Classloader是由本地代码实现的，因为它很早的，随着jv
 [java内存分配]<http://www.cnblogs.com/redcreen/archive/2011/05/04/2036387.html>
 
 [jvm internal]<http://blog.jamesdbloom.com/JVMInternals.html>
-  

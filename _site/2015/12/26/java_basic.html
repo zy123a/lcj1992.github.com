@@ -28,13 +28,16 @@
     <div id="main">
         <h2> java基础 </h2>
         <ul>
-  <li><a href="#init">java初始化顺序</a></li>
-  <li><a href="#autobox">自动装箱拆箱</a></li>
+  <li><a href="#class_init">初始化顺序</a></li>
+  <li><a href="#box_unbox">自动装箱拆箱</a></li>
   <li><a href="#transient">transient</a></li>
-  <li><a href="#thread">thread</a></li>
+  <li><a href="#shallow_deep_copy">shallow_deep_copy</a></li>
+  <li><a href="#object_wait_thread_sleep">object#wait VS thread#sleep</a></li>
+  <li><a href="#unsafe">unSafe</a></li>
+  <li><a href="#final">final</a></li>
 </ul>
 
-<h3 id="init">初始化顺序</h3>
+<h4 id="class_init">初始化顺序</h4>
 
 <ol>
   <li>
@@ -44,43 +47,78 @@
     <p>父类 &gt; 子类  子类的静态初始化在父类的实例变量初始化之前</p>
   </li>
   <li>
-    <p>静态代码块是在类加载时主动执行的，静态方法是在被调用的时候被动执行的</p>
+    <p>静态代码块是在类加载时主动执行的，静态方法是在被调用的时候被动执行的 todo</p>
   </li>
 </ol>
 
-<h3 id="autobox">自动装箱拆箱</h3>
+<h4 id="box_unbox">自动装箱拆箱</h4>
 
-<p>装箱
-基本类型-》引用类型</p>
+<p>装箱：基本类型 -&gt; 引用类型
+拆箱：引用类型 -&gt; 基本类型</p>
 
-<p>The Java compiler applies autoboxing when a primitive value is:</p>
+<h5 id="section">什么时候</h5>
 
 <ol>
-  <li>
-    <p>Passed as a parameter to a method that expects an object of the corresponding wrapper class.</p>
-  </li>
-  <li>
-    <p>Assigned to a variable of the corresponding wrapper class.</p>
-  </li>
+  <li>接受一个对象类型的参数，但是我们传入的是基本类型，发生自动装箱；相反情形，发生自动拆箱</li>
+  <li>赋值时</li>
+  <li>引用类型不参与计算，比较等操作，会发生自动拆箱。</li>
 </ol>
 
-<p>拆箱
-引用类型-》基本类型</p>
+<p>eg:</p>
 
-<p>The Java compiler applies unboxing when an object of a wrapper class is:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+list.add(1); //auto boxing对应情况1
+
+Integer i = 10; //auto boxing 对应情况2
+int j = i; // auto unboxing
+if(i &gt; 11){ // auto unboxing
+  System.out.println("fuck");
+}
+</code></pre>
+</div>
+
+<h5 id="section-1">注意事项</h5>
 
 <ol>
-  <li>
-    <p>Passed as a parameter to a method that expects a value of the corresponding primitive type.</p>
-  </li>
-  <li>
-    <p>Assigned to a variable of the corresponding primitive type.</p>
-  </li>
+  <li>避免在循环参与计算时，使用引用类型，会造成不必要的装箱拆箱操作，可能生成大量无用对象，增大GC压力。</li>
+  <li>缓存的对象：基本类型true,false,\u0000到\u007f的byte或char，-128到127的int或short会被缓存起来。</li>
+  <li>如果这个对象没有进行初始化或者为Null，在自动拆箱过程中会报空指针异常</li>
 </ol>
 
-<p>If the value p being boxed is true, false, a byte, or a char in the range \u0000 to \u007f, or an int or short number between -128 and 127 (inclusive), then let r1 and r2 be the results of any two boxing conversions of p. It is always the case that r1 == r2.</p>
+<p>eg:</p>
 
-<h3 id="transient">transient</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>Integer sum = 0;
+for(int i=1000; i&lt;5000; i++){
+    sum+=i;
+}
+
+// Example 1: == comparison pure primitive – no autoboxing
+int i1 = 1;
+int i2 = 1;
+System.out.println("i1==i2 : " + (i1 == i2)); // true
+
+// Example 2: equality operator mixing object and primitive
+Integer num1 = 1; // autoboxing
+int num2 = 1;
+System.out.println("num1 == num2 : " + (num1 == num2)); // true
+
+// Example 3: special case - arises due to autoboxing in Java
+Integer obj1 = 1; // autoboxing will call Integer.valueOf()
+Integer obj2 = 1; // same call to Integer.valueOf() will return same cached Object
+System.out.println("obj1 == obj2 : " + (obj1 == obj2)); // true
+
+// Example 4: equality operator - pure object comparison
+Integer one = new Integer(1); // no autoboxing
+Integer anotherOne = new Integer(1);
+System.out.println("one == anotherOne : " + (one == anotherOne)); // false
+</code></pre>
+</div>
+
+<p>参考</p>
+
+<p><a href="http://droidyue.com/blog/2015/04/07/autoboxing-and-autounboxing-in-java/index.html">Java中的自动装箱与拆箱</a></p>
+
+<h4 id="transient">transient</h4>
 
 <ol>
   <li>
@@ -94,48 +132,7 @@
   </li>
 </ol>
 
-<h3 id="thread">thread</h3>
-
-<p>结合<a href="http://lcj1992.github.io/2015/09/03/java_internal">jvm内存模型</a></p>
-
-<p>在Java当中，线程通常都有五种状态，<code class="highlighter-rouge">创建</code>、<code class="highlighter-rouge">就绪</code>、<code class="highlighter-rouge">运行</code>、<code class="highlighter-rouge">阻塞</code>和<code class="highlighter-rouge">死亡</code>。</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>状态</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>创建</td>
-      <td>在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。</td>
-    </tr>
-    <tr>
-      <td>就绪</td>
-      <td>当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后，也会处于就绪状态。</td>
-    </tr>
-    <tr>
-      <td>运行</td>
-      <td>线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。</td>
-    </tr>
-    <tr>
-      <td>阻塞</td>
-      <td>线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。</td>
-    </tr>
-    <tr>
-      <td>死亡</td>
-      <td>如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>thread.run()和thread.start()</p>
-
-<p>start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。</p>
-
-<h3 id="shallow-copy--deep-copy">shallow copy &amp; deep copy</h3>
+<h4 id="shallow_deep_copy">shallow copy &amp; deep copy</h4>
 
 <ol>
   <li>浅拷贝，对于基本类型和String，没有问题，独立的一份，对于对象，只是拷贝了引用，共用同一片内存区域</li>
@@ -150,26 +147,47 @@
 
 <p>[3]<a href="https://en.wikipedia.org/wiki/Object_copying">https://en.wikipedia.org/wiki/Object_copying</a></p>
 
-<h3 id="objectwait---threadsleep">Object#wait() &amp;&amp;  Thread.sleep()</h3>
+<h4 id="object_wait_thread_sleep">Object#wait() &amp;&amp;  Thread.sleep()</h4>
 
 <p>[1]<a href="http://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/">http://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/</a></p>
 
-<h3 id="unsafe">Unsafe</h3>
+<h4 id="unsafe">Unsafe</h4>
 
 <p>[1]<a href="http://blog.csdn.net/fenglibing/article/details/17138079">http://blog.csdn.net/fenglibing/article/details/17138079</a></p>
 
-<p>String.format格式化输出%?</p>
+<h4 id="final">final</h4>
 
-<p>%%</p>
+<p>不想做改变可能出于两种理由：1.<code class="highlighter-rouge">设计</code>；2.<code class="highlighter-rouge">效率</code>
+可能用到final的三种情况：1.<code class="highlighter-rouge">数据</code>;2.<code class="highlighter-rouge">方法</code>;3.<code class="highlighter-rouge">类</code></p>
 
-<p>所有的Serializable的类必须含有serialVersionUID属性，这是出于性能考虑，如果没有serialVersionUID属性，jre会自己计算一个值，这个值的计算很消耗资源。
-能double check最好double check，真的，不要让别人的不靠谱性影响自己的不靠谱性
-加了事务的方法，不要catch异常，抛出来才能rollback</p>
+<h5 id="final-1">final数据</h5>
 
-<p>httpclient使用完后要release
-文件打开之后要close
-封装的线程上下文要remove</p>
+<p>一经确定就不能再改了：</p>
 
+<ol>
+  <li>在编译时已经确定的常量</li>
+  <li>在运行时初始化(static、非static、构造器)，但在初始化（对象创建）后，不能再被改变了。</li>
+  <li>空白final： 在构造器中初始化final变量的值，这样就可以做到final域根据对象的不同而有所不同，却又保持其恒定不变的特性。</li>
+  <li>final参数： 无法再方法中更改参数引用所指的对象。这一特性，主要用于向匿名内部类传递参数。</li>
+</ol>
+
+<h5 id="final-2">final方法</h5>
+
+<ol>
+  <li>把方法缩影，防止继承类override重写该方法</li>
+  <li>类中所有的private方法都隐式地指定为是final的了，类似的还有interface的方法隐式都指定为public，想想就知道了。</li>
+</ol>
+
+<h5 id="final-3">final类</h5>
+
+<ol>
+  <li>不希望该类有任何改动，不希望有子类</li>
+  <li>由于final类禁止继承，所以final类中的所有方法都隐式的指定为final的。</li>
+</ol>
+
+<p>ps: static的变量都是放在方法区的。这个我觉得说的很对<a href="http://bbs.csdn.net/topics/370001490#post-371813857">27楼说的挺对</a></p>
+
+<p>所有的Serializable的类必须含有serialVersionUID属性，这是出于性能考虑，如果没有serialVersionUID属性，jre会自己计算一个值，这个值的计算很消耗资源。</p>
 
         <ul class="prev_next">
             
