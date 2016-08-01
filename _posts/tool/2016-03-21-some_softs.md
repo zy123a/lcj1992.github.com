@@ -2,7 +2,7 @@
 layout: post
 title: 一些有趣的工具
 categories: tool
-tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder
+tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder xmind omnigraffle
 ---
 
 *   [alfred](#alfred)
@@ -12,9 +12,11 @@ tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder
 *   [iterm2](#iterm2)
 *   [reeder](#reeder)
 *   [zsh](#zsh)
-*	  [theFuck](#thefuck)
-*	  [z](#z)
-*	  [参考](#ref)
+*	[theFuck](#thefuck)
+*	[z](#z)
+*   [omnigraffle](#omnigraffle)
+*   [xmind](#xmind)
+*	[参考](#ref)
 
 ### alfred
 
@@ -111,6 +113,14 @@ snip 腾讯的,mac自带的不太好用啊
 目录跳转,真的是神器
 
 [github地址](https://github.com/rupa/z)
+
+### omnigraffle
+
+mac上的`visio`,画图利器
+
+### xmind
+
+梳理思路，总结知识点，脑图。
 
 ## 参考 {#ref}
 

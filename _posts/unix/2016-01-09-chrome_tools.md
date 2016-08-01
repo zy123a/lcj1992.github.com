@@ -8,7 +8,7 @@ tags: chrome idea mac
 *	[chrome](#chrome)
 *	[参考](#ref)
 
-## chrome 
+## chrome
 
 ### 扩展程序
 

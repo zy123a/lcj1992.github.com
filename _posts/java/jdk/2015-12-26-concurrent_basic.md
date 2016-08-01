@@ -47,7 +47,6 @@ ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁
 ### volatile
 
 
-
 ### volatile vs static  vs  ThreadLocal {#volatile_static_thread_local}
 
 1.  volatile 不同线程的同一对象之间共享

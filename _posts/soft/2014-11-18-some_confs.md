@@ -2,7 +2,7 @@
 layout: post
 title: 各种环境配置
 categories: soft
-tags: soft jdk maven git
+tags: soft jdk maven git jekyll
 ---
 
 ### jdk
@@ -39,3 +39,25 @@ brew install go
 export GOPATH=/usr/local/Cellar/go/1.6.2
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
+### jekyll
+
+***1.ubuntu14.04安装jekyll***
+
+sudo apt-get install ruby
+
+sudo apt-get install nodejs
+
+sudo apt-get install jekyll
+
+sudo apt-get install ruby-redcarpet
+
+sudo apt-get install ruby-kramdown
+
+***2.mac**
+
+brew install jekyll
+
+### 使用
+
+jekyll server -I

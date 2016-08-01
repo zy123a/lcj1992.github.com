@@ -5,6 +5,8 @@ categories: design_pattern
 tags: proxy factory adapter facade decorator
 ---
 
+[示例代码](https://github.com/lcj1992/learn/tree/master/java)
+
 ### 创建型 {#create}
 
 |设计模式|概述|适用场景|备注or例子|详述|
