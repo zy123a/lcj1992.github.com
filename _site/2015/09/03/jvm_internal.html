@@ -200,16 +200,24 @@
 <p>关于DirectByteBuffer的gc</p>
 
 <ol>
-  <li>虽然是堆外内存，这部分内存也是有jvm的垃圾回收器负责回收的。Hotspot在gc时会扫描DirectByteBuffer对象是否有引用，如没有则同时也会回收其占用的堆外内存。</li>
-  <li>DirectByteBuffer对象晋升到old区，这时候就只能等full gc触发了（cms gc的情况下等cms gc），因此在DirectByteBuffer使用较多，存活时间较长的情况下，有可能会导致堆外内存耗光（因为DirectByteBuffer本身对象占用的空间是很小的）</li>
-  <li>对于2中所说的情况，最好的启动参数中增加<code class="highlighter-rouge">XX:MaxDirectMemorySize=x[m|g],例如X:MaxDirectMemorySize=500m</code>，这个参数默认的大小是-Xmx的值，参数的含义是在DirectByteBuffer分配的堆外内存到达指定大小后，触发Full GC</li>
+  <li>
+    <p>虽然是堆外内存，这部分内存也是有jvm的垃圾回收器负责回收的。Hotspot在gc时会扫描DirectByteBuffer对象是否有引用，如没有则同时也会回收其占用的堆外内存。</p>
+  </li>
+  <li>
+    <p>DirectByteBuffer对象晋升到old区，这时候就只能等full gc触发了（cms gc的情况下等cms gc），因此在DirectByteBuffer使用较多，存活时间较长的情况下，有可能会导致堆外内存耗光（因为DirectByteBuffer本身对象占用的空间是很小的）</p>
+  </li>
+  <li>
+    <p>对于2中所说的情况，最好的启动参数中增加<code class="highlighter-rouge">XX:MaxDirectMemorySize=x[m|g],例如X:MaxDirectMemorySize=500m</code>，这个参数默认的大小是不是64M，也不是-Xmx的大小，是<code class="highlighter-rouge">Runtime.getRuntime.maxMemory()</code>的大小（可参照<code class="highlighter-rouge">sun.misc.VM#saveAndRemoveProperties</code>），参数的含义是在DirectByteBuffer分配的堆外内存到达指定大小后，触发Full GC</p>
+  </li>
 </ol>
 
 <p>很多时候我们会看到java进程占用的内存超过-Xmx的大小，原因就是类似DirectByteBuffer、Unsafe、GC、编译、自己写的JNI模块等这些是需要占用堆外内存的。</p>
 
-<p>遇到java进程占用内存超过-Xmx大小的情况，可以尝试强制执行Full GC（强制执行的方位为执行jmap -history:live）看看，多执行两次，看堆外内存下降的话，很有可能就是DirectByteBuffer造成的，对于这种情况，通常加上上面的启动参数就可解决。</p>
+<p>遇到java进程占用内存超过-Xmx大小的情况，可以尝试强制执行Full GC（强制执行的方位为执行jmap -histo:live）看看，多执行两次，看堆外内存下降的话，很有可能就是DirectByteBuffer造成的，对于这种情况，通常加上上面的启动参数就可解决。</p>
 
 <h2 id="section">参考</h2>
+
+<p>[The Java® Virtual Machine Specification]<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/">https://docs.oracle.com/javase/specs/jvms/se8/html/</a></p>
 
 <p>[jvm internals]<a href="http://blog.jamesdbloom.com/JVMInternals.html">http://blog.jamesdbloom.com/JVMInternals.html</a></p>
 
@@ -218,6 +226,10 @@
 <p>[Java永久代去哪儿了]<a href="http://www.infoq.com/cn/articles/Java-PERMGEN-Removed">http://www.infoq.com/cn/articles/Java-PERMGEN-Removed</a></p>
 
 <p>[CMS GC会不会回收Direct ByteBuffer的内存]<a href="http://hellojava.info/?p=56">http://hellojava.info/?p=56</a></p>
+
+<p>[jvm参数]<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></p>
+
+<p>[JDK-4391499]<a href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4391499">http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4391499</a></p>
 
         <ul class="prev_next">
             
