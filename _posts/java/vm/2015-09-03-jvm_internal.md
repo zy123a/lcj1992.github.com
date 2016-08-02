@@ -153,14 +153,18 @@ ps: 对于hotspot，很多人更愿意把方法区称为“永久代”，本质
 关于DirectByteBuffer的gc
 
 1.  虽然是堆外内存，这部分内存也是有jvm的垃圾回收器负责回收的。Hotspot在gc时会扫描DirectByteBuffer对象是否有引用，如没有则同时也会回收其占用的堆外内存。
+
 2.  DirectByteBuffer对象晋升到old区，这时候就只能等full gc触发了（cms gc的情况下等cms gc），因此在DirectByteBuffer使用较多，存活时间较长的情况下，有可能会导致堆外内存耗光（因为DirectByteBuffer本身对象占用的空间是很小的）
-3.  对于2中所说的情况，最好的启动参数中增加`XX:MaxDirectMemorySize=x[m|g],例如X:MaxDirectMemorySize=500m`，这个参数默认的大小是-Xmx的值，参数的含义是在DirectByteBuffer分配的堆外内存到达指定大小后，触发Full GC
+
+3.  对于2中所说的情况，最好的启动参数中增加`XX:MaxDirectMemorySize=x[m|g],例如X:MaxDirectMemorySize=500m`，这个参数默认的大小是不是64M，也不是-Xmx的大小，是`Runtime.getRuntime.maxMemory()`的大小（可参照`sun.misc.VM#saveAndRemoveProperties`），参数的含义是在DirectByteBuffer分配的堆外内存到达指定大小后，触发Full GC
 
 很多时候我们会看到java进程占用的内存超过-Xmx的大小，原因就是类似DirectByteBuffer、Unsafe、GC、编译、自己写的JNI模块等这些是需要占用堆外内存的。
 
-遇到java进程占用内存超过-Xmx大小的情况，可以尝试强制执行Full GC（强制执行的方位为执行jmap -history:live）看看，多执行两次，看堆外内存下降的话，很有可能就是DirectByteBuffer造成的，对于这种情况，通常加上上面的启动参数就可解决。
+遇到java进程占用内存超过-Xmx大小的情况，可以尝试强制执行Full GC（强制执行的方位为执行jmap -histo:live）看看，多执行两次，看堆外内存下降的话，很有可能就是DirectByteBuffer造成的，对于这种情况，通常加上上面的启动参数就可解决。
 
 ## 参考
+
+[The Java® Virtual Machine Specification]<https://docs.oracle.com/javase/specs/jvms/se8/html/>
 
 [jvm internals]<http://blog.jamesdbloom.com/JVMInternals.html>
 
@@ -169,3 +173,7 @@ ps: 对于hotspot，很多人更愿意把方法区称为“永久代”，本质
 [Java永久代去哪儿了]<http://www.infoq.com/cn/articles/Java-PERMGEN-Removed>
 
 [CMS GC会不会回收Direct ByteBuffer的内存]<http://hellojava.info/?p=56>
+
+[jvm参数]<https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html>
+
+[JDK-4391499]<http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4391499>

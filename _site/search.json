@@ -3,6 +3,30 @@
 	"data" : [
 	 
 	{
+		"title" : "java内存模型与线程 - 2016-07-31 - jvm_memory_thread",
+		"url" : "/2016/07/31/jvm_memory_thread"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "线程安全性 - 2016-07-31 - thread_safe_concurrent",
+		"url" : "/2016/07/31/thread_safe"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "设计模式 - 2016-07-28 - proxy_factory_adapter_facade_decorator",
+		"url" : "/2016/07/28/design_overview"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "todo - 2016-07-28 - todo",
 		"url" : "/2016/07/28/todo"
 	}
@@ -21,6 +45,190 @@
 	{
 		"title" : "es基础 - 2016-07-26 - elasticsearch",
 		"url" : "/2016/07/26/es_basic"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "访问者模式 - 2016-07-26 - visitor",
+		"url" : "/2016/07/26/visitor"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "模版方法 - 2016-07-26 - template",
+		"url" : "/2016/07/26/template"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "策略模式 - 2016-07-26 - ",
+		"url" : "/2016/07/26/strategy"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "状态模式 - 2016-07-26 - state",
+		"url" : "/2016/07/26/state"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "单例模式 - 2016-07-26 - singleton",
+		"url" : "/2016/07/26/singleton"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "代理模式 - 2016-07-26 - proxy",
+		"url" : "/2016/07/26/proxy"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "原型模式 - 2016-07-26 - prototype",
+		"url" : "/2016/07/26/prototype"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "观察者模式 - 2016-07-26 - observer",
+		"url" : "/2016/07/26/observer"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "备忘录模式 - 2016-07-26 - memento",
+		"url" : "/2016/07/26/memento"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "中介者模式 - 2016-07-26 - mediator",
+		"url" : "/2016/07/26/mediator"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "迭代器模式 - 2016-07-26 - iterator",
+		"url" : "/2016/07/26/iterator"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "解释器模式 - 2016-07-26 - interpreter",
+		"url" : "/2016/07/26/interpreter"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "享元模式 - 2016-07-26 - flyweight",
+		"url" : "/2016/07/26/flyweight"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "工厂模式 - 2016-07-26 - factory",
+		"url" : "/2016/07/26/factory"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "门面模式 - 2016-07-26 - facade",
+		"url" : "/2016/07/26/facade"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "装饰器模式 - 2016-07-26 - decorator",
+		"url" : "/2016/07/26/decorator"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "组合模式 - 2016-07-26 - composite",
+		"url" : "/2016/07/26/composite"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "命令模式 - 2016-07-26 - command",
+		"url" : "/2016/07/26/command"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "责任链模式 - 2016-07-26 - chain_of_responsibility",
+		"url" : "/2016/07/26/chain_of_responsibility"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "建造者模式 - 2016-07-26 - builder",
+		"url" : "/2016/07/26/builder"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "桥接器模式 - 2016-07-26 - bridge",
+		"url" : "/2016/07/26/bridge"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "适配器模式 - 2016-07-26 - adapter",
+		"url" : "/2016/07/26/adapter"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "抽象工厂模式 - 2016-07-26 - abstract_factory",
+		"url" : "/2016/07/26/abstract_factory"
 	}
 	
 	,
@@ -163,7 +371,7 @@
 	
     
 	{
-		"title" : "一些有趣的工具 - 2016-03-21 - alfred_oh-my-zsh_zsh_z_switchHosts_theFuck_z_homebrew_iterm2_reeder",
+		"title" : "一些有趣的工具 - 2016-03-21 - alfred_oh-my-zsh_zsh_z_switchHosts_theFuck_z_homebrew_iterm2_reeder_xmind_omnigraffle",
 		"url" : "/2016/03/21/some_softs"
 	}
 	
@@ -803,7 +1011,7 @@
 	
     
 	{
-		"title" : "java基础 - 2015-12-26 - java_autoboxing_transient_thread_jdbc",
+		"title" : "java基础 - 2015-12-26 - java_autoboxing_transient_thread_jdbc_shallow_deep_copy_final",
 		"url" : "/2015/12/26/java_basic"
 	}
 	
@@ -955,30 +1163,6 @@
 	
     
 	{
-		"title" : "结构型 - 2015-12-02 - design_pattern",
-		"url" : "/2015/12/02/structure"
-	}
-	
-	,
-	
-    
-	{
-		"title" : "创建型 - 2015-12-02 - design_pattern",
-		"url" : "/2015/12/02/create"
-	}
-	
-	,
-	
-    
-	{
-		"title" : "行为型 - 2015-12-02 - design_pattern",
-		"url" : "/2015/12/02/behavior"
-	}
-	
-	,
-	
-    
-	{
 		"title" : "系统资源 - 2015-11-27 - top_netstat_performance",
 		"url" : "/2015/11/27/resource"
 	}
@@ -1003,22 +1187,6 @@
 	
     
 	{
-		"title" : "markdown语法 - 2015-11-25 - markdown",
-		"url" : "/2015/11/25/markdown"
-	}
-	
-	,
-	
-    
-	{
-		"title" : "jekyll安装 - 2015-11-25 - ",
-		"url" : "/2015/11/25/install_jekyll"
-	}
-	
-	,
-	
-    
-	{
 		"title" : "java并发编程实战笔记与实践 - 2015-11-25 - ",
 		"url" : "/2015/11/25/concurrent"
 	}
@@ -1027,7 +1195,7 @@
 	
     
 	{
-		"title" : "jvm internal(译) - 2015-09-03 - jvm_byte_code_thread_stack",
+		"title" : "jvm内存模型 - 2015-09-03 - jvm_byte_code_thread_stack",
 		"url" : "/2015/09/03/jvm_internal"
 	}
 	
@@ -1084,7 +1252,7 @@
     
 	{
 		"title" : "类加载机制 - 2015-01-26 - memory_byteCode",
-		"url" : "/2015/01/26/memory_byteCode"
+		"url" : "/2015/01/26/load_class"
 	}
 	
 	,
@@ -1099,8 +1267,8 @@
 	
     
 	{
-		"title" : "class文件和字节码 - 2015-01-06 - jvm_字节码_操作数栈_局部变量表",
-		"url" : "/2015/01/06/jvm_example"
+		"title" : "jvm执行引擎 - 2015-01-06 - jvm_byte_code_operand_stack_local_var_table_class_file",
+		"url" : "/2015/01/06/jvm_execute_engine"
 	}
 	
 	,
@@ -1155,8 +1323,8 @@
 	
     
 	{
-		"title" : "各种环境配置 - 2014-11-18 - soft_jdk_maven_git",
-		"url" : "/2014/11/18/jdk-maven-git-conf"
+		"title" : "各种环境配置 - 2014-11-18 - soft_jdk_maven_git_jekyll",
+		"url" : "/2014/11/18/some_confs"
 	}
 	
 	,

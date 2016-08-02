@@ -36,9 +36,9 @@
     <p>生成验证码,及对应的code (图片验证码类似,可以使用谷歌的kaptcha类库)</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>public class ConfirmCodeUtil {
-    
+
     private final static String SESSIONKEY_PREFIX = "aa_bb_xx";
-    
+
     public static String generate() {
         String chars = "0123456789";
         char[] rands = new char[6];
@@ -48,13 +48,13 @@
         }
         return new String(rands);
     }
-    
+
     //生成手机验证码session
     //生成图片验证码session
     public static String createSessionKey() {
         return System.currentTimeMillis() + DigestUtils.md5Hex(SESSIONKEY_PREFIX + new Random().nextInt());
     }
-    
+
 }
 </code></pre>
     </div>
@@ -135,6 +135,7 @@ OK
 
 <p>线上服务是24小时不停的服务的，不会因为你的发布而终止5分钟,用户的客户端可能不会升级</p>
 
+<h3 id="section-6">防御式编程</h3>
 
         <ul class="prev_next">
             

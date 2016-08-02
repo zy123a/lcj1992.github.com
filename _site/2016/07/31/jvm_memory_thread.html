@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> 各种环境配置  </title>
+    <title> java内存模型与线程  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,64 +26,39 @@
 </div>
 
     <div id="main">
-        <h2> 各种环境配置 </h2>
-        <h3 id="jdk">jdk</h3>
-<ul>
-  <li><code class="highlighter-rouge">JAVA_HOME</code> :    		<strong>D:\q\java\default</strong>   mac: `/usr/libexec/java_home`
-(<strong>你的jdk的安装目录，这里创建了一个软连接，指向了jdk的安装目录</strong>)</li>
-  <li><code class="highlighter-rouge">path</code>:    			<strong>;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</strong>(<strong>unix下是PATH</strong>,之间已<code class="highlighter-rouge">:</code>分隔)</li>
-  <li><code class="highlighter-rouge">CLASSPATH</code>: 	  	<strong>.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar</strong>（<strong>前面的.一定要加</strong>）</li>
-</ul>
+        <h2> java内存模型与线程 </h2>
+        <p>工作内存与主内存之间的交互：</p>
 
-<h3 id="maven">maven</h3>
+<ol>
+  <li>一个变量如何从主内存拷贝到工作内存</li>
+  <li>如何从工作内存同步回主内存</li>
+</ol>
 
-<ul>
-  <li><code class="highlighter-rouge">MAVEN_HOME</code>:	  	<strong>D:\bin\apache-maven</strong></li>
-  <li><code class="highlighter-rouge">path</code>:		  		<strong>;%MAVEN_HOME%\bin</strong>  <br />
-在.m2文件夹下注意要编辑settings.xml文件<br />
-windows下是在C:\Users\xxx.li下
-linux是在家目录下。
-<strong><em>mac 如果是brew 安装的软件,默认会在/usr/local/bin下, 在PATH中,所以不需要配置maven的环境变量</em></strong></li>
-</ul>
+<p>java内存模型定义了8种操作来完成，虚拟机实现必须保证这八种操作是原子不可再分的，其交互如下图所示：（对于double和long型变量来说，load，store，read和write在某些平台允许有例外）</p>
 
-<h3 id="git">git</h3>
-<ul>
-  <li><code class="highlighter-rouge">GIT_HOME</code>:		  	<strong>D:\Program Files (x86)\Git</strong></li>
-  <li><code class="highlighter-rouge">path</code>:		  		<strong>;%GIT_HOME%\cmd;</strong></li>
-</ul>
+<p><img src="/images/java/jvm_memory_thread.png" alt="jvm_memory_thread" /></p>
 
-<h3 id="idea">idea配置</h3>
+<p>内存间</p>
 
-<p>file-&gt;settings</p>
+<h3 id="ref">参考</h3>
 
-<h3 id="node">node</h3>
+<p>[Threads and Locks]<a href="https://docs.oracle.com/javase/specs/jvms/se6/html/Threads.doc.html">https://docs.oracle.com/javase/specs/jvms/se6/html/Threads.doc.html</a></p>
 
-<p>brew install node
-export NODE_PATH=/usr/local/lib/node_modules</p>
+<p>[深入理解java虚拟机-12章java内存模型与线程]<a href="https://book.douban.com/subject/24722612/">https://book.douban.com/subject/24722612/</a></p>
 
-<h3 id="go">go</h3>
-
-<p>brew install go
-export GOPATH=/usr/local/Cellar/go/1.6.2
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN</p>
+<p>[jvm内存模型]<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html">https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html</a></p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2014/11/17/gitBasic">git基础命令</a>
+                <a href="/2016/07/31/thread_safe">线程安全性</a>
             </li>
             
-            
-            <li>
-                <span>下一篇</span>
-                <a href="/2014/11/20/annotation">注解</a>
-            </li>
             
         </ul>
-        <div class="ds-share flat" data-thread-key="/2014/11/18/jdk-maven-git-conf" data-title="各种环境配置"
-             data-url="http://lcj1992.github.io/2014/11/18/jdk-maven-git-conf">
+        <div class="ds-share flat" data-thread-key="/2016/07/31/jvm_memory_thread" data-title="java内存模型与线程"
+             data-url="http://lcj1992.github.io/2016/07/31/jvm_memory_thread">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -96,8 +71,8 @@ export PATH=$PATH:$GOBIN</p>
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2014/11/18/jdk-maven-git-conf" data-title="各种环境配置"
-             data-url="http://lcj1992.github.io/2014/11/18/jdk-maven-git-conf"></div>
+        <div class="ds-thread" data-thread-key="/2016/07/31/jvm_memory_thread" data-title="java内存模型与线程"
+             data-url="http://lcj1992.github.io/2016/07/31/jvm_memory_thread"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -260,11 +235,11 @@ export PATH=$PATH:$GOBIN</p>
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2014/11/17/gitBasic";
+                    window.location.href = "/2016/07/31/thread_safe";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2014/11/20/annotation";
+                    window.location.href = "";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

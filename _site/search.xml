@@ -2,6 +2,27 @@
 <articles>
     
     <article>
+        <title>java内存模型与线程</title>
+        <url>http://foolchild.cn/2016/07/31/jvm_memory_thread</url>
+        <tag>jvmmemorythread</tag>
+        <date>2016-07-31</date>
+    </article>
+    
+    <article>
+        <title>线程安全性</title>
+        <url>http://foolchild.cn/2016/07/31/thread_safe</url>
+        <tag>thread_safeconcurrent</tag>
+        <date>2016-07-31</date>
+    </article>
+    
+    <article>
+        <title>设计模式</title>
+        <url>http://foolchild.cn/2016/07/28/design_overview</url>
+        <tag>proxyfactoryadapterfacadedecorator</tag>
+        <date>2016-07-28</date>
+    </article>
+    
+    <article>
         <title>todo</title>
         <url>http://foolchild.cn/2016/07/28/todo</url>
         <tag>todo</tag>
@@ -19,6 +40,167 @@
         <title>es基础</title>
         <url>http://foolchild.cn/2016/07/26/es_basic</url>
         <tag>elasticsearch</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>访问者模式</title>
+        <url>http://foolchild.cn/2016/07/26/visitor</url>
+        <tag>visitor</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>模版方法</title>
+        <url>http://foolchild.cn/2016/07/26/template</url>
+        <tag>template</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>策略模式</title>
+        <url>http://foolchild.cn/2016/07/26/strategy</url>
+        <tag></tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>状态模式</title>
+        <url>http://foolchild.cn/2016/07/26/state</url>
+        <tag>state</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>单例模式</title>
+        <url>http://foolchild.cn/2016/07/26/singleton</url>
+        <tag>singleton</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>代理模式</title>
+        <url>http://foolchild.cn/2016/07/26/proxy</url>
+        <tag>proxy</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>原型模式</title>
+        <url>http://foolchild.cn/2016/07/26/prototype</url>
+        <tag>prototype</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>观察者模式</title>
+        <url>http://foolchild.cn/2016/07/26/observer</url>
+        <tag>observer</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>备忘录模式</title>
+        <url>http://foolchild.cn/2016/07/26/memento</url>
+        <tag>memento</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>中介者模式</title>
+        <url>http://foolchild.cn/2016/07/26/mediator</url>
+        <tag>mediator</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>迭代器模式</title>
+        <url>http://foolchild.cn/2016/07/26/iterator</url>
+        <tag>iterator</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>解释器模式</title>
+        <url>http://foolchild.cn/2016/07/26/interpreter</url>
+        <tag>interpreter</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>享元模式</title>
+        <url>http://foolchild.cn/2016/07/26/flyweight</url>
+        <tag>flyweight</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>工厂模式</title>
+        <url>http://foolchild.cn/2016/07/26/factory</url>
+        <tag>factory</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>门面模式</title>
+        <url>http://foolchild.cn/2016/07/26/facade</url>
+        <tag>facade</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>装饰器模式</title>
+        <url>http://foolchild.cn/2016/07/26/decorator</url>
+        <tag>decorator</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>组合模式</title>
+        <url>http://foolchild.cn/2016/07/26/composite</url>
+        <tag>composite</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>命令模式</title>
+        <url>http://foolchild.cn/2016/07/26/command</url>
+        <tag>command</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>责任链模式</title>
+        <url>http://foolchild.cn/2016/07/26/chain_of_responsibility</url>
+        <tag>chain_of_responsibility</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>建造者模式</title>
+        <url>http://foolchild.cn/2016/07/26/builder</url>
+        <tag>builder</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>桥接器模式</title>
+        <url>http://foolchild.cn/2016/07/26/bridge</url>
+        <tag>bridge</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>适配器模式</title>
+        <url>http://foolchild.cn/2016/07/26/adapter</url>
+        <tag>adapter</tag>
+        <date>2016-07-26</date>
+    </article>
+    
+    <article>
+        <title>抽象工厂模式</title>
+        <url>http://foolchild.cn/2016/07/26/abstract_factory</url>
+        <tag>abstract_factory</tag>
         <date>2016-07-26</date>
     </article>
     
@@ -144,7 +326,7 @@
     <article>
         <title>一些有趣的工具</title>
         <url>http://foolchild.cn/2016/03/21/some_softs</url>
-        <tag>alfredoh-my-zshzshzswitchHoststheFuckzhomebrewiterm2reeder</tag>
+        <tag>alfredoh-my-zshzshzswitchHoststheFuckzhomebrewiterm2reederxmindomnigraffle</tag>
         <date>2016-03-21</date>
     </article>
     
@@ -704,7 +886,7 @@
     <article>
         <title>java基础</title>
         <url>http://foolchild.cn/2015/12/26/java_basic</url>
-        <tag>javaautoboxingtransientthreadjdbc</tag>
+        <tag>javaautoboxingtransientthreadjdbcshallow_deep_copyfinal</tag>
         <date>2015-12-26</date>
     </article>
     
@@ -835,27 +1017,6 @@
     </article>
     
     <article>
-        <title>结构型</title>
-        <url>http://foolchild.cn/2015/12/02/structure</url>
-        <tag>design_pattern</tag>
-        <date>2015-12-02</date>
-    </article>
-    
-    <article>
-        <title>创建型</title>
-        <url>http://foolchild.cn/2015/12/02/create</url>
-        <tag>design_pattern</tag>
-        <date>2015-12-02</date>
-    </article>
-    
-    <article>
-        <title>行为型</title>
-        <url>http://foolchild.cn/2015/12/02/behavior</url>
-        <tag>design_pattern</tag>
-        <date>2015-12-02</date>
-    </article>
-    
-    <article>
         <title>系统资源</title>
         <url>http://foolchild.cn/2015/11/27/resource</url>
         <tag>topnetstatperformance</tag>
@@ -877,20 +1038,6 @@
     </article>
     
     <article>
-        <title>markdown语法</title>
-        <url>http://foolchild.cn/2015/11/25/markdown</url>
-        <tag>markdown</tag>
-        <date>2015-11-25</date>
-    </article>
-    
-    <article>
-        <title>jekyll安装</title>
-        <url>http://foolchild.cn/2015/11/25/install_jekyll</url>
-        <tag></tag>
-        <date>2015-11-25</date>
-    </article>
-    
-    <article>
         <title>java并发编程实战笔记与实践</title>
         <url>http://foolchild.cn/2015/11/25/concurrent</url>
         <tag></tag>
@@ -898,7 +1045,7 @@
     </article>
     
     <article>
-        <title>jvm internal(译)</title>
+        <title>jvm内存模型</title>
         <url>http://foolchild.cn/2015/09/03/jvm_internal</url>
         <tag>jvmbyte_codethreadstack</tag>
         <date>2015-09-03</date>
@@ -948,7 +1095,7 @@
     
     <article>
         <title>类加载机制</title>
-        <url>http://foolchild.cn/2015/01/26/memory_byteCode</url>
+        <url>http://foolchild.cn/2015/01/26/load_class</url>
         <tag>memorybyteCode</tag>
         <date>2015-01-26</date>
     </article>
@@ -961,9 +1108,9 @@
     </article>
     
     <article>
-        <title>class文件和字节码</title>
-        <url>http://foolchild.cn/2015/01/06/jvm_example</url>
-        <tag>jvm字节码操作数栈局部变量表</tag>
+        <title>jvm执行引擎</title>
+        <url>http://foolchild.cn/2015/01/06/jvm_execute_engine</url>
+        <tag>jvmbyte_codeoperand_stacklocal_var_tableclass_file</tag>
         <date>2015-01-06</date>
     </article>
     
@@ -1011,8 +1158,8 @@
     
     <article>
         <title>各种环境配置</title>
-        <url>http://foolchild.cn/2014/11/18/jdk-maven-git-conf</url>
-        <tag>softjdkmavengit</tag>
+        <url>http://foolchild.cn/2014/11/18/some_confs</url>
+        <tag>softjdkmavengitjekyll</tag>
         <date>2014-11-18</date>
     </article>
     

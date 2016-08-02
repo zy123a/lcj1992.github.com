@@ -5,9 +5,65 @@
         <description>foolchild的技术博客</description>
         <link>http://foolchild.cn/</link>
         <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>Thu, 28 Jul 2016 23:56:40 +0800</pubDate>
-        <lastBuildDate>Thu, 28 Jul 2016 23:56:40 +0800</lastBuildDate>
+        <pubDate>Tue, 02 Aug 2016 00:15:52 +0800</pubDate>
+        <lastBuildDate>Tue, 02 Aug 2016 00:15:52 +0800</lastBuildDate>
         <generator>Jekyll v3.1.6</generator>
+        
+        <item>
+            <title>java内存模型与线程</title>
+            <description></description>
+            <pubDate>Sun, 31 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/31/jvm_memory_thread</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/31/jvm_memory_thread</guid>
+            
+            <category>jvm</category>
+            
+            <category>memory</category>
+            
+            <category>thread</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>线程安全性</title>
+            <description></description>
+            <pubDate>Sun, 31 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/31/thread_safe</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/31/thread_safe</guid>
+            
+            <category>thread_safe</category>
+            
+            <category>concurrent</category>
+            
+            
+            <category>java</category>
+            
+        </item>
+        
+        <item>
+            <title>设计模式</title>
+            <description></description>
+            <pubDate>Thu, 28 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/28/design_overview</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/28/design_overview</guid>
+            
+            <category>proxy</category>
+            
+            <category>factory</category>
+            
+            <category>adapter</category>
+            
+            <category>facade</category>
+            
+            <category>decorator</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
         
         <item>
             <title>todo</title>
@@ -50,6 +106,326 @@
             
             
             <category>soft</category>
+            
+        </item>
+        
+        <item>
+            <title>访问者模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/visitor</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/visitor</guid>
+            
+            <category>visitor</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>模版方法</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/template</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/template</guid>
+            
+            <category>template</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>策略模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/strategy</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/strategy</guid>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>状态模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/state</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/state</guid>
+            
+            <category>state</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>单例模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/singleton</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/singleton</guid>
+            
+            <category>singleton</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>代理模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/proxy</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/proxy</guid>
+            
+            <category>proxy</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>原型模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/prototype</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/prototype</guid>
+            
+            <category>prototype</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>观察者模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/observer</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/observer</guid>
+            
+            <category>observer</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>备忘录模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/memento</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/memento</guid>
+            
+            <category>memento</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>中介者模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/mediator</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/mediator</guid>
+            
+            <category>mediator</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>迭代器模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/iterator</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/iterator</guid>
+            
+            <category>iterator</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>解释器模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/interpreter</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/interpreter</guid>
+            
+            <category>interpreter</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>享元模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/flyweight</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/flyweight</guid>
+            
+            <category>flyweight</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>工厂模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/factory</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/factory</guid>
+            
+            <category>factory</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>门面模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/facade</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/facade</guid>
+            
+            <category>facade</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>装饰器模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/decorator</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/decorator</guid>
+            
+            <category>decorator</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>组合模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/composite</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/composite</guid>
+            
+            <category>composite</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>命令模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/command</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/command</guid>
+            
+            <category>command</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>责任链模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/chain_of_responsibility</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/chain_of_responsibility</guid>
+            
+            <category>chain_of_responsibility</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>建造者模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/builder</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/builder</guid>
+            
+            <category>builder</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>桥接器模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/bridge</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/bridge</guid>
+            
+            <category>bridge</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>适配器模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/adapter</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/adapter</guid>
+            
+            <category>adapter</category>
+            
+            
+            <category>design_pattern</category>
+            
+        </item>
+        
+        <item>
+            <title>抽象工厂模式</title>
+            <description></description>
+            <pubDate>Tue, 26 Jul 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/07/26/abstract_factory</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/07/26/abstract_factory</guid>
+            
+            <category>abstract_factory</category>
+            
+            
+            <category>design_pattern</category>
             
         </item>
         
@@ -347,6 +723,10 @@
             <category>iterm2</category>
             
             <category>reeder</category>
+            
+            <category>xmind</category>
+            
+            <category>omnigraffle</category>
             
             
             <category>tool</category>
@@ -1612,6 +1992,10 @@
             
             <category>jdbc</category>
             
+            <category>shallow_deep_copy</category>
+            
+            <category>final</category>
+            
             
             <category>java</category>
             
@@ -1908,48 +2292,6 @@
         </item>
         
         <item>
-            <title>结构型</title>
-            <description></description>
-            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/12/02/structure</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/structure</guid>
-            
-            <category>design_pattern</category>
-            
-            
-            <category>design_pattern</category>
-            
-        </item>
-        
-        <item>
-            <title>创建型</title>
-            <description></description>
-            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/12/02/create</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/create</guid>
-            
-            <category>design_pattern</category>
-            
-            
-            <category>design_pattern</category>
-            
-        </item>
-        
-        <item>
-            <title>行为型</title>
-            <description></description>
-            <pubDate>Wed, 02 Dec 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/12/02/behavior</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/12/02/behavior</guid>
-            
-            <category>design_pattern</category>
-            
-            
-            <category>design_pattern</category>
-            
-        </item>
-        
-        <item>
             <title>系统资源</title>
             <description></description>
             <pubDate>Fri, 27 Nov 2015 00:00:00 +0800</pubDate>
@@ -2006,32 +2348,6 @@
         </item>
         
         <item>
-            <title>markdown语法</title>
-            <description></description>
-            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/11/25/markdown</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/markdown</guid>
-            
-            <category>markdown</category>
-            
-            
-            <category>soft</category>
-            
-        </item>
-        
-        <item>
-            <title>jekyll安装</title>
-            <description></description>
-            <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/11/25/install_jekyll</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/11/25/install_jekyll</guid>
-            
-            
-            <category>soft</category>
-            
-        </item>
-        
-        <item>
             <title>java并发编程实战笔记与实践</title>
             <description></description>
             <pubDate>Wed, 25 Nov 2015 00:00:00 +0800</pubDate>
@@ -2044,7 +2360,7 @@
         </item>
         
         <item>
-            <title>jvm internal(译)</title>
+            <title>jvm内存模型</title>
             <description></description>
             <pubDate>Thu, 03 Sep 2015 00:00:00 +0800</pubDate>
             <link>http://foolchild.cn/2015/09/03/jvm_internal</link>
@@ -2149,8 +2465,8 @@
             <title>类加载机制</title>
             <description></description>
             <pubDate>Mon, 26 Jan 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/01/26/memory_byteCode</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/01/26/memory_byteCode</guid>
+            <link>http://foolchild.cn/2015/01/26/load_class</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/26/load_class</guid>
             
             <category>memory</category>
             
@@ -2174,19 +2490,21 @@
         </item>
         
         <item>
-            <title>class文件和字节码</title>
+            <title>jvm执行引擎</title>
             <description></description>
             <pubDate>Tue, 06 Jan 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/01/06/jvm_example</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/01/06/jvm_example</guid>
+            <link>http://foolchild.cn/2015/01/06/jvm_execute_engine</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/01/06/jvm_execute_engine</guid>
             
             <category>jvm</category>
             
-            <category>字节码</category>
+            <category>byte_code</category>
             
-            <category>操作数栈</category>
+            <category>operand_stack</category>
             
-            <category>局部变量表</category>
+            <category>local_var_table</category>
+            
+            <category>class_file</category>
             
             
             <category>java</category>
@@ -2291,8 +2609,8 @@
             <title>各种环境配置</title>
             <description></description>
             <pubDate>Tue, 18 Nov 2014 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2014/11/18/jdk-maven-git-conf</link>
-            <guid isPermaLink="true">http://foolchild.cn/2014/11/18/jdk-maven-git-conf</guid>
+            <link>http://foolchild.cn/2014/11/18/some_confs</link>
+            <guid isPermaLink="true">http://foolchild.cn/2014/11/18/some_confs</guid>
             
             <category>soft</category>
             
@@ -2301,6 +2619,8 @@
             <category>maven</category>
             
             <category>git</category>
+            
+            <category>jekyll</category>
             
             
             <category>soft</category>

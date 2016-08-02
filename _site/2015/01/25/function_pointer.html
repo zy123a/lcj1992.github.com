@@ -99,13 +99,13 @@ int main(void)
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/01/06/jvm_example">class文件和字节码</a>
+                <a href="/2015/01/06/jvm_execute_engine">jvm执行引擎</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2015/01/26/memory_byteCode">类加载机制</a>
+                <a href="/2015/01/26/load_class">类加载机制</a>
             </li>
             
         </ul>
@@ -287,11 +287,11 @@ int main(void)
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/01/06/jvm_example";
+                    window.location.href = "/2015/01/06/jvm_execute_engine";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/01/26/memory_byteCode";
+                    window.location.href = "/2015/01/26/load_class";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

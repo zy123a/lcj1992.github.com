@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://foolchild.cn/2016/07/31/jvm_memory_thread</loc>
+<lastmod>2016-07-31T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://foolchild.cn/2016/07/31/thread_safe</loc>
 <lastmod>2016-07-31T00:00:00+08:00</lastmod>
 </url>
@@ -589,14 +593,6 @@
 <lastmod>2015-11-25T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/11/25/markdown</loc>
-<lastmod>2015-11-25T00:00:00+08:00</lastmod>
-</url>
-<url>
-<loc>http://foolchild.cn/2015/11/25/install_jekyll</loc>
-<lastmod>2015-11-25T00:00:00+08:00</lastmod>
-</url>
-<url>
 <loc>http://foolchild.cn/2015/11/25/concurrent</loc>
 <lastmod>2015-11-25T00:00:00+08:00</lastmod>
 </url>
@@ -665,7 +661,7 @@
 <lastmod>2014-11-20T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2014/11/18/jdk-maven-git-conf</loc>
+<loc>http://foolchild.cn/2014/11/18/some_confs</loc>
 <lastmod>2014-11-18T00:00:00+08:00</lastmod>
 </url>
 <url>
