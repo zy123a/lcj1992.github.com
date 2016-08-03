@@ -69,6 +69,7 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 8.  `cmd + option + e`所有tab查找
 9.  `cmd + /`高亮当前鼠标的位置
 10. `preferences->profiles->keys` 最下面的Left/Right Option，把normal改成esc Option + B/F 光标逐词移动
+11. `cmd + l` 编辑当前session，结合着cmd + o 支持将tab命名，并快速切换。
 
 1,2使用场景: 新开一个桌面,专门放终端,然后cmd+enter全屏显示,然后切换到终端F12,对于经常要登服务器的码农们,简直不要太赞哦
 

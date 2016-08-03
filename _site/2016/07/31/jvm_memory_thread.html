@@ -53,6 +53,8 @@
 
 <h3 id="volatile">volatile型变量的特殊</h3>
 
+<h4 id="volatile-1">volatile使用场景</h4>
+
 <p>volatile变量只能保证可见性，在不符合以下两条规则的运算场景下，我们仍然需要通过加锁（使用synchronized或者java.util.concurrent中的原子类）来保证原子性：</p>
 
 <ol>
@@ -60,7 +62,13 @@
   <li>变量不需要与其他状态变量共同参与不变性约束。</li>
 </ol>
 
-<p>volatile变量的第二个语义是禁止指令重排序优化</p>
+<h4 id="volatile-2">volatile的特殊规则</h4>
+
+<ol>
+  <li>线程T对变量V的use操作必须和线程T对变量V的read、load动作相关联</li>
+  <li>线程T对比变量V的assign动作必须和线程T对变量V的store、write动作相关联</li>
+  <li>假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相对应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相对应的对变量W的read或write动作。如果A优先于B，那么P优先于Q。（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。</li>
+</ol>
 
 <h3 id="happen-before">happen-before</h3>
 
@@ -98,6 +106,10 @@
 <p>[深入理解java虚拟机-12章java内存模型与线程]<a href="https://book.douban.com/subject/24722612/">https://book.douban.com/subject/24722612/</a></p>
 
 <p>[jvm内存模型]<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html">https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html</a></p>
+
+<p>[Memory Barriers and JVM Concurrency]<a href="https://www.infoq.com/articles/memory_barriers_jvm_concurrency">https://www.infoq.com/articles/memory_barriers_jvm_concurrency</a></p>
+
+<p>[The JSR-133 Cookbook for Compiler Writers]<a href="http://g.oswego.edu/dl/jmm/cookbook.html">http://g.oswego.edu/dl/jmm/cookbook.html</a></p>
 
         <ul class="prev_next">
             

@@ -27,16 +27,37 @@ java内存模型定义了8种操作来完成，虚拟机实现必须保证这八
 7.  如果变量事先没有被lock操作，就不能对其进行unlock操作，也不允许unlock一个被其他线程锁定住的变量
 8.  对变量进行unlock操作之前，必须先把此变量同步回主内存（store、write）。
 
-### volatile型变量的特殊
+### volatile型变量的特殊规则
+
+1.  线程T对变量V的use操作必须和线程T对变量V的read、load动作相关联
+2.  线程T对比变量V的assign动作必须和线程T对变量V的store、write动作相关联
+3.  假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相对应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相对应的对变量W的read或write动作。如果A优先于B，那么P优先于Q。（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。
 
 volatile变量只能保证可见性，在不符合以下两条规则的运算场景下，我们仍然需要通过加锁（使用synchronized或者java.util.concurrent中的原子类）来保证原子性：
 
 1.  运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值
 2.  变量不需要与其他状态变量共同参与不变性约束。
 
-volatile变量的第二个语义是禁止指令重排序优化
+### 重排序 {#reordering}
+
+Doug Lea的图。 此人写了Collection和Concurrent包的。
+
+图中标no的就是不能进行重排序的。
+
+![重排序规则](/images/java/reordering.png)
+
+其中：
+1. Normal Loads are getfield, getstatic, array load of non-volatile fields
+2. Normal Stores are putfield, putstatic, array store of non-volatile fields
+3. Volatile Loads are getfield, getstatic of volatile fields that are accessible by multiple threads
+4. Volatile Stores are putfield, putstatic of volatile fields that are accessible by multiple threads
+5. MonitorEnters (including entry to synchronized methods) are for lock objects accessible by multiple threads.
+6. MonitorExits (including exit from synchronized methods) are for lock objects accessible by multiple threads.
 
 ### happen-before
+
+根据以上的规定，我们可以总结出一下8条happen-before规则，happen-before的前后两个操作会被重排序且后者对前者的内存可见。
+
 
 1. 程序顺序规则：一个线程中的每个操作，happens- before 于该线程中的任意后续操作（控制流操作而不是程序代码顺序）。
 
@@ -61,3 +82,7 @@ volatile变量的第二个语义是禁止指令重排序优化
 [深入理解java虚拟机-12章java内存模型与线程]<https://book.douban.com/subject/24722612/>
 
 [jvm内存模型]<https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html>
+
+[Memory Barriers and JVM Concurrency]<https://www.infoq.com/articles/memory_barriers_jvm_concurrency>
+
+[The JSR-133 Cookbook for Compiler Writers]<http://g.oswego.edu/dl/jmm/cookbook.html>
