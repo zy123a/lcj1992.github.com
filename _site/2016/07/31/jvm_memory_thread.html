@@ -51,9 +51,13 @@
   <li>对变量进行unlock操作之前，必须先把此变量同步回主内存（store、write）。</li>
 </ol>
 
-<h3 id="volatile">volatile型变量的特殊</h3>
+<h3 id="volatile">volatile型变量的特殊规则</h3>
 
-<h4 id="volatile-1">volatile使用场景</h4>
+<ol>
+  <li>线程T对变量V的use操作必须和线程T对变量V的read、load动作相关联</li>
+  <li>线程T对比变量V的assign动作必须和线程T对变量V的store、write动作相关联</li>
+  <li>假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相对应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相对应的对变量W的read或write动作。如果A优先于B，那么P优先于Q。（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。</li>
+</ol>
 
 <p>volatile变量只能保证可见性，在不符合以下两条规则的运算场景下，我们仍然需要通过加锁（使用synchronized或者java.util.concurrent中的原子类）来保证原子性：</p>
 
@@ -62,15 +66,25 @@
   <li>变量不需要与其他状态变量共同参与不变性约束。</li>
 </ol>
 
-<h4 id="volatile-2">volatile的特殊规则</h4>
+<h3 id="reordering">重排序</h3>
 
-<ol>
-  <li>线程T对变量V的use操作必须和线程T对变量V的read、load动作相关联</li>
-  <li>线程T对比变量V的assign动作必须和线程T对变量V的store、write动作相关联</li>
-  <li>假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相对应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相对应的对变量W的read或write动作。如果A优先于B，那么P优先于Q。（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。</li>
-</ol>
+<p>Doug Lea的图。 此人写了Collection和Concurrent包的。</p>
+
+<p>图中标no的就是不能进行重排序的。</p>
+
+<p><img src="/images/java/reordering.png" alt="重排序规则" /></p>
+
+<p>其中：
+1. Normal Loads are getfield, getstatic, array load of non-volatile fields
+2. Normal Stores are putfield, putstatic, array store of non-volatile fields
+3. Volatile Loads are getfield, getstatic of volatile fields that are accessible by multiple threads
+4. Volatile Stores are putfield, putstatic of volatile fields that are accessible by multiple threads
+5. MonitorEnters (including entry to synchronized methods) are for lock objects accessible by multiple threads.
+6. MonitorExits (including exit from synchronized methods) are for lock objects accessible by multiple threads.</p>
 
 <h3 id="happen-before">happen-before</h3>
+
+<p>根据以上的规定，我们可以总结出一下8条happen-before规则，happen-before的前后两个操作会被重排序且后者对前者的内存可见。</p>
 
 <ol>
   <li>

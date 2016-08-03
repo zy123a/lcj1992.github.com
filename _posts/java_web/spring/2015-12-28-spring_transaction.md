@@ -111,7 +111,9 @@ c.事务配置
 d.spring中两种不同的mode
 
 1.  mode=“proxy” 使用spring的动态代理，但是这种方式有点限制,对于类内的方法调用，事务不生效
-2.  mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，使用方式参见 [gist](https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81)
+2.  mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，
+
+ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81)
 
 ### 事务流程 {#how_to_work}
 
