@@ -146,7 +146,7 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 
 |传播特性|含义|场景|
 |-|-|-|
-|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启|默认的，也基本够用了。|
+|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启|默认的。µ|
 |PROPAGATION_SUPPORTS|如果存在一个事务，则支持当前事务。如果没有事务，则非事务的执行||
 |PROPAGATION_MANDATORY|如果存在一个事务，则支持当前事务。如果没有一个活动的事务，则抛出异常。||
 |PROPAGATION_REQUIRES_NEW|总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。||
