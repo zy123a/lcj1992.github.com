@@ -2,8 +2,10 @@
 layout: post
 title: java内存模型与线程
 categories: java
-tags: jvm memory thread
+tags: jvm memory thread memory_barrier lock
 ---
+
+>   概述：java的内存模型，工作内存和主内存之间是如何进行交互的，然后引出重排序，说明这种模型之下什么时候让重排序，什么时候不让重排序，又是怎么来实现的，对应cpu的那些指令，最后几个简单case以常见并发类编译成的汇编指令进行验证。
 
 ### 工作内存与主内存的交互 {#thread_memory}
 
@@ -33,20 +35,27 @@ java内存模型定义了8种操作来完成，虚拟机实现必须保证这八
 
 8.  对变量进行unlock操作之前，必须先把此变量同步回主内存（store、write）。
 
-### volatile型变量的特殊规则
+#### volatile型变量的特殊规则
 
 1.  线程T对变量V的use操作必须和线程T对变量V的read、load动作相关联
+
 2.  线程T对比变量V的assign动作必须和线程T对变量V的store、write动作相关联
+
 3.  假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相对应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相对应的对变量W的read或write动作。如果A优先于B，那么P优先于Q。（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。
-
-volatile变量只能保证可见性，在不符合以下两条规则的运算场景下，我们仍然需要通过加锁（使用synchronized或者java.util.concurrent中的原子类）来保证原子性：
-
-1.  运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值
-2.  变量不需要与其他状态变量共同参与不变性约束。
 
 ### 重排序 {#reordering}
 
-Doug Lea的图。 此人写了Collection和Concurrent包的。
+在访问程序变量（对象实例的域，类的静态域，以及数组元素）时，一些情形下，可能程序执行过程并不像代码写的那样。编译器可能会做优化，cpu在特定情形下可能会乱序执行。数据可能以不同于程序代码的顺序从寄存器，cpu cache，以及主存之间流转。
+
+一个例子就是，当一个县城write to field a,然后write to field b，b的值不依赖a的值，那么编译器就可以重排序，b的缓存也可以在a之前先flush到主存。编译器、jit、一些cache都可能引起重排序。
+
+但也不能随便重排，编译器、运行时、硬件需要保证`as-if-serial`,就是说你重排序之后，对于单线程来说，程序是不受影响的（也就是说你重排后的指令执行后和未重排的指令执行结果是一样的）。但是并不保证没有合理同步化的多线程环境下，
+
+觉得不清楚的话，可以之间看原文[what is meant by reordering](https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#reordering)
+
+###
+
+Doug Lea的图。 此人写了Collection和Concurrent包的,制定了多个jsr。
 
 图中标no的就是不能进行重排序的。
 
@@ -54,15 +63,20 @@ Doug Lea的图。 此人写了Collection和Concurrent包的。
 
 其中：
 1. Normal Loads are getfield, getstatic, array load of non-volatile fields
+
 2. Normal Stores are putfield, putstatic, array store of non-volatile fields
+
 3. Volatile Loads are getfield, getstatic of volatile fields that are accessible by multiple threads
+
 4. Volatile Stores are putfield, putstatic of volatile fields that are accessible by multiple threads
+
 5. MonitorEnters (including entry to synchronized methods) are for lock objects accessible by multiple threads.
+
 6. MonitorExits (including exit from synchronized methods) are for lock objects accessible by multiple threads.
 
 ### happen-before
 
-根据以上的规定，我们可以总结出一下8条happen-before规则，happen-before的前后两个操作不会被重排序且后者对前者的内存可见。这些先行发生关系无须任何同步器协助就已经存在，可以在编码中直接使用，如果两个操作不在此列，并且无法从下列规则推导出来的话，它们就没有顺序性保障，虚拟机可以对它们随意地进行排序。
+根据以上的规定，我们可以总结出以下8条happen-before规则，happen-before的前后两个操作不会被重排序且后者对前者的内存可见。这些先行发生关系无须任何同步器协助就已经存在，可以在编码中直接使用，如果两个操作不在此列，并且无法从下列规则推导出来的话，它们就没有顺序性保障，虚拟机可以对它们随意地进行排序。（不是很清楚，先放这吧，大家都这么说，后续完善）。
 
 1. 程序顺序规则：一个线程中的每个操作，happens- before 于该线程中的任意后续操作（控制流操作而不是程序代码顺序）。
 
