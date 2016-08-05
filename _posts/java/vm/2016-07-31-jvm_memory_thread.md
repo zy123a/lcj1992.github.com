@@ -5,7 +5,7 @@ categories: java
 tags: jvm memory thread memory_barrier lock
 ---
 
->   概述：java的内存模型，工作内存和主内存之间是如何进行交互的，然后引出重排序，说明这种模型之下什么时候让重排序，什么时候不让重排序，又是怎么来实现的，对应cpu的那些指令，最后几个简单case以常见并发类编译成的汇编指令进行验证。
+>   概述：本文首先说下java的内存模型：工作内存和主内存之间是如何进行交互的，然后引出重排序，说明什么时候会重排序，什么时候禁止重排序，cpu又是怎么来实现的，对应cpu的那些指令，最后几个简单case以常见并发类编译成的汇编指令进行验证。
 
 ### 工作内存与主内存的交互 {#thread_memory}
 
@@ -47,13 +47,13 @@ java内存模型定义了8种操作来完成，虚拟机实现必须保证这八
 
 在访问程序变量（对象实例的域，类的静态域，以及数组元素）时，一些情形下，可能程序执行过程并不像代码写的那样。编译器可能会做优化，cpu在特定情形下可能会乱序执行。数据可能以不同于程序代码的顺序从寄存器，cpu cache，以及主存之间流转。
 
-一个例子就是，当一个县城write to field a,然后write to field b，b的值不依赖a的值，那么编译器就可以重排序，b的缓存也可以在a之前先flush到主存。编译器、jit、一些cache都可能引起重排序。
+一个例子就是，当一个线程write to field a,然后write to field b，b的值不依赖a的值，那么编译器就可以重排序，b的缓存也可以在a之前先flush到主存。编译器、jit、一些cache都可能引起重排序。
 
 但也不能随便重排，编译器、运行时、硬件需要保证`as-if-serial`,就是说你重排序之后，对于单线程来说，程序是不受影响的（也就是说你重排后的指令执行后和未重排的指令执行结果是一样的）。但是并不保证没有合理同步化的多线程环境下，
 
 觉得不清楚的话，可以之间看原文[what is meant by reordering](https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#reordering)
 
-###
+### 禁止重排序 {#non_reordering}
 
 Doug Lea的图。 此人写了Collection和Concurrent包的,制定了多个jsr。
 
@@ -73,6 +73,17 @@ Doug Lea的图。 此人写了Collection和Concurrent包的,制定了多个jsr�
 5. MonitorEnters (including entry to synchronized methods) are for lock objects accessible by multiple threads.
 
 6. MonitorExits (including exit from synchronized methods) are for lock objects accessible by multiple threads.
+
+cpu如何保证上图的no呢（也就是说cpu又是如何来实现禁止重排序的），靠的内存屏障，`LoadLoad`、`LoadStore`、`StoreLoad`、`StoreStore`(好像还可以细分)
+
+对应关系如下：
+
+![内存屏障](/images/java/memory_barriers_3.png)
+
+LoadLoad等在不同的cpu架构上，对应不同的指令，然后就是下图了(对于我们只用关系x86就ok)：
+
+![指令](/images/java/cpu_memory_barriers_instruction.png)
+
 
 ### happen-before
 
