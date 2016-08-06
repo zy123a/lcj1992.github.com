@@ -2,16 +2,16 @@
 <articles>
     
     <article>
-        <title>java内存模型与线程</title>
-        <url>http://foolchild.cn/2016/07/31/jvm_memory_thread</url>
-        <tag>jvmmemorythread</tag>
-        <date>2016-07-31</date>
+        <title>如何得到jvm的本地指令</title>
+        <url>http://foolchild.cn/2016/08/06/jvm_compile</url>
+        <tag>assemblyjitjvm</tag>
+        <date>2016-08-06</date>
     </article>
     
     <article>
-        <title>线程安全性</title>
-        <url>http://foolchild.cn/2016/07/31/thread_safe</url>
-        <tag>thread_safeconcurrent</tag>
+        <title>java内存模型与线程</title>
+        <url>http://foolchild.cn/2016/07/31/jvm_memory_thread</url>
+        <tag>jvmmemorythreadmemory_barrierlock</tag>
         <date>2016-07-31</date>
     </article>
     

@@ -3,16 +3,16 @@
 	"data" : [
 	 
 	{
-		"title" : "java内存模型与线程 - 2016-07-31 - jvm_memory_thread",
-		"url" : "/2016/07/31/jvm_memory_thread"
+		"title" : "如何得到jvm的本地指令 - 2016-08-06 - assembly_jit_jvm",
+		"url" : "/2016/08/06/jvm_compile"
 	}
 	
 	,
 	
     
 	{
-		"title" : "线程安全性 - 2016-07-31 - thread_safe_concurrent",
-		"url" : "/2016/07/31/thread_safe"
+		"title" : "java内存模型与线程 - 2016-07-31 - jvm_memory_thread_memory_barrier_lock",
+		"url" : "/2016/07/31/jvm_memory_thread"
 	}
 	
 	,

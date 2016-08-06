@@ -16,7 +16,6 @@ java内存模型定义了8种操作来完成，虚拟机实现必须保证这八
 
 ![jvm_memory_thread](/images/java/jvm_memory_thread.png)
 
-
 上述8个操作还需要满足如下规则:
 
 1.  不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内存不接受，或者从工作内存发起了回写但是主内存不接受的情况出现
@@ -83,7 +82,6 @@ cpu如何保证上图的no呢（也就是说cpu又是如何来实现禁止重排
 LoadLoad等在不同的cpu架构上，对应不同的指令，然后就是下图了(对于我们只用关系x86就ok)：
 
 ![指令](/images/java/cpu_memory_barriers_instruction.png)
-
 
 ### happen-before
 

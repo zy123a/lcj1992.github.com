@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> 线程安全性  </title>
+    <title> 如何得到jvm的本地指令  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -26,29 +26,98 @@
 </div>
 
     <div id="main">
-        <h2> 线程安全性 </h2>
-        <p>原子性</p>
+        <h2> 如何得到jvm的本地指令 </h2>
+        <h3 id="section">安装汇编插件</h3>
 
-<p>可见性</p>
+<ol>
+  <li>下载汇编插件：https://kenai.com/projects/base-hsdis/downloads</li>
+  <li>把hsdis-*.so放到$JAVA_HOME/jre/lib/amd64/server下（也有可能在$JAVA_HOME/jre/lib/server目录下）</li>
+  <li>javac xx.java</li>
+  <li>java -XX:CompileThreshold=1 -XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly -XX:CompileCommand=”compileonly classname methodname” classname</li>
+</ol>
 
-<p>不变性</p>
+<p>其中</p>
+
+<p>-XX:CompileThreshold=1是执行一次就触发jit编译（不知道我这怎么不好使）</p>
+
+<p>-XX:编译过程中打印汇编指令</p>
+
+<p>-XX:解锁诊断jvm选项的一些指令，比如如果这个不打开的话，printAssembly是不好使的。</p>
+
+<p>-XX:+PrintAssembly 打印汇编指令</p>
+
+<p>-XX:CompleCommand=”compleonly VolatileBarrierExample readAndWrite VolatileBarrierExample” 只汇编这个方法VolatileBarrierExample#readAndWrite这个方法。
+更多请参照<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">tool reference</a></p>
+
+<p>eg：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class VolatileBarrierExample {
+    long a;
+    volatile long v1=1;
+
+    void readAndWrite(){
+        v1 = 32;
+    }
+
+    public static void main(String[] args){
+        final VolatileBarrierExample ex=new VolatileBarrierExample();
+        for(int i=0;i&lt;10000000;i++)
+            ex.readAndWrite();
+    }
+}
+</code></pre>
+</div>
+
+<p>然后按3，4步所说再编译，执行，(我的本是64位的)可以得到如下（截取的是一小段）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># {method} 'readAndWrite' '()V' in 'VolatileBarrierExample'
+#           [sp+0x20]  (sp of caller)
+0x00007fb59d061bc0: mov    0x8(%rsi),%r10d
+0x00007fb59d061bc4: cmp    %r10,%rax
+0x00007fb59d061bc7: jne    0x00007fb59d037960  ;   {runtime_call}
+0x00007fb59d061bcd: xchg   %ax,%ax
+[Verified Entry Point]
+0x00007fb59d061bd0: sub    $0x18,%rsp
+0x00007fb59d061bd7: mov    %rbp,0x10(%rsp)
+0x00007fb59d061bdc: movq   $0x20,0x18(%rsi)
+0x00007fb59d061be4: lock addl $0x0,(%rsp)     ;*putfield v1
+                                              ; - VolatileBarrierExample::readAndWrite@4 (line 6)
+0x00007fb59d061be9: add    $0x10,%rsp
+0x00007fb59d061bed: pop    %rbp
+0x00007fb59d061bee: test   %eax,0x9c6440c(%rip)        # 0x00007fb5a6cc6000
+                                              ;   {poll_return}
+</code></pre>
+</div>
+
+<p>v1声不声明volatile，会有lock addl $0x0,(%rsp)这句的差别。</p>
+
+<p><img src="/images/java/volatile_diff.png" alt="volatile_diff" />
+在赋值之后(movq $0x20,0x18(%rsi))多执行了一句<code class="highlighter-rouge">lock addl $0x0,(%rsp)</code>操作，这个操作相当于一个内存屏障（memory barrier或者memory fence），重排序时，不能把后面的指令重排序到内存屏障之前的位置。lock的作用是使得本cpu的cache写入了内存，该写入动作也会引起别的cpu或者别的内核无效化其cache。所以通过这一空操作，可以让volatile变量的修改对其他cpu立即可见。</p>
+
+<p>todo看懂上边汇编
+从AMD Opteron处理器开始，x86架构扩展32位寄存器到64位寄存器。其中R前缀代表的是64位的寄存器（RAX,RBX,RCX,RDX,RSI,RDI,RBP,RSP,RFLAGS,RIP）,同时引入了八个通用寄存器(R8-R15)。</p>
+
+<p>关于64位下寄存器的相关知识可参照<a href="https://en.wikipedia.org/wiki/X86#64-bit">x86#64bit</a></p>
+
+<h3 id="ref">参考</h3>
+
+<p>[x86]<a href="https://en.wikipedia.org/wiki/X86">https://en.wikipedia.org/wiki/X86</a></p>
+
+<p>[tool reference]<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></p>
+
+<p>[CPU中的主要寄存器]<a href="http://share.onlinesjtu.com/mod/tab/view.php?id=233">http://share.onlinesjtu.com/mod/tab/view.php?id=233</a></p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2016/07/28/design_overview">设计模式</a>
-            </li>
-            
-            
-            <li>
-                <span>下一篇</span>
                 <a href="/2016/07/31/jvm_memory_thread">java内存模型与线程</a>
             </li>
             
+            
         </ul>
-        <div class="ds-share flat" data-thread-key="/2016/07/31/thread_safe" data-title="线程安全性"
-             data-url="http://lcj1992.github.io/2016/07/31/thread_safe">
+        <div class="ds-share flat" data-thread-key="/2016/08/06/jvm_compile" data-title="如何得到jvm的本地指令"
+             data-url="http://lcj1992.github.io/2016/08/06/jvm_compile">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -61,8 +130,8 @@
                 </div>
             </div>
         </div>
-        <div class="ds-thread" data-thread-key="/2016/07/31/thread_safe" data-title="线程安全性"
-             data-url="http://lcj1992.github.io/2016/07/31/thread_safe"></div>
+        <div class="ds-thread" data-thread-key="/2016/08/06/jvm_compile" data-title="如何得到jvm的本地指令"
+             data-url="http://lcj1992.github.io/2016/08/06/jvm_compile"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -225,11 +294,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2016/07/28/design_overview";
+                    window.location.href = "/2016/07/31/jvm_memory_thread";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2016/07/31/jvm_memory_thread";
+                    window.location.href = "";
                 });
 
                 $.getJSON("/search.json").done(function (data) {
