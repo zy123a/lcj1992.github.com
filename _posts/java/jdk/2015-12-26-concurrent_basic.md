@@ -37,7 +37,6 @@ tags: concurrent
 3.  业务处理完成之后一定要释放ThreadLocal的变量，对于使用线程池的，线程会复用
 4.  ThreadLocal只是本线程有效,InheritableThreadLocal对由本线程创建的子线程也有效.
 
-
 ### CopyOnWriteArrayList {#copy_on_write_array_list}
 
 ### ReadWriteLock {#read_write_lock}
@@ -52,6 +51,11 @@ volatile变量只能保证可见性，在不符合以下两条规则的运算场
 
 2.  变量不需要与其他状态变量共同参与不变性约束。
 
+volatile为什么能保证可见性，并不能保证原子性呢？
+
+1.  在volatile声明的变量赋值之后，然后立即使本cpu的cache写入内存，该写入动作也会引起别的cpu或者别的内核无效化其cache。所以通过这一空操作，可以让volatile变量的修改对其他cpu立即可见。
+
+2.  
 
 ### volatile vs static  vs  ThreadLocal {#volatile_static_thread_local}
 
