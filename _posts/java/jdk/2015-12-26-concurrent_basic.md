@@ -55,7 +55,7 @@ volatile为什么能保证可见性，并不能保证原子性呢？
 
 1.  在volatile声明的变量赋值之后，然后立即使本cpu的cache写入内存，该写入动作也会引起别的cpu或者别的内核无效化其cache。所以通过这一空操作，可以让volatile变量的修改对其他cpu立即可见。
 
-2.  
+2.  对主存中某变量来说,因为没有对其进行加锁，所以还是有多个线程同时操作，所以并不能保证原子性。
 
 ### volatile vs static  vs  ThreadLocal {#volatile_static_thread_local}
 
