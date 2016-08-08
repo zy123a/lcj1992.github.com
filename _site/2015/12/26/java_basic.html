@@ -157,32 +157,49 @@ System.out.println("one == anotherOne : " + (one == anotherOne)); // false
 
 <h4 id="final">final</h4>
 
-<p>不想做改变可能出于两种理由：1.<code class="highlighter-rouge">设计</code>；2.<code class="highlighter-rouge">效率</code>
-可能用到final的三种情况：1.<code class="highlighter-rouge">数据</code>;2.<code class="highlighter-rouge">方法</code>;3.<code class="highlighter-rouge">类</code></p>
+<p>不想做改变可能出于两种理由：1.<code class="highlighter-rouge">设计</code>；2.<code class="highlighter-rouge">效率</code></p>
+
+<p>可能用到final的三种情况：1.<code class="highlighter-rouge">数据</code>;2.<code class="highlighter-rouge">方法</code>;3.<code class="highlighter-rouge">类</code></p>
 
 <h5 id="final-1">final数据</h5>
 
 <p>一经确定就不能再改了：</p>
 
 <ol>
-  <li>在编译时已经确定的常量</li>
-  <li>在运行时初始化(static、非static、构造器)，但在初始化（对象创建）后，不能再被改变了。</li>
-  <li>空白final： 在构造器中初始化final变量的值，这样就可以做到final域根据对象的不同而有所不同，却又保持其恒定不变的特性。</li>
-  <li>final参数： 无法再方法中更改参数引用所指的对象。这一特性，主要用于向匿名内部类传递参数。</li>
+  <li>
+    <p>在编译时已经确定的常量</p>
+  </li>
+  <li>
+    <p>在运行时初始化(static、非static、构造器)，但在初始化（对象创建）后，不能再被改变了。</p>
+  </li>
+  <li>
+    <p>空白final： 在构造器中初始化final变量的值，这样就可以做到final域根据对象的不同而有所不同，却又保持其恒定不变的特性。</p>
+  </li>
+  <li>
+    <p>final参数： 无法再方法中更改参数引用所指的对象。这一特性，主要用于向匿名内部类传递参数。</p>
+  </li>
 </ol>
 
 <h5 id="final-2">final方法</h5>
 
 <ol>
-  <li>把方法缩影，防止继承类override重写该方法</li>
-  <li>类中所有的private方法都隐式地指定为是final的了，类似的还有interface的方法隐式都指定为public，想想就知道了。</li>
+  <li>
+    <p>防止继承类override重写该方法</p>
+  </li>
+  <li>
+    <p>类中所有的private方法都隐式地指定为是final的了，类似的还有interface的方法隐式都指定为public，想想就知道了。</p>
+  </li>
 </ol>
 
 <h5 id="final-3">final类</h5>
 
 <ol>
-  <li>不希望该类有任何改动，不希望有子类</li>
-  <li>由于final类禁止继承，所以final类中的所有方法都隐式的指定为final的。</li>
+  <li>
+    <p>不希望该类有任何改动，不希望有子类</p>
+  </li>
+  <li>
+    <p>由于final类禁止继承，所以final类中的所有方法都隐式的指定为final的。</p>
+  </li>
 </ol>
 
 <p>ps: static的变量都是放在方法区的。这个我觉得说的很对<a href="http://bbs.csdn.net/topics/370001490#post-371813857">27楼说的挺对</a></p>
