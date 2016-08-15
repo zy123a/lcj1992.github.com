@@ -78,7 +78,7 @@
 <ol>
   <li>
     <p>on vs where
-两者效果可能一样，但on是连接两表做笛卡尔积时的连接条件，where连接之后的筛选条件。</p>
+两者效果可能一样(内连接)，但on是连接两表做笛卡尔积时的连接条件，where连接之后的筛选条件。</p>
   </li>
   <li>
     <p>where vs having</p>
@@ -93,8 +93,9 @@
     </ol>
   </li>
   <li>
-    <p>join、left join、right join　　
-eg table_a,table_b</p>
+    <p>join、left join、right join　　</p>
+
+    <p>eg table_a,table_b</p>
 
     <ol>
       <li>left join 以左为准，右可以为空, 记录数&gt;=table_a总数</li>

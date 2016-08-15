@@ -27,16 +27,18 @@
 
     <div id="main">
         <h2> 设计模式 </h2>
-        <p><a href="https://github.com/lcj1992/learn/tree/master/java/designPattern">示例代码</a></p>
+        <h3 id="create">创建型</h3>
 
-<h3 id="create">创建型</h3>
+<p>下图中的例子都来自<a href="https://github.com/lcj1992/learn/tree/master/java/designPattern">示例代码</a>
+、<code class="highlighter-rouge">jdk</code>、<a href="https://quanke.gitbooks.io/design-pattern-java/content/">gitbook</a>或者<a href="https://en.wikipedia.org/wiki/Design_pattern">wikipedia</a></p>
+
+<p>ps： 下边的gitbook xxx是指的gitbook中的相应的例子。</p>
 
 <table>
   <thead>
     <tr>
-      <th>设计模式</th>
+      <th>模式</th>
       <th>概述</th>
-      <th>适用场景</th>
       <th>备注or例子</th>
       <th>详述</th>
     </tr>
@@ -45,37 +47,38 @@
     <tr>
       <td>单例</td>
       <td>限制一个类只能有一个实例</td>
+      <td><code class="highlighter-rouge">java.lang.Runtime</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Singleton_pattern">wiki</a>   2.<a href="/2016/07/26/singleton">me</a></td>
+    </tr>
+    <tr>
+      <td>简单工厂</td>
+      <td>不指定具体的对象，而通过工厂来创建对象,工厂与产品一对多,工厂方法里if-else来确定生产哪个产品</td>
+      <td><code class="highlighter-rouge">java.util.Calendar#getInstance()</code></td>
       <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Singleton_pattern">wikipedia</a> 2.<a href="/2016/07/26/singleton">foolchild</a></td>
     </tr>
     <tr>
       <td>工厂方法</td>
-      <td>不指定具体的对象而通过工厂来创建对象</td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Factory_method_pattern">wikipedia</a> 2.<a href="/2016/07/26/factory">foolchild</a></td>
+      <td>不指定具体的对象，而通过工厂来创建对象,工厂与产品一对一</td>
+      <td><code class="highlighter-rouge">Collection#iterator()</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Factory_method_pattern">wiki</a>   2.<a href="/2016/07/26/factory">me</a></td>
     </tr>
     <tr>
       <td>抽象工厂</td>
-      <td>跟工厂方法类似，不过抽象工厂可以创建一组对象（有关联的）</td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern">wikipedia</a> 2.<a href="/2016/07/26/abstract_factory">foolchild</a></td>
+      <td>跟工厂方法类似，不过抽象工厂可以创建一组对象（有关联的），工厂与产品组一对一</td>
+      <td><code class="highlighter-rouge">GUIFactory和WinFactory</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern">wiki</a>   2.<a href="/2016/07/26/abstract_factory">me</a></td>
     </tr>
     <tr>
       <td>建造者</td>
       <td>创建模块化的复杂的对象</td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Builder_pattern">wikipedia</a> 2.<a href="/2016/07/26/builder">foolchild</a></td>
+      <td><code class="highlighter-rouge">gitbook游戏角色</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Builder_pattern">wiki</a>     2.<a href="/2016/07/26/builder">me</a></td>
     </tr>
     <tr>
       <td>原型</td>
       <td>得到一个对象的拷贝</td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Prototype_pattern">wikipedia</a> 2.<a href="/2016/07/26/prototype">foolchild</a></td>
+      <td><code class="highlighter-rouge">gitbook工作日报</code>,深拷贝vs浅拷贝</td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Prototype_pattern">wiki</a>   2.<a href="/2016/07/26/prototype">me</a></td>
     </tr>
   </tbody>
 </table>
@@ -85,90 +88,78 @@
 <table>
   <thead>
     <tr>
-      <th>设计模式</th>
+      <th>模式</th>
       <th>概述</th>
-      <th>备注</th>
-      <th>例子</th>
+      <th>备注or例子</th>
       <th>详述</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>责任链</td>
-      <td> </td>
-      <td>链式</td>
-      <td>报销需要层层审批</td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">wikipedia</a> 2.<a href="/2016/07/26/chain_of_responsibility">foolchild</a></td>
+      <td>链式，流程需分步进行，且各步之间有层次关系，1执行完成执行2，2执行完成执行3</td>
+      <td><code class="highlighter-rouge">报销</code>,<code class="highlighter-rouge">代购模拟支付</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">wiki</a> 2.<a href="/2016/07/26/chain_of_responsibility">me</a></td>
     </tr>
     <tr>
       <td>命令</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Command_pattern">wikipedia</a> 2.<a href="/2016/07/26/command">foolchild</a></td>
+      <td>invoker，command，receiver三种角色,command需持有receiver的引用</td>
+      <td><code class="highlighter-rouge">开关、打开和关闭操作、灯泡</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Command_pattern">wiki</a> 2.<a href="/2016/07/26/command">me</a></td>
     </tr>
     <tr>
       <td>迭代器</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Iterator_pattern">wikipedia</a> 2.<a href="/2016/07/26/iterator">foolchild</a></td>
+      <td>太多了</td>
+      <td>Iterator</td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Iterator_pattern">wiki</a> 2.<a href="/2016/07/26/iterator">me</a></td>
     </tr>
     <tr>
       <td>解释器</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Interpreter_pattern">wikipedia</a> 2.<a href="/2016/07/26/interpreter">foolchild</a></td>
+      <td>..</td>
+      <td>..</td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Interpreter_pattern">wiki</a> 2.<a href="/2016/07/26/interpreter">me</a></td>
     </tr>
     <tr>
       <td>中介者</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Mediator_pattern">wikipedia</a> 2.<a href="/2016/07/26/mediator">foolchild</a></td>
+      <td>mediator中介者、被中介的双方或三方。中介者需持有被中介者的引用，被中介者需持有中介者的引用（真别扭），需声明一个联络方法</td>
+      <td><code class="highlighter-rouge">猎头、我、公司们 猎头就是个中介者</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Mediator_pattern">wiki</a> 2.<a href="/2016/07/26/mediator">me</a></td>
     </tr>
     <tr>
       <td>备忘录</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Memento_pattern">wikipedia</a> 2.<a href="/2016/07/26/memento">foolchild</a></td>
+      <td>在捕获一个对象内部状态，并在该对象之外保存这个状态，在以后可以使对象恢复到原先保存的状态</td>
+      <td><code class="highlighter-rouge">gitbook象棋悔棋</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Memento_pattern">wiki</a> 2.<a href="/2016/07/26/memento">me</a></td>
     </tr>
     <tr>
       <td>观察者</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Observer_pattern">wikipedia</a> 2.<a href="/2016/07/26/observer">foolchild</a></td>
+      <td>Observer、Subject，subject持有所有Observers的引用，Observer持有subject的引用</td>
+      <td><code class="highlighter-rouge">java.util.Observable  java.util.Observer</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Observer_pattern">wiki</a> 2.<a href="/2016/07/26/observer">me</a></td>
     </tr>
     <tr>
       <td>状态</td>
+      <td>Context、State，Context持有State的引用，其内部方法会因State的不同而采取不同的行为</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/State_pattern">wikipedia</a> 2.<a href="/2016/07/26/state">foolchild</a></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/State_pattern">wiki</a> 2.<a href="/2016/07/26/state">me</a></td>
     </tr>
     <tr>
       <td>策略</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Strategy_pattern">wikipedia</a> 2.<a href="/2016/07/26/strategy">foolchild</a></td>
+      <td>类图感觉跟状态模式一样，感觉要解决的问题不一样（好别扭）</td>
+      <td><code class="highlighter-rouge">Collections.sort(list,comparator)</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Strategy_pattern">wiki</a> 2.<a href="/2016/07/26/strategy">me</a></td>
     </tr>
     <tr>
       <td>模板方法</td>
-      <td>定义一个算法的框架，子类可以实现具体的某些步骤。</td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Template_method_pattern">wikipedia</a> 2.<a href="/2016/07/26/template">foolchild</a></td>
+      <td>定义一个算法的框架，子类可以实现具体的某些步骤（abstract的方法）。</td>
+      <td>太多了,AbstractCollection#isEmpty()</td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Template_method_pattern">wiki</a> 2.<a href="/2016/07/26/template">me</a></td>
     </tr>
     <tr>
       <td>访问者</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Visitor_pattern">wikipedia</a> 2.<a href="/2016/07/26/visitor">foolchild</a></td>
+      <td>Vistor、Element、Elements，不同的vistor实现visit同一Element，结果不一样，不同的visitor关注点不同，Elements提供遍历操作</td>
+      <td>gitbook <code class="highlighter-rouge">hr和财务访问员工list</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Visitor_pattern">wiki</a> 2.<a href="/2016/07/26/visitor">me</a></td>
     </tr>
   </tbody>
 </table>
@@ -178,9 +169,8 @@
 <table>
   <thead>
     <tr>
-      <th>设计模式</th>
+      <th>模式</th>
       <th>概述</th>
-      <th>适用场景</th>
       <th>备注or例子</th>
       <th>详述</th>
     </tr>
@@ -188,52 +178,45 @@
   <tbody>
     <tr>
       <td>适配器</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Adapter_pattern">wikipedia</a> 2.<a href="/2016/07/26/adapter">foolchild</a></td>
+      <td>Adapter、Adaptee、Target，（对象适配器）Adapter继承自Target，持有Adaptee的引用（对象适配器）；除此之外还有类适配器和双向适配器</td>
+      <td><code class="highlighter-rouge">官网代购的各个adapter</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Adapter_pattern">wiki</a> 2.<a href="/2016/07/26/adapter">me</a></td>
     </tr>
     <tr>
       <td>桥接</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Bridge_pattern">wikipedia</a> 2.<a href="/2016/07/26/bridge">foolchild</a></td>
+      <td>多维度变化，其中一个维度持有其他维度的引用</td>
+      <td><code class="highlighter-rouge">gitbook PNG,JPG格式图片和Win，Mac，Linux操作系统</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Bridge_pattern">wiki</a> 2.<a href="/2016/07/26/bridge">me</a></td>
     </tr>
     <tr>
       <td>组合</td>
+      <td>对待组合和对待元素是一样一样的。组合和元素实现统一接口</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Composite_pattern">wikipedia</a> 2.<a href="/2016/07/26/composite">foolchild</a></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Composite_pattern">wiki</a> 2.<a href="/2016/07/26/composite">me</a></td>
     </tr>
     <tr>
       <td>装饰</td>
+      <td>如果只增强一层的话，和代理模式类图是一样一样的，关注点不同。可以不断的装饰</td>
       <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Decorator_pattern">wikipedia</a> 2.<a href="/2016/07/26/decorator">foolchild</a></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Decorator_pattern">wiki</a> 2.<a href="/2016/07/26/decorator">me</a></td>
     </tr>
     <tr>
       <td>门面</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Facade_pattern">wikipedia</a> 2.<a href="/2016/07/26/facade">foolchild</a></td>
+      <td>封装，对外提供api</td>
+      <td><code class="highlighter-rouge">gitbook自己泡茶和去茶馆喝茶</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Facade_pattern">wiki</a> 2.<a href="/2016/07/26/facade">me</a></td>
     </tr>
     <tr>
       <td>享元</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Flyweight_pattern">wikipedia</a> 2.<a href="/2016/07/26/flyweight">foolchild</a></td>
+      <td>大量细粒度对象的重用</td>
+      <td><code class="highlighter-rouge">缓存</code>，<code class="highlighter-rouge">Integer#valueOf()</code></td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Flyweight_pattern">wiki</a> 2.<a href="/2016/07/26/flyweight">me</a></td>
     </tr>
     <tr>
       <td>代理</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td>1.<a href="https://en.wikipedia.org/wiki/Proxy_pattern">wikipedia</a> 2.<a href="/2016/07/26/proxy">foolchild</a></td>
+      <td>代理类和被代理类实现统一接口，代理类持有被代理类引用，在实现接口方法时改变被代理类的行为</td>
+      <td>静态代理，spring动态代理</td>
+      <td>1.<a href="https://en.wikipedia.org/wiki/Proxy_pattern">wiki</a> 2.<a href="/2016/07/26/proxy">me</a></td>
     </tr>
   </tbody>
 </table>
@@ -242,7 +225,9 @@
 
 <p>[1]<a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/">http://linuxtools-rst.readthedocs.org/zh_CN/latest/</a></p>
 
-<p>[2]<a href="https://en.wikipedia.org/wiki/Design_pattern">https://en.wikipedia.org/wiki/Design_pattern</a></p>
+<p>[wikipedia]<a href="https://en.wikipedia.org/wiki/Design_pattern">https://en.wikipedia.org/wiki/Design_pattern</a></p>
+
+<p>[gitbook]<a href="https://quanke.gitbooks.io/design-pattern-java/content/">https://quanke.gitbooks.io/design-pattern-java/content/</a></p>
 
 <p>[图说设计模式]<a href="http://design-patterns.readthedocs.io/zh_CN/latest/">http://design-patterns.readthedocs.io/zh_CN/latest/</a></p>
 

@@ -40,7 +40,7 @@ limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Or
 ### 细解 {#sql}
 
 1.  on vs where
-    两者效果可能一样，但on是连接两表做笛卡尔积时的连接条件，where连接之后的筛选条件。
+    两者效果可能一样(内连接)，但on是连接两表做笛卡尔积时的连接条件，where连接之后的筛选条件。
 
 2.  where vs having
 
@@ -49,6 +49,7 @@ limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Or
     2.  having 筛选满足条件的组(`group by 之后`,having是专门搭配group by干活的)，即在分组之后过滤数据，条件中经常包含聚集函数，使用having条件过滤出特定的组，也可以使用多个分组标准进行分组。
 
 3.  join、left join、right join　　
+
     eg table_a,table_b
 
     1.  left join 以左为准，右可以为空, 记录数>=table_a总数

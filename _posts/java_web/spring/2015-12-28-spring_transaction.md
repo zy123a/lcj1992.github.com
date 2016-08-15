@@ -140,6 +140,10 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 
 `TransactionSynchronization`
 
+`DelegatingTransactionAttribute`  动态代理transactionAttribute
+
+`RuleBasedTransactionAttribute` 
+
 ![原理](/images/java_web/spring_transaction_source.png)
 
 ### spring中事务的传播特性 {#propagation}
