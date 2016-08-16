@@ -25,7 +25,7 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 |模式|概述|备注or例子|详述|
 |-|-|-|-|-|-|
-|责任链|链式，流程需分步进行，且各步之间有层次关系，1执行完成执行2，2执行完成执行3|`报销`,`代购模拟支付`|1.[wiki](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) 2.[me](/2016/07/26/chain_of_responsibility)|
+|责任链|链式，流程需分步进行，且各步之间有层次关系，1执行完成执行2，2执行完成执行3|`报销`,`代购模拟支付`,`java.util.logging.Logger#log()`|1.[wiki](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) 2.[me](/2016/07/26/chain_of_responsibility)|
 |命令|invoker，command，receiver三种角色,command需持有receiver的引用|`开关、打开和关闭操作、灯泡`|1.[wiki](https://en.wikipedia.org/wiki/Command_pattern) 2.[me](/2016/07/26/command)|
 |迭代器|太多了|Iterator|1.[wiki](https://en.wikipedia.org/wiki/Iterator_pattern) 2.[me](/2016/07/26/iterator)|
 |解释器|..|..|1.[wiki](https://en.wikipedia.org/wiki/Interpreter_pattern) 2.[me](/2016/07/26/interpreter)|

@@ -27,8 +27,22 @@
 
     <div id="main">
         <h2> 抽象工厂模式 </h2>
-        <p>抽象工厂创建具体的工厂,每一个工厂创建多种产品，这些个产品是相互关联的
-工厂与产品是是一对多的关系</p>
+        <h3 id="section">概述</h3>
+<p>抽象工厂创建具体的工厂,每一个工厂创建多种产品，这些个产品是相互关联的。</p>
+
+<p><img src="/images/design_pattern/abstract_factory.jpeg" alt="产品族" />
+1.  工厂方法中具体工厂与具体的产品是一对一的关系
+2.  抽象工厂方法中具体工厂与具体的产品族是一对一的关系</p>
+
+<h3 id="section-1">类图</h3>
+
+<p>抽象工厂、具体工厂、抽象产品1、具体产品1、抽象产品2、具体产品2</p>
+
+<p>GUIFactory、WinFactory、Label、WinLabel、Button、WinButton</p>
+
+<p><img src="/images/design_pattern/abstract_factory.png" alt="类图" /></p>
+
+<p><a href="https://github.com/lcj1992/learn/tree/master/java/designPattern/src/main/java/creational/abstractFactory">代码举例</a></p>
 
         <ul class="prev_next">
             
