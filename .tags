@@ -82,6 +82,7 @@ eager	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-single
 参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### 参考 {#ref}$/;"	function	line:66
 概述	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 概述$/;"	function	line:8
 类图	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 类图$/;"	function	line:18
+参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-bridge.md	/^### 参考 {#ref}$/;"	function	line:16
 创建型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 创建型 {#create}$/;"	function	line:8
 行为型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 行为型 {#behavior}$/;"	function	line:24
 结构型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 结构型 {#structure}$/;"	function	line:40
