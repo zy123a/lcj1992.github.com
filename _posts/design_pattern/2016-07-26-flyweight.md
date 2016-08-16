@@ -5,7 +5,7 @@ categories: design_pattern
 tags: flyweight
 ---
 
-菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了
+菜单上的flavours就是共享的,机场贵宾室说明基本都是共享的,Integer.valueOf()
 
 
     // Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects

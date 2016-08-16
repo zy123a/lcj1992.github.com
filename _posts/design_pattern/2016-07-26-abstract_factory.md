@@ -6,6 +6,7 @@ tags: abstract_factory
 ---
 
 ### 概述
+
 抽象工厂创建具体的工厂,每一个工厂创建多种产品，这些个产品是相互关联的。
 
 ![产品族](/images/design_pattern/abstract_factory.jpeg)

@@ -63,7 +63,6 @@ ps：
 
 eager的实现方式有enum版本的，holder版本的，还有最简单的直接实例化的,这里就不说了[单例](https://github.com/lcj1992/learn/tree/master/java/designPattern/src/main/java/creational/singleton)。
 
-
 ### 参考 {#ref}
 
 [深入浅出单实例Singleton设计模式]<http://coolshell.cn/articles/265.html>

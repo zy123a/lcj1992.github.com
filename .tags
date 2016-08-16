@@ -75,9 +75,6 @@ div.paginator	/Users/lichuangjian/work/foolchild/css/default.css	/^div.paginator
 .prev_next li span	/Users/lichuangjian/work/foolchild/css/default.css	/^.prev_next li span {$/;"	function	line:164
 th	/Users/lichuangjian/work/foolchild/css/default.css	/^th {$/;"	function	line:171
 td	/Users/lichuangjian/work/foolchild/css/default.css	/^td {$/;"	function	line:176
-类图	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-factory.md	/^### 类图$/;"	function	line:8
-概述	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 概述$/;"	function	line:8
-类图	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 类图$/;"	function	line:15
 创建型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 创建型 {#create}$/;"	function	line:8
 行为型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 行为型 {#behavior}$/;"	function	line:24
 结构型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 结构型 {#structure}$/;"	function	line:40
@@ -86,4 +83,6 @@ lazy	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singlet
 简单版本	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^#### 简单版本$/;"	function	line:16
 双重检查	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^#### 双重检查$/;"	function	line:29
 eager	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### eager$/;"	function	line:60
-参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### 参考 {#ref}$/;"	function	line:67
+参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### 参考 {#ref}$/;"	function	line:66
+概述	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 概述$/;"	function	line:8
+类图	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-abstract_factory.md	/^### 类图$/;"	function	line:16
