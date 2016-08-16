@@ -27,7 +27,27 @@
 
     <div id="main">
         <h2> 责任链模式 </h2>
-        
+        <p>链式，流程需分步进行，且各步之间有层次关系，1执行完成执行2，2执行完成执行3</p>
+
+<p><img src="/images/design_pattern/chain_of_responsibility.png" alt="类图" /></p>
+
+<p>抽象handler、各handler子类，handler都持有下一步骤handler的引用。</p>
+
+<p>类图中着重看标红处，各子类需持有继承者successor的引用，如果满足条件，执行successor的方法。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>abstract class PurchasePower {
+    static final double BASE = 500;
+    PurchasePower successor;
+
+    void setSuccessor(PurchasePower successor) {
+        this.successor = successor;
+    }
+    abstract public void processRequest(PurchaseRequest request);
+}
+</code></pre>
+</div>
+
+<p><a href="https://github.com/lcj1992/learn/blob/master/java/designPattern/src/main/java/behavioral/chainOfResponsibility/ChainOfResponseTest.java">代码示例</a></p>
 
         <ul class="prev_next">
             

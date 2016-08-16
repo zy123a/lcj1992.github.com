@@ -29,20 +29,20 @@
         <h2> 享元模式 </h2>
         <p>菜单上的flavours就是共享的，当new了很多对象，而这些对象好多是一样的，就考虑下享元模式了</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>        // Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects
-        class Menu {
-            private Map&lt;String, CoffeeFlavour&gt; flavours = new ConcurrentHashMap&lt;String, CoffeeFlavour&gt;();
+<div class="highlighter-rouge"><pre class="highlight"><code>// Menu acts as a staticfactory and cache for CoffeeFlavour flyweight objects
+class Menu {
+    private Map&lt;String, CoffeeFlavour&gt; flavours = new ConcurrentHashMap&lt;String, CoffeeFlavour&gt;();
 
-            CoffeeFlavour lookup(String flavorName) {
-                if (!flavours.containsKey(flavorName))
-                    flavours.put(flavorName, new CoffeeFlavour(flavorName));
-                return flavours.get(flavorName);
-            }
+    CoffeeFlavour lookup(String flavorName) {
+        if (!flavours.containsKey(flavorName))
+            flavours.put(flavorName, new CoffeeFlavour(flavorName));
+        return flavours.get(flavorName);
+    }
 
-            int totalCoffeeFlavoursMade() {
-                return flavours.size();
-            }
-        }
+    int totalCoffeeFlavoursMade() {
+        return flavours.size();
+    }
+}
 </code></pre>
 </div>
 

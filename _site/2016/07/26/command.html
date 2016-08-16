@@ -27,11 +27,13 @@
 
     <div id="main">
         <h2> 命令模式 </h2>
-        <ol>
-  <li>三类对象：<code class="highlighter-rouge">invoker</code>,<code class="highlighter-rouge">receiver</code>和具体的<code class="highlighter-rouge">commands</code></li>
-  <li><code class="highlighter-rouge">invoker</code>发送<code class="highlighter-rouge">commands</code>给<code class="highlighter-rouge">receiver</code>，<code class="highlighter-rouge">receiver</code>执行<code class="highlighter-rouge">invoker</code>发送来的<code class="highlighter-rouge">commands</code></li>
-  <li><code class="highlighter-rouge">commands</code>包含有<code class="highlighter-rouge">receiver</code>的实例，<code class="highlighter-rouge">command</code>的execute方法实际上是调用<code class="highlighter-rouge">receiver</code>的某个行为方法</li>
-</ol>
+        <p><img src="/images/design_pattern/command.png" alt="类图" /></p>
+
+<p>invoker、receiver、command、command实现类</p>
+
+<p>command持有receiver的引用，command的执行实际是上调用的持有的receiver的方法。invoker发送command。</p>
+
+<p><a href="https://github.com/lcj1992/learn/blob/master/java/designPattern/src/main/java/behavioral/command/CommandTest.java">代码示例</a></p>
 
         <ul class="prev_next">
             
