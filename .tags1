@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-创建型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 创建型 {#create}$/;"	function	line:8
-行为型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 行为型 {#behavior}$/;"	function	line:24
-结构型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 结构型 {#structure}$/;"	function	line:40
-参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 参考 {#ref}$/;"	function	line:52
+lazy	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### lazy$/;"	function	line:10
+简单版本	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^#### 简单版本$/;"	function	line:16
+双重检查	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^#### 双重检查$/;"	function	line:29
+eager	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-singleton.md	/^### eager$/;"	function	line:60
