@@ -8,7 +8,7 @@ tags: proxy factory adapter facade decorator
 ### 创建型 {#create}
 
  下图中的例子都来自[示例代码](https://github.com/lcj1992/learn/tree/master/java/designPattern)
-、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Design_pattern)
+、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
 
 ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
