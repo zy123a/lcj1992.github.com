@@ -44,7 +44,7 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 |适配器|Adapter、Adaptee、Target，（对象适配器）Adapter继承自Target，持有Adaptee的引用（对象适配器）；除此之外还有类适配器和双向适配器|`官网代购的各个adapter`|1.[wiki](https://en.wikipedia.org/wiki/Adapter_pattern) 2.[me](/2016/07/26/adapter)|
 |桥接|多维度变化，其中一个维度持有其他维度的引用|`gitbook PNG,JPG格式图片和Win，Mac，Linux操作系统`|1.[wiki](https://en.wikipedia.org/wiki/Bridge_pattern) 2.[me](/2016/07/26/bridge)|
 |组合|对待组合和对待元素是一样一样的。组合和元素实现统一接口||1.[wiki](https://en.wikipedia.org/wiki/Composite_pattern) 2.[me](/2016/07/26/composite)|
-|装饰|如果只增强一层的话，和代理模式类图是一样一样的，关注点不同。可以不断的装饰||1.[wiki](https://en.wikipedia.org/wiki/Decorator_pattern) 2.[me](/2016/07/26/decorator)|
+|装饰|如果只增强一层的话，和代理模式类图是一样一样的，关注点不同。可以不断的装饰|InputStream、FilterInputStream、BufferedInputStream、DataInputStream|1.[wiki](https://en.wikipedia.org/wiki/Decorator_pattern) 2.[me](/2016/07/26/decorator)|
 |门面|封装，对外提供api|`gitbook自己泡茶和去茶馆喝茶`|1.[wiki](https://en.wikipedia.org/wiki/Facade_pattern) 2.[me](/2016/07/26/facade)|
 |享元|大量细粒度对象的重用|`缓存`，`Integer#valueOf()`|1.[wiki](https://en.wikipedia.org/wiki/Flyweight_pattern) 2.[me](/2016/07/26/flyweight)|
 |代理|代理类和被代理类实现统一接口，代理类持有被代理类引用，在实现接口方法时改变被代理类的行为|静态代理，spring动态代理|1.[wiki](https://en.wikipedia.org/wiki/Proxy_pattern) 2.[me](/2016/07/26/proxy)|
