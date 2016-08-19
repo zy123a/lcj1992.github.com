@@ -31,13 +31,20 @@
   <li><a href="#interface_impl">接口可以有实现了</a></li>
   <li><a href="#functionalInterface">增加@FunctionalInterface注解</a></li>
   <li><a href="#some_example">部分函数式接口</a>
- 	* <a href="#predicate">Predicate</a>
- 	* <a href="#function">Function</a>
- 	* <a href="#supplier">Supplier</a>
- 	* <a href="#consumer">Consumer</a>
- 	* <a href="#comparator">Comparator</a>
- 	* <a href="#optional">Optional</a>
- 	* <a href="#stream">Stream</a></li>
+    <ul>
+      <li><a href="#predicate">Predicate</a></li>
+      <li><a href="#function">Function</a></li>
+      <li><a href="#supplier">Supplier</a></li>
+      <li><a href="#consumer">Consumer</a></li>
+      <li><a href="#comparator">Comparator</a></li>
+    </ul>
+  </li>
+  <li><a href="#except">处理之外还有</a>
+    <ul>
+      <li><a href="#optional">Optional</a></li>
+      <li><a href="#stream">Stream</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="interface_impl">接口可以有实现了, default和static</h3>
@@ -58,15 +65,25 @@
 
 <p>但是问题来了</p>
 
-<p>1.如果实现了两个接口，两个接口包含了同名的方法。解决办法：实现类覆盖该方法</p>
-
-<p>2.如果继承了父类，实现了接口，父类和接口包含了同名的方法。父类方法优先</p>
+<ol>
+  <li>
+    <p>如果实现了两个接口，两个接口包含了同名的方法。解决办法：实现类覆盖该方法</p>
+  </li>
+  <li>
+    <p>如果继承了父类，实现了接口，父类和接口包含了同名的方法。父类方法优先</p>
+  </li>
+</ol>
 
 <p>那么带有default方法的接口与抽象类有什么区别呢？</p>
 
-<p>1.抽象类可以有成员变量,接口不能</p>
-
-<p>2.接口可以用于lamda表达式，抽象类不能</p>
+<ol>
+  <li>
+    <p>抽象类可以有成员变量,接口不能</p>
+  </li>
+  <li>
+    <p>接口可以用于lamda表达式，抽象类不能</p>
+  </li>
+</ol>
 
 <p>注：default方法不能覆盖toString，hashcode和equals方法</p>
 
@@ -122,18 +139,10 @@ public class MultiExtend {
 <h3 id="functionalInterface">增加@FunctionalInterface注解</h3>
 
 <ol>
-  <li>
-    <p>接口可以有实现</p>
-  </li>
-  <li>
-    <p>只能有一个抽象方法</p>
-  </li>
-  <li>
-    <p>java8 接口都是函数式的</p>
-  </li>
-  <li>
-    <p>可以有三种声明方式</p>
-  </li>
+  <li>接口可以有实现</li>
+  <li>只能有一个抽象方法</li>
+  <li>java8 接口都是函数式的</li>
+  <li>可以有三种声明方式</li>
 </ol>
 
 <p>eg:</p>
@@ -191,36 +200,44 @@ public class FunctionInterfaceTest {
 
 <h4 id="predicate">Predicate</h4>
 
-<p>抽象方法test,default方法and,or,negate,static方法isEqual（是否看到了guava的影子）</p>
+<ol>
+  <li>抽象方法: <code class="highlighter-rouge">test</code></li>
+  <li>default方法: <code class="highlighter-rouge">and</code>,<code class="highlighter-rouge">or</code>,<code class="highlighter-rouge">negate</code></li>
+  <li>
+    <p>static方法: <code class="highlighter-rouge">isEqual</code>（是否看到了guava的影子）</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Predicate
-Predicate&lt;String&gt; predicate = (s) -&gt; s.length() &gt; 0;
+    <p>// Predicate
+Predicate<String> predicate = (s) -&gt; s.length() &gt; 0;
 predicate.test("foo");
 predicate.negate().test("foo");
-Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;
-Predicate&lt;Boolean&gt; isNull = Objects::isNull;
-Predicate&lt;String&gt; isEmpty = String::isEmpty;
-Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();
+Predicate<Boolean> nonNull = Objects::nonNull;
+Predicate<Boolean> isNull = Objects::isNull;
+Predicate<String> isEmpty = String::isEmpty;
+Predicate<String> isNotEmpty = isEmpty.negate();
 nonNull.and(isNull).test(false);
-nonNull.or(isNull).test(true);
-</code></pre>
-</div>
+nonNull.or(isNull).test(true);</String></String></Boolean></Boolean></String></p>
+  </li>
+</ol>
 
 <h4 id="function">Function</h4>
 
-<p>抽象方法apply,default方法compose和andThen，static方法identity</p>
+<ol>
+  <li>抽象方法:<code class="highlighter-rouge">apply</code></li>
+  <li>default方法:<code class="highlighter-rouge">compose</code>和<code class="highlighter-rouge">andThen</code></li>
+  <li>
+    <p>static方法:<code class="highlighter-rouge">identity</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Function
+    <p>// Function
 Function&lt;String, Integer&gt; toInteger = Integer::valueOf;
-toInteger.apply("123");
+toInteger.apply(“123”);
 Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);
-backToString.apply("123");
-</code></pre>
-</div>
+backToString.apply(“123”);</p>
+  </li>
+</ol>
 
 <h4 id="supplier">Supplier</h4>
 
-<p>抽象方法get</p>
+<p>抽象方法<code class="highlighter-rouge">get</code></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Supplier personSupplier = Person::new;
 personSupplier.get();
@@ -230,26 +247,35 @@ Person person = personSupplier.get();
 
 <h4 id="consumer">Consumer</h4>
 
-<p>抽象方法accept,default方法andThen</p>
+<ol>
+  <li>抽象方法: <code class="highlighter-rouge">accept</code></li>
+  <li>
+    <p>default方法: <code class="highlighter-rouge">andThen</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// consumer
-Consumer&lt;Person&gt; greeter = (p) -&gt; System.out.println("hello " + p.firstName);
-greeter.accept(new Person("Luke", "Skywalker"));
-</code></pre>
-</div>
+    <p>// consumer
+Consumer<Person> greeter = (p) -&gt; System.out.println("hello " + p.firstName);
+greeter.accept(new Person("Luke", "Skywalker"));</Person></p>
+  </li>
+</ol>
 
 <h4 id="comparator">Comparator</h4>
 
-<p>抽象方法compare，default方法…,static方法…</p>
+<ol>
+  <li>抽象方法:<code class="highlighter-rouge">compare</code></li>
+  <li>default方法: …</li>
+  <li>
+    <p>static方法: …</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// comparator
+    <p>// comparator
 Comparator comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);
-Person p1 = new Person("John", "Doe");
-Person p2 = new Person("Alice", "WonderLand");
+Person p1 = new Person(“John”, “Doe”);
+Person p2 = new Person(“Alice”, “WonderLand”);
 comparator.compare(p1, p2);
-comparator.reversed().compare(p1, p2);
-</code></pre>
-</div>
+comparator.reversed().compare(p1, p2);</p>
+  </li>
+</ol>
+
+<h3 id="except">处理之外还有</h3>
 
 <h4 id="optional">Optional</h4>
 
