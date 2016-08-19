@@ -49,6 +49,8 @@
 
 <h3 id="interface_impl">接口可以有实现了, default和static</h3>
 
+<p>eg:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>interface Man {
 	// adds a java 8 default method
 	default void sayHello() {
@@ -87,7 +89,7 @@
 
 <p>注：default方法不能覆盖toString，hashcode和equals方法</p>
 
-<p>例：</p>
+<p>eg：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>interface Man {
     default void sayHello() {
@@ -203,41 +205,47 @@ public class FunctionInterfaceTest {
 <ol>
   <li>抽象方法: <code class="highlighter-rouge">test</code></li>
   <li>default方法: <code class="highlighter-rouge">and</code>,<code class="highlighter-rouge">or</code>,<code class="highlighter-rouge">negate</code></li>
-  <li>
-    <p>static方法: <code class="highlighter-rouge">isEqual</code>（是否看到了guava的影子）</p>
+  <li>static方法: <code class="highlighter-rouge">isEqual</code>（是否看到了guava的影子）</li>
+</ol>
 
-    <p>// Predicate
-Predicate<String> predicate = (s) -&gt; s.length() &gt; 0;
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Predicate
+Predicate&lt;String&gt; predicate = (s) -&gt; s.length() &gt; 0;
 predicate.test("foo");
 predicate.negate().test("foo");
-Predicate<Boolean> nonNull = Objects::nonNull;
-Predicate<Boolean> isNull = Objects::isNull;
-Predicate<String> isEmpty = String::isEmpty;
-Predicate<String> isNotEmpty = isEmpty.negate();
+Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;
+Predicate&lt;Boolean&gt; isNull = Objects::isNull;
+Predicate&lt;String&gt; isEmpty = String::isEmpty;
+Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();
 nonNull.and(isNull).test(false);
-nonNull.or(isNull).test(true);</String></String></Boolean></Boolean></String></p>
-  </li>
-</ol>
+nonNull.or(isNull).test(true);
+</code></pre>
+</div>
 
 <h4 id="function">Function</h4>
 
 <ol>
   <li>抽象方法:<code class="highlighter-rouge">apply</code></li>
   <li>default方法:<code class="highlighter-rouge">compose</code>和<code class="highlighter-rouge">andThen</code></li>
-  <li>
-    <p>static方法:<code class="highlighter-rouge">identity</code></p>
-
-    <p>// Function
-Function&lt;String, Integer&gt; toInteger = Integer::valueOf;
-toInteger.apply(“123”);
-Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);
-backToString.apply(“123”);</p>
-  </li>
+  <li>static方法:<code class="highlighter-rouge">identity</code></li>
 </ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Function
+Function&lt;String, Integer&gt; toInteger = Integer::valueOf;
+toInteger.apply("123");
+Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);
+backToString.apply("123");
+</code></pre>
+</div>
 
 <h4 id="supplier">Supplier</h4>
 
 <p>抽象方法<code class="highlighter-rouge">get</code></p>
+
+<p>eg:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Supplier personSupplier = Person::new;
 personSupplier.get();
@@ -249,35 +257,41 @@ Person person = personSupplier.get();
 
 <ol>
   <li>抽象方法: <code class="highlighter-rouge">accept</code></li>
-  <li>
-    <p>default方法: <code class="highlighter-rouge">andThen</code></p>
-
-    <p>// consumer
-Consumer<Person> greeter = (p) -&gt; System.out.println("hello " + p.firstName);
-greeter.accept(new Person("Luke", "Skywalker"));</Person></p>
-  </li>
+  <li>default方法: <code class="highlighter-rouge">andThen</code></li>
 </ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// consumer
+Consumer&lt;Person&gt; greeter = (p) -&gt; System.out.println("hello " + p.firstName);
+greeter.accept(new Person("Luke", "Skywalker"));
+</code></pre>
+</div>
 
 <h4 id="comparator">Comparator</h4>
 
 <ol>
   <li>抽象方法:<code class="highlighter-rouge">compare</code></li>
   <li>default方法: …</li>
-  <li>
-    <p>static方法: …</p>
-
-    <p>// comparator
-Comparator comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);
-Person p1 = new Person(“John”, “Doe”);
-Person p2 = new Person(“Alice”, “WonderLand”);
-comparator.compare(p1, p2);
-comparator.reversed().compare(p1, p2);</p>
-  </li>
+  <li>static方法: …</li>
 </ol>
+
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// comparator
+Comparator comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);
+Person p1 = new Person("John", "Doe");
+Person p2 = new Person("Alice", "WonderLand");
+comparator.compare(p1, p2);
+comparator.reversed().compare(p1, p2);
+</code></pre>
+</div>
 
 <h3 id="except">处理之外还有</h3>
 
 <h4 id="optional">Optional</h4>
+
+<p>eg:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>// Optional
 Optional&lt;String&gt; optional = Optional.of("bam");
@@ -289,6 +303,8 @@ optional.ifPresent((s) -&gt; System.out.println(s.charAt(0)));
 </div>
 
 <h4 id="stream">Stream</h4>
+
+<p>eg:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>// Stream
 List&lt;String&gt; stringCollection = new ArrayList&lt;&gt;();
