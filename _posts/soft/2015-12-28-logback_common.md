@@ -2,21 +2,23 @@
 layout: post
 title: logback日常总结
 categories: soft java
-tags: logback asyncAppender 
+tags: logback asyncAppender
 ---
 
 *   打印异常
 
-1.  LOGGER.error("aa{}",e); 是错误的,异常被吞掉是多么恐怖的一件事啊
+eg:
 
-2.  LOGGER.error("aa{}",var,e);  这样是可以打印出异常信息的,记得在我转正答辩时候,有个厉害的评委说不可以,转管理之后不搞技术没事,瞎说就不对了.
+    LOGGER.error("aa{}",e); 是错误的,异常被吞掉是多么恐怖的一件事啊
+    LOGGER.error("aa{}",var,e);  这样是可以打印出异常信息的(slf4j老版本的是不支持这种打印的)
 
 *   性能
 
-     logger.debug("Entry number: " + i + " is " +  String.valueOf(entry[i]));
-     logger.debug("Entry number: {} is {}", i, entry[i]);
+eg:
 
-前者无论是否打都会进行字符串拼接,
+    logger.debug("Entry number: " + i + " is " +  String.valueOf(entry[i]));
+    logger.debug("Entry number: {} is {}", i, entry[i]);
+    前者无论是否打都会进行字符串拼接,
 
 *   异步appender
 
@@ -34,8 +36,8 @@ tags: logback asyncAppender
             <maxHistory>5</maxHistory>
         </rollingPolicy>
     </appender>
-    
-    
+
+
     <!-- 异步输出 -->
     <appender name ="asyncSearch" class= "ch.qos.logback.classic.AsyncAppender">
         <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->

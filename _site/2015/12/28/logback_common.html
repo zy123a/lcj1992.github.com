@@ -31,25 +31,24 @@
   <li>打印异常</li>
 </ul>
 
-<ol>
-  <li>
-    <p>LOGGER.error(“aa{}”,e); 是错误的,异常被吞掉是多么恐怖的一件事啊</p>
-  </li>
-  <li>
-    <p>LOGGER.error(“aa{}”,var,e);  这样是可以打印出异常信息的,记得在我转正答辩时候,有个厉害的评委说不可以,转管理之后不搞技术没事,瞎说就不对了.</p>
-  </li>
-</ol>
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>LOGGER.error("aa{}",e); 是错误的,异常被吞掉是多么恐怖的一件事啊
+LOGGER.error("aa{}",var,e);  这样是可以打印出异常信息的(slf4j老版本的是不支持这种打印的)
+</code></pre>
+</div>
 
 <ul>
-  <li>
-    <p>性能</p>
-
-    <p>logger.debug(“Entry number: “ + i + “ is “ +  String.valueOf(entry[i]));
- logger.debug(“Entry number: {} is {}”, i, entry[i]);</p>
-  </li>
+  <li>性能</li>
 </ul>
 
-<p>前者无论是否打都会进行字符串拼接,</p>
+<p>eg:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>logger.debug("Entry number: " + i + " is " +  String.valueOf(entry[i]));
+logger.debug("Entry number: {} is {}", i, entry[i]);
+前者无论是否打都会进行字符串拼接,
+</code></pre>
+</div>
 
 <ul>
   <li>异步appender</li>
