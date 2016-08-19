@@ -142,9 +142,15 @@ public class MultiExtend {
 
 <ol>
   <li>接口可以有实现</li>
-  <li>只能有一个抽象方法</li>
-  <li>java8 接口都是函数式的</li>
-  <li>可以有三种声明方式</li>
+  <li>如果接口只有一个非static，非default的方法，那么这个接口就是函数式的接口</li>
+  <li>可以有三种声明方式
+    <ul>
+      <li>正常是这样的:  <code class="highlighter-rouge">函数式接口 = (类型 参数名) -&gt; { 函数实现};</code></li>
+      <li>可以不指定类型,会自行推断</li>
+      <li>如果方法体只有一行,可以不要大括号</li>
+      <li>如果是某个类的某个方法和接口 与函数式接口的入参,返回值一样,可以使用::来指定</li>
+    </ul>
+  </li>
 </ol>
 
 <p>eg:</p>
