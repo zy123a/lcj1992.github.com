@@ -27,7 +27,20 @@
 
     <div id="main">
         <h2> java8 </h2>
-        <h3 id="defaultstatic">接口可以有实现了, default和static</h3>
+        <ul>
+  <li><a href="#interface_impl">接口可以有实现了</a></li>
+  <li><a href="#functionalInterface">增加@FunctionalInterface注解</a></li>
+  <li><a href="#some_example">部分函数式接口</a>
+ 	* <a href="#predicate">Predicate</a>
+ 	* <a href="#function">Function</a>
+ 	* <a href="#supplier">Supplier</a>
+ 	* <a href="#consumer">Consumer</a>
+ 	* <a href="#comparator">Comparator</a>
+ 	* <a href="#optional">Optional</a>
+ 	* <a href="#stream">Stream</a></li>
+</ul>
+
+<h3 id="interface_impl">接口可以有实现了, default和static</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>interface Man {
 	// adds a java 8 default method
@@ -106,23 +119,34 @@ public class MultiExtend {
 </code></pre>
 </div>
 
-<h3 id="functionalinterface">增加@FunctionalInterface注解</h3>
-<p>1.接口可以有实现</p>
+<h3 id="functionalInterface">增加@FunctionalInterface注解</h3>
 
-<p>2.只能有一个抽象方法</p>
+<ol>
+  <li>
+    <p>接口可以有实现</p>
+  </li>
+  <li>
+    <p>只能有一个抽象方法</p>
+  </li>
+  <li>
+    <p>java8 接口都是函数式的</p>
+  </li>
+  <li>
+    <p>可以有三种声明方式</p>
+  </li>
+</ol>
 
-<p>3.可以有三种声明方式</p>
+<p>eg:</p>
 
-<p>//1.param 可以不用指定类型，会自行推断
+<div class="highlighter-rouge"><pre class="highlight"><code>//1.param 可以不用指定类型，会自行推断
 aInterface = (param) -&gt;{
    函数实现;
    return  result;
 }
 //2.方法体只有一行代码，可以省略大括号的
 aInterface = (param) -&gt; 方法体;
-//3.允许你用::关键字来传递方法或者构造函数的引用</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>converter = Integer::valueOf;
+//3.允许你用::关键字来传递方法或者构造函数的引用
+converter = Integer::valueOf;
 @FunctionalInterface
 interface Converter&lt;F, T&gt; {
     T convert(F from);
@@ -163,8 +187,9 @@ public class FunctionInterfaceTest {
 </code></pre>
 </div>
 
-<h3 id="section">部分函数式接口</h3>
-<p>Predicate</p>
+<h3 id="some_example">部分函数式接口</h3>
+
+<h4 id="predicate">Predicate</h4>
 
 <p>抽象方法test,default方法and,or,negate,static方法isEqual（是否看到了guava的影子）</p>
 
@@ -177,9 +202,11 @@ Predicate&lt;Boolean&gt; isNull = Objects::isNull;
 Predicate&lt;String&gt; isEmpty = String::isEmpty;
 Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();
 nonNull.and(isNull).test(false);
-nonNull.or(isNull).test(true); Function
+nonNull.or(isNull).test(true);
 </code></pre>
 </div>
+
+<h4 id="function">Function</h4>
 
 <p>抽象方法apply,default方法compose和andThen，static方法identity</p>
 
@@ -188,25 +215,30 @@ Function&lt;String, Integer&gt; toInteger = Integer::valueOf;
 toInteger.apply("123");
 Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);
 backToString.apply("123");
-Supplier
 </code></pre>
 </div>
+
+<h4 id="supplier">Supplier</h4>
 
 <p>抽象方法get</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Supplier personSupplier = Person::new;
 personSupplier.get();
-Person person = personSupplier.get(); consumer
+Person person = personSupplier.get();
 </code></pre>
 </div>
+
+<h4 id="consumer">Consumer</h4>
 
 <p>抽象方法accept,default方法andThen</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>// consumer
 Consumer&lt;Person&gt; greeter = (p) -&gt; System.out.println("hello " + p.firstName);
-greeter.accept(new Person("Luke", "Skywalker")); Comparator
+greeter.accept(new Person("Luke", "Skywalker"));
 </code></pre>
 </div>
+
+<h4 id="comparator">Comparator</h4>
 
 <p>抽象方法compare，default方法…,static方法…</p>
 
@@ -215,16 +247,24 @@ Comparator comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);
 Person p1 = new Person("John", "Doe");
 Person p2 = new Person("Alice", "WonderLand");
 comparator.compare(p1, p2);
-comparator.reversed().compare(p1, p2); ### 除此之外Optional和Stream Optional
+comparator.reversed().compare(p1, p2);
+</code></pre>
+</div>
 
-// Optional
+<h4 id="optional">Optional</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Optional
 Optional&lt;String&gt; optional = Optional.of("bam");
 optional.isPresent();
 optional.get();
 optional.orElse("fallBack");
-optional.ifPresent((s) -&gt; System.out.println(s.charAt(0))); Stream
+optional.ifPresent((s) -&gt; System.out.println(s.charAt(0)));
+</code></pre>
+</div>
 
-// Stream
+<h4 id="stream">Stream</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Stream
 List&lt;String&gt; stringCollection = new ArrayList&lt;&gt;();
 stringCollection.add("ddd2");
 stringCollection.add("aaa2");
