@@ -54,6 +54,7 @@ tags: singleton
 ps：
 
     instance = new DoubleCheckVersion();
+
 这句并不是原子的操作， 事实上在jvm层面大概做了三件事：
 
 1.  给instance分配内存
@@ -89,3 +90,7 @@ eager的实现方式有enum版本的，还有最简单的直接实例化的,这�
 [深入浅出单实例Singleton设计模式]<http://coolshell.cn/articles/265.html>
 
 [wikipedia]<https://en.wikipedia.org/wiki/Singleton_pattern>
+
+[单例模式的八种写法比较]<http://tianweili.github.io/blog/2015/03/02/singleton-pattern/>
+
+[如何正确地写出单例模式]<http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/>

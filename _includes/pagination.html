@@ -1,6 +1,6 @@
 <div id="post-pagination" class="paginator">
 
-  <!-- {% if paginator.previous_page %}
+  {% if paginator.previous_page %}
     {% if paginator.previous_page == 1 %}
     <a href="/"><前页</a>
     {% else %}
@@ -29,5 +29,5 @@
   {% else %}
     <span class="next disabled" >后页></span>
   {% endif %}
-  (共{{ paginator.total_posts }}篇) -->
+  (共{{ paginator.total_posts }}篇)
 </div>

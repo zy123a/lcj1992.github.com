@@ -64,7 +64,7 @@ eg：
 v1声不声明volatile，会有lock addl $0x0,(%rsp)这句的差别。
 
 ![volatile_diff](/images/java/volatile_diff.png)
-在赋值之后(movq $0x20,0x18(%rsi))多执行了一句`lock addl $0x0,(%rsp)`操作，这个操作相当于一个内存屏障（memory barrier或者memory fence），重排序时，不能把后面的指令重排序到内存屏障之前的位置。lock的作用是使得本cpu的cache写入了内存，该写入动作也会引起别的cpu或者别的内核无效化其cache。所以通过这一空操作，可以让volatile变量的修改对其他cpu立即可见。
+在赋值之后(movq $0x20,0x18(%rsi))多执行了一句`lock addl $0x0,(%rsp)`操作，这个操作相当于一个内存屏障（memory barrier或者memory fence），重排序时，不能把后面的指令重排序到内存屏障之前的位置。`lock addl $0x0,(%rsp)`的作用是使得本cpu的cache写入了内存，该写入动作也会引起别的cpu或者别的内核无效化其cache。所以通过这一空操作，可以让volatile变量的修改对其他cpu立即可见。
 
 todo看懂上边汇编
 从AMD Opteron处理器开始，x86架构扩展32位寄存器到64位寄存器。其中R前缀代表的是64位的寄存器（RAX,RBX,RCX,RDX,RSI,RDI,RBP,RSP,RFLAGS,RIP）,同时引入了八个通用寄存器(R8-R15)。

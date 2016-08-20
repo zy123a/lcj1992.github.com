@@ -35,6 +35,7 @@
   <li><a href="#volatile">volatile</a></li>
   <li><a href="#volatile_static_thread_local">volatile_static_threadLocal</a></li>
   <li><a href="#ThreadExecutor">ThreadExecutor</a></li>
+  <li><a href="#lock">lock、tryLock、lockInterruptibly</a></li>
 </ul>
 
 <h3 id="thread">thread</h3>
@@ -190,13 +191,12 @@
 
 <p><img src="/images/java/executor.jpg" alt="处理流程" /></p>
 
-<p>1.当coreSize未满时，当有新任务submit时，即使有空闲线程，也会新起线程。如果调用了线程池的prestartAllcoreThreads方法，线程池会提前创建并启动所有基本线程。</p>
-
-<p>2.当coreSize满了，会添加到队列中</p>
-
-<p>3.当队列也满了，但maxSize未满，会新起线程</p>
-
-<p>4.超过maxSize，按照策略执行。</p>
+<ol>
+  <li>当coreSize未满时，当有新任务submit时，即使有空闲线程，也会新起线程。如果调用了线程池的prestartAllcoreThreads方法，线程池会提前创建并启动所有基本线程。</li>
+  <li>当coreSize满了，会添加到队列中</li>
+  <li>当队列也满了，但maxSize未满，会新起线程</li>
+  <li>超过maxSize，按照策略执行。</li>
+</ol>
 
 <h4 id="section-2">各线程池</h4>
 
@@ -210,6 +210,31 @@
 大量短时异步任务建议使用。</Runnable></li>
   <li>Executors.newSingleThreadScheduledExecutor()</li>
 </ul>
+
+<h3 id="lock">lock、tryLock、lockInterruptibly</h3>
+
+<p>Lock接口，详见<a href="https://github.com/lcj1992/learn/blob/master/java/basic/src/test/java/concurrent/lock/LockTest.java">测试代码</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ReentrantLock lock = new ReentrantLock();
+</code></pre>
+</div>
+
+<ol>
+  <li>lock.lock()
+    <ol>
+      <li>不响应中断，即显示的调用thread.interrupt()，也不会中断lock.lock()加锁的进行</li>
+      <li>阻塞线程，直到拿到锁。</li>
+    </ol>
+  </li>
+  <li>lock.tryLock() 拿到锁则返回true，否则返回false。不阻塞线程</li>
+  <li>lock.tryLock(x, TimeUnit.SECONDS)  x秒内如果拿到锁，则返回true，否则返回false。x秒内阻塞线程</li>
+  <li>lock.lockInterruptibly()
+    <ol>
+      <li>跟lock.lock()不同的是，它会响应中断，显示的调用thread.interrupt(),会中断lock.lockInterruptibly()加锁的进行，并抛出InterruptedException。</li>
+      <li>阻塞线程，直到拿到锁</li>
+    </ol>
+  </li>
+</ol>
 
 <p>参考：</p>
 

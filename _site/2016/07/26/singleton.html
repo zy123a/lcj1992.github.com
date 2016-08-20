@@ -86,9 +86,11 @@
 
 <p>ps：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>instance = new DoubleCheckVersion(); 这句并不是原子的操作， 事实上在jvm层面大概做了三件事：
+<div class="highlighter-rouge"><pre class="highlight"><code>instance = new DoubleCheckVersion();
 </code></pre>
 </div>
+
+<p>这句并不是原子的操作， 事实上在jvm层面大概做了三件事：</p>
 
 <ol>
   <li>给instance分配内存</li>
@@ -131,6 +133,10 @@
 <p>[深入浅出单实例Singleton设计模式]<a href="http://coolshell.cn/articles/265.html">http://coolshell.cn/articles/265.html</a></p>
 
 <p>[wikipedia]<a href="https://en.wikipedia.org/wiki/Singleton_pattern">https://en.wikipedia.org/wiki/Singleton_pattern</a></p>
+
+<p>[单例模式的八种写法比较]<a href="http://tianweili.github.io/blog/2015/03/02/singleton-pattern/">http://tianweili.github.io/blog/2015/03/02/singleton-pattern/</a></p>
+
+<p>[如何正确地写出单例模式]<a href="http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/">http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/</a></p>
 
         <ul class="prev_next">
             
