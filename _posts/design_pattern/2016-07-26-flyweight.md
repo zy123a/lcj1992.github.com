@@ -22,3 +22,6 @@ tags: flyweight
             return flavours.size();
         }
     }
+
+
+[wikipedia](https://en.wikipedia.org/wiki/Flyweight_pattern) 

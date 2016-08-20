@@ -10,3 +10,5 @@ tags: composite
 组合类和单一的类，继承自统一接口，组合类持有单一类的list
 
 ![类图](/images/design_pattern/composite.png)
+
+ [wikipedia](https://en.wikipedia.org/wiki/Composite_pattern) 

@@ -39,7 +39,7 @@
       <li><a href="#comparator">Comparator</a></li>
     </ul>
   </li>
-  <li><a href="#except">处理之外还有</a>
+  <li><a href="#except">除此之外还有</a>
     <ul>
       <li><a href="#optional">Optional</a></li>
       <li><a href="#stream">Stream</a></li>
@@ -293,7 +293,7 @@ comparator.reversed().compare(p1, p2);
 </code></pre>
 </div>
 
-<h3 id="except">处理之外还有</h3>
+<h3 id="except">除此之外还有</h3>
 
 <h4 id="optional">Optional</h4>
 
@@ -342,7 +342,7 @@ boolean noneStartWithZ = stringCollection.stream().noneMatch((s) -&gt; s.startsW
 long startWithB = stringCollection.stream().filter((s) -&gt; s.startsWith("b")).count();
 
 // reduce
-Optional&lt;String&gt; reduced = stringCollection.stream().sorted(). reduce((s1, s2) -&gt; s1 + "#" + s2);
+Optional&lt;String&gt; reduced = stringCollection.stream().sorted().reduce((s1, s2) -&gt; s1 + "#" + s2);
 reduced.ifPresent(System.out::println);
 </code></pre>
 </div>

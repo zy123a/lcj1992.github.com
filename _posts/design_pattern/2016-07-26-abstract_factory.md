@@ -24,3 +24,7 @@ GUIFactory、WinFactory、Label、WinLabel、Button、WinButton
 ![类图](/images/design_pattern/abstract_factory.png)
 
 [代码举例](https://github.com/lcj1992/learn/tree/master/java/designPattern/src/main/java/creational/abstractFactory)
+
+参考
+
+[wikipedia]<https://en.wikipedia.org/wiki/Abstract_factory_pattern>

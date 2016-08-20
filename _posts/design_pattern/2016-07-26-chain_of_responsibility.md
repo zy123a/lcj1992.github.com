@@ -24,3 +24,7 @@ tags: chain_of_responsibility
     }
 
 [代码示例](https://github.com/lcj1992/learn/blob/master/java/designPattern/src/main/java/behavioral/chainOfResponsibility/ChainOfResponseTest.java)
+
+参考
+
+[wikipedia]<https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern>

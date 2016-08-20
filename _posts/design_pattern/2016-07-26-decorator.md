@@ -8,3 +8,5 @@ tags: decorator
 ![装饰器](/images/design_pattern/decorator.png)
 
 层层增强
+
+[wikipedia](https://en.wikipedia.org/wiki/Decorator_pattern)
