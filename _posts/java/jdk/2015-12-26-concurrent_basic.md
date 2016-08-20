@@ -157,6 +157,12 @@ Lock接口，详见[测试代码](https://github.com/lcj1992/learn/blob/master/j
     1.  跟lock.lock()不同的是，它会响应中断，显示的调用thread.interrupt(),会中断lock.lockInterruptibly()加锁的进行，并抛出InterruptedException。
     2.  阻塞线程，直到拿到锁
 
+### Callable vs Runnable {#callable_runnable}
+
+1.  Callable可以返回值或者抛出异常，Runnable不能
+2.  Callable接口是call，Runnable接口是run。
+3.  Callable可以被ExecutorService#invokeXXX，但是Runnable不能；两者都可以被ExecutorService#submit调用。
+
 
 参考：
 

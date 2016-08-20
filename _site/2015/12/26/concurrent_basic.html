@@ -236,6 +236,14 @@
   </li>
 </ol>
 
+<h3 id="callable_runnable">Callable vs Runnable</h3>
+
+<ol>
+  <li>Callable可以返回值或者抛出异常，Runnable不能</li>
+  <li>Callable接口是call，Runnable接口是run。</li>
+  <li>Callable可以被ExecutorService#invokeXXX，但是Runnable不能；两者都可以被ExecutorService#submit调用。</li>
+</ol>
+
 <p>参考：</p>
 
 <p>[1]<a href="http://www.infoq.com/cn/articles/java-threadPool">http://www.infoq.com/cn/articles/java-threadPool</a></p>
