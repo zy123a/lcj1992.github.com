@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
     <link rel="stylesheet" href="/css/codeboy.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/donate.css" type="text/css"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
@@ -156,6 +157,8 @@
             </li>
             
         </ul>
+
+        <!-- 多说评论 -->
         <div class="ds-share flat" data-thread-key="/2016/07/16/transaction" data-title="事务隔离级"
              data-url="http://lcj1992.github.io/2016/07/16/transaction">
             <div class="ds-share-inline">
@@ -169,6 +172,22 @@
                 <div class="ds-share-icons-more">
                 </div>
             </div>
+        </div>
+        <!-- 打赏 -->
+        <div class="post-donate">
+            <div id="donate_board" class="donate_bar center hidden">
+                <a id="btn_donate" href="javascript:;" title="打赏" class="btn_donate"></a>
+                <div class="donate_txt"> ↑<br>此文有用? 求鼓励!<br></div>
+            </div>
+            <div id="donate_guide" class="donate_bar center">
+                <a href="/images/donate.jpg" title="此文有用? 求鼓励!" class="fancybox" rel="gallery">
+                    <img src="/images/donate.jpg" title="微信打赏"></a>
+            </div>
+            <script type="text/javascript">document.getElementById('btn_donate').onclick = function(){
+                $('#donate_board').addClass('hidden');
+                $('#donate_guide').removeClass('hidden');
+            }
+            </script>
         </div>
         <div class="ds-thread" data-thread-key="/2016/07/16/transaction" data-title="事务隔离级"
              data-url="http://lcj1992.github.io/2016/07/16/transaction"></div>
@@ -443,4 +462,3 @@
 </div>
 </body>
 </html>
-

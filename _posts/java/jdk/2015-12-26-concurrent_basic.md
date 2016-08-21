@@ -12,7 +12,12 @@ tags: concurrent
 *   [volatile](#volatile)
 *   [volatile_static_threadLocal](#volatile_static_thread_local)
 *   [ThreadExecutor](#ThreadExecutor)
+    * [官方注释](#official)
+    * [处理流程](#handle_process)
+    * [各线程池](#thread_pools)
+    * [为什么要shutdown](#why_shutdown)
 *   [lock、tryLock、lockInterruptibly](#lock)
+*   [Callable_Runnable](#callable_runnable)
 
 ### thread
 
@@ -92,15 +97,13 @@ eg:
           }
       }
 
-
-
 [他人的讨论](http://stackoverflow.com/questions/2784009/why-should-java-threadlocal-variables-be-static)
 
 ![volatile_static](/images/java/volatile_static.png)
 
 ### ThreadExecutor {#ThreadExecutor}
 
-#### 官方注释
+#### 官方注释 {#official}
 
         @param corePoolSize the number of threads to keep in the pool, even
         if they are idle, unless{@code allowCoreThreadTimeOut}is set
@@ -122,7 +125,7 @@ eg:
         executed. This queue will hold only the {@code Runnable} tasks submitted by the
         {@code execute} method.
 
-#### 处理流程
+#### 处理流程 {#handle_process}
 
 ![处理流程](/images/java/executor.jpg)
 
@@ -131,7 +134,7 @@ eg:
 3.  当队列也满了，但maxSize未满，会新起线程
 4.  超过maxSize，按照策略执行。
 
-#### 各线程池
+#### 各线程池 {#thread_pools}
 
 *   Executors.newFixedThreadPool(size)
 *   ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
@@ -141,6 +144,29 @@ eg:
 线程池数量无界，SynchronousQueue一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue。
 大量短时异步任务建议使用。
 *   Executors.newSingleThreadScheduledExecutor()
+
+#### 为什么要shutdown {#why_shutdown}
+
+试想一个daemon的线程池，其内部线程中又起了线程，在执行完task之后不shutdown。因为父线程持有子线程池的引用，并不会被gc掉，造成内存泄漏。
+eg：
+
+    // executor使用的线程池,使用完毕时一定要释放。
+    // 验证:
+    // 主线程起一个scheduled的线程池,每隔1s触发一次,在子线程中也new一个线程池,提交任务之后
+    // 使用jvisualvm观察shutdown和不shutdown线程池数量的变化
+    @Test
+    public void whyShutDown() throws InterruptedException {
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
+        AtomicLong atomicLong = new AtomicLong();
+        executorService.scheduleAtFixedRate(() -> {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(() -> System.out.println(atomicLong.getAndIncrement()));
+            // shutdown ？or not shutdown ？
+            executor.shutdown();
+        }, 1, 1, TimeUnit.SECONDS);
+
+        Thread.sleep(100000);
+    }
 
 ### lock、tryLock、lockInterruptibly {#lock}
 

@@ -21,7 +21,7 @@
     <div id="main">
         <h2> {{ page.title }} </h2>
         {{ content }}
-
+        <!-- 多说评论 -->
         <div class="ds-share flat" data-thread-key="{{page.id}}" data-title="{{page.title}}"
              data-url="http://lcj1992.github.io{{page.url}}">
             <div class="ds-share-inline">
@@ -52,6 +52,7 @@
                 || document.getElementsByTagName('body')[0]).appendChild(ds);
             })();
         </script>
+
     </div>
 
     <!-- jQuery -->
@@ -311,4 +312,3 @@
 </div>
 </body>
 </html>
-

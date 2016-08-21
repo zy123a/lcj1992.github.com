@@ -5,8 +5,8 @@
         <description>foolchild的技术博客</description>
         <link>http://foolchild.cn/</link>
         <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>Sat, 06 Aug 2016 19:16:23 +0800</pubDate>
-        <lastBuildDate>Sat, 06 Aug 2016 19:16:23 +0800</lastBuildDate>
+        <pubDate>Sun, 21 Aug 2016 17:24:02 +0800</pubDate>
+        <lastBuildDate>Sun, 21 Aug 2016 17:24:02 +0800</lastBuildDate>
         <generator>Jekyll v3.1.6</generator>
         
         <item>
@@ -2387,10 +2387,26 @@
         
         <item>
             <title>java8</title>
-            <description>java8新特性</description>
+            <description></description>
             <pubDate>Wed, 20 May 2015 00:00:00 +0800</pubDate>
             <link>http://foolchild.cn/2015/05/20/java8</link>
             <guid isPermaLink="true">http://foolchild.cn/2015/05/20/java8</guid>
+            
+            <category>java8</category>
+            
+            <category>Predicate</category>
+            
+            <category>Function</category>
+            
+            <category>Supplier</category>
+            
+            <category>Consumer</category>
+            
+            <category>Comparator</category>
+            
+            <category>Optional</category>
+            
+            <category>Stream</category>
             
             
             <category>java</category>
