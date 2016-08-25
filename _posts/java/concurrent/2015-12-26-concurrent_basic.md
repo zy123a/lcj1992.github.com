@@ -6,9 +6,10 @@ tags: concurrent
 ---
 
 *   [thread](#thread)
+*   [atomic](#atomic)
 *   [ThreadLocal](#thread_local)
 *   [CopyOnWriteArrayList](#copy_on_write_array_list)
-*   [ReadWriteLock](#read_write_lock)
+*   [ReentrantLock](#ReentrantLock)
 *   [volatile](#volatile)
 *   [volatile_static_threadLocal](#volatile_static_thread_local)
 *   [ThreadExecutor](#ThreadExecutor)
@@ -18,6 +19,16 @@ tags: concurrent
     * [为什么要shutdown](#why_shutdown)
 *   [lock、tryLock、lockInterruptibly](#lock)
 *   [Callable_Runnable](#callable_runnable)
+
+|操作|x86对应指令|
+|-|-|
+|测试并设置(Test-and-Set)|[BTS](http://www.felixcloutier.com/x86/BTS.html)|
+|获取并增加(Fetch-and-Increment)|[INC](http://www.felixcloutier.com/x86/INC.html)|
+|交换(Swap)|[BSWAP](http://www.felixcloutier.com/x86/BSWAP.html)|
+|比较并交换(Compare-and-Swap,下文简称CAS)|[CMPXCHG](http://www.felixcloutier.com/x86/CMPXCHG.html)|
+|加载链接/条件存储(Load-linked/Store-Conditional,下问称LL/SC)|这个x86系列的处理器好像木有，参见[这里](https://en.wikipedia.org/wiki/Load-link/store-conditional#Implementations)|
+
+[x86的指令集](http://www.felixcloutier.com/x86/)
 
 ### thread
 
@@ -36,6 +47,9 @@ tags: concurrent
 1.  run()和start():  start方法会新起一个线程，而run方法只是普通的方法调用，还是在原线程。
 2.  join()/join(long millis) 等待当前线程die或者超时
 
+### atomic
+
+
 ### ThreadLocal {#thread_local}
 
 1.  相当于线程范围的局部变量，Map<Thread,object>。
@@ -45,7 +59,17 @@ tags: concurrent
 
 ### CopyOnWriteArrayList {#copy_on_write_array_list}
 
-### ReadWriteLock {#read_write_lock}
+### ReentrantLock {#ReentrantLock}
+
+ReetrantLock与synchronized
+
+同：
+1.   线程重入特性
+
+异：
+1.  ReetrantLock是API层面的互斥锁，synchronized是原生语言层面的互斥锁
+2.  ReetrantLock 等待可中断
+3.  ReetrantLock 可实现公平锁
 
 ReadWriteLock比ReentrantLock好在哪了,对于读读,ReadWriteLock是不加锁的,ReentrantLock还是会加锁滴.
 
@@ -199,3 +223,7 @@ Lock接口，详见[测试代码](https://github.com/lcj1992/learn/blob/master/j
 [3]<http://ifeve.com/java-concurrency-thread-directory/>
 
 [4]<http://blog.csdn.net/column/details/concurrency.html>
+
+[java并发-ReentrantLock的lock和lockInterruptibly的区别]<http://blog.csdn.net/wojiushiwo945you/article/details/42387091>
+
+[atomic_32.h]<http://lxr.linux.no/linux+v2.6.26.6/include/asm-x86/atomic_32.h>

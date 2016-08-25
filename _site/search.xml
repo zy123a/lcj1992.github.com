@@ -2,6 +2,13 @@
 <articles>
     
     <article>
+        <title>ReentrantLock源码解析</title>
+        <url>http://foolchild.cn/2016/08/22/ReentrantLock</url>
+        <tag>aqsReentrantLockCLHAbstractQueuedSynchronizer</tag>
+        <date>2016-08-22</date>
+    </article>
+    
+    <article>
         <title>如何得到jvm的本地指令</title>
         <url>http://foolchild.cn/2016/08/06/jvm_compile</url>
         <tag>assemblyjitjvm</tag>
