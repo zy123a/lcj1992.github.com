@@ -31,7 +31,7 @@ tags: AQS ReentrantLock CLH AbstractQueuedSynchronizer
 
 ## 硬件层面支持的原子操作  {#cpu_atomic}
 
-一些看似非原子的硬件层级的原子操作
+一些看似非原子的原子指令
 
 |操作|x86对应指令|
 |-|-|
