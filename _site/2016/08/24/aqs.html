@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> ReentrantLock源码解析  </title>
+    <title> AbstractQueuedSynchronizer源码分析  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,337 +27,78 @@
 </div>
 
     <div id="main">
-        <h2> ReentrantLock源码解析 </h2>
+        <h2> AbstractQueuedSynchronizer源码分析 </h2>
         <ul>
   <li><a href="#overview">概述</a></li>
-  <li><a href="#nonFairLock">非公平锁</a>
-    <ul>
-      <li><a href="#ReentrantLock_lock">加锁过程</a>
-        <ul>
-          <li><a href="#NonfairLock_lock">NonfairLock#lock</a></li>
-          <li><a href="#AbstractQueuedSynchronizer_acquire">AbstractQueuedSynchronizer#acquire</a></li>
-          <li><a href="#Sync_nonfairTryAcquire">Sync#nonfairTryAcquire</a></li>
-          <li><a href="#AbstractQueuedSynchronizer_addWaiter">AbstractQueuedSynchronizer#addWaiter</a></li>
-          <li><a href="#AbstractQueuedSynchronizer_enq">AbstractQueuedSynchronizer#enq</a></li>
-          <li><a href="#AbstractQueuedSynchronizer_acquireQueued">AbstractQueuedSynchronizer#acquireQueued</a></li>
-        </ul>
-      </li>
-      <li><a href="#ReentrantLock_unlock">解锁过程</a>
-        <ul>
-          <li><a href="#Sync_tryRelease">Sync#tryRelease</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#FairLock">公平锁</a>
-    <ul>
-      <li><a href="#ReentrantLock_lock_fair">加锁过程</a>
-        <ul>
-          <li><a href="#FairLock_lock">FairLock#lock</a></li>
-          <li><a href="#FairSync_tryAcquire">FairSync#tryAcquire</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  <li><a href="#cpu_atomic">硬件层面支持的原子操作</a></li>
+  <li><a href="#ref">参考</a></li>
 </ul>
 
-<h2 id="overview">概述</h2>
+<h2 id="overiew">概述</h2>
 
-<p>ReentrantLock的结构体如下</p>
-
-<p><img src="/images/java/reentrantLock.png" alt="reentrantLock" /></p>
+<p>AbstractQueuedSynchronizer是整个juc中locks类的核心了，包含有一个声明为volatile的变量state保证了内存可见性，通过原子的CAS操作来保证原子性，使用CLH队列来存储waiters。</p>
 
 <ol>
-  <li>内部类<code class="highlighter-rouge">Sync</code>继承自<code class="highlighter-rouge">AbstractQueuedSynchronizer</code> 参见<a href="/2016/08/24/aqs">aqs</a></li>
-  <li>Sync两个子类 <code class="highlighter-rouge">NonfairSync</code>实现非公平锁、<code class="highlighter-rouge">FairSync</code>实现公平锁</li>
-  <li>使用AQS的独占API</li>
+  <li>AQS继承自继承自<code class="highlighter-rouge">AbstractOwnableSynchronizer</code>（juc locks包中的根本了），含有一个属性<code class="highlighter-rouge">exclusiveOwnerThread</code>，同步器的属主线程。</li>
+  <li>AQS内部类<code class="highlighter-rouge">Node</code>, AQS内部实现一个FIFO队列，Node是队列的节点。</li>
+  <li>AQS内部类<code class="highlighter-rouge">ConditionObject</code>继承自<code class="highlighter-rouge">Condition</code></li>
+  <li><code class="highlighter-rouge">state</code> 同步器的状态，0为free，&gt;0 重入数。</li>
+  <li>AQS有独占功能和共享功能，它的所有子类中，要么实现并使用它独占功能的API（ReentrantLock中的Sync），要么共享功能，而不会同时使用两套API。</li>
+  <li>AQS提供模板方法，其子类实现
+    <ol>
+      <li>独占 <code class="highlighter-rouge">tryAcquire</code>、<code class="highlighter-rouge">tryRelease</code>；</li>
+      <li>共享 <code class="highlighter-rouge">tryAcquireShared</code>、<code class="highlighter-rouge">tryReleaseShared</code></li>
+    </ol>
+  </li>
+  <li>支持非阻塞同步尝试，如<code class="highlighter-rouge">tryAcquire</code></li>
+  <li>支持超时时间，应用可以放弃等待<code class="highlighter-rouge">tryAcquireNanos</code></li>
+  <li>可取消<code class="highlighter-rouge">acquireInterruptibly</code></li>
+  <li>Node的waitStatus
+    <ol>
+      <li>CANCELLED ： waitStatus value to indicate thread has cancelled</li>
+      <li>SIGNAL ： waitStatus value to indicate successor’s thread needs unparking</li>
+      <li>CONDITION ： waitStatus value to indicate thread is waiting on condition</li>
+      <li>PROPAGATE ：waitStatus value to indicate the next acquireShared should unconditionally propagate</li>
+    </ol>
+  </li>
 </ol>
 
-<h2 id="nonFairLock">非公平锁</h2>
+<h2 id="cpu_atomic">硬件层面支持的原子操作</h2>
 
-<h3 id="ReentrantLock_lock">加锁过程</h3>
+<p>一些看似非原子的原子指令</p>
 
-<h4 id="NonfairLock_lock">NonfairLock#lock</h4>
+<table>
+  <thead>
+    <tr>
+      <th>操作</th>
+      <th>x86对应指令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>测试并设置(Test-and-Set)</td>
+      <td><a href="http://www.felixcloutier.com/x86/BTS.html">BTS</a></td>
+    </tr>
+    <tr>
+      <td>获取并增加(Fetch-and-Increment)</td>
+      <td><a href="http://www.felixcloutier.com/x86/INC.html">INC</a></td>
+    </tr>
+    <tr>
+      <td>交换(Swap)</td>
+      <td><a href="http://www.felixcloutier.com/x86/BSWAP.html">BSWAP</a></td>
+    </tr>
+    <tr>
+      <td>比较并交换(Compare-and-Swap,下文简称CAS)</td>
+      <td><a href="http://www.felixcloutier.com/x86/CMPXCHG.html">CMPXCHG</a></td>
+    </tr>
+    <tr>
+      <td>加载链接/条件存储(Load-linked/Store-Conditional,下问称LL/SC)</td>
+      <td>这个x86系列的处理器好像木有，参见<a href="https://en.wikipedia.org/wiki/Load-link/store-conditional#Implementations">这里</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>ReentrantLock#lock() -&gt; NonfairLock#lock()</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code> // 执行加锁，立即闯入，如果失败的话执行正常的acquire
-final void lock() {
-    // CAS操作保证操作的原子性
-    // state声明为 volatile保证内存可见性,state=0表明可以争用。
-    if (compareAndSetState(0, 1))
-        // 如果state 0-&gt;1设置成功,设置当前线程为同步器的属主线程
-        setExclusiveOwnerThread(Thread.currentThread());
-    else
-        acquire(1);
-}
-</code></pre>
-</div>
-
-<p>然后acquire(1)</p>
-
-<h4 id="AbstractQueuedSynchronizer_acquire">AbstractQueuedSynchronizer#acquire</h4>
-
-<p>AbstractQueuedSynchronizer#acquire(arg)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>public final void acquire(int arg) {
-    // 以独占模式acquire失败
-    if (!tryAcquire(arg) &amp;&amp;
-    // 包装一个当前线程的Node，入队列，然后尝试去acquire
-        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
-        // 如果失败，中断当前线程
-        selfInterrupt();
-}
-</code></pre>
-</div>
-
-<h4 id="Sync_nonfairTryAcquire">Sync#nonfairTryAcquire</h4>
-
-<p>NonfairSync#tryAcquire(arg) -&gt; Sync#nonfairTryAcquire(arg)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>final boolean nonfairTryAcquire(int acquires) {
-    final Thread current = Thread.currentThread();
-    int c = getState();
-    // 获取state标志位，如果为0，没有线程持有锁
-    if (c == 0) {
-        // CAS尝试去获取锁。
-        if (compareAndSetState(0, acquires)) {
-            // 如果获取成功，设置属主线程为当前线程。
-            setExclusiveOwnerThread(current);
-            return true;
-        }
-    }
-    // 如果不为0，判断当前线程是否为属主线程，这里实现可重入
-    else if (current == getExclusiveOwnerThread()) {
-        int nextc = c + acquires;
-        if (nextc &lt; 0) // overflow
-            throw new Error("Maximum lock count exceeded");
-        // 设置state的值，state的值表明当前线程的重入数。
-        setState(nextc);
-        return true;
-    }
-    return false;
-}
-</code></pre>
-</div>
-
-<p>如果tryAcquire失败，把当前线程包装为一个Node入队列，并再次尝试acquire</p>
-
-<p>包装当前线程为一个node</p>
-
-<h4 id="AbstractQueuedSynchronizer_addWaiter">AbstractQueuedSynchronizer#addWaiter</h4>
-
-<p>AbstractQueuedSynchronizer#addWaiter()</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private Node addWaiter(Node mode) {
-   Node node = new Node(Thread.currentThread(), mode);
-   // Try the fast path of enq; backup to full enq on failure
-   Node pred = tail;
-   // 如果队列不为空
-   if (pred != null) {
-       // node的先驱节点设置为tail
-       node.prev = pred;
-       // 设置当前节点为tail
-       if (compareAndSetTail(pred, node)) {
-           // 原有的tail的后继节点指向node
-           pred.next = node;
-           return node;
-       }
-   }
-   // 如果pred为null或者设置当前节点为tail失败，表明有别的线程并发入队列。执行enq方法，自旋方式入队列。
-   enq(node);
-   return node;    }
-</code></pre>
-</div>
-
-<h4 id="AbstractQueuedSynchronizer_enq">AbstractQueuedSynchronizer#enq</h4>
-
-<p>AbstractQueuedSynchronizer#enq()</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private Node enq(final Node node) {
-    // 自旋方式入队列
-    for (;;) {
-        Node t = tail;
-        // 如果队列为空，初始化head和tail节点
-        if (t == null) { // Must initialize
-            if (compareAndSetHead(new Node()))
-                tail = head;
-        } else {
-            node.prev = t;
-            if (compareAndSetTail(t, node)) {
-                t.next = node;
-                return t;
-            }
-        }
-    }
-}
-</code></pre>
-</div>
-
-<p>入队列后，然后尝试从队列中acquire</p>
-
-<h4 id="AbstractQueuedSynchronizer_acquireQueued">AbstractQueuedSynchronizer#acquireQueued</h4>
-
-<p>AbstractQueuedSynchronizer#acquireQueued()</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>final boolean acquireQueued(final Node node, int arg) {
-    boolean failed = true;
-    try {
-        boolean interrupted = false;
-        for (;;) {
-            final Node p = node.predecessor();
-            // 如果先驱节点为head，尝试acquire
-            if (p == head &amp;&amp; tryAcquire(arg)) {
-                // acquire成功，将head节点置为node
-                setHead(node);
-                p.next = null; // help GC
-                failed = false;
-                return interrupted;
-            }
-            // 如果先驱节点不是head，或者是head，但是尝试acquire失败
-            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
-                parkAndCheckInterrupt())
-                interrupted = true;
-        }
-    } finally {
-        if (failed)
-            cancelAcquire(node);
-    }
-}
-</code></pre>
-</div>
-
-<p>AbstractQueuedSynchronizer#setHead()</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private void setHead(Node node) {
-    head = node;
-    // 头节点不绑定线程
-    node.thread = null;
-    node.prev = null;
-}
-</code></pre>
-</div>
-
-<h4 id="AbstractQueuedSynchronizer_shouldParkAfterFailedAcquire">AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire</h4>
-
-<p>AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire(Node pred,Node node)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code> /** waitStatus value to indicate thread has cancelled */
- // 当前线程已经被取消
- static final int CANCELLED =  1;
- /** waitStatus value to indicate successor's thread needs unparking */
- // 后继节点线程等待被触发
- static final int SIGNAL    = -1;
- /** waitStatus value to indicate thread is waiting on condition */
- // 线程等待条件
- static final int CONDITION = -2;
- /**
-  * waitStatus value to indicate the next acquireShared should
-  * unconditionally propagate
-  */
- // 节点状态需要向后传播
- static final int PROPAGATE = -3;
-
-private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
-    int ws = pred.waitStatus;
-    if (ws == Node.SIGNAL)
-        /*
-         * This node has already set status asking a release
-         * to signal it, so it can safely park.
-         */
-        // 只有当前节点的前一个节点为SIGNAL时，当前节点才能被挂起
-        return true;
-    if (ws &gt; 0) {
-        /*
-         * Predecessor was cancelled. Skip over predecessors and
-         * indicate retry.
-         */
-        do {
-            node.prev = pred = pred.prev;
-        } while (pred.waitStatus &gt; 0);
-        pred.next = node;
-    } else {
-        /*
-         * waitStatus must be 0 or PROPAGATE.  Indicate that we
-         * need a signal, but don't park yet.  Caller will need to
-         * retry to make sure it cannot acquire before parking.
-         */
-        compareAndSetWaitStatus(pred, ws, Node.SIGNAL);
-    }
-    return false;
-}
-</code></pre>
-</div>
-
-<h3 id="ReentrantLock_unlock">解锁过程</h3>
-
-<p>解锁过程较简单点</p>
-
-<h4 id="Sync_tryRelease">Sync#tryRelease</h4>
-
-<p>ReentrantLock#unlock() -&gt; AbstractQueuedSynchronizer#release() -&gt; Sync#tryRelease(releases)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>protected final boolean tryRelease(int releases) {
-    int c = getState() - releases;
-    if (Thread.currentThread() != getExclusiveOwnerThread())
-        throw new IllegalMonitorStateException();
-    boolean free = false;
-    // 可重入，只有减为0时，才是free，别的线程才能抢得到。
-    if (c == 0) {
-        free = true;
-        // 设置属主线程为null
-        setExclusiveOwnerThread(null);
-    }
-    setState(c);
-    return free;
-}
-</code></pre>
-</div>
-
-<h2 id="FairLock">公平锁</h2>
-
-<h3 id="ReentrantLock_lock_fair">加锁过程</h3>
-
-<p>整体流程和非公平加锁是一样的。</p>
-
-<h4 id="FairLock_lock">FairLock#lock</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>final void lock() {
-    // if (compareAndSetState(0, 1))
-    //    setExclusiveOwnerThread(Thread.currentThread());
-    // else
-    // 必须严格按照队列顺序来
-    acquire(1);
-}
-</code></pre>
-</div>
-
-<h4 id="FairSync_tryAcquire">FairSync#tryAcquire</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>protected final boolean tryAcquire(int acquires) {
-    final Thread current = Thread.currentThread();
-    int c = getState();
-    if (c == 0) {
-        // 比非公平加锁，多了这个判定条件 hasQueuedPredecessors，必须没有前驱节点才让你acquire，否则的话，好好等着，轮到你再来。
-        if (!hasQueuedPredecessors() &amp;&amp;
-            compareAndSetState(0, acquires)) {
-            setExclusiveOwnerThread(current);
-            return true;
-        }
-    }
-    else if (current == getExclusiveOwnerThread()) {
-        int nextc = c + acquires;
-        if (nextc &lt; 0)
-            throw new Error("Maximum lock count exceeded");
-        setState(nextc);
-        return true;
-    }
-    return false;
-}
-</code></pre>
-</div>
-
-<p>加锁过程和非公平锁是一样一样的</p>
+<p>详情请垂询<a href="http://www.felixcloutier.com/x86/">x86的指令集</a></p>
 
 <h2 id="ref">参考</h2>
 
@@ -373,20 +114,15 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
             
             <li>
                 <span>上一篇</span>
-                <a href="/2016/08/06/jvm_compile">如何得到jvm的本地指令</a>
+                <a href="/2016/08/22/ReentrantLock">ReentrantLock源码解析</a>
             </li>
             
-            
-            <li>
-                <span>下一篇</span>
-                <a href="/2016/08/24/aqs">AbstractQueuedSynchronizer源码分析</a>
-            </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2016/08/22/ReentrantLock" data-title="ReentrantLock源码解析"
-             data-url="http://lcj1992.github.io/2016/08/22/ReentrantLock">
+        <div class="ds-share flat" data-thread-key="/2016/08/24/aqs" data-title="AbstractQueuedSynchronizer源码分析"
+             data-url="http://lcj1992.github.io/2016/08/24/aqs">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -415,8 +151,8 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2016/08/22/ReentrantLock" data-title="ReentrantLock源码解析"
-             data-url="http://lcj1992.github.io/2016/08/22/ReentrantLock"></div>
+        <div class="ds-thread" data-thread-key="/2016/08/24/aqs" data-title="AbstractQueuedSynchronizer源码分析"
+             data-url="http://lcj1992.github.io/2016/08/24/aqs"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -579,11 +315,11 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2016/08/06/jvm_compile";
+                    window.location.href = "/2016/08/22/ReentrantLock";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2016/08/24/aqs";
+                    window.location.href = "";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

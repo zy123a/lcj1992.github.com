@@ -5,8 +5,6 @@ categories: java
 tags: AQS ReentrantLock CLH AbstractQueuedSynchronizer
 ---
 * [概述](#overview)
-* [硬件层面支持的原子操作](#cpu_atomic)
-* [uml](#uml)
 * [非公平锁](#nonFairLock)
     * [加锁过程](#ReentrantLock_lock)
         * [NonfairLock#lock](#NonfairLock_lock)
@@ -22,46 +20,17 @@ tags: AQS ReentrantLock CLH AbstractQueuedSynchronizer
         * [FairLock#lock](#FairLock_lock)
         * [FairSync#tryAcquire](#FairSync_tryAcquire)
 
-
 ## 概述  {#overview}
-
-1.  通过代理类FairSync(公平锁)和NonfairSync(非公平锁)来实现的，
-2.  声明为volatile，保证state的内存可见性，使用cas操作保证state操作的原子性. state为0表明没有线程持有锁，大于0，别的线程阻塞，属主线程可以继续acquire（可重入）
-3.  使用CLH队列来存储waiters.
-
-## 硬件层面支持的原子操作  {#cpu_atomic}
-
-一些看似非原子的原子指令
-
-|操作|x86对应指令|
-|-|-|
-|测试并设置(Test-and-Set)|[BTS](http://www.felixcloutier.com/x86/BTS.html)|
-|获取并增加(Fetch-and-Increment)|[INC](http://www.felixcloutier.com/x86/INC.html)|
-|交换(Swap)|[BSWAP](http://www.felixcloutier.com/x86/BSWAP.html)|
-|比较并交换(Compare-and-Swap,下文简称CAS)|[CMPXCHG](http://www.felixcloutier.com/x86/CMPXCHG.html)|
-|加载链接/条件存储(Load-linked/Store-Conditional,下问称LL/SC)|这个x86系列的处理器好像木有，参见[这里](https://en.wikipedia.org/wiki/Load-link/store-conditional#Implementations)|
-
-详情请垂询[x86的指令集](http://www.felixcloutier.com/x86/)
-
-## uml
 
 ReentrantLock的结构体如下
 
 ![reentrantLock](/images/java/reentrantLock.png)
 
-1.  内部类Sync继承自AbstractQueuedSynchronizer
-    1.  AQS继承自继承自AbstractOwnableSynchronizer（juc locks包中的根本了），含有一个属性`exclusiveOwnerThread`，同步器的属主线程。
-    2.  AQS内部类Node, AQS内部实现一个FIFO队列，Node是其中的节点。
-    3.  AQS内部类ConditionObject继承自Condition
-    4.  state 同步器的状态，0为free，>0 重入数。
-    5.  AQS有独占功能和共享功能，它的所有子类中，要么实现并使用它独占功能的API（ReentrantLock中的Sync），要么共享功能，而不会同时使用两套API。
-    6.  AQS提供模板方法，其子类实现1.独占 tryAcquire、tryRelease；2.共享 tryAcquireShared、tryReleaseShared
+1.  内部类`Sync`继承自`AbstractQueuedSynchronizer` 参见[aqs](/2016/08/24/aqs)
+2.  Sync两个子类 `NonfairSync`实现非公平锁、`FairSync`实现公平锁
 2.  使用AQS的独占API
-3.  Sync两个子类NonfairLock实现非公平锁、FairLock实现公平锁
 
 ## 非公平锁 {#nonFairLock}
-
-以非公平锁的加解锁过程为突破口分析ReentrantLock
 
 ### 加锁过程 {#ReentrantLock_lock}
 
@@ -71,7 +40,7 @@ ReentrantLock#lock() -> NonfairLock#lock()
 
      // 执行加锁，立即闯入，如果失败的话执行正常的acquire
     final void lock() {
-        // cas操作保证操作的原子性
+        // CAS操作保证操作的原子性
         // state声明为 volatile保证内存可见性,state=0表明可以争用。
         if (compareAndSetState(0, 1))
             // 如果state 0->1设置成功,设置当前线程为同步器的属主线程
@@ -104,7 +73,7 @@ NonfairSync#tryAcquire(arg) -> Sync#nonfairTryAcquire(arg)
         int c = getState();
         // 获取state标志位，如果为0，没有线程持有锁
         if (c == 0) {
-            // cas尝试去获取锁。
+            // CAS尝试去获取锁。
             if (compareAndSetState(0, acquires)) {
                 // 如果获取成功，设置属主线程为当前线程。
                 setExclusiveOwnerThread(current);
@@ -323,6 +292,8 @@ ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release() -> Sync#tryReleas
         }
         return false;
     }
+
+加锁过程和非公平锁是一样一样的。
 
 ## 参考 {#ref}
 

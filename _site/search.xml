@@ -2,9 +2,16 @@
 <articles>
     
     <article>
+        <title>AbstractQueuedSynchronizer源码分析</title>
+        <url>http://foolchild.cn/2016/08/24/aqs</url>
+        <tag>concurrentaqs</tag>
+        <date>2016-08-24</date>
+    </article>
+    
+    <article>
         <title>ReentrantLock源码解析</title>
         <url>http://foolchild.cn/2016/08/22/ReentrantLock</url>
-        <tag>aqsReentrantLockCLHAbstractQueuedSynchronizer</tag>
+        <tag>AQSReentrantLockCLHAbstractQueuedSynchronizer</tag>
         <date>2016-08-22</date>
     </article>
     

@@ -87,22 +87,23 @@ eager	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-26-single
 行为型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 行为型 {#behavior}$/;"	function	line:24
 结构型 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 结构型 {#structure}$/;"	function	line:40
 参考 {	/Users/lichuangjian/work/foolchild/_posts/design_pattern/2016-07-28-design_overview.md	/^### 参考 {#ref}$/;"	function	line:52
-概述  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 概述  {#overview}$/;"	function	line:26
-硬件层面支持的原子操作  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 硬件层面支持的原子操作  {#cpu_atomic}$/;"	function	line:32
-uml	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## uml$/;"	function	line:46
-非公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 非公平锁 {#nonFairLock}$/;"	function	line:62
-加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock}$/;"	function	line:66
-NonfairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### NonfairLock#lock {#NonfairLock_lock}$/;"	function	line:68
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquire {#AbstractQueuedSynchronizer_acquire}$/;"	function	line:85
-Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#nonfairTryAcquire {#Sync_nonfairTryAcquire}$/;"	function	line:98
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#addWaiter {#AbstractQueuedSynchronizer_addWaiter}$/;"	function	line:130
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#enq {#AbstractQueuedSynchronizer_enq}$/;"	function	line:154
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquireQueued {#AbstractQueuedSynchronizer_acquireQueued}$/;"	function	line:178
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire {#AbstractQueuedSynchronizer_shouldParkAfterFailedAcquire}$/;"	function	line:216
-解锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 解锁过程 {#ReentrantLock_unlock}$/;"	function	line:265
-Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#tryRelease {#Sync_tryRelease}$/;"	function	line:269
-公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 公平锁 {#FairLock}$/;"	function	line:288
-加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock_fair}$/;"	function	line:290
-FairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairLock#lock {#FairLock_lock}$/;"	function	line:294
-FairSync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairSync#tryAcquire {#FairSync_tryAcquire}$/;"	function	line:304
-参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 参考 {#ref}$/;"	function	line:327
+概述 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 概述 {#overiew}$/;"	function	line:12
+硬件层面支持的原子操作  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 硬件层面支持的原子操作  {#cpu_atomic}$/;"	function	line:33
+参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 参考 {#ref}$/;"	function	line:47
+概述  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 概述  {#overview}$/;"	function	line:23
+非公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 非公平锁 {#nonFairLock}$/;"	function	line:33
+加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock}$/;"	function	line:35
+NonfairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### NonfairLock#lock {#NonfairLock_lock}$/;"	function	line:37
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquire {#AbstractQueuedSynchronizer_acquire}$/;"	function	line:54
+Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#nonfairTryAcquire {#Sync_nonfairTryAcquire}$/;"	function	line:67
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#addWaiter {#AbstractQueuedSynchronizer_addWaiter}$/;"	function	line:99
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#enq {#AbstractQueuedSynchronizer_enq}$/;"	function	line:123
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquireQueued {#AbstractQueuedSynchronizer_acquireQueued}$/;"	function	line:147
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire {#AbstractQueuedSynchronizer_shouldParkAfterFailedAcquire}$/;"	function	line:185
+解锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 解锁过程 {#ReentrantLock_unlock}$/;"	function	line:234
+Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#tryRelease {#Sync_tryRelease}$/;"	function	line:238
+公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 公平锁 {#FairLock}$/;"	function	line:257
+加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock_fair}$/;"	function	line:259
+FairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairLock#lock {#FairLock_lock}$/;"	function	line:263
+FairSync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairSync#tryAcquire {#FairSync_tryAcquire}$/;"	function	line:273
+参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 参考 {#ref}$/;"	function	line:298
