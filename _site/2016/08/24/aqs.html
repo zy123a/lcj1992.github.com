@@ -40,7 +40,7 @@
 
 <ol>
   <li>AQS继承自继承自<code class="highlighter-rouge">AbstractOwnableSynchronizer</code>（juc locks包中的根本了），含有一个属性<code class="highlighter-rouge">exclusiveOwnerThread</code>，同步器的属主线程。</li>
-  <li>AQS内部类<code class="highlighter-rouge">Node</code>, AQS内部实现一个FIFO队列，Node是队列的节点。</li>
+  <li>AQS内部类<code class="highlighter-rouge">Node</code>, AQS内部实现两个FIFO队列（同步队列sync queue和条件队列condition queue），Node是队列的节点。</li>
   <li>AQS内部类<code class="highlighter-rouge">ConditionObject</code>继承自<code class="highlighter-rouge">Condition</code></li>
   <li><code class="highlighter-rouge">state</code> 同步器的状态，0为free，&gt;0 重入数。</li>
   <li>AQS有独占功能和共享功能，它的所有子类中，要么实现并使用它独占功能的API（ReentrantLock中的Sync），要么共享功能，而不会同时使用两套API。</li>
