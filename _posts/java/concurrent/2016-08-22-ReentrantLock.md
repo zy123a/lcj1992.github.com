@@ -42,6 +42,7 @@ ReentrantLock#lock() -> NonfairLock#lock()
     final void lock() {
         // CAS操作保证操作的原子性
         // state声明为 volatile保证内存可见性,state=0表明可以争用。
+        // 非公平的，刚进来就大家随便争，可以对比下公平锁的lock这里怎么搞的。
         if (compareAndSetState(0, 1))
             // 如果state 0->1设置成功,设置当前线程为同步器的属主线程
             setExclusiveOwnerThread(Thread.currentThread());

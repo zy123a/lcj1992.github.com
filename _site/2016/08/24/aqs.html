@@ -53,7 +53,7 @@
   <li>支持非阻塞同步尝试，如<code class="highlighter-rouge">tryAcquire</code></li>
   <li>支持超时时间，应用可以放弃等待<code class="highlighter-rouge">tryAcquireNanos</code></li>
   <li>可取消<code class="highlighter-rouge">acquireInterruptibly</code></li>
-  <li>Node的waitStatus
+  <li>Node的waitStatus（todo）
     <ol>
       <li>CANCELLED ： waitStatus value to indicate thread has cancelled</li>
       <li>SIGNAL ： waitStatus value to indicate successor’s thread needs unparking</li>
@@ -117,6 +117,11 @@
                 <a href="/2016/08/22/ReentrantLock">ReentrantLock源码解析</a>
             </li>
             
+            
+            <li>
+                <span>下一篇</span>
+                <a href="/2016/08/26/CountDownLatch">Countdownlatch</a>
+            </li>
             
         </ul>
 
@@ -319,7 +324,7 @@
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "";
+                    window.location.href = "/2016/08/26/CountDownLatch";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

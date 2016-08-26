@@ -12,7 +12,6 @@ tags: countDownLatch juc aqs
         this.sync = new Sync(count);
     }
 
-
     Sync(int count) {
         // 设置state为count
         setState(count);
@@ -54,7 +53,7 @@ tags: countDownLatch juc aqs
 
 ### AbstractQueuedSynchronizer#doReleaseShared {#aqs_doReleaseShared}
 
-如果tryReleaseShared返回true
+// 如果state不为0，并且cas进行state - 1后，state不为0，则执行doReleaseShared
 
     private void doReleaseShared() {
        for (;;) {
@@ -99,7 +98,69 @@ tags: countDownLatch juc aqs
                if (t.waitStatus <= 0)
                    s = t;
        }
-       然后unpark之。
+       // 然后unpark之。
        if (s != null)
            LockSupport.unpark(s.thread);
    }
+
+##  await
+
+### doAcquireSharedInterruptibly
+
+    private void doAcquireSharedInterruptibly(int arg)
+        throws InterruptedException {
+        final Node node = addWaiter(Node.SHARED);
+        boolean failed = true;
+        try {
+            for (;;) {
+                final Node p = node.predecessor();
+                if (p == head) {
+                    // 参照下doAcquireInterruptibly,这里是不一样滴。
+                    int r = tryAcquireShared(arg);
+                    if (r >= 0) {
+                        // 这里只需要state不为0
+                        // 参照下doAcquireInterruptibly,这里是不一样滴。
+                        setHeadAndPropagate(node, r);
+                        p.next = null; // help GC
+                        failed = false;
+                        return;
+                    }
+                }
+                if (shouldParkAfterFailedAcquire(p, node) &&
+                    parkAndCheckInterrupt())
+                    throw new InterruptedException();
+            }
+        } finally {
+            if (failed)
+                cancelAcquire(node);
+        }
+    }
+
+### setHeadAndPropagate
+
+    private void setHeadAndPropagate(Node node, int propagate) {
+        Node h = head; // Record old head for check below
+        setHead(node);
+        /*
+         * Try to signal next queued node if:
+         *   Propagation was indicated by caller,
+         *     or was recorded (as h.waitStatus either before
+         *     or after setHead) by a previous operation
+         *     (note: this uses sign-check of waitStatus because
+         *      PROPAGATE status may transition to SIGNAL.)
+         * and
+         *   The next node is waiting in shared mode,
+         *     or we don't know, because it appears null
+         *
+         * The conservatism in both of these checks may cause
+         * unnecessary wake-ups, but only when there are multiple
+         * racing acquires/releases, so most need signals now or soon
+         * anyway.
+         */
+        if (propagate > 0 || h == null || h.waitStatus < 0 ||
+            (h = head) == null || h.waitStatus < 0) {
+            Node s = node.next;
+            if (s == null || s.isShared())
+                doReleaseShared();
+        }
+    }
