@@ -5,6 +5,10 @@ categories: java
 tags: countDownLatch juc aqs
 ---
 
+*  [构造器](#init)
+*  [countDown](#countDown)
+*  [await](#await)
+
 ## CountDownLatch构造器 {#init}
 
     public CountDownLatch(int count) {
