@@ -2,6 +2,7 @@
 layout: post
 title: java并发编程实战笔记与实践
 categories: java
+tags: concurrent
 ---
 
 ### 简介

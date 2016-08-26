@@ -2,17 +2,24 @@
 <articles>
     
     <article>
-        <title>AbstractQueuedSynchronizer源码分析</title>
+        <title>AbstractQueuedSynchronizer</title>
         <url>http://foolchild.cn/2016/08/24/aqs</url>
-        <tag>concurrentaqs</tag>
+        <tag>concurrentaqsjuc</tag>
         <date>2016-08-24</date>
     </article>
     
     <article>
         <title>ReentrantLock源码解析</title>
         <url>http://foolchild.cn/2016/08/22/ReentrantLock</url>
-        <tag>AQSReentrantLockCLHAbstractQueuedSynchronizer</tag>
+        <tag>AQSReentrantLockCLHAbstractQueuedSynchronizerjuc</tag>
         <date>2016-08-22</date>
+    </article>
+    
+    <article>
+        <title>Countdownlatch</title>
+        <url>http://foolchild.cn/2016/08/16/CountDownLatch</url>
+        <tag>countDownLatchjucaqs</tag>
+        <date>2016-08-16</date>
     </article>
     
     <article>
@@ -1054,7 +1061,7 @@
     <article>
         <title>java并发编程实战笔记与实践</title>
         <url>http://foolchild.cn/2015/11/25/concurrent</url>
-        <tag></tag>
+        <tag>concurrent</tag>
         <date>2015-11-25</date>
     </article>
     
