@@ -40,7 +40,7 @@ tags: countDownLatch juc aqs
         return false;
     }
 
-### CountDownLatch#tryReleaseShared {#CountDownLatch#tryReleaseShared}
+### CountDownLatch#tryReleaseShared {#CountDownLatch_tryReleaseShared}
 
     protected boolean tryReleaseShared(int releases) {
         // Decrement count; signal when transition to zero
