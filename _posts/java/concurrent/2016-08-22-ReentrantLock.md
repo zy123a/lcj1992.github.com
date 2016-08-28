@@ -8,13 +8,16 @@ tags: AQS ReentrantLock CLH AbstractQueuedSynchronizer juc
 * [非公平锁](#nonFairLock)
     * [加锁过程](#ReentrantLock_lock)
         * [NonfairLock#lock](#NonfairLock_lock)
-        * [AbstractQueuedSynchronizer#acquire](#AbstractQueuedSynchronizer_acquire)
+        * [AQS#acquire](#AQS_acquire)
         * [Sync#nonfairTryAcquire](#Sync_nonfairTryAcquire)
-        * [AbstractQueuedSynchronizer#addWaiter](#AbstractQueuedSynchronizer_addWaiter)
-        * [AbstractQueuedSynchronizer#enq](#AbstractQueuedSynchronizer_enq)
-        * [AbstractQueuedSynchronizer#acquireQueued](#AbstractQueuedSynchronizer_acquireQueued)
+        * [AQS#addWaiter](#AQS_addWaiter)
+        * [AQS#enq](#AQS_enq)
+        * [AQS#acquireQueued](#AQS_acquireQueued)
+        * [AQS#shouldParkAfterFailedAcquire](#AQS_shouldParkAfterFailedAcquire)
     * [解锁过程](#ReentrantLock_unlock)
-        * [Sync#tryRelease](#Sync_tryRelease)
+        * [AbstractQueuedSynchronizer#release](#aqs_release)
+        * [ReentrantLock#tryRelease](#ReentrantLock_tryRelease)
+        * [AQS#unparkSuccessor](#AQS_acquireQueued)
 * [公平锁](#FairLock)
     * [加锁过程](#ReentrantLock_lock_fair)
         * [FairLock#lock](#FairLock_lock)
@@ -31,6 +34,51 @@ ReentrantLock的结构体如下
 2.  使用AQS的独占API
 
 ## 非公平锁 {#nonFairLock}
+
+idea debug多线程，将断点设置为线程级别就可以了,如下图所示
+![多线程debug](/images/java/multi_thread_debug.png)
+
+然后在debug时，在这里切换线程
+![切换线程](/images/java/switch_thread.png)
+
+设置以下几个断点
+![断点位置](/images/java/break_points.png)
+
+本文使用的例子
+
+    // 1.线程1首先拿到锁，但不释放锁呢。
+    // 2.线程2，3，4依次入等待队列
+    // 3.线程4自旋一次，会将pred的waitStatus改为signal，观察线程3释放锁时的unparkSuccessor操作。
+    @Test
+    public void howToLockTest() throws InterruptedException {
+        ReentrantLock lock = new ReentrantLock();
+        new Thread(new MyRunnable(lock), "thread1").start();
+        Thread.sleep(100);
+        new Thread(new MyRunnable(lock), "thread2").start();
+        new Thread(new MyRunnable(lock), "thread3").start();
+        new Thread(new MyRunnable(lock), "thread4").start();
+        Thread.sleep(1000000000);
+    }
+
+    private class MyRunnable implements Runnable {
+        private ReentrantLock lock;
+
+        MyRunnable(ReentrantLock lock) {
+            this.lock = lock;
+        }
+
+        @Override
+        public void run() {
+            lock.lock();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }
+    }
 
 ### 加锁过程 {#ReentrantLock_lock}
 
@@ -50,18 +98,18 @@ ReentrantLock#lock() -> NonfairLock#lock()
             acquire(1);
     }
 
-然后acquire(1)
+线程1因为比线程2，3，4执行提前0.1s，所以肯定走不到else分支，
+因为线程1拿到锁之后并不释放锁，所以线程2，3，4肯定走else分支，acquire(1)
 
-#### AbstractQueuedSynchronizer#acquire {#AbstractQueuedSynchronizer_acquire}
+#### AQS#acquire {#AQS_acquire}
 
-AbstractQueuedSynchronizer#acquire(arg)
-
+    // 尝试获取锁，获取不到则创建一个waiter（当前线程）后放到队列中
     public final void acquire(int arg) {
         // 以独占模式acquire失败
         if (!tryAcquire(arg) &&
         // 包装一个当前线程的Node，入队列，然后尝试去acquire
             acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
-            // 如果失败，中断当前线程
+            // 如果该线程被中断了，中断当前线程
             selfInterrupt();
     }
 
@@ -97,7 +145,7 @@ NonfairSync#tryAcquire(arg) -> Sync#nonfairTryAcquire(arg)
 
 包装当前线程为一个node
 
-#### AbstractQueuedSynchronizer#addWaiter {#AbstractQueuedSynchronizer_addWaiter}
+#### AQS#addWaiter {#AQS_addWaiter}
 
 AbstractQueuedSynchronizer#addWaiter()
 
@@ -116,12 +164,13 @@ AbstractQueuedSynchronizer#addWaiter()
                return node;
            }
        }
-       // 如果pred为null或者设置当前节点为tail失败，表明有别的线程并发入队列。执行enq方法，自旋方式入队列。
+       // 如果pred为null，说明之前队列为空，执行enq方法，自旋方式入队列
+       // 或者设置当前节点为tail失败，表明有别的线程并发入队列，执行enq方法，自旋方式入队列。
        enq(node);
        return node;
    }
 
-#### AbstractQueuedSynchronizer#enq {#AbstractQueuedSynchronizer_enq}
+#### AQS#enq {#AQS_enq}
 
 AbstractQueuedSynchronizer#enq()
 
@@ -129,13 +178,17 @@ AbstractQueuedSynchronizer#enq()
         // 自旋方式入队列
         for (;;) {
             Node t = tail;
+            // !!!!重要
             // 如果队列为空，初始化head和tail节点
             if (t == null) { // Must initialize
                 if (compareAndSetHead(new Node()))
                     tail = head;
             } else {
+                // 如果队列不为空，将该节点的前驱节点设置为tail，
                 node.prev = t;
+                // 同时cas设置tail为node，如果设置失败，说明有并发修改tail
                 if (compareAndSetTail(t, node)) {
+                    // 设置tail的后继节点为node
                     t.next = node;
                     return t;
                 }
@@ -145,7 +198,7 @@ AbstractQueuedSynchronizer#enq()
 
 入队列后，然后尝试从队列中acquire
 
-#### AbstractQueuedSynchronizer#acquireQueued {#AbstractQueuedSynchronizer_acquireQueued}
+#### AQS#acquireQueued {#AQS_acquireQueued}
 
 AbstractQueuedSynchronizer#acquireQueued()
 
@@ -183,9 +236,7 @@ AbstractQueuedSynchronizer#setHead()
         node.prev = null;
     }
 
-#### AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire {#AbstractQueuedSynchronizer_shouldParkAfterFailedAcquire}
-
-AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire(Node pred,Node node)
+#### AQS#shouldParkAfterFailedAcquire {#AQS_shouldParkAfterFailedAcquire}
 
      /** waitStatus value to indicate thread has cancelled */
      // 当前线程已经被取消
@@ -236,9 +287,23 @@ AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire(Node pred,Node node)
 
 解锁过程较简单点
 
-#### Sync#tryRelease {#Sync_tryRelease}
+#### AbstractQueuedSynchronizer#release {#aqs_release}
 
-ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release() -> Sync#tryRelease(releases)
+ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release()
+
+    public final boolean release(int arg) {
+        if (tryRelease(arg)) {
+            Node h = head;
+            // 属主线程可能是head节点也可能不是head节点哟。
+            if (h != null && h.waitStatus != 0)
+                // 如果是head节点，并且waitStatus不为0(SIGNAL、CONDITION、PROPAGATE）,则唤醒后继节点。
+                unparkSuccessor(h);
+            return true;
+        }
+        return false;
+    }
+
+#### ReentrantLock#tryRelease {#ReentrantLock_tryRelease}
 
     protected final boolean tryRelease(int releases) {
         int c = getState() - releases;
@@ -254,6 +319,38 @@ ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release() -> Sync#tryReleas
         setState(c);
         return free;
     }
+
+#### AQS#unparkSuccessor {#aqs_unparkSuccessor}
+
+        private void unparkSuccessor(Node node) {
+       /*
+        * If status is negative (i.e., possibly needing signal) try
+        * to clear in anticipation of signalling.  It is OK if this
+        * fails or if status is changed by waiting thread.
+        */
+       // 如果状态是负的（例如，可能等待着被signal）
+       int ws = node.waitStatus;
+       if (ws < 0)
+           compareAndSetWaitStatus(node, ws, 0);
+
+       /*
+        * Thread to unpark is held in successor, which is normally
+        * just the next node.  But if cancelled or apparently null,
+        * traverse backwards from tail to find the actual
+        * non-cancelled successor.
+        */
+       Node s = node.next;
+       if (s == null || s.waitStatus > 0) {
+           s = null;
+           for (Node t = tail; t != null && t != node; t = t.prev)
+               if (t.waitStatus <= 0)
+                   s = t;
+       }
+       if (s != null)
+           LockSupport.unpark(s.thread);
+   }
+
+
 
 ## 公平锁 {#FairLock}
 
@@ -294,7 +391,7 @@ ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release() -> Sync#tryReleas
         return false;
     }
 
-加锁过程和非公平锁是一样一样的。
+解锁过程和非公平锁是一样一样的。
 
 ## 参考 {#ref}
 

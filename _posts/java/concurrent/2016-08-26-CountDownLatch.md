@@ -9,6 +9,8 @@ tags: countDownLatch juc aqs
 *  [countDown](#countDown)
 *  [await](#await)
 
+以核心函数为突破口countDown和await
+
 ## CountDownLatch构造器 {#init}
 
     public CountDownLatch(int count) {
@@ -108,11 +110,13 @@ tags: countDownLatch juc aqs
    }
 
 ##  await
+使当前线程在锁存器倒计数至零之前一直等待，除非线程被中断
 
 ### doAcquireSharedInterruptibly
 
     private void doAcquireSharedInterruptibly(int arg)
         throws InterruptedException {
+        // 包装为共享节点，然后添加进等待队列
         final Node node = addWaiter(Node.SHARED);
         boolean failed = true;
         try {
@@ -120,10 +124,13 @@ tags: countDownLatch juc aqs
                 final Node p = node.predecessor();
                 if (p == head) {
                     // 参照下doAcquireInterruptibly,这里是不一样滴。
+                    // 试图在共享模式下获取对象状态
                     int r = tryAcquireShared(arg);
                     if (r >= 0) {
-                        // 这里只需要state不为0
-                        // 参照下doAcquireInterruptibly,这里是不一样滴。
+                        // 这里需要state为0
+
+                        // 这里对比doAcquireInterruptibly
+                        // 设置头节点 并传播
                         setHeadAndPropagate(node, r);
                         p.next = null; // help GC
                         failed = false;
@@ -165,6 +172,7 @@ tags: countDownLatch juc aqs
             (h = head) == null || h.waitStatus < 0) {
             Node s = node.next;
             if (s == null || s.isShared())
+                // 后继为空或者为共享模式
                 doReleaseShared();
         }
     }

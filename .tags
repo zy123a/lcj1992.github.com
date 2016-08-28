@@ -95,32 +95,45 @@ CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08
 AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-16-CountDownLatch.md	/^## AbstractQueuedSynchronizer#releaseShared {#aqs_releaseShared}$/;"	function	line:27
 CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-16-CountDownLatch.md	/^## CountDownLatch#tryReleaseShared {#CountDownLatch#tryReleaseShared}$/;"	function	line:37
 AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-16-CountDownLatch.md	/^## AbstractQueuedSynchronizer#doReleaseShared {#aqs_doReleaseShared}$/;"	function	line:53
-概述  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 概述  {#overview}$/;"	function	line:23
-非公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 非公平锁 {#nonFairLock}$/;"	function	line:33
-加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock}$/;"	function	line:35
-NonfairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### NonfairLock#lock {#NonfairLock_lock}$/;"	function	line:37
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquire {#AbstractQueuedSynchronizer_acquire}$/;"	function	line:55
-Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#nonfairTryAcquire {#Sync_nonfairTryAcquire}$/;"	function	line:68
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#addWaiter {#AbstractQueuedSynchronizer_addWaiter}$/;"	function	line:100
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#enq {#AbstractQueuedSynchronizer_enq}$/;"	function	line:124
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#acquireQueued {#AbstractQueuedSynchronizer_acquireQueued}$/;"	function	line:148
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#shouldParkAfterFailedAcquire {#AbstractQueuedSynchronizer_shouldParkAfterFailedAcquire}$/;"	function	line:186
-解锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 解锁过程 {#ReentrantLock_unlock}$/;"	function	line:235
-Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#tryRelease {#Sync_tryRelease}$/;"	function	line:239
-公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 公平锁 {#FairLock}$/;"	function	line:258
-加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock_fair}$/;"	function	line:260
-FairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairLock#lock {#FairLock_lock}$/;"	function	line:264
-FairSync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairSync#tryAcquire {#FairSync_tryAcquire}$/;"	function	line:274
-参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 参考 {#ref}$/;"	function	line:299
+CountDownLatch构造器 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^## CountDownLatch构造器 {#init}$/;"	function	line:14
+CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^## CountDownLatch#countDown {#countDown}$/;"	function	line:26
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#releaseShared {#aqs_releaseShared}$/;"	function	line:32
+CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### CountDownLatch#tryReleaseShared {#CountDownLatch#tryReleaseShared}$/;"	function	line:43
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#doReleaseShared {#aqs_doReleaseShared}$/;"	function	line:60
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#unparkSuccessor {#aqs_unparkSuccessor}$/;"	function	line:90
+await	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^##  await$/;"	function	line:112
+doAcquireSharedInterruptibly	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### doAcquireSharedInterruptibly$/;"	function	line:115
+setHeadAndPropagate	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### setHeadAndPropagate$/;"	function	line:150
+类图 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### 类图 {#class_graph}$/;"	function	line:21
+Map	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### Map$/;"	function	line:25
+AbstractMap	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### AbstractMap$/;"	function	line:51
+HashMap	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### HashMap$/;"	function	line:55
+HashMap X问 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### HashMap X问 {#qAnda}$/;"	function	line:84
+1.为什么并发下会死循环 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^#### 1.为什么并发下会死循环 {#infiniteLoop}$/;"	function	line:86
+2.为什么其内部table的length都是2的幂 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^#### 2.为什么其内部table的length都是2的幂 {#table_length}$/;"	function	line:110
+3.hashCode如何提高HashMap的性能 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^#### 3.hashCode如何提高HashMap的性能 {#hashcode}$/;"	function	line:120
+4.EntrySet为何能遍历所有键值对 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^#### 4.EntrySet为何能遍历所有键值对 {#iterator}$/;"	function	line:124
+5.ConcurrentHashMap为什么线程安全且高性能 {	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^#### 5.ConcurrentHashMap为什么线程安全且高性能 {#ConcurrentHashMap}$/;"	function	line:130
+参考	/Users/lichuangjian/work/foolchild/_posts/java/jdk/2016-02-24-HashMap.md	/^### 参考$/;"	function	line:136
 概述 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 概述 {#overiew}$/;"	function	line:12
-硬件层面支持的原子操作  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 硬件层面支持的原子操作  {#cpu_atomic}$/;"	function	line:33
-参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 参考 {#ref}$/;"	function	line:47
-CountDownLatch构造器 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^## CountDownLatch构造器 {#init}$/;"	function	line:12
-CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^## CountDownLatch#countDown {#countDown}$/;"	function	line:24
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#releaseShared {#aqs_releaseShared}$/;"	function	line:30
-CountDownLatch	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### CountDownLatch#tryReleaseShared {#CountDownLatch#tryReleaseShared}$/;"	function	line:41
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#doReleaseShared {#aqs_doReleaseShared}$/;"	function	line:58
-AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### AbstractQueuedSynchronizer#unparkSuccessor {#aqs_unparkSuccessor}$/;"	function	line:88
-await	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^##  await$/;"	function	line:110
-doAcquireSharedInterruptibly	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### doAcquireSharedInterruptibly$/;"	function	line:112
-setHeadAndPropagate	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-26-CountDownLatch.md	/^### setHeadAndPropagate$/;"	function	line:143
+硬件层面支持的原子操作  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 硬件层面支持的原子操作  {#cpu_atomic}$/;"	function	line:38
+参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-24-aqs.md	/^## 参考 {#ref}$/;"	function	line:52
+概述  {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 概述  {#overview}$/;"	function	line:26
+非公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 非公平锁 {#nonFairLock}$/;"	function	line:36
+加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock}$/;"	function	line:83
+NonfairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### NonfairLock#lock {#NonfairLock_lock}$/;"	function	line:85
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#acquire {#AQS_acquire}$/;"	function	line:104
+Sync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### Sync#nonfairTryAcquire {#Sync_nonfairTryAcquire}$/;"	function	line:116
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#addWaiter {#AQS_addWaiter}$/;"	function	line:148
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#enq {#AQS_enq}$/;"	function	line:173
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#acquireQueued {#AQS_acquireQueued}$/;"	function	line:201
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#shouldParkAfterFailedAcquire {#AQS_shouldParkAfterFailedAcquire}$/;"	function	line:239
+解锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 解锁过程 {#ReentrantLock_unlock}$/;"	function	line:286
+AbstractQueuedSynchronizer	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AbstractQueuedSynchronizer#release {#aqs_release}$/;"	function	line:290
+ReentrantLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### ReentrantLock#tryRelease {#ReentrantLock_tryRelease}$/;"	function	line:306
+AQS	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### AQS#unparkSuccessor {#aqs_unparkSuccessor}$/;"	function	line:323
+公平锁 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 公平锁 {#FairLock}$/;"	function	line:355
+加锁过程 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^### 加锁过程 {#ReentrantLock_lock_fair}$/;"	function	line:357
+FairLock	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairLock#lock {#FairLock_lock}$/;"	function	line:361
+FairSync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^#### FairSync#tryAcquire {#FairSync_tryAcquire}$/;"	function	line:371
+参考 {	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-ReentrantLock.md	/^## 参考 {#ref}$/;"	function	line:396

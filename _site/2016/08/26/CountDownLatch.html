@@ -34,6 +34,8 @@
   <li><a href="#await">await</a></li>
 </ul>
 
+<p>以核心函数为突破口countDown和await</p>
+
 <h2 id="init">CountDownLatch构造器</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>public CountDownLatch(int count) {
@@ -143,11 +145,13 @@ Sync(int count) {
 </div>
 
 <h2 id="await">await</h2>
+<p>使当前线程在锁存器倒计数至零之前一直等待，除非线程被中断</p>
 
 <h3 id="doacquiresharedinterruptibly">doAcquireSharedInterruptibly</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>private void doAcquireSharedInterruptibly(int arg)
     throws InterruptedException {
+    // 包装为共享节点，然后添加进等待队列
     final Node node = addWaiter(Node.SHARED);
     boolean failed = true;
     try {
@@ -155,10 +159,13 @@ Sync(int count) {
             final Node p = node.predecessor();
             if (p == head) {
                 // 参照下doAcquireInterruptibly,这里是不一样滴。
+                // 试图在共享模式下获取对象状态
                 int r = tryAcquireShared(arg);
                 if (r &gt;= 0) {
-                    // 这里只需要state不为0
-                    // 参照下doAcquireInterruptibly,这里是不一样滴。
+                    // 这里需要state为0
+
+                    // 这里对比doAcquireInterruptibly
+                    // 设置头节点 并传播
                     setHeadAndPropagate(node, r);
                     p.next = null; // help GC
                     failed = false;
@@ -202,6 +209,7 @@ Sync(int count) {
         (h = head) == null || h.waitStatus &lt; 0) {
         Node s = node.next;
         if (s == null || s.isShared())
+            // 后继为空或者为共享模式
             doReleaseShared();
     }
 }
