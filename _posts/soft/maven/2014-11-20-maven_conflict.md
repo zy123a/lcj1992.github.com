@@ -122,7 +122,6 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
     import java.security.CodeSource;
     import java.security.ProtectionDomain;
 
-
     /**
     * 查看类所在的jar包
     **/
@@ -160,8 +159,8 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 
     }
 
-#### ps
-当解决完冲突后，真正运行时可能日志还是会出问题,所以
+#### 日志框架
+很多时候日志各种jar会冲突，单列出来说下。
 
 ![日志jar关系](/images/soft/log_relation.png)
 
@@ -180,7 +179,7 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 |ch.qos.logback:logback-core|日志实现||
 |org.apache.logging.log4j:log4j-api|日志实现||
 |org.apache.logging.log4j:log4j-core|日志实现||
-|org.apache.logging.log4j:log4j-slf4j-impl|日志实现||
+|org.apache.logging.log4j:log4j-slf4j-impl|过渡包|log4j2是可以不依赖任何桥接包slf4j，jcl，这个包是使用slf4j来接管log4j的。|
 
 推荐实践为：
 

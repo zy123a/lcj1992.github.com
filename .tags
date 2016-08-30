@@ -143,9 +143,9 @@ FairSync	/Users/lichuangjian/work/foolchild/_posts/java/concurrent/2016-08-22-Re
 冲突	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 冲突$/;"	function	line:34
 定位解决	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 定位解决$/;"	function	line:55
 如何查看运行时出错的类到底load的是哪个jar包？	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 如何查看运行时出错的类到底load的是哪个jar包？$/;"	function	line:103
-ps	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### ps$/;"	function	line:163
-接口统一使用slf4j接管	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 接口统一使用slf4j接管$/;"	function	line:190
-实现使用logback	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^##### 实现使用logback$/;"	function	line:222
-实现使用log4j2	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^##### 实现使用log4j2$/;"	function	line:240
-常见冲突解决	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 常见冲突解决    $/;"	function	line:261
-参考	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 参考$/;"	function	line:276
+日志框架	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 日志框架$/;"	function	line:162
+接口统一使用slf4j接管	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 接口统一使用slf4j接管$/;"	function	line:189
+实现使用logback	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^##### 实现使用logback$/;"	function	line:221
+实现使用log4j2	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^##### 实现使用log4j2$/;"	function	line:239
+常见冲突解决	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 常见冲突解决    $/;"	function	line:260
+参考	/Users/lichuangjian/work/foolchild/_posts/soft/maven/2014-11-20-maven_conflict.md	/^#### 参考$/;"	function	line:275
