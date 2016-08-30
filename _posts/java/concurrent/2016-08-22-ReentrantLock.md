@@ -350,8 +350,6 @@ ReentrantLock#unlock() -> AbstractQueuedSynchronizer#release()
            LockSupport.unpark(s.thread);
    }
 
-
-
 ## 公平锁 {#FairLock}
 
 ### 加锁过程 {#ReentrantLock_lock_fair}

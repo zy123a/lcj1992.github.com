@@ -9,7 +9,7 @@ tags: maven
 1.打包命令：(爱起啥名起啥名，然后会按照目录结构生成jar，两个类都在bean目录下)
 
     jar cvf hehe.jar bean/UserCenterResponseBean.class  bean/UserInfoBean.class  
-    
+
 2.
 
 *   groupId：组id，jar包所在的group，你会看到一些group名为com.google.guava等
@@ -53,17 +53,52 @@ groupId和artifactId相同，version不同，没使用DependencyManagement，就
 两个jar包就是包含相同包结构的相同的类（这种情况应该也是存在的）
 
 #### 定位解决
-`mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId` 列出项目的依赖关系(可以指定只看某artfactId的)
+`mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId` 列出项目的依赖关系(可以指定只看某artfactId的) 检测类的依赖树
 
-`mvn enforcer:enforce`规则校验
+`mvn enforcer:enforce`规则校验，可以自定义规则，包冲突类冲突检测规则jar包的配置如下：
+
+    <pluginManagement>
+       <plugins>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-enforcer-plugin</artifactId>
+               <version>1.2</version>
+               <dependencies>
+                   <dependency>
+                       <groupId>org.codehaus.mojo</groupId>
+                       <artifactId>extra-enforcer-rules</artifactId>
+                       <version>1.0-alpha-5</version>
+                   </dependency>
+               </dependencies>
+           </plugin>
+       </plugins>
+    </pluginManagement>
+    <plugins>
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-enforcer-plugin</artifactId>
+           <configuration>
+               <rules>
+                   <banDuplicateClasses>
+                       <findAllDuplicates>true</findAllDuplicates>
+                       <ignoreClasses>
+                           <ignoreClass>junit.*</ignoreClass>
+                           <ignoreClass>org.junit.*</ignoreClass>
+                           <ignoreClass>org.w3c.dom.*</ignoreClass>
+                           <ignoreClass>javax.xml.namespace.*</ignoreClass>
+                           <ignoreClass>org.apache.axis2.*</ignoreClass>
+                       </ignoreClasses>
+                       <message>[ERROR] [Trip Enforcer Rules] find DuplicateClasses</message>
+                   </banDuplicateClasses>
+
+                   <DependencyConvergence/>
+
+               </rules>
+           </configuration>
+       </plugin>
+    </plugins>
 
 idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TODO）
-
-命令1已经很强大了，基本都能检查出来（由编译时依赖造成的包冲突）；命令二也很强大，可以检测项目中相同的类；但是对于运行时依赖造成的冲突他们就无能为力了，不能靠懵来选择使用那个jar包吧。
-
-这里有个通用的解决办法：
-
-使用dependencyManagement管理就不会出现包冲突问题，它的管理策略肯定会从多个版本的包中为你找一个（或者nearest 或者按声明顺序,可能它帮你决定的包是个低版本的，缺少类或方法。这时我们需要知道运行时到底加载的是那个版本的。
 
 #### 如何查看运行时出错的类到底load的是哪个jar包？
 
@@ -77,7 +112,7 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 
 5.  严重推荐使用dependencyManagement来管理依赖（下述）
 
-简直感天动地。出于对原作者的尊重：http://stamen.iteye.com/blog/2030552
+出于对原作者的尊重：http://stamen.iteye.com/blog/2030552
 
 ![解决](/images/java/cope.png)
 
@@ -126,27 +161,126 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
     }
 
 #### ps
-当解决完冲突后，真正运行时可能日志还是会出问题，所以
+当解决完冲突后，真正运行时可能日志还是会出问题,所以
 
-日志框架
-http://www.slf4j.org/manual.html  
-http://www.cnblogs.com/enjiex/p/3732338.html
+![日志jar关系](/images/soft/log_relation.png)
+
+|jar|类型|说明|
+|-|-|-|
+|org.slf4j:slf4j-api|接口，桥接|slf4j api,具体实现交给其他日志|
+|org.apache.commons:commons-logging-api|接口，桥接|jcl api,同上，我们的应用中肯定不会以它为api，但是很多框架中使用了它|
+|org.slf4j:jcl-over-slf4j|过渡包|使用slf4j接管jcl|
+|org.slf4j:slf4j-jcl|过渡包|使用jcl接管slf4j|
+|org.slf4j:log4j-over-slf4j|过渡包|使用slf4j接管log4j1，对于log4j2是不适用的|
+|org.slf4j:slf4j-log4j12|过渡包|使用log4j接管slf4j|
+|org.slf4j:jul-to-slf4j|过渡包|使用slf4j接管jul(java.util.logging)|
+|org.apache.logging.log4j:log4j-jul|过渡包|把jul的接口适配到log4j2的实现|
+|org.apache.logging.log4j:log4j-1.2-api|过渡包|把log4j1的接口适配到log4j2的实现|
+|ch.qos.logback:logback-classic|日志实现||
+|ch.qos.logback:logback-core|日志实现||
+|org.apache.logging.log4j:log4j-api|日志实现||
+|org.apache.logging.log4j:log4j-core|日志实现||
+|org.apache.logging.log4j:log4j-slf4j-impl|日志实现||
+
+推荐实践为：
+
+1.  slf4j + logback
+2.  slf4j + log4j2
+
+#### 接口统一使用slf4j接管
+
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${org.slf4j.version}</version>
+    </dependency>
+
+    <!--Jakarta Commons Logging redirect to slf4j -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${org.slf4j.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!--Apache log4j redirect to slf4j -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${org.slf4j.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!--Java Util Logging redirect to slf4j -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${org.slf4j.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+
+##### 实现使用logback
+
+    <!--slf4j的配置-->
+
+    <!--logback的配置-->
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+
+##### 实现使用log4j2
+
+    <!--slf4j的配置-->
+
+    <!--log4j2的配置-->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>2.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.3</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.3</version>
+    </dependency>
 
 #### 常见冲突解决    
 
-junit :jmockit 冲突问题: 请将 junit 换成 junit-dep
+1. junit :jmockit 冲突问题: 请将 junit 换成 junit-dep
 
-commons-beanutils & commons-collections 冲突问题: 去掉commons-beanutils版本号
+2. commons-beanutils & commons-collections 冲突问题: 删除commons-beanutils
 
-jcl-over-slf4j & commons-logging 冲突: 删掉 commons-logging
+3. jcl-over-slf4j & commons-logging 冲突: 删掉 commons-logging,类似日志的实践参考上方。
 
-io.netty:netty & org.jboss.netty:netty 删掉后者（后者改名成前者了）
+4. io.netty:netty & org.jboss.netty:netty 删掉后者（后者改名成前者了）
 
-cglib-nodep & cglib cglib-nodep里包含了asm包，cglib里不包含asm包。asm包和cglib不匹配也会出错。因此用cglib-nodep就不会出现版本不匹配情况
+5. cglib-nodep & cglib cglib-nodep里包含了asm包，cglib里不包含asm包。asm包和cglib不匹配也会出错。因此用cglib-nodep就不会出现版本不匹配情况
 
-fastxml  codehaus  后者已经不维护了，改名为fastxml了
+6. fastxml  codehaus  后者已经不维护了，改名为fastxml了
 
-参考
-<http://stamen.iteye.com/blog/2030552>
 
-<http://www.cnblogs.com/zemliu/p/3277241.html>
+#### 参考
+
+[slf4j]<http://www.slf4j.org/manual.html>
+
+[日志框架]<http://www.cnblogs.com/enjiex/p/3732338.html>
+
+[slf4j]<http://www.slf4j.org/manual.html>
+
+[日志框架]<http://www.cnblogs.com/enjiex/p/3732338.html>
+
+[日志框架]<http://wiki.sankuai.com/pages/viewpage.action?pageId=575620751>

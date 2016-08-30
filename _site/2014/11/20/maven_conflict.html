@@ -80,17 +80,54 @@
 <p>两个jar包就是包含相同包结构的相同的类（这种情况应该也是存在的）</p>
 
 <h4 id="section-3">定位解决</h4>
-<p><code class="highlighter-rouge">mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId</code> 列出项目的依赖关系(可以指定只看某artfactId的)</p>
+<p><code class="highlighter-rouge">mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId</code> 列出项目的依赖关系(可以指定只看某artfactId的) 检测类的依赖树</p>
 
-<p><code class="highlighter-rouge">mvn enforcer:enforce</code>规则校验</p>
+<p><code class="highlighter-rouge">mvn enforcer:enforce</code>规则校验，可以自定义规则，包冲突类冲突检测规则jar包的配置如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;pluginManagement&gt;
+   &lt;plugins&gt;
+       &lt;plugin&gt;
+           &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+           &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;
+           &lt;version&gt;1.2&lt;/version&gt;
+           &lt;dependencies&gt;
+               &lt;dependency&gt;
+                   &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                   &lt;artifactId&gt;extra-enforcer-rules&lt;/artifactId&gt;
+                   &lt;version&gt;1.0-alpha-5&lt;/version&gt;
+               &lt;/dependency&gt;
+           &lt;/dependencies&gt;
+       &lt;/plugin&gt;
+   &lt;/plugins&gt;
+&lt;/pluginManagement&gt;
+&lt;plugins&gt;
+   &lt;plugin&gt;
+       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+       &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;
+       &lt;configuration&gt;
+           &lt;rules&gt;
+               &lt;banDuplicateClasses&gt;
+                   &lt;findAllDuplicates&gt;true&lt;/findAllDuplicates&gt;
+                   &lt;ignoreClasses&gt;
+                       &lt;ignoreClass&gt;junit.*&lt;/ignoreClass&gt;
+                       &lt;ignoreClass&gt;org.junit.*&lt;/ignoreClass&gt;
+                       &lt;ignoreClass&gt;org.w3c.dom.*&lt;/ignoreClass&gt;
+                       &lt;ignoreClass&gt;javax.xml.namespace.*&lt;/ignoreClass&gt;
+                       &lt;ignoreClass&gt;org.apache.axis2.*&lt;/ignoreClass&gt;
+                   &lt;/ignoreClasses&gt;
+                   &lt;message&gt;[ERROR] [Trip Enforcer Rules] find DuplicateClasses&lt;/message&gt;
+               &lt;/banDuplicateClasses&gt;
+
+               &lt;DependencyConvergence/&gt;
+
+           &lt;/rules&gt;
+       &lt;/configuration&gt;
+   &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+</div>
 
 <p>idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TODO）</p>
-
-<p>命令1已经很强大了，基本都能检查出来（由编译时依赖造成的包冲突）；命令二也很强大，可以检测项目中相同的类；但是对于运行时依赖造成的冲突他们就无能为力了，不能靠懵来选择使用那个jar包吧。</p>
-
-<p>这里有个通用的解决办法：</p>
-
-<p>使用dependencyManagement管理就不会出现包冲突问题，它的管理策略肯定会从多个版本的包中为你找一个（或者nearest 或者按声明顺序,可能它帮你决定的包是个低版本的，缺少类或方法。这时我们需要知道运行时到底加载的是那个版本的。</p>
 
 <h4 id="loadjar">如何查看运行时出错的类到底load的是哪个jar包？</h4>
 
@@ -112,7 +149,7 @@
   </li>
 </ol>
 
-<p>简直感天动地。出于对原作者的尊重：http://stamen.iteye.com/blog/2030552</p>
+<p>出于对原作者的尊重：http://stamen.iteye.com/blog/2030552</p>
 
 <p><img src="/images/java/cope.png" alt="解决" /></p>
 
@@ -163,30 +200,210 @@ public class ClassLocationUtils {
 </div>
 
 <h4 id="ps">ps</h4>
-<p>当解决完冲突后，真正运行时可能日志还是会出问题，所以</p>
+<p>当解决完冲突后，真正运行时可能日志还是会出问题,所以</p>
 
-<p>日志框架
-http://www.slf4j.org/manual.html<br />
-http://www.cnblogs.com/enjiex/p/3732338.html</p>
+<p><img src="/images/soft/log_relation.png" alt="日志jar关系" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>jar</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>org.slf4j:slf4j-api</td>
+      <td>接口，桥接</td>
+      <td>slf4j api,具体实现交给其他日志</td>
+    </tr>
+    <tr>
+      <td>org.apache.commons:commons-logging-api</td>
+      <td>接口，桥接</td>
+      <td>jcl api,同上，我们的应用中肯定不会以它为api，但是很多框架中使用了它</td>
+    </tr>
+    <tr>
+      <td>org.slf4j:jcl-over-slf4j</td>
+      <td>过渡包</td>
+      <td>使用slf4j接管jcl</td>
+    </tr>
+    <tr>
+      <td>org.slf4j:slf4j-jcl</td>
+      <td>过渡包</td>
+      <td>使用jcl接管slf4j</td>
+    </tr>
+    <tr>
+      <td>org.slf4j:log4j-over-slf4j</td>
+      <td>过渡包</td>
+      <td>使用slf4j接管log4j1，对于log4j2是不适用的</td>
+    </tr>
+    <tr>
+      <td>org.slf4j:slf4j-log4j12</td>
+      <td>过渡包</td>
+      <td>使用log4j接管slf4j</td>
+    </tr>
+    <tr>
+      <td>org.slf4j:jul-to-slf4j</td>
+      <td>过渡包</td>
+      <td>使用slf4j接管jul(java.util.logging)</td>
+    </tr>
+    <tr>
+      <td>org.apache.logging.log4j:log4j-jul</td>
+      <td>过渡包</td>
+      <td>把jul的接口适配到log4j2的实现</td>
+    </tr>
+    <tr>
+      <td>org.apache.logging.log4j:log4j-1.2-api</td>
+      <td>过渡包</td>
+      <td>把log4j1的接口适配到log4j2的实现</td>
+    </tr>
+    <tr>
+      <td>ch.qos.logback:logback-classic</td>
+      <td>日志实现</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ch.qos.logback:logback-core</td>
+      <td>日志实现</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>org.apache.logging.log4j:log4j-api</td>
+      <td>日志实现</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>org.apache.logging.log4j:log4j-core</td>
+      <td>日志实现</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>org.apache.logging.log4j:log4j-slf4j-impl</td>
+      <td>日志实现</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>推荐实践为：</p>
+
+<ol>
+  <li>slf4j + logback</li>
+  <li>slf4j + log4j2</li>
+</ol>
+
+<h4 id="slf4j">接口统一使用slf4j接管</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--Jakarta Commons Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;!--Apache log4j redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;!--Java Util Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jul-to-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<h5 id="logback">实现使用logback</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--slf4j的配置--&gt;
+
+&lt;!--logback的配置--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;version&gt;${logback.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+    &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+    &lt;version&gt;${logback.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<h5 id="log4j2">实现使用log4j2</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--slf4j的配置--&gt;
+
+&lt;!--log4j2的配置--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+    &lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
 
 <h4 id="section-4">常见冲突解决</h4>
 
-<p>junit :jmockit 冲突问题: 请将 junit 换成 junit-dep</p>
+<ol>
+  <li>
+    <p>junit :jmockit 冲突问题: 请将 junit 换成 junit-dep</p>
+  </li>
+  <li>
+    <p>commons-beanutils &amp; commons-collections 冲突问题: 删除commons-beanutils</p>
+  </li>
+  <li>
+    <p>jcl-over-slf4j &amp; commons-logging 冲突: 删掉 commons-logging,类似日志的实践参考上方。</p>
+  </li>
+  <li>
+    <p>io.netty:netty &amp; org.jboss.netty:netty 删掉后者（后者改名成前者了）</p>
+  </li>
+  <li>
+    <p>cglib-nodep &amp; cglib cglib-nodep里包含了asm包，cglib里不包含asm包。asm包和cglib不匹配也会出错。因此用cglib-nodep就不会出现版本不匹配情况</p>
+  </li>
+  <li>
+    <p>fastxml  codehaus  后者已经不维护了，改名为fastxml了</p>
+  </li>
+</ol>
 
-<p>commons-beanutils &amp; commons-collections 冲突问题: 去掉commons-beanutils版本号</p>
+<h4 id="section-5">参考</h4>
 
-<p>jcl-over-slf4j &amp; commons-logging 冲突: 删掉 commons-logging</p>
+<p>[slf4j]<a href="http://www.slf4j.org/manual.html">http://www.slf4j.org/manual.html</a></p>
 
-<p>io.netty:netty &amp; org.jboss.netty:netty 删掉后者（后者改名成前者了）</p>
+<p>[日志框架]<a href="http://www.cnblogs.com/enjiex/p/3732338.html">http://www.cnblogs.com/enjiex/p/3732338.html</a></p>
 
-<p>cglib-nodep &amp; cglib cglib-nodep里包含了asm包，cglib里不包含asm包。asm包和cglib不匹配也会出错。因此用cglib-nodep就不会出现版本不匹配情况</p>
+<p>[slf4j]<a href="http://www.slf4j.org/manual.html">http://www.slf4j.org/manual.html</a></p>
 
-<p>fastxml  codehaus  后者已经不维护了，改名为fastxml了</p>
+<p>[日志框架]<a href="http://www.cnblogs.com/enjiex/p/3732338.html">http://www.cnblogs.com/enjiex/p/3732338.html</a></p>
 
-<p>参考
-<a href="http://stamen.iteye.com/blog/2030552">http://stamen.iteye.com/blog/2030552</a></p>
-
-<p><a href="http://www.cnblogs.com/zemliu/p/3277241.html">http://www.cnblogs.com/zemliu/p/3277241.html</a></p>
+<p>[日志框架]<a href="http://wiki.sankuai.com/pages/viewpage.action?pageId=575620751">http://wiki.sankuai.com/pages/viewpage.action?pageId=575620751</a></p>
 
         <ul class="prev_next">
             
