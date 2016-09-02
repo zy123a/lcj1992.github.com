@@ -80,7 +80,7 @@ Class.forName()时，先执行static代码块，会先new一个Driver实例，�
      preparedStatement.setString(2,"lcj");
      preparedStatement.execute();
      con.commit();
-     con.rollback();
+     //con.rollback();
 
 
 #### 有了spring,mybatis {#spring-mybatis}
@@ -91,7 +91,7 @@ a.数据源设置
 
 1.  声明(可以不实例化`abstract="true"`)parentDatasource, 设置driver的className,连接池大小,超时时间等
 2.  实例化各子DataSource(如果有多数据源)parent指定为1中声明的 `parent="parentDatasource"`,然后设置该数据源的url,username,password等.
-3.  如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource [做法见](/2015/12/28/spring_databases)
+3.  如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource [做法见](/2015/12/28/tables_databases#spring_databases)
 
 b.mybatis设置
 

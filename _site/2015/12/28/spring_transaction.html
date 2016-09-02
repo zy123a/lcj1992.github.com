@@ -114,7 +114,7 @@
  preparedStatement.setString(2,"lcj");
  preparedStatement.execute();
  con.commit();
- con.rollback();
+ //con.rollback();
 </code></pre>
 </div>
 
@@ -127,7 +127,7 @@
 <ol>
   <li>声明(可以不实例化<code class="highlighter-rouge">abstract="true"</code>)parentDatasource, 设置driver的className,连接池大小,超时时间等</li>
   <li>实例化各子DataSource(如果有多数据源)parent指定为1中声明的 <code class="highlighter-rouge">parent="parentDatasource"</code>,然后设置该数据源的url,username,password等.</li>
-  <li>如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource <a href="/2015/12/28/spring_databases">做法见</a></li>
+  <li>如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource <a href="/2015/12/28/tables_databases#spring_databases">做法见</a></li>
 </ol>
 
 <p>b.mybatis设置</p>
