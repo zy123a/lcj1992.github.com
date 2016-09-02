@@ -117,6 +117,8 @@ ps:  datasource建立连接的内部实现还是跟[原理](#origin)类似
 1.  mode=“proxy” 默认的使用spring的动态代理（jdk or cglib），但是这种方式有点限制,对于类内的方法调用，事务即使声明了不生效（考虑spring aop的原理）
 2.  mode=“aspectj” 类内类外都生效，需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入。具体配置见[附](#appendix)
 
+比较说明：
+
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
     <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
 

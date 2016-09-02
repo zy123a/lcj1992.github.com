@@ -163,14 +163,15 @@
 
 <ol>
   <li>mode=“proxy” 默认的使用spring的动态代理（jdk or cglib），但是这种方式有点限制,对于类内的方法调用，事务即使声明了不生效（考虑spring aop的原理）</li>
-  <li>
-    <p>mode=“aspectj” 类内类外都生效，需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入。具体配置见<a href="#appendix">附</a></p>
+  <li>mode=“aspectj” 类内类外都生效，需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入。具体配置见<a href="#appendix">附</a></li>
+</ol>
 
-    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+<p>比较说明：</p>
 
-    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" />
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/&gt;
+&lt;tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/&gt;
 
-    <p>class TestService{
+class TestService{
     @Resource
     XxService xxService；
     public void test(){
@@ -179,24 +180,23 @@
         // methodC的事务仅在aspectj mode下生效
         xxService.methodB();
     }
-}</p>
-
-    <p>@Service
-public class XxService{</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>@Transactional
-public void methodA(){...}
-
-public void methodB(){
-    methodC();
 }
 
-@Transactional
-public void methodC(){...} }
+@Service
+public class XxService{
+
+    @Transactional
+    public void methodA(){...}
+
+    public void methodB(){
+        methodC();
+    }
+
+    @Transactional
+    public void methodC(){...}
+}
 </code></pre>
-    </div>
-  </li>
-</ol>
+</div>
 
 <h3 id="how_to_work">事务流程</h3>
 
