@@ -18,4 +18,4 @@ SNAPSHOT版本会实时比对仓库版本。即使本地有了同一版本jar包
 
 `mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId` 检查依赖
 
-`mvn enforcer:enforcer`规则校验
+`mvn enforcer:enforcer` 规则校验

@@ -271,12 +271,7 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 
 6. fastxml  codehaus  后者已经不维护了，改名为fastxml了
 
-
 #### 参考
-
-[slf4j]<http://www.slf4j.org/manual.html>
-
-[日志框架]<http://www.cnblogs.com/enjiex/p/3732338.html>
 
 [slf4j]<http://www.slf4j.org/manual.html>
 
