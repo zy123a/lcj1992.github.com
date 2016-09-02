@@ -8,9 +8,12 @@ tags: spring transaction
 *   [常用spring-mybatis的数据库配置](#common_config)
     *   [原理](#origin)
     *   [有了spring和mybatis](#spring-mybatis)
+        * [数据源](#datasource)
+        * [mybatis](#mybatis)
+        * [事务配置](#transaction)
+        * [spring事务中两种的mode](#transaction_mode)
 *   [spring事务流程](#how_to_work)
 *   [spring中事务的传播特性](#propagation)
-*   [声明式事务使用方法](#use)
 
 ### 常用spring-mybatis的数据库配置 {#common_config}
 
@@ -87,13 +90,13 @@ Class.forName()时，先执行static代码块，会先new一个Driver实例，�
 
 我们通常是这么配置的,必须清楚知道的是框架只是帮我们封装了这些，里边还是那么掉的:
 
-a.数据源设置
+##### 数据源设置 {#datasource}
 
 1.  声明(可以不实例化`abstract="true"`)parentDatasource, 设置driver的className,连接池大小,超时时间等
 2.  实例化各子DataSource(如果有多数据源)parent指定为1中声明的 `parent="parentDatasource"`,然后设置该数据源的url,username,password等.
 3.  如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource [做法见](/2015/12/28/tables_databases#spring_databases)
 
-b.mybatis设置
+##### mybatis设置 {#mybatis}
 
 1.  实例化sqlSessionFactory, 设置一般有这四个`dataSource`,`mapperLocations`,`typeAliasesPackage`,`typeHandlersPackage`:
     *   `dataSource`(单一dataSource或者DynamicDataSource)
@@ -104,17 +107,43 @@ b.mybatis设置
 
 ps:  datasource建立连接的内部实现还是跟[原理](#origin)类似
 
-c.事务配置
+##### 事务配置 {#transaction}
 
 1.  声明式事务 实例化一个`DataSourceTransactionManager`,然后加上`<<tx:annotation-driven transaction-manager="transactionManager">` 实例化AnnotationTransactionAttributeSource 扫描@Transactional注解
 2.  编程式事务 不care
 
-d.spring中两种不同的mode
+#### spring事务中两种的mode {#transaction_mode}
 
-1.  mode=“proxy” 使用spring的动态代理，但是这种方式有点限制,对于类内的方法调用，事务不生效
-2.  mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，
+1.  mode=“proxy” 默认的使用spring的动态代理（jdk or cglib），但是这种方式有点限制,对于类内的方法调用，事务即使声明了不生效（考虑spring aop的原理）
+2.  mode=“aspectj” 类内类外都生效，需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入。具体配置见[附](#appendix)
 
-ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81)
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+
+    class TestService{
+        @Resource
+        XxService xxService；
+        public void test(){
+            // methodA的事务在两种mode中都生效
+            xxService.methodA();
+            // methodC的事务仅在aspectj mode下生效
+            xxService.methodB();
+        }
+    }
+
+    @Service
+    public class XxService{
+
+        @Transactional
+        public void methodA(){...}
+
+        public void methodB(){
+            methodC();
+        }
+
+        @Transactional
+        public void methodC(){...}
+    }
 
 ### 事务流程 {#how_to_work}
 
@@ -159,29 +188,7 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 |PROPAGATION_NEVER|总是非事务地执行，如果存在一个活动事务，则抛出异常||
 |PROPAGATION_NESTED|如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行||
 
-### 声明式事务使用方法 {#use}
-
-1. 默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。
-2. 指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！
-
-配置：
-
-    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
-    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
-
-    @Service
-    public class XxService{
-
-        @Transactional
-        public void methodA(){...}
-
-        public void methodB(){
-            methodC();
-        }
-
-        @Transactional
-        public void methodC(){...}
-    }
+#### aspectj配置 {#appendix}
 
 使用aspectj编译器编译pom中配置
 

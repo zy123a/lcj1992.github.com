@@ -32,12 +32,18 @@
   <li><a href="#common_config">常用spring-mybatis的数据库配置</a>
     <ul>
       <li><a href="#origin">原理</a></li>
-      <li><a href="#spring-mybatis">有了spring和mybatis</a></li>
+      <li><a href="#spring-mybatis">有了spring和mybatis</a>
+        <ul>
+          <li><a href="#datasource">数据源</a></li>
+          <li><a href="#mybatis">mybatis</a></li>
+          <li><a href="#transaction">事务配置</a></li>
+          <li><a href="#transaction_mode">spring事务中两种的mode</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#how_to_work">spring事务流程</a></li>
   <li><a href="#propagation">spring中事务的传播特性</a></li>
-  <li><a href="#use">声明式事务使用方法</a></li>
 </ul>
 
 <h3 id="common_config">常用spring-mybatis的数据库配置</h3>
@@ -122,7 +128,7 @@
 
 <p>我们通常是这么配置的,必须清楚知道的是框架只是帮我们封装了这些，里边还是那么掉的:</p>
 
-<p>a.数据源设置</p>
+<h5 id="datasource">数据源设置</h5>
 
 <ol>
   <li>声明(可以不实例化<code class="highlighter-rouge">abstract="true"</code>)parentDatasource, 设置driver的className,连接池大小,超时时间等</li>
@@ -130,7 +136,7 @@
   <li>如果配置了多数据源,通常我们还是设置dataSources路由,dynamicDataSource <a href="/2015/12/28/tables_databases#spring_databases">做法见</a></li>
 </ol>
 
-<p>b.mybatis设置</p>
+<h5 id="mybatis">mybatis设置</h5>
 
 <ol>
   <li>实例化sqlSessionFactory, 设置一般有这四个<code class="highlighter-rouge">dataSource</code>,<code class="highlighter-rouge">mapperLocations</code>,<code class="highlighter-rouge">typeAliasesPackage</code>,<code class="highlighter-rouge">typeHandlersPackage</code>:
@@ -146,21 +152,51 @@
 
 <p>ps:  datasource建立连接的内部实现还是跟<a href="#origin">原理</a>类似</p>
 
-<p>c.事务配置</p>
+<h5 id="transaction">事务配置</h5>
 
 <ol>
   <li>声明式事务 实例化一个<code class="highlighter-rouge">DataSourceTransactionManager</code>,然后加上<code class="highlighter-rouge">&lt;&lt;tx:annotation-driven transaction-manager="transactionManager"&gt;</code> 实例化AnnotationTransactionAttributeSource 扫描@Transactional注解</li>
   <li>编程式事务 不care</li>
 </ol>
 
-<p>d.spring中两种不同的mode</p>
+<h4 id="transaction_mode">spring事务中两种的mode</h4>
 
 <ol>
-  <li>mode=“proxy” 使用spring的动态代理，但是这种方式有点限制,对于类内的方法调用，事务不生效</li>
-  <li>mode=“aspectj” 类内类外都生效，但是前提是你得用aspectj编译器编译或者<context:load-time-weaver>加载时织入，</context:load-time-weaver></li>
-</ol>
+  <li>mode=“proxy” 默认的使用spring的动态代理（jdk or cglib），但是这种方式有点限制,对于类内的方法调用，事务即使声明了不生效（考虑spring aop的原理）</li>
+  <li>
+    <p>mode=“aspectj” 类内类外都生效，需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入。具体配置见<a href="#appendix">附</a></p>
 
-<p>ps: aspectj的事务pom.xml需安装插件参见<a href="https://gist.github.com/lcj1992/ea228aa0a9415f0bc6675a9c4cb0dc81">gist</a></p>
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" />
+
+    <p>class TestService{
+    @Resource
+    XxService xxService；
+    public void test(){
+        // methodA的事务在两种mode中都生效
+        xxService.methodA();
+        // methodC的事务仅在aspectj mode下生效
+        xxService.methodB();
+    }
+}</p>
+
+    <p>@Service
+public class XxService{</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>@Transactional
+public void methodA(){...}
+
+public void methodB(){
+    methodC();
+}
+
+@Transactional
+public void methodC(){...} }
+</code></pre>
+    </div>
+  </li>
+</ol>
 
 <h3 id="how_to_work">事务流程</h3>
 
@@ -242,33 +278,7 @@
   </tbody>
 </table>
 
-<h3 id="use">声明式事务使用方法</h3>
-
-<ol>
-  <li>默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。</li>
-  <li>指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！</li>
-</ol>
-
-<p>配置：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/&gt;
-&lt;tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/&gt;
-
-@Service
-public class XxService{
-
-    @Transactional
-    public void methodA(){...}
-
-    public void methodB(){
-        methodC();
-    }
-
-    @Transactional
-    public void methodC(){...}
-}
-</code></pre>
-</div>
+<h4 id="appendix">aspectj配置</h4>
 
 <p>使用aspectj编译器编译pom中配置</p>
 
