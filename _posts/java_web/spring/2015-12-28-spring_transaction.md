@@ -142,7 +142,7 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 
 `DelegatingTransactionAttribute`  动态代理transactionAttribute
 
-`RuleBasedTransactionAttribute` 
+`RuleBasedTransactionAttribute`
 
 ![原理](/images/java_web/spring_transaction_source.png)
 
@@ -150,10 +150,76 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 
 |传播特性|含义|场景|
 |-|-|-|
-|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启|默认的。µ|
+|PROPAGATION_REQUIRED|如果存在一个事务，则支持当前事务。如果没有事务则开启|默认的。|
 |PROPAGATION_SUPPORTS|如果存在一个事务，则支持当前事务。如果没有事务，则非事务的执行||
 |PROPAGATION_MANDATORY|如果存在一个事务，则支持当前事务。如果没有一个活动的事务，则抛出异常。||
 |PROPAGATION_REQUIRES_NEW|总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。||
 |PROPAGATION_NOT_SUPPORTED|总是非事务地执行，并挂起任何存在的事务。||
 |PROPAGATION_NEVER|总是非事务地执行，如果存在一个活动事务，则抛出异常||
 |PROPAGATION_NESTED|如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行||
+
+### 声明式事务使用方法
+
+1. 默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。
+2. 指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！
+
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+
+    @Service
+    public class XxService{
+
+        @Transactional
+        public void methodA(){...}
+
+        public void methodB(){
+            methodC();
+        }
+
+        @Transactional
+        public void methodC(){...}
+    }
+
+使用aspectj编译器编译pom中配置
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <version>4.3.1.RELEASE</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.8.7</version>
+    </dependency>
+
+    <build>
+    <finalName>web</finalName>
+    <plugins>
+       <plugin>
+           <groupId>org.codehaus.mojo</groupId>
+           <artifactId>aspectj-maven-plugin</artifactId>
+           <version>1.8</version>
+           <executions>
+               <execution>
+                   <goals>
+                       <goal>compile</goal>
+                       <goal>test-compile</goal>
+                   </goals>
+               </execution>
+           </executions>
+           <configuration>
+               <complianceLevel>1.8</complianceLevel>
+               <source>1.8</source>
+               <target>1.8</target>
+               <encoding>UTF-8</encoding>
+               <aspectLibraries>
+                   <aspectLibrary>
+                       <groupId>org.springframework</groupId>
+                       <artifactId>spring-aspects</artifactId>
+                   </aspectLibrary>
+               </aspectLibraries>
+           </configuration>
+       </plugin>
+    </plugins>
+    </build>
