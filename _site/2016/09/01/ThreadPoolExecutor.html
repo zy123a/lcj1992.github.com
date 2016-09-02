@@ -32,7 +32,6 @@
   <li><a href="#ctl">ctl</a></li>
   <li><a href="#FutureTask">FutureTask</a></li>
   <li><a href="#Workder">Worker</a></li>
-  <li><a href="#workQueue">workQueue</a></li>
   <li><a href="#invokeAll">invokeAll</a></li>
 </ul>
 
@@ -81,8 +80,9 @@ RunnableFuture&lt;V&gt; extend Runnable,Future&lt;V&gt;
 
 <p>然后看下FutureTask几个关键的域：关联的<code class="highlighter-rouge">callable</code>，<code class="highlighter-rouge">outcome</code>运行结果、<code class="highlighter-rouge">runner</code>运行这个futureTask的线程.</p>
 
-<p>正常的流程:通过runner.start()方法启动线程，调用run()方法、run()方法里会调用callable()的call方法，并把结果保存在outcome中。然后通过future.get()拿到outcome中的结果。
-ps:注意线程池里并不是通过runner.start()来启动线程的，通过Worker里的thread来启动的，下边有讲。</p>
+<p>正常的流程:通过runner.start()方法启动线程，调用run()方法、run()方法里会调用callable()的call方法，并把结果保存在outcome中。然后通过future.get()拿到outcome中的结果。这是Callable可以返回结果的原因。</p>
+
+<p>ps:注意线程池里并不是通过runner.start()来启动线程的，通过Worker里的thread来启动的，下边有讲。</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>/** The underlying callable; nulled out after running */
 // 所关联的callable 
@@ -115,7 +115,7 @@ private volatile Thread runner;
 </code></pre>
 </div>
 
-<p>在构造Worker时，会初始化这两个域，并指定thread的Runnable为this(worker自己)，run方法里调用firstTask的run方法。</p>
+<p>在构造Worker时，会初始化这两个域，并指定thread的Runnable为this(worker自己)，run() -&gt; runWorker() -&gt; firstTask.run().</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code> Worker(Runnable firstTask) {
      setState(-1); // inhibit interrupts until runWorker
@@ -125,46 +125,160 @@ private volatile Thread runner;
 </code></pre>
 </div>
 
-<h3 id="workQueue">workQueue</h3>
+<h3 id="invokeAll">invokeAll(callableList)</h3>
 
-<p>invokeAll(callableList)</p>
+<p>源码注解invokeAll</p>
 
-<ol>
-  <li>Callable如何实现返回结果的？</li>
-</ol>
+<div class="highlighter-rouge"><pre class="highlight"><code>public &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+    throws InterruptedException {
+    if (tasks == null)
+        throw new NullPointerException();
+    ArrayList&lt;Future&lt;T&gt;&gt; futures = new ArrayList&lt;Future&lt;T&gt;&gt;(tasks.size());
+    boolean done = false;
+    try {
+        for (Callable&lt;T&gt; t : tasks) {
+            // 将callable包装成RunnableFuture。
+            RunnableFuture&lt;T&gt; f = newTaskFor(t);
+            futures.add(f);
+            // 执行runnableFuture
+            execute(f);
+        }
+        for (int i = 0, size = futures.size(); i &lt; size; i++) {
+            Future&lt;T&gt; f = futures.get(i);
+            // 先判定任务是否完成
+            if (!f.isDone()) {
+                try {
+                    // 如果没有完成，这里会自旋阻塞当前结果。
+                    f.get();
+                } catch (CancellationException ignore) {
+                } catch (ExecutionException ignore) {
+                }
+            }
+        }
+        done = true;
+        return futures;
+    } finally {
+        if (!done)
+            for (int i = 0, size = futures.size(); i &lt; size; i++)
+                futures.get(i).cancel(true);
+    }
+}
+</code></pre>
+</div>
 
-<p>通过FutureTask来实现。
-    a.FutureTask继承自RunnableFuture.
-    b.有两个很重要的域Callable、outcome.
-    c.在其run方法中调用Callable的call方法，并把结果保存在outcome中。</p>
+<p>execute()</p>
 
-<ol>
-  <li>
-    <p>invokeAll怎么实现等待所有结果都返回？</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>public void execute(Runnable command) {
+    if (command == null)
+        throw new NullPointerException();
+    int c = ctl.get();
+    // 如果池中线程小于corePoolSize，会一直添加，即时有空余线程。
+    if (workerCountOf(c) &lt; corePoolSize) {
+        if (addWorker(command, true))
+            return;
+        c = ctl.get();
+    }
+    if (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+        int recheck = ctl.get();
+        if (! isRunning(recheck) &amp;&amp; remove(command))
+            reject(command);
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    }
+    else if (!addWorker(command, false))
+        reject(command);
+}
+</code></pre>
+</div>
 
-    <p>for (int i = 0, size = futures.size(); i &lt; size; i++) {
-     Future<T> f = futures.get(i);
-     // 先判定类是否完成。
-     if (!f.isDone()) {
-         try {
-             // 如果没有完成，这里会自旋阻塞当前结果。
-             f.get();
-         } catch (CancellationException ignore) {
-         } catch (ExecutionException ignore) {
-         }
-     }
- }</T></p>
-  </li>
-  <li>
-    <p>worker继承自Runnable，内部的thread初始化时，newThread(this)把worker注入进自己的Thread。执行时，run() -&gt; runWorker().</p>
+<p>addWorker()</p>
 
-    <p>Worker(Runnable firstTask) {
-     setState(-1); // inhibit interrupts until runWorker
-     this.firstTask = firstTask;
-     this.thread = getThreadFactory().newThread(this);
- }</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><pre class="highlight"><code>private boolean addWorker(Runnable firstTask, boolean core) {
+    retry:
+    for (;;) {
+        int c = ctl.get();
+        int rs = runStateOf(c);
+
+        // Check if queue empty only if necessary.
+        if (rs &gt;= SHUTDOWN &amp;&amp;
+            ! (rs == SHUTDOWN &amp;&amp;
+               firstTask == null &amp;&amp;
+               ! workQueue.isEmpty()))
+            return false;
+
+        for (;;) {
+            int wc = workerCountOf(c);
+            if (wc &gt;= CAPACITY ||
+                wc &gt;= (core ? corePoolSize : maximumPoolSize))
+                return false;
+            if (compareAndIncrementWorkerCount(c))
+                // workCount原子自增，自增成功break出for循环
+                break retry;
+            c = ctl.get();  // Re-read ctl
+            if (runStateOf(c) != rs)
+                continue retry;
+            // else CAS failed due to workerCount change; retry inner loop
+        }
+    }
+
+    boolean workerStarted = false;
+    boolean workerAdded = false;
+    Worker w = null;
+    try {
+        // 这里包赚firstTask，同时实例化运行该task的Thread。
+        w = new Worker(firstTask);
+        // t为运行该task的线程
+        final Thread t = w.thread;
+        if (t != null) {
+            final ReentrantLock mainLock = this.mainLock;
+            mainLock.lock();
+            try {
+                // Recheck while holding lock.
+                // Back out on ThreadFactory failure or if
+                // shut down before lock acquired.
+                int rs = runStateOf(ctl.get());
+
+                if (rs &lt; SHUTDOWN ||
+                    (rs == SHUTDOWN &amp;&amp; firstTask == null)) {
+                    if (t.isAlive()) // precheck that t is startable
+                        throw new IllegalThreadStateException();
+                    workers.add(w);
+                    int s = workers.size();
+                    if (s &gt; largestPoolSize)
+                        largestPoolSize = s;
+                    workerAdded = true;
+                }
+            } finally {
+                mainLock.unlock();
+            }
+            if (workerAdded) {
+                // 启动线程
+                t.start();
+                workerStarted = true;
+            }
+        }
+    } finally {
+        if (! workerStarted)
+            addWorkerFailed(w);
+    }
+    return workerStarted;
+}
+</code></pre>
+</div>
+
+<p>f.get()</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public V get() throws InterruptedException, ExecutionException {
+    int s = state;
+    if (s &lt;= COMPLETING)
+        // 这里自旋直到拿到结果。
+        s = awaitDone(false, 0L);
+    // 返回结果或异常
+    return report(s);
+}
+</code></pre>
+</div>
+
 
         <ul class="prev_next">
             
