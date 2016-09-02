@@ -37,6 +37,7 @@
   </li>
   <li><a href="#how_to_work">spring事务流程</a></li>
   <li><a href="#propagation">spring中事务的传播特性</a></li>
+  <li><a href="#use">声明式事务使用方法</a></li>
 </ul>
 
 <h3 id="common_config">常用spring-mybatis的数据库配置</h3>
@@ -206,7 +207,7 @@
     <tr>
       <td>PROPAGATION_REQUIRED</td>
       <td>如果存在一个事务，则支持当前事务。如果没有事务则开启</td>
-      <td>默认的。µ</td>
+      <td>默认的。</td>
     </tr>
     <tr>
       <td>PROPAGATION_SUPPORTS</td>
@@ -240,6 +241,80 @@
     </tr>
   </tbody>
 </table>
+
+<h3 id="use">声明式事务使用方法</h3>
+
+<ol>
+  <li>默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。</li>
+  <li>指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！</li>
+</ol>
+
+<p>配置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/&gt;
+&lt;tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/&gt;
+
+@Service
+public class XxService{
+
+    @Transactional
+    public void methodA(){...}
+
+    public void methodB(){
+        methodC();
+    }
+
+    @Transactional
+    public void methodC(){...}
+}
+</code></pre>
+</div>
+
+<p>使用aspectj编译器编译pom中配置</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+    &lt;version&gt;4.3.1.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+    &lt;version&gt;1.8.7&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;build&gt;
+&lt;finalName&gt;web&lt;/finalName&gt;
+&lt;plugins&gt;
+   &lt;plugin&gt;
+       &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+       &lt;artifactId&gt;aspectj-maven-plugin&lt;/artifactId&gt;
+       &lt;version&gt;1.8&lt;/version&gt;
+       &lt;executions&gt;
+           &lt;execution&gt;
+               &lt;goals&gt;
+                   &lt;goal&gt;compile&lt;/goal&gt;
+                   &lt;goal&gt;test-compile&lt;/goal&gt;
+               &lt;/goals&gt;
+           &lt;/execution&gt;
+       &lt;/executions&gt;
+       &lt;configuration&gt;
+           &lt;complianceLevel&gt;1.8&lt;/complianceLevel&gt;
+           &lt;source&gt;1.8&lt;/source&gt;
+           &lt;target&gt;1.8&lt;/target&gt;
+           &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+           &lt;aspectLibraries&gt;
+               &lt;aspectLibrary&gt;
+                   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                   &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+               &lt;/aspectLibrary&gt;
+           &lt;/aspectLibraries&gt;
+       &lt;/configuration&gt;
+   &lt;/plugin&gt;
+&lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+</div>
 
         <ul class="prev_next">
             

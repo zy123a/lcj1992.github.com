@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> maven基本命令  </title>
+    <title> ThreadPoolEexcutor  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,40 +27,149 @@
 </div>
 
     <div id="main">
-        <h2> maven基本命令 </h2>
-        <h4 id="section">基础</h4>
-<p>SNAPSHOT版本会实时比对仓库版本。即使本地有了同一版本jar包，还是会比对仓库。所以SNAPSHOT比较试用在开发阶段，需频繁更改代码，而不用更改版本</p>
+        <h2> ThreadPoolEexcutor </h2>
+        <ul>
+  <li><a href="#ctl">ctl</a></li>
+  <li><a href="#FutureTask">FutureTask</a></li>
+  <li><a href="#Workder">Worker</a></li>
+  <li><a href="#workQueue">workQueue</a></li>
+  <li><a href="#invokeAll">invokeAll</a></li>
+</ul>
 
-<h4 id="section-1">常用命令</h4>
+<p>首先需要明确的是ThreadPoolExecutor虽然是1.5的东西，但是底层还是一些jdk1.0的东西，Thread和Runnable，然后加以管理.</p>
 
-<p><code class="highlighter-rouge">mvn clean package -Dmaven.test.skip=true</code> 打包之前先clean，不执行test</p>
+<h3 id="ctl">ctl</h3>
 
-<p><code class="highlighter-rouge">mvn clean package -Pdev</code>指定资源</p>
+<p>线程池最重要的一个状态了。一个int型，包含两个域：1.  线程池数量(workCount后29位) 2.  运行状态(runState前3位)</p>
 
-<p><code class="highlighter-rouge">mvn deploy</code>部署到maven仓库（部署子模块也得从工程根路径下进行）</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 后29位保存线程池数量
+private static final int COUNT_BITS = Integer.SIZE - 3;
+// 最大的线程池数量是2的29次方-1
+private static final int CAPACITY   = (1 &lt;&lt; COUNT_BITS) - 1;
 
-<p><code class="highlighter-rouge">mvn dependency:tree -Dverbose -Dincludes(-Dexcludes)=groupId:artifactId</code> 检查依赖</p>
+// runState is stored in the high-order bits
+// 111000..000
+private static final int RUNNING    = -1 &lt;&lt; COUNT_BITS;
+// 000000..000
+private static final int SHUTDOWN   =  0 &lt;&lt; COUNT_BITS;
+// 001000..000
+private static final int STOP       =  1 &lt;&lt; COUNT_BITS;
+// 010000..000
+private static final int TIDYING    =  2 &lt;&lt; COUNT_BITS;
+// 011000..000
+private static final int TERMINATED =  3 &lt;&lt; COUNT_BITS;hreadPoolExecutor几个重要方法为突破口
+  
+// 提供ctl、runState、workCount的转换方法
+private static int runStateOf(int c)     { return c &amp; ~CAPACITY; }
+private static int workerCountOf(int c)  { return c &amp; CAPACITY; }
+private static int ctlOf(int rs, int wc) { return rs | wc; }
+</code></pre>
+</div>
 
-<p><code class="highlighter-rouge">mvn enforcer:enforcer</code> 规则校验</p>
+<h3 id="FutureTask">FutureTask</h3>
+
+<p>因为所有提交给线程池的Runnable或者Callable都会被newTaskFor()包装成一个FutureTask，所以有必要提下。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>FutureTask&lt;V&gt; implement RunnableFuture&lt;V&gt;
+RunnableFuture&lt;V&gt; extend Runnable,Future&lt;V&gt; 
+</code></pre>
+</div>
+
+<p>首先看FutureTask的继承体系，继承自RunnableFuture，实现了Runnable和Future接口。</p>
+
+<p>也就是说FutureTask可以作为Runnable扔给线程池去执行，然后通过Future.get()拿到返回的结果。</p>
+
+<p>然后看下FutureTask几个关键的域：关联的<code class="highlighter-rouge">callable</code>，<code class="highlighter-rouge">outcome</code>运行结果、<code class="highlighter-rouge">runner</code>运行这个futureTask的线程.</p>
+
+<p>其流程:通过runner.start()方法启动线程，调用run()方法、run()方法里会调用callable()的call方法，并把结果保存在outcome中。然后通过future.get()拿到outcome中的结果。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/** The underlying callable; nulled out after running */
+// 所关联的callable 
+private callable&lt;V&gt; callable;
+
+/** The result to return or exception to throw from get() */
+// 结果
+private Object outcome; // non-volatile, protected by state reads/writes
+
+/** The thread running the callable; CASed during run() */
+// 运行这个futureTask的线程
+private volatile Thread runner;
+</code></pre>
+</div>
+
+<h3 id="Workder">Worker</h3>
+
+<p>Worker继承自AbstractQueuedSynchronizer和Runnable。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> /** Thread this worker is running in.  Null if factory fails. */
+ final Thread thread;
+ 
+ /** Initial task to run.  Possibly null. */
+ Runnable firstTask;
+ 
+ /** Per-thread task counter */
+ volatile long completedTasks;
+</code></pre>
+</div>
+
+<ol>
+  <li>包装Runnable为一个RunnableFuture，实际类型为FutureTask，持有一个Callable的引用。</li>
+  <li>workQueue</li>
+  <li>workers</li>
+</ol>
+
+<p>invokeAll(callableList)</p>
+
+<ol>
+  <li>Callable如何实现返回结果的？</li>
+</ol>
+
+<p>通过FutureTask来实现。
+    a.FutureTask继承自RunnableFuture.
+    b.有两个很重要的域Callable、outcome.
+    c.在其run方法中调用Callable的call方法，并把结果保存在outcome中。</p>
+
+<ol>
+  <li>
+    <p>invokeAll怎么实现等待所有结果都返回？</p>
+
+    <p>for (int i = 0, size = futures.size(); i &lt; size; i++) {
+     Future<T> f = futures.get(i);
+     // 先判定类是否完成。
+     if (!f.isDone()) {
+         try {
+             // 如果没有完成，这里会自旋阻塞当前结果。
+             f.get();
+         } catch (CancellationException ignore) {
+         } catch (ExecutionException ignore) {
+         }
+     }
+ }</T></p>
+  </li>
+  <li>
+    <p>worker继承自Runnable，内部的thread初始化时，newThread(this)把worker注入进自己的Thread。执行时，run() -&gt; runWorker().</p>
+
+    <p>Worker(Runnable firstTask) {
+     setState(-1); // inhibit interrupts until runWorker
+     this.firstTask = firstTask;
+     this.thread = getThreadFactory().newThread(this);
+ }</p>
+  </li>
+</ol>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/12/28/dependency">maven依赖机制</a>
+                <a href="/2016/08/26/CountDownLatch">Countdownlatch</a>
             </li>
             
-            
-            <li>
-                <span>下一篇</span>
-                <a href="/2015/12/28/maven_project_structure">maven工程结构(译)</a>
-            </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2015/12/28/maven_command" data-title="maven基本命令"
-             data-url="http://lcj1992.github.io/2015/12/28/maven_command">
+        <div class="ds-share flat" data-thread-key="/2016/09/01/ThreadPoolExecutor" data-title="ThreadPoolEexcutor"
+             data-url="http://lcj1992.github.io/2016/09/01/ThreadPoolExecutor">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -89,8 +198,8 @@
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/12/28/maven_command" data-title="maven基本命令"
-             data-url="http://lcj1992.github.io/2015/12/28/maven_command"></div>
+        <div class="ds-thread" data-thread-key="/2016/09/01/ThreadPoolExecutor" data-title="ThreadPoolEexcutor"
+             data-url="http://lcj1992.github.io/2016/09/01/ThreadPoolExecutor"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -253,11 +362,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/12/28/dependency";
+                    window.location.href = "/2016/08/26/CountDownLatch";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/12/28/maven_project_structure";
+                    window.location.href = "";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

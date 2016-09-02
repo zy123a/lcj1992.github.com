@@ -164,6 +164,8 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 1. 默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。
 2. 指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！
 
+配置：
+
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
     <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
 
