@@ -11,7 +11,7 @@ tags: ThreadPoolExecutor FutureTask RunnableFuture ExecutorService
 * [workQueue](#workQueue)
 * [invokeAll](#invokeAll)
 
-首先需要明确的是ThreadPoolExecutor虽然是1.5的东西，但是底层还是一些jdk1.0的东西，Thread和Runnable，然后加以管理.
+首先需要明确的是ThreadPoolExecutor虽然是1.5引入的，但是底层还是一些jdk1.0的东西，Thread和Runnable，然后加以管理.
 
 ### ctl
 
@@ -41,7 +41,7 @@ tags: ThreadPoolExecutor FutureTask RunnableFuture ExecutorService
 
 ### FutureTask {#FutureTask}
 
-因为所有提交给线程池的Runnable或者Callable都会被newTaskFor()包装成一个FutureTask，所以有必要提下。
+因为所有提交给线程池的Runnable或者Callable都会被newTaskFor()包装成一个个的FutureTask，然后交给一个个的Worker，所以有必要提下。
 
     FutureTask<V> implement RunnableFuture<V>
     RunnableFuture<V> extend Runnable,Future<V> 
@@ -52,7 +52,8 @@ tags: ThreadPoolExecutor FutureTask RunnableFuture ExecutorService
 
 然后看下FutureTask几个关键的域：关联的`callable`，`outcome`运行结果、`runner`运行这个futureTask的线程.
 
-其流程:通过runner.start()方法启动线程，调用run()方法、run()方法里会调用callable()的call方法，并把结果保存在outcome中。然后通过future.get()拿到outcome中的结果。
+正常的流程:通过runner.start()方法启动线程，调用run()方法、run()方法里会调用callable()的call方法，并把结果保存在outcome中。然后通过future.get()拿到outcome中的结果。
+ps:注意线程池里并不是通过runner.start()来启动线程的，通过Worker里的thread来启动的，下边有讲。
 
     /** The underlying callable; nulled out after running */
     // 所关联的callable 
@@ -68,20 +69,30 @@ tags: ThreadPoolExecutor FutureTask RunnableFuture ExecutorService
 
 ### Worker {#Workder}
 
-Worker继承自AbstractQueuedSynchronizer和Runnable。
+Worker继承自AbstractQueuedSynchronizer和Runnable。有两个关键的域需提下：持有执行任务的线程thread，以及要执行的任务firstTask.
 
      /** Thread this worker is running in.  Null if factory fails. */
+     // worker绑定的执行任务的线程
      final Thread thread;
  
      /** Initial task to run.  Possibly null. */
+     // worker绑定的要执行的任务
      Runnable firstTask;
  
      /** Per-thread task counter */
      volatile long completedTasks;
  
-1. 包装Runnable为一个RunnableFuture，实际类型为FutureTask，持有一个Callable的引用。
-4. workQueue
-5. workers
+在构造Worker时，会初始化这两个域，并指定thread的Runnable为this(worker自己)，run方法里调用firstTask的run方法。
+     
+     Worker(Runnable firstTask) {
+         setState(-1); // inhibit interrupts until runWorker
+         this.firstTask = firstTask;
+         this.thread = getThreadFactory().newThread(this);
+     }
+
+### workQueue {#workQueue}
+
+
 
 invokeAll(callableList)
 
