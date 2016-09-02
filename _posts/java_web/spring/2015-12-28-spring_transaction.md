@@ -176,6 +176,7 @@ ps:  datasource建立连接的内部实现还是跟[原理](#origin)类似
 
 `RuleBasedTransactionAttribute`
 
+以cglib代理为例：
 ![原理](/images/java_web/spring_transaction_source.png)
 
 ### spring中事务的传播特性 {#propagation}
