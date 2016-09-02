@@ -10,6 +10,7 @@ tags: spring transaction
     *   [有了spring和mybatis](#spring-mybatis)
 *   [spring事务流程](#how_to_work)
 *   [spring中事务的传播特性](#propagation)
+*   [声明式事务使用方法](#use)
 
 ### 常用spring-mybatis的数据库配置 {#common_config}
 
@@ -158,7 +159,7 @@ ps: aspectj的事务pom.xml需安装插件参见[gist](https://gist.github.com/l
 |PROPAGATION_NEVER|总是非事务地执行，如果存在一个活动事务，则抛出异常||
 |PROPAGATION_NESTED|如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION_REQUIRED 属性执行||
 
-### 声明式事务使用方法
+### 声明式事务使用方法 {#use}
 
 1. 默认情况下mode使用的proxy模式，会使用cglib动态代理或者jdk动态代理。事务声明只对spring管理的方法有效，对于XxService调用methodA，methodA的事务是生效的；但是调用methodB，然后在methodB中调用methodC，methodC的事务是不生效的。
 2. 指定mode为aspectj,需引入spring-aspects和aspectjrt包，使用aspectj编译器进行编译，编译时织入，这种就太强大了，all are ok！
