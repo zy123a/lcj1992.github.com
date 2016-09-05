@@ -2,6 +2,13 @@
 <articles>
     
     <article>
+        <title>redis源码分析</title>
+        <url>http://foolchild.cn/2016/09/01/redis_source</url>
+        <tag>redisds</tag>
+        <date>2016-09-01</date>
+    </article>
+    
+    <article>
         <title>ThreadPoolEexcutor</title>
         <url>http://foolchild.cn/2016/09/01/ThreadPoolExecutor</url>
         <tag>ThreadPoolExecutorFutureTaskRunnableFutureExecutorService</tag>
@@ -47,13 +54,6 @@
         <title>设计模式</title>
         <url>http://foolchild.cn/2016/07/28/design_overview</url>
         <tag>proxyfactoryadapterfacadedecorator</tag>
-        <date>2016-07-28</date>
-    </article>
-    
-    <article>
-        <title>todo</title>
-        <url>http://foolchild.cn/2016/07/28/todo</url>
-        <tag>todo</tag>
         <date>2016-07-28</date>
     </article>
     
@@ -608,13 +608,6 @@
         <url>http://foolchild.cn/2015/12/31/interupt</url>
         <tag>interupt</tag>
         <date>2015-12-31</date>
-    </article>
-    
-    <article>
-        <title>redis的数据结构</title>
-        <url>http://foolchild.cn/2015/12/29/redis_ds</url>
-        <tag>redisds</tag>
-        <date>2015-12-29</date>
     </article>
     
     <article>

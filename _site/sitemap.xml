@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://foolchild.cn/2016/09/01/redis_source</loc>
+<lastmod>2016-09-01T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://foolchild.cn/2016/09/01/ThreadPoolExecutor</loc>
 <lastmod>2016-09-01T00:00:00+08:00</lastmod>
 </url>
@@ -343,10 +347,6 @@
 <url>
 <loc>http://foolchild.cn/2015/12/31/interupt</loc>
 <lastmod>2015-12-31T00:00:00+08:00</lastmod>
-</url>
-<url>
-<loc>http://foolchild.cn/2015/12/29/redis_ds</loc>
-<lastmod>2015-12-29T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>http://foolchild.cn/2015/12/28/tmux_screen</loc>

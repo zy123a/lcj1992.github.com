@@ -50,4 +50,13 @@ eg:
 
 *   分布式系统中一个请求可能会经过多个不同的子系统，这是最好生成一个UUID附在请求中，每个子系统在大一日志时都将给UUID放在MDC里，便于以后打日志
 
+*   测试环境中打印sql
+
+    <logger name="com.ibatis" level="debug">
+    </logger>
+    <logger name="java.sql" level="debug">
+    </logger>
+    <logger name="org.springframework.jdbc" level="debug">
+    </logger>
+
 [1]<http://www.infoq.com/cn/articles/things-of-java-log-performance>

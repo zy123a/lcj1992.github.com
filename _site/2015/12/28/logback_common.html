@@ -84,7 +84,19 @@ logger.debug("Entry number: {} is {}", i, entry[i]);
 </div>
 
 <ul>
-  <li>分布式系统中一个请求可能会经过多个不同的子系统，这是最好生成一个UUID附在请求中，每个子系统在大一日志时都将给UUID放在MDC里，便于以后打日志</li>
+  <li>
+    <p>分布式系统中一个请求可能会经过多个不同的子系统，这是最好生成一个UUID附在请求中，每个子系统在大一日志时都将给UUID放在MDC里，便于以后打日志</p>
+  </li>
+  <li>
+    <p>测试环境中打印sql</p>
+
+    <logger name="com.ibatis" level="debug">
+</logger>
+    <logger name="java.sql" level="debug">
+</logger>
+    <logger name="org.springframework.jdbc" level="debug">
+</logger>
+  </li>
 </ul>
 
 <p>[1]<a href="http://www.infoq.com/cn/articles/things-of-java-log-performance">http://www.infoq.com/cn/articles/things-of-java-log-performance</a></p>

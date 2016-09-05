@@ -8,7 +8,7 @@ tags: redis ds
 * [介绍](#hello)
 * [基本用法](#basic)
 
-redis是一个开源的内存数据结构存储，被用作数据库，缓存，以及消息中间件。它提供了诸如strings，hashes，lists，sets，带区间查询的sorted sets，bitmaps，hyperloglogs，以及带半径查询的geospatial indexes。redis内置了复制，lua 脚本，LRU逐出，事务以及不同级别的持久化，提供了哨兵和集群自动分区两种高可用的的模式。
+redis是一个开源的内存数据结构存储，被用作数据库，缓存，以及消息中间件。它提供了诸如strings，hashes，lists，sets，带区间查询的sorted sets，bitmaps，hyperloglogs，以及带半径查询的geospatial indexes。redis内置了复制，lua 脚本，LRU逐出，事务以及不同级别的持久化，提供了带有哨兵和集群自动分区功能的redis集群。
 
 ### 介绍 {#hello}
 
