@@ -17,6 +17,7 @@ tags: redis ds
 * [调试redis](#debug_redis)
 * [redis启动流程](#redis_start)
 * [redis接收请求](#redis_accept_request)
+    * [reactor](#reactor)
 * [redis多机](#redis_distributed)
 * [使用场景](#redis_situation)
 
@@ -350,7 +351,7 @@ ps: mac上的gdb还需设置下: http://jingyan.baidu.com/article/925f8cb8fa362e
 ### redis启动流程 {#redis_start}
 
 redis.c中有两个全局变量
-struct RedisServer * server、 struct RedisCommand *commandTable
+`struct RedisServer * server`、 `struct RedisCommand *commandTable`
 
 1. 初始化redisServer的配置initServerConfig()  
 
@@ -395,6 +396,53 @@ Q&A ?
 1. 如何将其设置为守护进程的。
 
 ### redis接受请求 {#redis_accept_request}
+
+redis的事件包含有时间事件和文件事件。
+
+1. 创建tcp链接
+2. 创建redisClient
+3. 绑定读事件到事件 loop （开始接收命令请求）
+4. 
+
+#### reactor
+
+todo
+
+redis的文件事件处理采用的是reactor模式，通过select/poll/epoll/kqueue这些I/O多路复用函数库，解决了一个线程处理多个连接的问题。
+mac上其实现为kqueue，linux为epool，sun为select，可参见config.h和ae.c中的声明。
+ 
+   ae.c
+  
+    #else
+        #ifdef HAVE_EPOLL
+        #include "ae_epoll.c"
+        #else
+            #ifdef HAVE_KQUEUE
+            #include "ae_kqueue.c"
+            #else
+            #include "ae_select.c"
+            #endif
+        #endif
+    #endif
+      
+      
+    config.h
+      
+    /* Test for polling API */
+    #ifdef __linux__
+    #define HAVE_EPOLL 1
+    #endif
+     
+    #if (defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6)) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined (__NetBSD__)
+    #define HAVE_KQUEUE 1
+    #endif
+     
+    #ifdef __sun
+    #include <sys/feature_tests.h>
+    #ifdef _DTRACE_VERSION
+    #define HAVE_EVPORT 1
+    #endif
+    #endif 
 
 ### redis多机  {#redis_distributed}
 
