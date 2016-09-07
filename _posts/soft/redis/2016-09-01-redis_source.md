@@ -333,8 +333,9 @@ sds: simple dynamic string
 
 1. 启动服务端redis-server
 2. 启动客户端redis-cli
-3. gdb attach到服务进程上
+3. gdb attach到服务进程上`gdb -p pid`，这种方式可以调试redis接收请求的过程，但是比如redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是进入到redis的目录下`make install`，然后`gdb ./src/redis-server`,然后设断点 `b 4092`,`r`
 4. 打断点，对不同数据结构进行断点调试
+
 ![gdb_redis](/images/soft/gdb_redis.png)
 
 ### redis启动流程 {#redis_start}

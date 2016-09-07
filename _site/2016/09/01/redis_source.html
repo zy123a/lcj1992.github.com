@@ -142,7 +142,7 @@
     </tr>
     <tr>
       <td>REDIS_ENCODING_EMBSTR</td>
-      <td>embstr编码的简单动态字符串</td>
+      <td>embstr编码：的简单动态字符串</td>
     </tr>
     <tr>
       <td>REDIS_ENCODING_RAW</td>
@@ -197,7 +197,16 @@ string
 
 <h3 id="ds">数据结构</h3>
 
-<p>对象底层的数据结构有这么几种:sds、list、dict、skipList、intSet、 zipList。</p>
+<p>redis底层的数据结构有这么几种:sds、list、dict、skipList、intSet、 zipList。</p>
+
+<ol>
+  <li>
+    <p>对象的底层实现，比如列表对象listObject其底层可能就是使用的list数据结构。</p>
+  </li>
+  <li>
+    <p>服务器的一些其他功能的底层实现也是这些数据结构，比如redisServer保持多个客户端的状态信息，监视器等功能底层实现也是list；redis本身就是个kv存储系统，redis数据库的底层就是使用了dict，然后dict对象底层也是用的dict，有点蒙了，可以对照上图。</p>
+  </li>
+</ol>
 
 <h4 id="sds">sds</h4>
 
@@ -440,10 +449,11 @@ typedef struct zskiplistNode {
 <ol>
   <li>启动服务端redis-server</li>
   <li>启动客户端redis-cli</li>
-  <li>gdb attach到服务进程上</li>
-  <li>打断点，对不同数据结构进行断点调试
-<img src="/images/soft/gdb_redis.png" alt="gdb_redis" /></li>
+  <li>gdb attach到服务进程上<code class="highlighter-rouge">gdb -p pid</code>，这种方式可以调试redis接收请求的过程，但是比如redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是进入到redis的目录下<code class="highlighter-rouge">make install</code>，然后<code class="highlighter-rouge">gdb ./src/redis-server</code>,然后设断点 <code class="highlighter-rouge">b 4092</code>,<code class="highlighter-rouge">r</code></li>
+  <li>打断点，对不同数据结构进行断点调试</li>
 </ol>
+
+<p><img src="/images/soft/gdb_redis.png" alt="gdb_redis" /></p>
 
 <h3 id="redis_start">redis启动流程</h3>
 
