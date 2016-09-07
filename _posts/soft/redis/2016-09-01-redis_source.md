@@ -99,8 +99,10 @@ eg:
 ### 数据结构 {#ds}
 
 redis底层的数据结构有这么几种:sds、list、dict、skipList、intSet、 zipList。
-一方面是对象的底层实现，比如列表对象listObject其底层可能就是使用的list数据结构。
-另一方面服务器的一些其他功能的底层实现也是这些数据结构，比如redisServer保持多个客户端的状态信息，监视器等功能底层实现也是list；redis本身就是个kv存储系统，redis数据库的底层就是使用了dict，然后dict对象底层也是用的dict，有点蒙了，可以对照上图。
+
+1.  对象的底层实现，比如列表对象listObject其底层可能就是使用的list数据结构。
+
+2.  服务器的一些其他功能的底层实现也是这些数据结构，比如redisServer保持多个客户端的状态信息，监视器等功能底层实现也是list；redis本身就是个kv存储系统，redis数据库的底层就是使用了dict，然后dict对象底层也是用的dict，有点蒙了，可以对照上图。
 
 #### sds {#sds}
 
