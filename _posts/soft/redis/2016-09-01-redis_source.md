@@ -333,12 +333,66 @@ sds: simple dynamic string
 
 1. 启动服务端redis-server
 2. 启动客户端redis-cli
-3. gdb attach到服务进程上`gdb -p pid`，这种方式可以调试redis接收请求的过程，但是比如redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是进入到redis的目录下`make install`，然后`gdb ./src/redis-server`,然后设断点 `b 4092`,`r`
+3. gdb attach到服务进程上`gdb -p pid`，这种方式可以调试redis接收请求的过程，但是必须redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是gdb可执行文件
 4. 打断点，对不同数据结构进行断点调试
+ps: mac上的gdb还需设置下: http://jingyan.baidu.com/article/925f8cb8fa362ec0dde0561a.html
+
+执行过程如下：
+    
+    cd /Users/lichuangjian/soft/redis-3.0-annotated
+    make install
+    gdb ./src/redis-server
+    b 3952
+    r
 
 ![gdb_redis](/images/soft/gdb_redis.png)
 
 ### redis启动流程 {#redis_start}
+
+redis.c中有两个全局变量
+struct RedisServer * server、 struct RedisCommand *commandTable
+
+1. 初始化redisServer的配置initServerConfig()  
+
+2. 如果指定了配置文件，加载配置文件，修改默认配置loadServerConfig()
+
+3. 打开监听端口listenToPort()
+
+4. 打开unix本地端口anetUnixServer()
+
+5. 创建数据库并进行初始化（默认是16个）
+
+6. 创建pubSub相关数据结构
+
+7. 初始化server的其他一些配置
+
+8. 为 serverCron() 创建时间事件aeCreateTimeEvent()
+
+9. 为 TCP 连接关联连接应答（accept）处理器aeCreateFileEvent()
+
+10. 为本地套接字关联应答处理器aeCreateFileEvent()
+
+11. 如果AOF功能打开，打开或创建aof文件
+
+12. 如果服务器以cluster方式运行，初始化cluster, clusterInit()
+
+13. 初始化复制功能有关的脚本缓存replicationScriptCacheInit()
+
+14. 初始化脚本系统scriptingInit()
+
+15. 初始化慢查询功能slowlogInit()
+
+16. 初始化BIO系统bioInit()
+
+17. 从aof或者rdb文件中载入数据
+
+18. 启动集群？
+
+19. 运行事件处理器。
+
+Q&A ?
+
+1. 如何将其设置为守护进程的。
 
 ### redis接受请求 {#redis_accept_request}
 

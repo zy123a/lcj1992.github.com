@@ -449,13 +449,93 @@ typedef struct zskiplistNode {
 <ol>
   <li>启动服务端redis-server</li>
   <li>启动客户端redis-cli</li>
-  <li>gdb attach到服务进程上<code class="highlighter-rouge">gdb -p pid</code>，这种方式可以调试redis接收请求的过程，但是比如redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是进入到redis的目录下<code class="highlighter-rouge">make install</code>，然后<code class="highlighter-rouge">gdb ./src/redis-server</code>,然后设断点 <code class="highlighter-rouge">b 4092</code>,<code class="highlighter-rouge">r</code></li>
-  <li>打断点，对不同数据结构进行断点调试</li>
+  <li>gdb attach到服务进程上<code class="highlighter-rouge">gdb -p pid</code>，这种方式可以调试redis接收请求的过程，但是必须redis服务器启动起来。所以如果观察redis的启动流程正确的姿势应该是gdb可执行文件</li>
+  <li>打断点，对不同数据结构进行断点调试
+ps: mac上的gdb还需设置下: http://jingyan.baidu.com/article/925f8cb8fa362ec0dde0561a.html</li>
 </ol>
+
+<p>执行过程如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /Users/lichuangjian/soft/redis-3.0-annotated
+make install
+gdb ./src/redis-server
+b 3952
+r
+</code></pre>
+</div>
 
 <p><img src="/images/soft/gdb_redis.png" alt="gdb_redis" /></p>
 
 <h3 id="redis_start">redis启动流程</h3>
+
+<p>redis.c中有两个全局变量
+struct RedisServer * server、 struct RedisCommand *commandTable</p>
+
+<ol>
+  <li>
+    <p>初始化redisServer的配置initServerConfig()</p>
+  </li>
+  <li>
+    <p>如果指定了配置文件，加载配置文件，修改默认配置loadServerConfig()</p>
+  </li>
+  <li>
+    <p>打开监听端口listenToPort()</p>
+  </li>
+  <li>
+    <p>打开unix本地端口anetUnixServer()</p>
+  </li>
+  <li>
+    <p>创建数据库并进行初始化（默认是16个）</p>
+  </li>
+  <li>
+    <p>创建pubSub相关数据结构</p>
+  </li>
+  <li>
+    <p>初始化server的其他一些配置</p>
+  </li>
+  <li>
+    <p>为 serverCron() 创建时间事件aeCreateTimeEvent()</p>
+  </li>
+  <li>
+    <p>为 TCP 连接关联连接应答（accept）处理器aeCreateFileEvent()</p>
+  </li>
+  <li>
+    <p>为本地套接字关联应答处理器aeCreateFileEvent()</p>
+  </li>
+  <li>
+    <p>如果AOF功能打开，打开或创建aof文件</p>
+  </li>
+  <li>
+    <p>如果服务器以cluster方式运行，初始化cluster, clusterInit()</p>
+  </li>
+  <li>
+    <p>初始化复制功能有关的脚本缓存replicationScriptCacheInit()</p>
+  </li>
+  <li>
+    <p>初始化脚本系统scriptingInit()</p>
+  </li>
+  <li>
+    <p>初始化慢查询功能slowlogInit()</p>
+  </li>
+  <li>
+    <p>初始化BIO系统bioInit()</p>
+  </li>
+  <li>
+    <p>从aof或者rdb文件中载入数据</p>
+  </li>
+  <li>
+    <p>启动集群？</p>
+  </li>
+  <li>
+    <p>运行事件处理器。</p>
+  </li>
+</ol>
+
+<p>Q&amp;A ?</p>
+
+<ol>
+  <li>如何将其设置为守护进程的。</li>
+</ol>
 
 <h3 id="redis_accept_request">redis接受请求</h3>
 
