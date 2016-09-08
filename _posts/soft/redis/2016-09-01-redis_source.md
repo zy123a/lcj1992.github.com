@@ -397,12 +397,64 @@ Q&A ?
 
 ### redis接受请求 {#redis_accept_request}
 
+gdb 调试：
+
+p (struct redisServer) server
+p (struct redisClient) c
+
+redis事件接口
+    
+    // 文件事件处理器，eg: readQueryFromClient、acceptTcpHandler、
+    // acceptUnixHandler、sendReplyToClient、acceptHandler ..
+    typedef void aeFileProc(struct aeEventLoop *eventLoop, int fd, void *clientData, int mask);
+    // 时间事件处理器，eg
+    typedef int aeTimeProc(struct aeEventLoop *eventLoop, long long id, void *clientData);
+    // 事件终结处理器，eg
+    typedef void aeEventFinalizerProc(struct aeEventLoop *eventLoop, void *clientData);
+    // 事件预处理器，eg
+    typedef void aeBeforeSleepProc(struct aeEventLoop *eventLoop);
+
+redis命令实现接口
+
+    // eg：setCommand，getCommand，zrangeCommand..
+    typedef void redisCommandProc(redisClient *c);
+
 redis的事件包含有时间事件和文件事件。
 
-1. 创建tcp链接
-2. 创建redisClient
-3. 绑定读事件到事件 loop （开始接收命令请求）
-4. 
+以最简单的get xx为例
+
+    127.0.0.1:6379> get msg
+    "heheda"
+    (3405.11s)
+
+acceptTcpHandler
+
+1. anetTcpAccept -> anetGenericAccept : 创建客户端连接
+2. acceptCommonHandler -> createClient : 
+   1. 分配redisClient内存空间，
+   2. 设置io非阻塞，
+   3. 禁用 Nagle 算法，
+   4. 设置tcpKeepAlive时间，
+   5. 添加读事件并绑定readQueryFromClient事件处理器,
+   6. 绑定client到db0,
+   7. 初始化事务和发布订阅相关数据结构
+   8. ...
+
+readQueryFromClient
+
+1. 从缓冲区读取客户端命令内容
+2. processInputBuffer或者processMultibulkBuffer
+   1. 解析命令sdssplitargs,并为解析后的每一个参数创建为一个stringObject（解析如下例子所示）
+   2. 执行命令processCommand
+      1. lookupCommand,根据命令名查找对应的redisCommand
+      2. addReply
+
+    *  sds *arr = sdssplitargs("timeout 10086\r\nport 123321\r\n");
+    *  会得出
+    *  arr[0] = "timeout"
+    *  arr[1] = "10086"
+    *  arr[2] = "port"
+    *  arr[3] = "123321 
 
 #### reactor
 

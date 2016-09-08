@@ -543,13 +543,84 @@ r
 
 <h3 id="redis_accept_request">redis接受请求</h3>
 
+<p>gdb 调试：</p>
+
+<p>p (struct redisServer) server
+p (struct redisClient) c</p>
+
+<p>redis事件接口</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 文件事件处理器，eg: readQueryFromClient、acceptTcpHandler、
+// acceptUnixHandler、sendReplyToClient、acceptHandler ..
+typedef void aeFileProc(struct aeEventLoop *eventLoop, int fd, void *clientData, int mask);
+// 时间事件处理器，eg
+typedef int aeTimeProc(struct aeEventLoop *eventLoop, long long id, void *clientData);
+// 事件终结处理器，eg
+typedef void aeEventFinalizerProc(struct aeEventLoop *eventLoop, void *clientData);
+// 事件预处理器，eg
+typedef void aeBeforeSleepProc(struct aeEventLoop *eventLoop);
+</code></pre>
+</div>
+
+<p>redis命令实现接口</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// eg：setCommand，getCommand，zrangeCommand..
+typedef void redisCommandProc(redisClient *c);
+</code></pre>
+</div>
+
 <p>redis的事件包含有时间事件和文件事件。</p>
 
+<p>以最简单的get xx为例</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1:6379&gt; get msg
+"heheda"
+(3405.11s)
+</code></pre>
+</div>
+
+<p>acceptTcpHandler</p>
+
 <ol>
-  <li>创建tcp链接</li>
-  <li>创建redisClient</li>
-  <li>绑定读事件到事件 loop （开始接收命令请求）</li>
-  <li></li>
+  <li>anetTcpAccept -&gt; anetGenericAccept : 创建客户端连接</li>
+  <li>acceptCommonHandler -&gt; createClient :
+    <ol>
+      <li>分配redisClient内存空间，</li>
+      <li>设置io非阻塞，</li>
+      <li>禁用 Nagle 算法，</li>
+      <li>设置tcpKeepAlive时间，</li>
+      <li>添加读事件并绑定readQueryFromClient事件处理器,</li>
+      <li>绑定client到db0,</li>
+      <li>初始化事务和发布订阅相关数据结构</li>
+      <li>…</li>
+    </ol>
+  </li>
+</ol>
+
+<p>readQueryFromClient</p>
+
+<ol>
+  <li>从缓冲区读取客户端命令内容</li>
+  <li>processInputBuffer或者processMultibulkBuffer
+    <ol>
+      <li>解析命令sdssplitargs,并为解析后的每一个参数创建为一个stringObject（解析如下例子所示）</li>
+      <li>执行命令processCommand
+        <ol>
+          <li>lookupCommand,根据命令名查找对应的redisCommand</li>
+          <li>addReply</li>
+        </ol>
+      </li>
+    </ol>
+
+    <ul>
+      <li>sds *arr = sdssplitargs(“timeout 10086\r\nport 123321\r\n”);</li>
+      <li>会得出</li>
+      <li>arr[0] = “timeout”</li>
+      <li>arr[1] = “10086”</li>
+      <li>arr[2] = “port”</li>
+      <li>arr[3] = “123321</li>
+    </ul>
+  </li>
 </ol>
 
 <h4 id="reactor">reactor</h4>
