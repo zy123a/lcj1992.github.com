@@ -397,10 +397,9 @@ Q&A ?
 
 ### redis接受请求 {#redis_accept_request}
 
-gdb 调试：
+`p (struct redisServer) server`
 
-p (struct redisServer) server
-p (struct redisClient) c
+`p (struct redisClient) c`
 
 redis事件接口
     

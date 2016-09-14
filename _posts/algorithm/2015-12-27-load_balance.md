@@ -85,7 +85,7 @@ tags: load_balance
 基于概率统计的理论，吞吐量越大，随机算法的效果越接近轮询算法的效果。因此，你还会考虑一定要使用需要付出一定代价的轮询算法么？
 
 #### 源地址哈希法 {#source_address}
-    
+
 源地址哈希的思想是获取客户端访问的ip地址值，通过哈希函数计算得到一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是要访问的服务器的序号。采用哈希法进行负载均衡，同一个ip地址的客户端，当后端服务器列表不变时，它每次都会被映射到同一台后端服务器进行访问。
 
     public static String getServerByConsumerHash(String remoteIp) {
@@ -166,13 +166,14 @@ tags: load_balance
 
 最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它正是根据后端服务器当前的链接情况，动态的选取其中积压连接数最少的一台服务器来处理当前请求，尽可能的提高后端服务器的利用效率，将负载合理的分流到每一台机器。
 
-#### sticky {sticky}
+#### sticky {#sticky}
 
 保证始终只在一台处理，如果这台服务器挂了，会自动切换到下一台上。
 
 #### 一致性hash {#consistent_hash}
 
 主要用于分布式缓存集群,避免扩容或宕机带来的命中率急剧下降.
+
 
 先构造一个长度为2^32的整数环(这个环被称作一致性hash环)根据节点名称的hash值(其分布范围为\[0,0^32 -1\]),将缓存服务器节点放置在这个Hash环上,然后根据需要缓存的数据的Key值计算得到其Hash值(其
 分布范围也同样为\[0,2^32-1\]),然后在Hash环上顺时针查找距离这个Key的Hash值最近的缓存服务器节点,完成Key到服务器的Hash映射查找
@@ -181,35 +182,35 @@ tags: load_balance
 这个长度为2^32的一致性Hash环通常使用二叉查找树实现,Hash查找过程实际上是在二叉查找树中查找小于查找树的最小数值,当然这个二叉树的最右边叶子节点和最左边的叶子节点相连接,构成环.
 
 还有问题,新加入节点后,节点之间的数据负载是不一样的,所以又引入虚拟节点的概念,就是将物理缓存服务器虚拟为一组虚拟缓存服务器,分散在整个环上.
-   
+
        public class ConsistentHash<T> {
-       
+
            private final HashFunction hashFunction;
            private final int numberOfReplicas;
            private final SortedMap<Integer, T> circle = new TreeMap<Integer, T>();
-       
+
            public ConsistentHash(HashFunction hashFunction, int numberOfReplicas,
                                  Collection<T> nodes) {
                this.hashFunction = hashFunction;
                this.numberOfReplicas = numberOfReplicas;
-       
+
                for (T node : nodes) {
                    add(node);
                }
            }
-       
+
            public void add(T node) {
                for (int i = 0; i < numberOfReplicas; i++) {
                    circle.put(hashFunction.hash(node.toString() + i), node);
                }
            }
-       
+
            public void remove(T node) {
                for (int i = 0; i < numberOfReplicas; i++) {
                    circle.remove(hashFunction.hash(node.toString() + i));
                }
            }
-       
+
            public T get(Object key) {
                if (circle.isEmpty()) {
                    return null;
@@ -221,9 +222,9 @@ tags: load_balance
                }
                return circle.get(hash);
            }
-       
+
        }
-       
+
 #### 参考 {#ref}
 
 [Consistent Hashing Blog]<https://community.oracle.com/blogs/tomwhite/2007/11/27/consistent-hashing>    

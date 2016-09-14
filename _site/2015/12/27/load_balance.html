@@ -203,7 +203,7 @@ static {
 
 <p>最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它正是根据后端服务器当前的链接情况，动态的选取其中积压连接数最少的一台服务器来处理当前请求，尽可能的提高后端服务器的利用效率，将负载合理的分流到每一台机器。</p>
 
-<h4 id="sticky-sticky">sticky {sticky}</h4>
+<h4 id="sticky">sticky</h4>
 
 <p>保证始终只在一台处理，如果这台服务器挂了，会自动切换到下一台上。</p>
 
@@ -219,33 +219,33 @@ static {
 <p>还有问题,新加入节点后,节点之间的数据负载是不一样的,所以又引入虚拟节点的概念,就是将物理缓存服务器虚拟为一组虚拟缓存服务器,分散在整个环上.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>   public class ConsistentHash&lt;T&gt; {
-   
+
        private final HashFunction hashFunction;
        private final int numberOfReplicas;
        private final SortedMap&lt;Integer, T&gt; circle = new TreeMap&lt;Integer, T&gt;();
-   
+
        public ConsistentHash(HashFunction hashFunction, int numberOfReplicas,
                              Collection&lt;T&gt; nodes) {
            this.hashFunction = hashFunction;
            this.numberOfReplicas = numberOfReplicas;
-   
+
            for (T node : nodes) {
                add(node);
            }
        }
-   
+
        public void add(T node) {
            for (int i = 0; i &lt; numberOfReplicas; i++) {
                circle.put(hashFunction.hash(node.toString() + i), node);
            }
        }
-   
+
        public void remove(T node) {
            for (int i = 0; i &lt; numberOfReplicas; i++) {
                circle.remove(hashFunction.hash(node.toString() + i));
            }
        }
-   
+
        public T get(Object key) {
            if (circle.isEmpty()) {
                return null;
@@ -257,7 +257,7 @@ static {
            }
            return circle.get(hash);
        }
-   
+
    }
 </code></pre>
 </div>
