@@ -46,9 +46,18 @@
       <li><a href="#stream">Stream</a></li>
     </ul>
   </li>
+  <li><a href="#ref">参考</a></li>
 </ul>
 
+<p>java8函数式编程里一句话，觉得说的特好：函数式编程是对行为进行抽象。</p>
+
 <h3 id="interface_impl">接口可以有实现了, default和static</h3>
+
+<h4 id="default">为什么要有default方法?</h4>
+
+<p>java8中Collection接口中增加了stream方法，这就意味着所有Collection的子类都要实现该接口方法，对于核心类库，实现该方法即可，但是对于第三方的类库，eg：MyArrayList都要实现么，这太坑爹了，于是引入了default方法，你没有我给你提供个默认的，保证二进制兼容性（你用jdk1的javac上编译过能运行的代码，用jdk8也能编译过能运行）。</p>
+
+<h4 id="section">这样接口就可以有实现了。</h4>
 
 <p>eg:</p>
 
@@ -66,7 +75,7 @@
 
 <p>这样就可以实现多继承了。</p>
 
-<p>但是问题来了</p>
+<p>但是问题又来了</p>
 
 <ol>
   <li>
@@ -139,17 +148,26 @@ public class MultiExtend {
 </code></pre>
 </div>
 
+<h4 id="java8defaultstatic">java8中增加的一些default和static方法</h4>
+
+<ol>
+  <li>Collection中增加了stream default方法</li>
+  <li>Iterator中增加了forEach方法</li>
+  <li>…</li>
+</ol>
+
 <h3 id="functionalInterface">增加@FunctionalInterface注解</h3>
 
 <ol>
   <li>接口可以有实现</li>
   <li>如果接口只有一个非static，非default的方法，那么这个接口就是函数式的接口</li>
-  <li>可以有三种声明方式
+  <li>可以有这几种声明方式：小括号、类型、参数名、花括号都可能是没有的！
     <ul>
       <li>正常是这样的:  <code class="highlighter-rouge">函数式接口 = (类型 参数名) -&gt; { 函数实现};</code></li>
-      <li>可以不指定类型,会自行推断</li>
+      <li>如果接口声明中指定了类型，实现中可以不指定类型,会自行推断<code class="highlighter-rouge">Function&lt;Integer,Integer&gt; = (i) -&gt; i + 1;</code></li>
+      <li>当只有一个参数时,且可以不指定类型时，可以不要小括号<code class="highlighter-rouge">Function&lt;Integer,Integer&gt; = i -&gt; i + 1;</code></li>
       <li>如果方法体只有一行,可以不要大括号</li>
-      <li>如果是某个类的某个方法和接口 与函数式接口的入参,返回值一样,可以使用::来指定</li>
+      <li><code class="highlighter-rouge">方法引用</code>: 如果是某个类的某个方法和接口 与函数式接口的入参,返回值一样,可以使用::来指定</li>
     </ul>
   </li>
 </ol>
@@ -298,6 +316,8 @@ comparator.reversed().compare(p1, p2);
 
 <h4 id="optional">Optional</h4>
 
+<p>替换null值。</p>
+
 <p>eg:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>// Optional
@@ -311,6 +331,30 @@ optional.ifPresent((s) -&gt; System.out.println(s.charAt(0)));
 
 <h4 id="stream">Stream</h4>
 
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">高阶函数</code>是指接受另外一个函数作为参数或者返回一个函数的函数。高阶函数不难辨认：看函数签名就够了，如果函数的参数列表里包含函数接口，或该函数返回一个函数接口，那么该函数就是高阶函数。
+stream接口中的大部分函数都是高阶函数。</p>
+  </li>
+  <li>
+    <p>像filter这样的只描述stream，最终不产生新集合的方法叫做<code class="highlighter-rouge">惰性求值</code>方法，而像count这样最终会从stream产生值的方法叫做<code class="highlighter-rouge">及早求值</code>方法。判断一个操作是惰性求值还是及早求值很简单：只需看它的返回值。</p>
+  </li>
+  <li>
+    <p>除了Stream还有ParallelStream并行流</p>
+  </li>
+</ol>
+
+<p>常用的流操作：</p>
+
+<ol>
+  <li>collect(toList()) : 由stream里的值生成一个列表，是一个及早求值操作<code class="highlighter-rouge">Stream.of("a","b","c").collect(Collectors.toList())</code></li>
+  <li>map : 将一种类型的值转换成另外一种类型，将一个流转换成一个新的流</li>
+  <li>filter : 遍历数据并检查其中的元素</li>
+  <li>flatMap : 可用Stream替换值，然后将多个Stream连接成一个Stream。</li>
+  <li>max、min、count : 最大值，最小值，统计</li>
+  <li>reduce : 实现从一组值中生成一个值，max、min、count都是reduce操作，只是因为太常用了，而被纳入了标准库。</li>
+</ol>
+
 <p>eg:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>// Stream
@@ -323,6 +367,9 @@ stringCollection.add("bbb3");
 stringCollection.add("ccc");
 stringCollection.add("bbb2");
 stringCollection.add("ddd1");
+
+// Stream的工厂方法
+Stream.of("ddd2","aaa2","bbb1","aaa1","bbb3","ccc","bbb2","ddd1").collect(Collectors.toList());
 
 // Filter
 stringCollection.stream().filter((s) -&gt; s.startsWith("a")).forEach(System.out::println);
@@ -347,6 +394,17 @@ Optional&lt;String&gt; reduced = stringCollection.stream().sorted().reduce((s1, 
 reduced.ifPresent(System.out::println);
 </code></pre>
 </div>
+
+<p>ps:
+java8中ThreadLocal中增加了一个工厂方法，接受一个lambda表达式，并产生一个新的ThreadLocal对象</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ThreadLocal&lt;String&gt; source = ThreadLocal.withInitial(() -&gt; "mtp");
+</code></pre>
+</div>
+
+<h3 id="ref">参考</h3>
+
+<p>[java8函数式编程]<a href="https://book.douban.com/subject/26346017/">https://book.douban.com/subject/26346017/</a></p>
 
         <ul class="prev_next">
             

@@ -2,6 +2,13 @@
 <articles>
     
     <article>
+        <title>redis集群搭建及容灾</title>
+        <url>http://foolchild.cn/2016/09/04/redis_cluster</url>
+        <tag>redisclustersentinel</tag>
+        <date>2016-09-04</date>
+    </article>
+    
+    <article>
         <title>redis源码分析</title>
         <url>http://foolchild.cn/2016/09/01/redis_source</url>
         <tag>redisds</tag>

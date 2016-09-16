@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "redis集群搭建及容灾 - 2016-09-04 - redis_cluster_sentinel",
+		"url" : "/2016/09/04/redis_cluster"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "redis源码分析 - 2016-09-01 - redis_ds",
 		"url" : "/2016/09/01/redis_source"
 	}
