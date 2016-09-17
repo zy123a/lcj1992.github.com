@@ -309,7 +309,7 @@
 <lastmod>2016-01-07T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2016/01/07/spring_base</loc>
+<loc>http://foolchild.cn/2016/01/07/spring_module</loc>
 <lastmod>2016-01-07T00:00:00+08:00</lastmod>
 </url>
 <url>
@@ -401,11 +401,11 @@
 <lastmod>2015-12-28T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/12/28/spring_proxy</loc>
+<loc>http://foolchild.cn/2015/12/28/spring_conf</loc>
 <lastmod>2015-12-28T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/12/28/spring_conf</loc>
+<loc>http://foolchild.cn/2015/12/28/spring_aop</loc>
 <lastmod>2015-12-28T00:00:00+08:00</lastmod>
 </url>
 <url>
@@ -631,10 +631,6 @@
 <url>
 <loc>http://foolchild.cn/2015/03/18/shell_basic</loc>
 <lastmod>2015-03-18T00:00:00+08:00</lastmod>
-</url>
-<url>
-<loc>http://foolchild.cn/2015/01/29/springAnnotation</loc>
-<lastmod>2015-01-29T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>http://foolchild.cn/2015/01/27/springmvc</loc>

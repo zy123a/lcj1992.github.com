@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> annotation-config与component-scan  </title>
+    <title> spring aop  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,218 +27,157 @@
 </div>
 
     <div id="main">
-        <h2> annotation-config与component-scan </h2>
-        <p><strong>注：好文章的搬运工！</strong>
-&gt;   *<code class="highlighter-rouge">&lt;context:annotation-config&gt;</code>用来激活已经注册在application context中的beans的注解。（无论他是通过xml还是通过包扫描定义的） <br />
-&gt;   *<code class="highlighter-rouge">&lt;context:component-scan&gt;</code>可以做<code class="highlighter-rouge">&lt;context:annotation-config&gt;</code>做的，而且<code class="highlighter-rouge">&lt;context:component-scan&gt;</code>还可以扫包来发现和向application context中注册beans。</p>
+        <h2> spring aop </h2>
+        <ul>
+  <li><a href="#dynamic_proxy">动态代理</a></li>
+  <li><a href="#static_proxy">静态代理</a></li>
+  <li><a href="#aop">aop</a></li>
+</ul>
 
-<h2 id="examples">examples</h2>
-<p>类型为A，B，C的三个类，B，C 被注入到A中</p>
+<p>要讲spring的aop，就不能不讲代理。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.xxx;
-public class B {
-  public B() {
-    System.out.println("creating bean B: " + this);
-  }
-}
+<h3 id="dynamic_proxy">动态代理</h3>
 
-package com.xxx;
-public class C {
-  public C() {
-    System.out.println("creating bean C: " + this);
-  }
-}
+<p>spring Aop使用<code class="highlighter-rouge">jdk动态代理</code>或者<code class="highlighter-rouge">cglib代理</code>来为实例创建代理。</p>
 
-package com.yyy;
-import com.xxx.B;
-import com.xxx.C;
-public class A { 
-  private B bbb;
-  private C ccc;
-  public A() {
-    System.out.println("creating bean A: " + this);
-  }
-  public void setBbb(B bbb) {
-    System.out.println("setting A.bbb with " + bbb);
-    this.bbb = bbb;
-  }
-  public void setCcc(C ccc) {
-    System.out.println("setting A.ccc with " + ccc);
-    this.ccc = ccc; 
-  }
-} 配置文件如下：  
+<p>如果目标对象实现了至少一个接口，那么jdk动态代理将会被使用。所有被这个目标类实现的接口都将被代理。如果目标对象没有实现任何的接口，那么cglib代理将被创建。</p>
 
-&lt;bean id="bBean" class="com.xxx.B" /&gt;
-&lt;bean id="cBean" class="com.xxx.C" /&gt;
-&lt;bean id="aBean" class="com.yyy.A"&gt;
-  &lt;property name="bbb" ref="bBean" /&gt;
-  &lt;property name="ccc" ref="cBean" /&gt;
-&lt;/bean&gt; 当我们load context时，可以得到如下结果：
+<p>如果你想强制使用cglib代理（例如，想代理目标对象中所有的方法，而不仅仅是实现的接口的方法），你可以做这些，但是有一些问题需要考虑：</p>
 
-creating bean B: com.xxx.B@c2ff5
-creating bean C: com.xxx.C@1e8a1f6
-creating bean A: com.yyy.A@1e152c5
-setting A.bbb with com.xxx.B@c2ff5
-setting A.ccc with com.xxx.C@1e8a1f6 这是老式风格的spring，让我们用注解来简化xml 首先，我们诸如BBB 和 CCC 在bean A中向这样：  
+<p>final 方法不能被advised，因为他们不能被重写
+从3.2版本，cglib被包含org.srpingframework  的spring-croe jar包中
+为了强制使用cglib代理，将<aop:config>中proxy-target-class设为true</aop:config></p>
 
-package com.yyy;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.xxx.B;
-import com.xxx.C;
-public class A { 
-  private B bbb;
-  private C ccc;
-  public A() {
-    System.out.println("creating bean A: " + this);
-  }
-  @Autowired
-  public void setBbb(B bbb) {
-    System.out.println("setting A.bbb with " + bbb);
-    this.bbb = bbb;
-  }
-  @Autowired
-  public void setCcc(C ccc) {
-    System.out.println("setting A.ccc with " + ccc);
-    this.ccc = ccc;
-  }
-} 这样的话，我们就可以移除xml中的这两行：   
-
-&lt;property name="bbb" ref="bBean" /&gt;
-&lt;property name="ccc" ref="cBean" /&gt; 我的xml就可以简化为：  
-
-&lt;bean id="bBean" class="com.xxx.B" /&gt;
-&lt;bean id="cBean" class="com.xxx.C" /&gt;
-&lt;bean id="aBean" class="com.yyy.A" /&gt; 当我们load context时，可以得到如下结果：   
-
-creating bean B: com.xxx.B@5e5a50
-creating bean C: com.xxx.C@54a328
-creating bean A: com.yyy.A@a3d4cf ok，这不对啊！发生什么了？为什么我的属性没有被注入？ 注解是一个很好的特性，但是他们自己不做任何   事情，他们仅仅是注解，你需要一个processing tool来发现这些注解，然后用他们来做些什么。`&lt;context:annotation-config&gt;`就是来干这个的，他找到和他定义在同一个application context的beans，并激活这些beans中的注解。 如果我更改我的xml如下：  
-
-&lt;context:annotation-config /&gt;
-&lt;bean id="bBean" class="com.xxx.B" /&gt;
-&lt;bean id="cBean" class="com.xxx.C" /&gt;
-&lt;bean id="aBean" class="com.yyy.A" /&gt; 当我load the application context 我得到了合适的结果：  
-
-creating bean B: com.xxx.B@15663a2
-creating bean C: com.xxx.C@cd5f8b
-creating bean A: com.yyy.A@157aa53
-setting A.bbb with com.xxx.B@15663a2
-setting A.ccc with com.xxx.C@cd5f8b
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;aop:config proxy-target-class="true"&gt;
+    &lt;!-- other beans defined here... --&gt;
+&lt;/aop:config&gt;
 </code></pre>
 </div>
 
-<p>ok，当我移除了xml中的这两行然后添加了一行，结果很好。那我把xml中全删了，然后用注解来实现呢？</p>
+<p>在使用@Aspectj自动代理时，为了强制使用cglib，需要设置<aop:aspectj-autoproxy>的属性‘proxy-target-class’为true。</aop:aspectj-autoproxy></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.xxx;
-import org.springframework.stereotype.Component;
-@Component
-public class B {
-  public B() {
-    System.out.println("creating bean B: " + this);
-  }
-}
-
-package com.xxx;
-import org.springframework.stereotype.Component;
-@Component
-public class C {
-  public C() {
-    System.out.println("creating bean C: " + this);
-  }
-}
-
-package com.yyy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.xxx.B;
-import com.xxx.C;
-@Component
-public class A { 
-  private B bbb;
-  private C ccc;
-  public A() {
-    System.out.println("creating bean A: " + this);
-  }
-  @Autowired
-  public void setBbb(B bbb) {
-    System.out.println("setting A.bbb with " + bbb);
-    this.bbb = bbb;
-  }
-  @Autowired
-  public void setCcc(C ccc) {
-    System.out.println("setting A.ccc with " + ccc);
-    this.ccc = ccc;
-  }
-} xml中仅仅保留：
-
-&lt;context:annotation-config /&gt; 当重新load context时，nothing，没有beans被创建，没有beans被注入。   这是因为，正如我第一段说的，`&lt;context:annotation-config /&gt;`仅仅对已经注册在application context中的beans生效，当移除xml中的配置时，没有beans被创建，`&lt;context:annotation-config /&gt;`没有作用的对象。   但是这对于`&lt;context:component-scan&gt;`不是问题，他可以扫包来创建beans，然后注入。   然后我们更改xml配置如下：  
-
-&lt;context:component-scan base-package="com.xxx" /&gt; 当load context时，得到如下输出：  
-
-creating bean B: com.xxx.B@1be0f0a
-creating bean C: com.xxx.C@80d1ff 还是少了点啥！为什么呢？ 原来A在com.yyy包中，而我xml中只用了包com.xxx,所以会遗漏A，更改xml配置如下：  
-
-&lt;context:component-scan base-package="com.xxx,com.yyy" /&gt;     得到期望的结果. 保持A,B,C的注解，修改xml配置如下：  
-
-&lt;context:component-scan     base-package="com.xxx" /&gt;
-&lt;bean id="aBean" class="com.yyy.A" /&gt; 我们仍然得到正确的结果：  
-
-creating bean B: com.xxx.B@157aa53
-creating bean C: com.xxx.C@ec4a87
-creating bean A: com.yyy.A@1d64c37
-setting A.bbb with com.xxx.B@157aa53
-setting A.ccc with com.xxx.C@ec4a87   即使A类的bean没有被扫描到，`&lt;context:component-scan&gt;`仍然能够对application context中的所有beans起作用，即使A是通过xml注册的。  
-但是如果我们修改我们的xml配置如下，会不会得到重复的beans呢？  
-
-&lt;context:annotation-config /&gt;
-&lt;context:component-scan base-package="com.xxx" /&gt;
-&lt;bean id="aBean" class="com.yyy.A" /&gt;   没有重复，我们仍然得到了期望的结果：  
-
-creating bean B: com.xxx.B@157aa53
-creating bean C: com.xxx.C@ec4a87
-creating bean A: com.yyy.A@1d64c37
-setting A.bbb with com.xxx.B@157aa53
-setting A.ccc with com.xxx.C@ec4a87   这是因为如果有`&lt;context:component-scan&gt;`了，`&lt;context:annotation-config /&gt;`会被忽略，spring只运行他们一次。  
-即使你注册了多个processing tools，Spring仍然会确定你只做了一次，比如你的xml如下：  
-
-&lt;context:annotation-config /&gt;
-&lt;context:component-scan base-package="com.xxx" /&gt;
-&lt;bean id="aBean" class="com.yyy.A" /&gt;
-&lt;bean id="bla" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
-&lt;bean id="bla1" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
-&lt;bean id="bla2" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt;
-&lt;bean id="bla3" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /&gt; 仍然会得到一样的结果：  
-
-creating bean B: com.xxx.B@157aa53
-creating bean C: com.xxx.C@ec4a87
-creating bean A: com.yyy.A@25d2b2
-setting A.bbb with com.xxx.B@157aa53
-setting A.ccc with com.xxx.C@ec4a87 通过学习，你会发现`&lt;context:component-scan/&gt;`能够识别&lt;`context:annotation-config/&gt;`的超集，也就是 &gt;   *`@Component`, `@Service`, `@Repository`, `@Controller`, `@Endpoint`        &gt;   *`@Configuration`, `@Bean`, `@Lazy`, `@Scope`, `@Order`, `@Primary`, `@Profile`, `@DependsOn`, `@Import`, `@ImportResource`
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;aop:aspectj-autoproxy proxy-target-class="true"/&gt;
 </code></pre>
 </div>
 
-<p>As you can see <code class="highlighter-rouge">&lt;context:component-scan/&gt;</code> logically extends <code class="highlighter-rouge">&lt;context:annotation-config/&gt;</code> with CLASSPATH component scanning and Java @Configuration features.</p>
+<p>使用proxy-target-class=true 在<tx:annotation-driven></tx:annotation-driven>,<aop:aspectj-autoproxy></aop:aspectj-autoproxy>,<aop:config></aop:config>任一，会使cglib代理在三者都生效。</p>
 
-<p>[1]<a href="http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan">http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan</a></p>
+<h3 id="static_proxy">静态代理</h3>
+
+<p>aspectj</p>
+
+<h3 id="aop">aop</h3>
+
+<h4 id="aop-1">aop术语</h4>
+
+<ul>
+  <li>通知(Advice): 定义了切面是什么以及何时使用，除了描述切面要完成的工作，通知还解决了何时执行这个工作的问题
+    <ul>
+      <li>前置通知(Before): 在目标方法被调用之前调用通知功能,下类似</li>
+      <li>后置通知(After):</li>
+      <li>返回通知(After-teturing)</li>
+      <li>异常通知(After-throwing)</li>
+      <li>环绕通知(Around)</li>
+    </ul>
+  </li>
+  <li>连接点(JoinPoint) :在应用执行过程中能够插入切面的一个点</li>
+  <li>切点(PointCut): 切点的定义会匹配通知所要织入的一个或多个连接点</li>
+  <li>切面(Aspect): 切面是通知和切点的结合，通知和切点共同定义了切面的全部内容–它是什么，在何时和何处完成其功能</li>
+  <li>引入(Introduction): 引入允许我们向现有的类添加新方法或属性</li>
+  <li>织入(Weaving): 织入是把切面应用到目标对象并创建新的代理对象的过程。切面在指定的连接点织入到目标对象。在目标对象的生命周期里有多个点可以进行织入：
+    <ul>
+      <li>编译期:切面在目标类编译时被织入，这种方式需要特殊的编译器，Aspectj的织入编译器就是以这种方法织入切面的</li>
+      <li>类加载期: 切面在目标类加载到jvm时被织入。这种方式需要特殊的类加载器，它可以在目标类在被引入应用之前增强该目标类的字节码，Aspectj5的加载时织入(load-time weaving,LTW)就支持以这种方式织入切面</li>
+      <li>运行时: 切面在应用运行的某个时刻被织入，一般情况下，在织入切面时，aop容器会为目标对象动态创建一个代理对象。spring aop就是以这种方式织入切面的。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>以实战中例子说明如下：</p>
+
+<p><img src="/images/java_web/aop_action.png" alt="aop例子说明" /></p>
+
+<h4 id="section">通过切点来选择连接点</h4>
+
+<p>正如前面所述，切点用于准确定位应该在什么地方应用切面的通知。通知和切点是切面的最基本元素。因此了解如何编写切点非常重要。</p>
+
+<p>在spring aop中，要使用aspectj的切点表达式语言来定义切点，spring aop仅支持aspectj切点指示器的一个子集。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>aspectj指示器</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>arg()</td>
+      <td>限制连接点匹配参数为指定类型的执行方法</td>
+    </tr>
+    <tr>
+      <td>@arg()</td>
+      <td>限制连接点匹配参数由指定注解标注的执行方法</td>
+    </tr>
+    <tr>
+      <td>execution()</td>
+      <td>用于匹配是连接点的执行方法</td>
+    </tr>
+    <tr>
+      <td>this()</td>
+      <td>限制连接点匹配aop代理的bean引用为指定类型的类</td>
+    </tr>
+    <tr>
+      <td>target()</td>
+      <td>限制连接点匹配目标对象为指定类型的类</td>
+    </tr>
+    <tr>
+      <td>@target()</td>
+      <td>限制连接点匹配特定的执行对象，这些对象对应的类要具有指定类型的注解</td>
+    </tr>
+    <tr>
+      <td>within()</td>
+      <td>限制连接点匹配指定的类型</td>
+    </tr>
+    <tr>
+      <td>@within()</td>
+      <td>限制连接点匹配指定胡姐所标注的类型(当使用spring aop时，方法定义在由指定注解所标注的类里)</td>
+    </tr>
+    <tr>
+      <td>@annotation()</td>
+      <td>限制匹配带有指定注解的连接点</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ps:</p>
+
+<ol>
+  <li>在spring中尝试使用aspectj其他指示器时，将会抛出IIlegalArgument Exception异常。</li>
+  <li>只有execution指示器是实际执行匹配的，而其他的指示器都是用来限制匹配的。</li>
+</ol>
+
+<p>举例如下：
+<img src="/images/java_web/aspectj_expression.jpeg" alt="aspectj_expression" /></p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/01/27/springmvc">从启动日志看spring mvc的流程</a>
+                <a href="/2015/12/28/tables_databases">数据库分库分表</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2015/03/18/shell_basic">shell语法</a>
+                <a href="/2015/12/28/spring_conf">spring常用配置</a>
             </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2015/01/29/springAnnotation" data-title="annotation-config与component-scan"
-             data-url="http://lcj1992.github.io/2015/01/29/springAnnotation">
+        <div class="ds-share flat" data-thread-key="/2015/12/28/spring_aop" data-title="spring aop"
+             data-url="http://lcj1992.github.io/2015/12/28/spring_aop">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -267,8 +206,8 @@ setting A.ccc with com.xxx.C@ec4a87 通过学习，你会发现`&lt;context:comp
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/01/29/springAnnotation" data-title="annotation-config与component-scan"
-             data-url="http://lcj1992.github.io/2015/01/29/springAnnotation"></div>
+        <div class="ds-thread" data-thread-key="/2015/12/28/spring_aop" data-title="spring aop"
+             data-url="http://lcj1992.github.io/2015/12/28/spring_aop"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -431,11 +370,11 @@ setting A.ccc with com.xxx.C@ec4a87 通过学习，你会发现`&lt;context:comp
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/01/27/springmvc";
+                    window.location.href = "/2015/12/28/tables_databases";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/03/18/shell_basic";
+                    window.location.href = "/2015/12/28/spring_conf";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

@@ -2,7 +2,7 @@
 <articles>
     
     <article>
-        <title>redis集群搭建及容灾</title>
+        <title>redis集群搭建</title>
         <url>http://foolchild.cn/2016/09/04/redis_cluster</url>
         <tag>redisclustersentinel</tag>
         <date>2016-09-04</date>
@@ -542,7 +542,7 @@
     
     <article>
         <title>spring基础</title>
-        <url>http://foolchild.cn/2016/01/07/spring_base</url>
+        <url>http://foolchild.cn/2016/01/07/spring_module</url>
         <tag>spring</tag>
         <date>2016-01-07</date>
     </article>
@@ -702,16 +702,16 @@
     </article>
     
     <article>
-        <title>spring代理(译)</title>
-        <url>http://foolchild.cn/2015/12/28/spring_proxy</url>
-        <tag>springproxy</tag>
+        <title>spring常用配置</title>
+        <url>http://foolchild.cn/2015/12/28/spring_conf</url>
+        <tag>spring</tag>
         <date>2015-12-28</date>
     </article>
     
     <article>
-        <title>spring常用配置</title>
-        <url>http://foolchild.cn/2015/12/28/spring_conf</url>
-        <tag>spring</tag>
+        <title>spring aop</title>
+        <url>http://foolchild.cn/2015/12/28/spring_aop</url>
+        <tag>springproxyaop</tag>
         <date>2015-12-28</date>
     </article>
     
@@ -1105,13 +1105,6 @@
         <url>http://foolchild.cn/2015/03/18/shell_basic</url>
         <tag>shell</tag>
         <date>2015-03-18</date>
-    </article>
-    
-    <article>
-        <title>annotation-config与component-scan</title>
-        <url>http://foolchild.cn/2015/01/29/springAnnotation</url>
-        <tag></tag>
-        <date>2015-01-29</date>
     </article>
     
     <article>

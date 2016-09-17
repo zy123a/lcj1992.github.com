@@ -133,5 +133,8 @@ spring的配置xsd都有详细说明，然后稍微懂点英语，会看xsd就ok
         </property>
     </bean>
 
+#### 参考 {#ref}
 
-http://stackoverflow.com/questions/7621920/scopeprototype-bean-scope-not-creating-new-bean
+[1]<http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan>
+
+[2]<http://stackoverflow.com/questions/7621920/scopeprototype-bean-scope-not-creating-new-bean>

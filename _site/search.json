@@ -3,7 +3,7 @@
 	"data" : [
 	 
 	{
-		"title" : "redis集群搭建及容灾 - 2016-09-04 - redis_cluster_sentinel",
+		"title" : "redis集群搭建 - 2016-09-04 - redis_cluster_sentinel",
 		"url" : "/2016/09/04/redis_cluster"
 	}
 	
@@ -620,7 +620,7 @@
     
 	{
 		"title" : "spring基础 - 2016-01-07 - spring",
-		"url" : "/2016/01/07/spring_base"
+		"url" : "/2016/01/07/spring_module"
 	}
 	
 	,
@@ -803,16 +803,16 @@
 	
     
 	{
-		"title" : "spring代理(译) - 2015-12-28 - spring_proxy",
-		"url" : "/2015/12/28/spring_proxy"
+		"title" : "spring常用配置 - 2015-12-28 - spring",
+		"url" : "/2015/12/28/spring_conf"
 	}
 	
 	,
 	
     
 	{
-		"title" : "spring常用配置 - 2015-12-28 - spring",
-		"url" : "/2015/12/28/spring_conf"
+		"title" : "spring aop - 2015-12-28 - spring_proxy_aop",
+		"url" : "/2015/12/28/spring_aop"
 	}
 	
 	,
@@ -1261,14 +1261,6 @@
 	{
 		"title" : "shell语法 - 2015-03-18 - shell",
 		"url" : "/2015/03/18/shell_basic"
-	}
-	
-	,
-	
-    
-	{
-		"title" : "annotation-config与component-scan - 2015-01-29 - ",
-		"url" : "/2015/01/29/springAnnotation"
 	}
 	
 	,

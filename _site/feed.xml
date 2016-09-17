@@ -5,12 +5,12 @@
         <description>foolchild的技术博客</description>
         <link>http://foolchild.cn/</link>
         <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>Wed, 14 Sep 2016 17:49:53 +0800</pubDate>
-        <lastBuildDate>Wed, 14 Sep 2016 17:49:53 +0800</lastBuildDate>
+        <pubDate>Sat, 17 Sep 2016 17:28:44 +0800</pubDate>
+        <lastBuildDate>Sat, 17 Sep 2016 17:28:44 +0800</lastBuildDate>
         <generator>Jekyll v3.1.6</generator>
         
         <item>
-            <title>redis集群搭建及容灾</title>
+            <title>redis集群搭建</title>
             <description></description>
             <pubDate>Sun, 04 Sep 2016 00:00:00 +0800</pubDate>
             <link>http://foolchild.cn/2016/09/04/redis_cluster</link>
@@ -1211,8 +1211,8 @@
             <title>spring基础</title>
             <description></description>
             <pubDate>Thu, 07 Jan 2016 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2016/01/07/spring_base</link>
-            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/spring_base</guid>
+            <link>http://foolchild.cn/2016/01/07/spring_module</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/01/07/spring_module</guid>
             
             <category>spring</category>
             
@@ -1570,22 +1570,6 @@
         </item>
         
         <item>
-            <title>spring代理(译)</title>
-            <description></description>
-            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/12/28/spring_proxy</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_proxy</guid>
-            
-            <category>spring</category>
-            
-            <category>proxy</category>
-            
-            
-            <category>java_web</category>
-            
-        </item>
-        
-        <item>
             <title>spring常用配置</title>
             <description></description>
             <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
@@ -1593,6 +1577,24 @@
             <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_conf</guid>
             
             <category>spring</category>
+            
+            
+            <category>java_web</category>
+            
+        </item>
+        
+        <item>
+            <title>spring aop</title>
+            <description></description>
+            <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2015/12/28/spring_aop</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/spring_aop</guid>
+            
+            <category>spring</category>
+            
+            <category>proxy</category>
+            
+            <category>aop</category>
             
             
             <category>java_web</category>
@@ -2536,18 +2538,6 @@
             
             
             <category>language</category>
-            
-        </item>
-        
-        <item>
-            <title>annotation-config与component-scan</title>
-            <description>spring注解</description>
-            <pubDate>Thu, 29 Jan 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/01/29/springAnnotation</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/01/29/springAnnotation</guid>
-            
-            
-            <category>java_web</category>
             
         </item>
         
