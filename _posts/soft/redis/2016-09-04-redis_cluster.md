@@ -53,6 +53,8 @@ tags: redis cluster sentinel
     // 启动哨兵
     sed 's/26379/26380/g' redis-sentinel-26379.conf >> redis-sentinel-26380.conf
     sed 's/26379/26381/g' redis-sentinel-26379.conf >> redis-sentinel-26381.conf
+
+    
 ### 参考 {#ref}
 
 [Redis 自动故障转移sentinel（哨兵）实践]<http://lampblog.org/1840.html>

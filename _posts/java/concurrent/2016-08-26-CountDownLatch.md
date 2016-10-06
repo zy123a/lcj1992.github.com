@@ -47,8 +47,8 @@ tags: countDownLatch juc aqs
         for (;;) {
             int c = getState();
             if (c == 0)
-                // 如果线程持有锁
                 return false;
+            // 如果线程持有锁
             int nextc = c-1;
             // 可能并发的改state的值，所以这里需要cas
             if (compareAndSetState(c, nextc))

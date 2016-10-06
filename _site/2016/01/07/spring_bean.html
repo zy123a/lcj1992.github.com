@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> Countdownlatch  </title>
+    <title> spring bean  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,213 +27,45 @@
 </div>
 
     <div id="main">
-        <h2> Countdownlatch </h2>
-        <ul>
-  <li><a href="#init">构造器</a></li>
-  <li><a href="#countDown">countDown</a></li>
-  <li><a href="#await">await</a></li>
+        <h2> spring bean </h2>
+        <p>DI和AOP是spring框架最核心的部分。本文就讲下spring中使用DI装配bean。</p>
+
+<h3 id="bean">bean的生命周期</h3>
+
+<p><img src="/images/java_web/spring_beans_lifecycle.jpg" alt="bean的生命周期" /></p>
+
+<ul>
+  <li>spring对bean进行实例化</li>
+  <li>spring将值和bean的引用注入到bean对应的属性中</li>
+  <li>如果bean实现了BeanNameAware接口，spring将bean的ID传递给setBeanName()方法。</li>
+  <li>如果bean实现了BeanFactoryAware接口，spring将调用setBeanFactory()方法，将BeanFacotry容器实例传入</li>
+  <li>如果bean实现了ApplicationContextAware接口，spring将调用setApplicationContext()方法，将bean所在的应用上下文的引用传入进来</li>
+  <li>如果bean实现了BeanPostProcessor接口，spring将调用他们的postProcessBeforeInitialization()方法</li>
+  <li>如果bean实现了InitializationBean接口，spring将调用他们的afterPropertiesSet()方法，类似的，如果bean使用init-method声明了初始化方法，该方法也会被调用</li>
+  <li>如果bean实现了BeanPostProcessor接口，spring将调用他们的postProcessorAfterInitialization()方法</li>
+  <li>此时，bean已经准备就绪，可以被应用程序使用了，它们将一直驻留在应用上下文中，直到该应用上下文被销毁</li>
+  <li>如果bean实现了disposableBean接口，spring将调用它的destory()接口方法，同样，如果bean使用destory-method声明了销毁方法，该方法也会被调用</li>
 </ul>
 
-<p>以核心函数为突破口countDown和await</p>
-
-<h2 id="init">CountDownLatch构造器</h2>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>public CountDownLatch(int count) {
-    if (count &lt; 0) throw new IllegalArgumentException("count &lt; 0");
-    this.sync = new Sync(count);
-}
-
-Sync(int count) {
-    // 设置state为count
-    setState(count);
-}
-</code></pre>
-</div>
-
-<h2 id="countDown">CountDownLatch#countDown</h2>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>public void countDown() {
-    sync.releaseShared(1);
-}
-</code></pre>
-</div>
-
-<h3 id="aqs_releaseShared">AbstractQueuedSynchronizer#releaseShared</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>public final boolean releaseShared(int arg) {
-    if (tryReleaseShared(arg)) {
-        // 如果state为0，走不到这里；如果cas进行state-1后state不为0，也走不到这里。详看tryReleaseShared
-        doReleaseShared();
-        return true;
-    }
-    return false;
-}
-</code></pre>
-</div>
-
-<h3 id="CountDownLatch_tryReleaseShared">CountDownLatch#tryReleaseShared</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>protected boolean tryReleaseShared(int releases) {
-    // Decrement count; signal when transition to zero
-    for (;;) {
-        int c = getState();
-        if (c == 0)
-            return false;
-        // 如果线程持有锁
-        int nextc = c-1;
-        // 可能并发的改state的值，所以这里需要cas
-        if (compareAndSetState(c, nextc))
-            // 如果nextc不为0，返回false
-            return nextc == 0;
-    }
-}
-</code></pre>
-</div>
-
-<h3 id="aqs_doReleaseShared">AbstractQueuedSynchronizer#doReleaseShared</h3>
-
-<p>// 如果state不为0，并且cas进行state - 1后，state不为0，则执行doReleaseShared</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private void doReleaseShared() {
-   for (;;) {
-       Node h = head;
-       if (h != null &amp;&amp; h != tail) {
-           int ws = h.waitStatus;
-
-           // signal : waitStatus value to indicate successor's thread needs unparking    
-           // 后继节点等待被触发
-           if (ws == Node.SIGNAL) {
-               // 如果节点状态为signal，cas重置节点状态为0
-               if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
-                   continue;            // loop to recheck cases
-               // 如果重置成功，唤醒后继节点       
-               unparkSuccessor(h);
-           }
-           // 如果头节点为状态为初始状态，尝试设置waitStatus为propagate
-           // propagate: waitStatus value to indicate the next acquireShared should unconditionally propagate
-           else if (ws == 0 &amp;&amp;
-                    !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))
-               continue;                // loop on failed CAS
-       }
-       if (h == head)                   // loop if head changed
-           break;
-   }    }
-</code></pre>
-</div>
-
-<h3 id="aqs_unparkSuccessor">AbstractQueuedSynchronizer#unparkSuccessor</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private void unparkSuccessor(Node node) {
-   int ws = node.waitStatus;
-   // 唤醒后继节点，需要当前节点的waitStatus置为0或1
-   if (ws &lt; 0)
-       compareAndSetWaitStatus(node, ws, 0);
-
-   Node s = node.next;
-   if (s == null || s.waitStatus &gt; 0) {
-       // 如果s为null或者s为取消状态    
-       s = null;
-       // 从后向前遍历node，直到第一个waitStatus不是cancel的node
-       for (Node t = tail; t != null &amp;&amp; t != node; t = t.prev)
-           if (t.waitStatus &lt;= 0)
-               s = t;
-   }
-   // 然后unpark之。
-   if (s != null)
-       LockSupport.unpark(s.thread);    }
-</code></pre>
-</div>
-
-<h2 id="await">await</h2>
-<p>使当前线程在锁存器倒计数至零之前一直等待，除非线程被中断</p>
-
-<h3 id="doacquiresharedinterruptibly">doAcquireSharedInterruptibly</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private void doAcquireSharedInterruptibly(int arg)
-    throws InterruptedException {
-    // 包装为共享节点，然后添加进等待队列
-    final Node node = addWaiter(Node.SHARED);
-    boolean failed = true;
-    try {
-        for (;;) {
-            final Node p = node.predecessor();
-            if (p == head) {
-                // 参照下doAcquireInterruptibly,这里是不一样滴。
-                // 试图在共享模式下获取对象状态
-                int r = tryAcquireShared(arg);
-                if (r &gt;= 0) {
-                    // 这里需要state为0
-
-                    // 这里对比doAcquireInterruptibly
-                    // 设置头节点 并传播
-                    setHeadAndPropagate(node, r);
-                    p.next = null; // help GC
-                    failed = false;
-                    return;
-                }
-            }
-            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
-                parkAndCheckInterrupt())
-                throw new InterruptedException();
-        }
-    } finally {
-        if (failed)
-            cancelAcquire(node);
-    }
-}
-</code></pre>
-</div>
-
-<h3 id="setheadandpropagate">setHeadAndPropagate</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>private void setHeadAndPropagate(Node node, int propagate) {
-    Node h = head; // Record old head for check below
-    setHead(node);
-    /*
-     * Try to signal next queued node if:
-     *   Propagation was indicated by caller,
-     *     or was recorded (as h.waitStatus either before
-     *     or after setHead) by a previous operation
-     *     (note: this uses sign-check of waitStatus because
-     *      PROPAGATE status may transition to SIGNAL.)
-     * and
-     *   The next node is waiting in shared mode,
-     *     or we don't know, because it appears null
-     *
-     * The conservatism in both of these checks may cause
-     * unnecessary wake-ups, but only when there are multiple
-     * racing acquires/releases, so most need signals now or soon
-     * anyway.
-     */
-    if (propagate &gt; 0 || h == null || h.waitStatus &lt; 0 ||
-        (h = head) == null || h.waitStatus &lt; 0) {
-        Node s = node.next;
-        if (s == null || s.isShared())
-            // 后继为空或者为共享模式
-            doReleaseShared();
-    }
-}
-</code></pre>
-</div>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2016/08/24/aqs">AbstractQueuedSynchronizer</a>
+                <a href="/2016/01/07/filter_intercepter">过滤器和拦截器</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2016/09/01/ThreadPoolExecutor">ThreadPoolEexcutor</a>
+                <a href="/2016/01/07/spring_module">spring基础</a>
             </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2016/08/26/CountDownLatch" data-title="Countdownlatch"
-             data-url="http://lcj1992.github.io/2016/08/26/CountDownLatch">
+        <div class="ds-share flat" data-thread-key="/2016/01/07/spring_bean" data-title="spring bean"
+             data-url="http://lcj1992.github.io/2016/01/07/spring_bean">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -262,8 +94,8 @@ Sync(int count) {
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2016/08/26/CountDownLatch" data-title="Countdownlatch"
-             data-url="http://lcj1992.github.io/2016/08/26/CountDownLatch"></div>
+        <div class="ds-thread" data-thread-key="/2016/01/07/spring_bean" data-title="spring bean"
+             data-url="http://lcj1992.github.io/2016/01/07/spring_bean"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -426,11 +258,11 @@ Sync(int count) {
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2016/08/24/aqs";
+                    window.location.href = "/2016/01/07/filter_intercepter";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2016/09/01/ThreadPoolExecutor";
+                    window.location.href = "/2016/01/07/spring_module";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

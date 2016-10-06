@@ -548,6 +548,13 @@
     </article>
     
     <article>
+        <title>spring bean</title>
+        <url>http://foolchild.cn/2016/01/07/spring_bean</url>
+        <tag>springbean</tag>
+        <date>2016-01-07</date>
+    </article>
+    
+    <article>
         <title>过滤器和拦截器</title>
         <url>http://foolchild.cn/2016/01/07/filter_intercepter</url>
         <tag>filterintercepter</tag>
