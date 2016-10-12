@@ -11,7 +11,7 @@ tags: java autoboxing transient thread jdbc shallow_deep_copy final
 * [object#wait VS thread#sleep](#object_wait_thread_sleep)
 * [unSafe](#unsafe)
 * [final](#final)
-
+* [SimpleDateFormat](#simple_date_format)
 
 #### 初始化顺序 {#class_init}
 
@@ -105,6 +105,17 @@ eg:
 
 #### Object#wait() &&  Thread.sleep() {#object_wait_thread_sleep}
 
+Object#wait()
+
+1.  Causes the current thread to wait until another thread invokes the Object#notify() method or the Object#notifyAll() method for this object。(本线程wait，直到另一个线程调用notifyAll或者notify方法)
+2.  The current thread must own this object's monitor. The thread releases ownership of this monitor and waits until another thread notifies threads waiting on this object's monitor to wake up either through a call to the notify method or the notifyAll method. The thread then waits until it can re-obtain ownership of the monitor and resumes execution.(当前线程必须拥有该object的monitor，调用wait方法后，当前线程释放该object的monitor，直到另一个线程notify该线程，重新获得该object的monitor，重新开始执行)
+3.  响应中断
+
+Thread.sleep()
+
+1.  Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds, subject to the precision and accuracy of system timers and schedulers. The thread does not lose ownership of any monitors.(暂时停止执行x ms，线程不丢失任何monitor的所有权)
+2. 也响应中断
+
 [1]<http://javaconceptoftheday.com/difference-between-wait-and-sleep-methods-in-java/>
 
 
@@ -146,3 +157,13 @@ eg:
 ps: static的变量都是放在方法区的。这个我觉得说的很对[27楼说的挺对](http://bbs.csdn.net/topics/370001490#post-371813857)
 
 所有的Serializable的类必须含有serialVersionUID属性，这是出于性能考虑，如果没有serialVersionUID属性，jre会自己计算一个值，这个值的计算很消耗资源。
+
+#### SimpleDateFormat {#simple_date_format}
+
+Calendar calendar 可变且共享的 -> 非线程安全
+
+那么如何正确的使用参见[常用的线程安全处理方法](http://foolchild.cn/2015/11/25/concurrent#how_to_handle)
+
+1. 线程封闭： 每次使用实例化一个simpleDateFormat，局部变量； threadLocal
+2. 同步：每次使用时，加锁 
+3. 使用joadTime （推荐）
