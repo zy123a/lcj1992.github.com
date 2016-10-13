@@ -12,6 +12,7 @@ tags: java autoboxing transient thread jdbc shallow_deep_copy final
 * [unSafe](#unsafe)
 * [final](#final)
 * [SimpleDateFormat](#simple_date_format)
+* [lock_tryLock_lockInterruptibly](#lock_tryLock_lockInterruptibly)    
 
 #### 初始化顺序 {#class_init}
 
@@ -167,3 +168,13 @@ Calendar calendar 可变且共享的 -> 非线程安全
 1. 线程封闭： 每次使用实例化一个simpleDateFormat，局部变量； threadLocal
 2. 同步：每次使用时，加锁 
 3. 使用joadTime （推荐）
+
+#### lock_tryLock_lockInterruptibly
+
+1. 若lock被thread A取得，thread B會進入block狀態，直到取得lock。不响应终端
+2. tryLock尝试取获取锁，获取不到返回false。
+3. lockInterruptibly类lock，响应中断。当别的线程调用threadx.interrupt() 会使threadx抛出InterruptedException
+
+参考[lock、tryLock和lockInterruptibly的差別](https://pandaforme.ghost.io/java-lock-trylockhe-lockinterruptibly/)
+
+
