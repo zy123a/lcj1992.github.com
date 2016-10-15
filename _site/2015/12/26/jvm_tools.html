@@ -341,7 +341,8 @@ jps   [options]    [hostid]</p>
 <p>eg:</p>
 
 <ol>
-  <li>jstack pid</li>
+  <li>jstack pid
+如何找到占用最多cpu的线程<a href="/2015/12/17/cpuHigh">cpu高了</a></li>
 </ol>
 
 <h3 id="jvisualvm">jvisualvm</h3>
@@ -370,6 +371,13 @@ jps   [options]    [hostid]</p>
 <p>类名可以是<code class="highlighter-rouge">java.net.URL</code>具名的类或者<code class="highlighter-rouge">char[]</code>(or [C)数组。但是className并不能唯一确定一个java类。同样名字的class可以被不同的类加载器加载。<code class="highlighter-rouge">instanceof</code> 表明可以是子类型，否则的话必须是该类的实例。<code class="highlighter-rouge">from</code>和<code class="highlighter-rouge">where</code>都是可选的。</p>
 
 <p><code class="highlighter-rouge">select</code>和<code class="highlighter-rouge">where</code>使用的都是javascript语法规则，java堆对象呗包装成方便的script对象，更接近自然的语法规则，例如obj.field_name或者array[index].</p>
+
+<h3 id="ps">ps</h3>
+
+<p>JDK自带工具如jmap和jstack来dump JVM heap和JVM 线程栈的log来分析问题，可能碰到这个问题：well-known file is not secure</p>
+
+<p>执行jdk的工具时，会先检查执行该命令的用户和/tmp/hsperfdata_$USER/$PID 中的user一致不，不一致的话就会报上述错误。
+<a href="http://stackoverflow.com/questions/9100149/jstack-well-known-file-is-not-secure?rq=1">问题原址</a></p>
 
 <h3 id="ref">参考</h3>
 

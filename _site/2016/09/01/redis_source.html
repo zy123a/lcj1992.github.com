@@ -29,6 +29,7 @@
     <div id="main">
         <h2> redis源码分析 </h2>
         <ul>
+  <li><a href="#files">redis各文件作用</a></li>
   <li><a href="#memory">内存结构</a></li>
   <li><a href="#obj">对象</a></li>
   <li><a href="#ds">数据结构</a>
@@ -51,6 +52,265 @@
   <li><a href="#redis_distributed">redis多机</a></li>
   <li><a href="#redis_situation">使用场景</a></li>
 </ul>
+
+<h3 id="files">redis各文件作用</h3>
+
+<p>redis源码总共6w多行。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>文件</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">adlist.c</code> 、 <code class="highlighter-rouge">adlist.h</code></td>
+      <td>双端链表数据结构的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ae.c</code> 、 <code class="highlighter-rouge">ae.h</code> 、 <code class="highlighter-rouge">ae_epoll.c</code> 、 <code class="highlighter-rouge">ae_evport.c</code> 、<code class="highlighter-rouge">ae_kqueue.c</code>、<code class="highlighter-rouge">ae_select.c</code></td>
+      <td>事件处理器，以及各个具体实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">anet.c</code> 、 <code class="highlighter-rouge">anet.h</code></td>
+      <td>Redis 的异步网络框架，内容主要为对 socket 库的包装。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">aof.c</code></td>
+      <td>AOF 功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">asciilogo.h</code></td>
+      <td>保存了 Redis 的 ASCII LOGO 。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">bio.c</code>、 <code class="highlighter-rouge">bio.h</code></td>
+      <td>Redis 的后台 I/O 程序，用于将 I/O 操作放到子线程里面执行， 减少 I/O 操作对主线程的阻塞。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">bitops.c</code></td>
+      <td>二进制位操作命令的实现文件。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">blocked.c</code></td>
+      <td>用于实现 BLPOP 命令和 WAIT 命令的阻塞效果。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">cluster.c</code>、 <code class="highlighter-rouge">cluster.h</code></td>
+      <td>Redis 的集群实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.c</code> 、 <code class="highlighter-rouge">config.h</code></td>
+      <td>Redis 的配置管理实现，负责读取并分析配置文件， 然后根据这些配置修改 Redis 服务器的各个选项。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">crc16.c</code> 、 <code class="highlighter-rouge">crc64.c</code> 、 <code class="highlighter-rouge">crc64.h</code></td>
+      <td>计算 CRC 校验和。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">db.c</code></td>
+      <td>数据库实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">debug.c</code></td>
+      <td>调试实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dict.c</code> 、 <code class="highlighter-rouge">dict.h</code></td>
+      <td>字典数据结构的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">endianconv.c</code> 、 <code class="highlighter-rouge">endianconv.h</code></td>
+      <td>二进制的大端、小端转换函数。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">fmacros.h</code></td>
+      <td>一些移植性方面的宏。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">geo.h</code>、<code class="highlighter-rouge">geo.c</code></td>
+      <td>位置相关（经纬度）</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">latency.h</code>、<code class="highlighter-rouge">latency.c</code></td>
+      <td>延迟类</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">quicklist.h</code>、<code class="highlighter-rouge">quicklist.c</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">help.h</code></td>
+      <td><code class="highlighter-rouge">utils/generate-command-help.rb</code> 程序自动生成的命令帮助信息。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">hyperloglog.c</code></td>
+      <td>HyperLogLog 数据结构的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">intset.c</code> 、 <code class="highlighter-rouge">intset.h</code></td>
+      <td>整数集合数据结构的实现，用于优化 SET 类型。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">lzf_c.c</code> 、 <code class="highlighter-rouge">lzf_d.c</code> 、 <code class="highlighter-rouge">lzf.h</code> 、 <code class="highlighter-rouge">lzfP.h</code></td>
+      <td>Redis 对字符串和 RDB 文件进行压缩时使用的 LZF 压缩算法的实现</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Makefile</code> 、 <code class="highlighter-rouge">Makefile.dep</code></td>
+      <td>构建文件。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">memtest.c</code></td>
+      <td>内存测试。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">mkreleasehdr.sh</code></td>
+      <td>用于生成释出信息的脚本。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">multi.c</code></td>
+      <td>Redis 的事务实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">networking.c</code></td>
+      <td>Redis 的客户端网络操作库，用于实现命令请求接收、发送命令回复等工作，文件中的函数大多为 write 、 read 、 close 等函数的包装，以及各种协议的分析和构建函数.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">notify.c</code></td>
+      <td>Redis 的数据库通知实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">object.c</code></td>
+      <td>Redis 的对象系统实现.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">pqsort.c</code> 、 <code class="highlighter-rouge">pqsort.h</code></td>
+      <td>快速排序（QuickSort）算法的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">pubsub.c</code></td>
+      <td>发布与订阅功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rand.c</code> 、 <code class="highlighter-rouge">rand.h</code></td>
+      <td>伪随机数生成器。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rdb.c</code> 、 <code class="highlighter-rouge">rdb.h</code></td>
+      <td>RDB 持久化功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redisassert.h</code></td>
+      <td>Redis 自建的断言系统。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis-benchmark.c</code></td>
+      <td>Redis 的性能测试程序。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis.c</code></td>
+      <td>负责服务器的启动、维护和关闭等事项。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis-check-aof.c</code> 、 <code class="highlighter-rouge">redis-check-dump.c</code></td>
+      <td>RDB 文件和 AOF 文件的合法性检查程序。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis-cli.c</code></td>
+      <td>Redis 客户端的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis.h</code></td>
+      <td>Redis 的主要头文件，记录了 Redis 中的大部分数据结构，包括服务器状态和客户端状态。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redis-trib.rb</code></td>
+      <td>Redis 集群的管理程序</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">release.c</code> 、 <code class="highlighter-rouge">release.h</code></td>
+      <td>记录和生成 Redis 的释出版本信息。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">replication.c</code></td>
+      <td>复制功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rio.c</code> 、 <code class="highlighter-rouge">rio.h</code></td>
+      <td>Redis 对文件 I/O 函数的包装, 在普通 I/O 函数的基础上增加了显式缓存、以及计算校验和等功能。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">scripting.c</code></td>
+      <td>脚本功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sds.c</code> 、 <code class="highlighter-rouge">sds.h</code></td>
+      <td>SDS 数据结构的实现，SDS 为 Redis 的默认字符串表示。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sentinel.c</code></td>
+      <td>Redis Sentinel 的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">setproctitle.c</code></td>
+      <td>进程环境设置函数。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sha1.c</code> 、 <code class="highlighter-rouge">sha1.h</code></td>
+      <td>SHA1 校验和计算函数。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slowlog.c</code> 、 <code class="highlighter-rouge">slowlog.h</code></td>
+      <td>慢查询功能的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">solarisfixes.h</code></td>
+      <td>针对 Solaris 系统的补丁。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sort.c</code></td>
+      <td>SORT 命令的实现。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">syncio.c</code></td>
+      <td>同步 I/O 操作。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">testhelp.h</code></td>
+      <td>测试辅助宏。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">t_hash.c</code> 、 <code class="highlighter-rouge">t_list.c</code> 、 <code class="highlighter-rouge">t_set.c</code> 、 <code class="highlighter-rouge">t_string.c</code> 、<code class="highlighter-rouge">t_zset.c</code></td>
+      <td>定义了 Redis 的各种数据类型，以及这些数据类型的命令。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">util.c</code> 、 <code class="highlighter-rouge">util.h</code></td>
+      <td>各种辅助函数。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">valgrind.sup</code></td>
+      <td>valgrind 的suppression文件。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version.h</code></td>
+      <td>记录了 Redis 的版本号。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ziplist.c</code> 、 <code class="highlighter-rouge">ziplist.h</code></td>
+      <td>ZIPLIST 数据结构的实现，用于优化 LIST 类型。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">zipmap.c</code> 、 <code class="highlighter-rouge">zipmap.h</code></td>
+      <td>ZIPMAP 数据结构的实现，在 Redis 2.6 以前用与优化 HASH 类型, Redis 2.6 开始已经废弃。</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">zmalloc.c</code> 、 <code class="highlighter-rouge">zmalloc.h</code></td>
+      <td>内存管理程序</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="memory">内存结构</h3>
 
@@ -651,7 +911,7 @@ config.h
 #define HAVE_EPOLL 1
 #endif
  
-#if (defined(__APPLE__) &amp;&amp; defined(MAC_OS_X_VERSION_10_6)) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined (__NetBSD__)
+#if (defined(__APPLE__) &amp;&amp; defined(MAC_OS_X_VERSION_10_6))|| defined(__FreeBSD__)|| defined(__OpenBSD__)|| defined (__NetBSD__)
 #define HAVE_KQUEUE 1
 #endif
  

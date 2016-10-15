@@ -28,7 +28,9 @@
 
     <div id="main">
         <h2> java坑 </h2>
-        <h5 id="foreach-null">foreach 不能为null</h5>
+        <ol>
+  <li>foreach 不能为null</li>
+</ol>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>    for (RefundPassengerBean passengerBean : psgList) {
         for (PassengerInfoDto form : orderDto.getPassengers()) {
@@ -40,13 +42,17 @@
     }
 </code></pre>
 </div>
-<p>如果psgList为null会抛异常</p>
+<p>如果psgList为null会抛异常 因为foreach底层jvm还是会将其编译成iteraotr hasNext() next()去执行。</p>
 
-<h5 id="list-null">list 可包含null</h5>
-
-<p>还是上边的程序,如果psgList包含null,passengerBean.getTicketNo()抛空指针</p>
-
-<h4 id="spring">spring事务跟线程绑定</h4>
+<ol>
+  <li>
+    <p>list 可包含null
+还是上边的程序,如果psgList包含null,passengerBean.getTicketNo()抛空指针</p>
+  </li>
+  <li>
+    <p>list.addAll() 不能为空，抛空指针</p>
+  </li>
+</ol>
 
 
         <ul class="prev_next">
