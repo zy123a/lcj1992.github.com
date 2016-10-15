@@ -8,9 +8,11 @@ tags: proxy cglib
 *   [动态代理](#dynamic_proxy)
 *   [cglib代理](#cglib_proxy)
 
-<h3 id="dynamic_proxy">动态代理</h3>
+### 动态代理{#dynamic_proxy}
 
-    只对实现接口的类有效 //todok
+[java的动态代理机制详解](http://www.cnblogs.com/xiaoluo501395377/p/3383130.html)
+
+    只对实现接口的类有效 //todo
 
     BookFacade.java
 
@@ -49,7 +51,7 @@ tags: proxy cglib
         }
     }
 
-<h3 id="cglib_proxy">cglib代理</h3>
+### cglib代理{#cglib_proxy}
 
     BookFacadeImpl1.java
 
