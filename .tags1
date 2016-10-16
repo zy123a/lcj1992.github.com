@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+redis各文件作用 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### redis各文件作用 {#files}$/;"	function	line:25
+内存结构 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### 内存结构 {#memory}$/;"	function	line:94
+对象 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### 对象 {#obj}$/;"	function	line:107
+数据结构 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### 数据结构 {#ds}$/;"	function	line:174
+sds {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### sds {#sds}$/;"	function	line:182
+list {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### list {#list}$/;"	function	line:201
+dict(hash) {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### dict(hash) {#dict}$/;"	function	line:239
+skipList {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### skipList {#skipList}$/;"	function	line:318
+intSet  {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### intSet  {#intSet}$/;"	function	line:360
+zipList {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### zipList {#zipList}$/;"	function	line:377
+调试redis {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### 调试redis {#debug_redis}$/;"	function	line:403
+redis启动流程 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### redis启动流程 {#redis_start}$/;"	function	line:425
+redis接受请求 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### redis接受请求 {#redis_accept_request}$/;"	function	line:472
+reactor	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^#### reactor$/;"	function	line:532
+redis多机  {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### redis多机  {#redis_distributed}$/;"	function	line:572
+redis使用场景 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### redis使用场景 {#redis_situation}$/;"	function	line:574
+参考 {	/Users/lichuangjian/work/foolchild/_posts/soft/redis/2016-09-01-redis_source.md	/^### 参考 {#ref}$/;"	function	line:576
