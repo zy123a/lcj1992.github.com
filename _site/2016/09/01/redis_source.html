@@ -210,7 +210,7 @@
       <td>Redis 的性能测试程序。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">redis.c</code></td>
+      <td><code class="highlighter-rouge">server.c</code></td>
       <td>负责服务器的启动、维护和关闭等事项。</td>
     </tr>
     <tr>
@@ -222,7 +222,7 @@
       <td>Redis 客户端的实现。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">redis.h</code></td>
+      <td><code class="highlighter-rouge">server.h</code></td>
       <td>Redis 的主要头文件，记录了 Redis 中的大部分数据结构，包括服务器状态和客户端状态。</td>
     </tr>
     <tr>
@@ -335,7 +335,7 @@
     unsigned type:4;
 
     // 编码
-    // 
+    //
     unsigned encoding:4;
 
     // 对象最后一次被访问的时间
@@ -353,6 +353,8 @@
 
 <p>type</p>
 
+<p>见server.h Object types</p>
+
 <table>
   <thead>
     <tr>
@@ -364,33 +366,35 @@
   <tbody>
     <tr>
       <td>字符串对象</td>
-      <td>REDIS_STRING</td>
+      <td>OBJ_STRING</td>
       <td>“string”</td>
     </tr>
     <tr>
       <td>列表对象</td>
-      <td>REDIS_LIST</td>
+      <td>OBJ_LIST</td>
       <td>“list”</td>
     </tr>
     <tr>
       <td>哈希对象</td>
-      <td>REDIS_HASH</td>
+      <td>OBJ_HASH</td>
       <td>“hash”</td>
     </tr>
     <tr>
       <td>集合对象</td>
-      <td>REDIS_SET</td>
+      <td>OBJ_SET</td>
       <td>“set”</td>
     </tr>
     <tr>
       <td>有序集合对象</td>
-      <td>REDIS_ZSET</td>
+      <td>OBJ_ZSET</td>
       <td>“zset”</td>
     </tr>
   </tbody>
 </table>
 
 <p>encoding</p>
+
+<p>见server.h Objects encoding</p>
 
 <table>
   <thead>
@@ -401,36 +405,40 @@
   </thead>
   <tbody>
     <tr>
-      <td>REDIS_ENCODING_INT</td>
+      <td>OBJ_ENCODING_INT</td>
       <td>long类型的整数</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_EMBSTR</td>
+      <td>OBJ_ENCODING_EMBSTR</td>
       <td>embstr编码：的简单动态字符串</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_RAW</td>
+      <td>OBJ_ENCODING_RAW</td>
       <td>简单动态字符串</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_HT</td>
+      <td>OBJ_ENCODING_HT</td>
       <td>字典</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_LINKEDLIST</td>
+      <td>OBJ_ENCODING_LINKEDLIST</td>
       <td>双端链表</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_ZIPLIST</td>
+      <td>OBJ_ENCODING_ZIPLIST</td>
       <td>压缩列表</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_INTSET</td>
+      <td>OBJ_ENCODING_INTSET</td>
       <td>整数集合</td>
     </tr>
     <tr>
-      <td>REDIS_ENCODING_SKIPLIST</td>
+      <td>OBJ_ENCODING_SKIPLIST</td>
       <td>跳跃表和字典</td>
+    </tr>
+    <tr>
+      <td>OBJ_ENCODIGN_QUICKLIST</td>
+      <td>linked的ziplist</td>
     </tr>
   </tbody>
 </table>
@@ -488,7 +496,7 @@ string
     // 字节数组，用于保存字符串
     char buf[];
 
-}; 
+};
 </code></pre>
 </div>
 
@@ -902,25 +910,25 @@ mac上其实现为kqueue，linux为epool，sun为select，可参见config.h和ae
         #endif
     #endif
 #endif
-  
-  
+
+
 config.h
-  
+
 /* Test for polling API */
 #ifdef __linux__
 #define HAVE_EPOLL 1
 #endif
- 
+
 #if (defined(__APPLE__) &amp;&amp; defined(MAC_OS_X_VERSION_10_6))|| defined(__FreeBSD__)|| defined(__OpenBSD__)|| defined (__NetBSD__)
 #define HAVE_KQUEUE 1
 #endif
- 
+
 #ifdef __sun
 #include &lt;sys/feature_tests.h&gt;
 #ifdef _DTRACE_VERSION
 #define HAVE_EVPORT 1
 #endif
-#endif 
+#endif
 </code></pre>
 </div>
 
