@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://foolchild.cn/2016/11/04/log_dependency</loc>
+<lastmod>2016-11-04T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://foolchild.cn/2016/11/02/scala_basic</loc>
+<lastmod>2016-11-02T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://foolchild.cn/2016/10/09/some_words</loc>
 <lastmod>2016-10-09T00:00:00+08:00</lastmod>
 </url>
@@ -389,7 +397,7 @@
 <lastmod>2015-12-28T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://foolchild.cn/2015/12/28/dependency</loc>
+<loc>http://foolchild.cn/2015/12/28/clean_pom</loc>
 <lastmod>2015-12-28T00:00:00+08:00</lastmod>
 </url>
 <url>
@@ -743,6 +751,9 @@
 <url>
 <loc>http://foolchild.cn/2014/11/01/cPlusPlusBasic</loc>
 <lastmod>2014-11-01T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://foolchild.cn/2015-12-28-clean-pom</loc>
 </url>
 <url>
 <loc>http://foolchild.cn/404.html</loc>

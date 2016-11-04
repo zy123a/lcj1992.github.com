@@ -198,178 +198,7 @@ public class ClassLocationUtils {
 </code></pre>
 </div>
 
-<h4 id="section-4">日志框架</h4>
-<p>很多时候日志各种jar会冲突，单列出来说下。</p>
-
-<p><img src="/images/soft/log_relation.png" alt="日志jar关系" /></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>jar</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>org.slf4j:slf4j-api</td>
-      <td>接口，桥接</td>
-      <td>slf4j api,具体实现交给其他日志</td>
-    </tr>
-    <tr>
-      <td>org.apache.commons:commons-logging-api</td>
-      <td>接口，桥接</td>
-      <td>jcl api,同上，我们的应用中肯定不会以它为api，但是很多框架中使用了它</td>
-    </tr>
-    <tr>
-      <td>org.slf4j:jcl-over-slf4j</td>
-      <td>过渡包</td>
-      <td>使用slf4j接管jcl</td>
-    </tr>
-    <tr>
-      <td>org.slf4j:slf4j-jcl</td>
-      <td>过渡包</td>
-      <td>使用jcl接管slf4j</td>
-    </tr>
-    <tr>
-      <td>org.slf4j:log4j-over-slf4j</td>
-      <td>过渡包</td>
-      <td>使用slf4j接管log4j1，对于log4j2是不适用的</td>
-    </tr>
-    <tr>
-      <td>org.slf4j:slf4j-log4j12</td>
-      <td>过渡包</td>
-      <td>使用log4j接管slf4j</td>
-    </tr>
-    <tr>
-      <td>org.slf4j:jul-to-slf4j</td>
-      <td>过渡包</td>
-      <td>使用slf4j接管jul(java.util.logging)</td>
-    </tr>
-    <tr>
-      <td>org.apache.logging.log4j:log4j-jul</td>
-      <td>过渡包</td>
-      <td>把jul的接口适配到log4j2的实现</td>
-    </tr>
-    <tr>
-      <td>org.apache.logging.log4j:log4j-1.2-api</td>
-      <td>过渡包</td>
-      <td>把log4j1的接口适配到log4j2的实现</td>
-    </tr>
-    <tr>
-      <td>ch.qos.logback:logback-classic</td>
-      <td>日志实现</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>ch.qos.logback:logback-core</td>
-      <td>日志实现</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>org.apache.logging.log4j:log4j-api</td>
-      <td>日志实现</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>org.apache.logging.log4j:log4j-core</td>
-      <td>日志实现</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>org.apache.logging.log4j:log4j-slf4j-impl</td>
-      <td>过渡包</td>
-      <td>log4j2是可以不依赖任何桥接包slf4j，jcl，这个包是使用slf4j来接管log4j的。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>推荐实践为：</p>
-
-<ol>
-  <li>slf4j + logback</li>
-  <li>slf4j + log4j2</li>
-</ol>
-
-<h4 id="slf4j">接口统一使用slf4j接管</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
-&lt;/dependency&gt;
-
-&lt;!--Jakarta Commons Logging redirect to slf4j --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
-    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-
-&lt;!--Apache log4j redirect to slf4j --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
-    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-
-&lt;!--Java Util Logging redirect to slf4j --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;jul-to-slf4j&lt;/artifactId&gt;
-    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-</code></pre>
-</div>
-
-<h5 id="logback">实现使用logback</h5>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--slf4j的配置--&gt;
-
-&lt;!--logback的配置--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-    &lt;version&gt;${logback.version}&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-    &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
-    &lt;version&gt;${logback.version}&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-</code></pre>
-</div>
-
-<h5 id="log4j2">实现使用log4j2</h5>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--slf4j的配置--&gt;
-
-&lt;!--log4j2的配置--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
-    &lt;version&gt;2.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
-    &lt;version&gt;2.3&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
-    &lt;version&gt;2.3&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-</div>
-
-<h4 id="section-5">常见冲突解决</h4>
+<h4 id="section-4">常见冲突解决</h4>
 
 <ol>
   <li>
@@ -390,9 +219,14 @@ public class ClassLocationUtils {
   <li>
     <p>fastxml  codehaus  后者已经不维护了，改名为fastxml了</p>
   </li>
+  <li>
+    <p>com.google.code.findbugs:annotations   com.google.code.findbugs:jsr305 删除后者</p>
+  </li>
+  <li>
+    <p>spring在3.2.0 之后已经把spring-asm的类直接包含在spring-core中了<a href="http://stackoverflow.com/questions/19800004/why-is-there-no-spring-asm-3-2-4-release-jar">详见</a>
+#### 参考</p>
+  </li>
 </ol>
-
-<h4 id="section-6">参考</h4>
 
 <p>[slf4j]<a href="http://www.slf4j.org/manual.html">http://www.slf4j.org/manual.html</a></p>
 

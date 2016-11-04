@@ -3,6 +3,22 @@
 	"data" : [
 	 
 	{
+		"title" : "scala基础 - 2016-11-02 - scala",
+		"url" : "/2016/11/02/scala_basic"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Some_words - 2016-10-09 - ",
+		"url" : "/2016/10/09/some_words"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "redis集群搭建 - 2016-09-04 - redis_cluster_sentinel",
 		"url" : "/2016/09/04/redis_cluster"
 	}
@@ -771,8 +787,8 @@
 	
     
 	{
-		"title" : "maven依赖机制 - 2015-12-28 - maven",
-		"url" : "/2015/12/28/dependency"
+		"title" : "maven依赖机制 - 2015-12-28 - maven_dependency_conflict",
+		"url" : "/2015/12/28/clean_pom"
 	}
 	
 	,

@@ -2,6 +2,20 @@
 <articles>
     
     <article>
+        <title>scala基础</title>
+        <url>http://foolchild.cn/2016/11/02/scala_basic</url>
+        <tag>scala</tag>
+        <date>2016-11-02</date>
+    </article>
+    
+    <article>
+        <title>Some_words</title>
+        <url>http://foolchild.cn/2016/10/09/some_words</url>
+        <tag></tag>
+        <date>2016-10-09</date>
+    </article>
+    
+    <article>
         <title>redis集群搭建</title>
         <url>http://foolchild.cn/2016/09/04/redis_cluster</url>
         <tag>redisclustersentinel</tag>
@@ -675,8 +689,8 @@
     
     <article>
         <title>maven依赖机制</title>
-        <url>http://foolchild.cn/2015/12/28/dependency</url>
-        <tag>maven</tag>
+        <url>http://foolchild.cn/2015/12/28/clean_pom</url>
+        <tag>mavendependencyconflict</tag>
         <date>2015-12-28</date>
     </article>
     

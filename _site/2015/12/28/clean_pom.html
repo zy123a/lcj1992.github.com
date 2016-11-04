@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> sql基础  </title>
+    <title> clean pom  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,135 +27,275 @@
 </div>
 
     <div id="main">
-        <h2> sql基础 </h2>
+        <h2> clean pom </h2>
         <ul>
-  <li><a href="#select">select 执行顺序</a>
+  <li><a href="#basic">基础知识</a>
     <ul>
-      <li><a href="#sql">细解</a></li>
+      <li><a href="#dependencies_merge">子pom和父pom依赖的合并规则</a></li>
+      <li><a href="#dependency_manage">依赖管理</a></li>
     </ul>
   </li>
-  <li><a href="#index">索引</a></li>
+  <li><a href="#in_action">clean pom</a></li>
+  <li><a href="#debug_maven">调试maven</a></li>
   <li><a href="#ref">参考</a></li>
 </ul>
 
-<ol>
-  <li>
-    <p>ps</p>
-
-    <ol>
-      <li>
-        <p>update product_details set weight=38, exist = 1 where name = ‘jim’// 更新操作,and是错误的　</p>
-      </li>
-      <li>
-        <p>create table select ：创建一个和原表字段结构一致的新表，去掉所有的约束，同时将原表select的结果数据插入新表　　　　</p>
-      </li>
-      <li>
-        <p>create table like ： 创建一个和原表结构完全一致的新空表，包含全部约束　　　　</p>
-      </li>
-      <li>
-        <p>on 后连接的字段要考虑设计索引。　　</p>
-      </li>
-      <li>
-        <p>show variables like ‘log_slow_queries’;　查看是否启用慢日志　</p>
-      </li>
-      <li>
-        <p>show  variables like ‘long_query_time’;　查看慢于多少秒的sql会记录到慢日志中</p>
-      </li>
-      <li>
-        <p>涉及数据库的字段更改,需要考虑读取,写入的时间段,考虑 <strong><em>兼容性</em></strong>,  <strong><em>老数据</em></strong>,<code class="highlighter-rouge">发布过程服务不能停</code>,注意<strong><em>版本</em></strong>的概念.</p>
-      </li>
-      <li>
-        <p>当查询的列不是独立的，而是<code class="highlighter-rouge">表达式</code>或者<code class="highlighter-rouge">函数</code>的一部分时，这种情况下，mysql将无法使用该列的索引,所以合理的做法是在查之前,就计算出该值</p>
-      </li>
-      <li>
-        <p>当查询的列需要进行<code class="highlighter-rouge">模糊匹配</code>时，即使该列建了索引，也需要进行全表扫描</p>
-      </li>
-      <li>
-        <p>最早的mysql一次查询只能够使用其中一个索引，5.0即以后，mysql引入了索引合并（index merge）的策略，但是完全可以通过建立多列索引来避免索引合并给数据库带来额外的开销,以达到更好的性能。</p>
-      </li>
-    </ol>
-  </li>
-</ol>
-
-<h2 id="index">索引</h2>
+<h3 id="basic">基础知识</h3>
 
 <ol>
   <li>
-    <p>查看表的索引　　</p>
+    <p>依赖调解 dependency mediation</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>show index from tb_xx;
-</code></pre>
-    </div>
+    <ul>
+      <li>nearest  A-&gt;B-&gt;C2; A-&gt;C1   最终会选择C1</li>
+      <li>声明优先 A-&gt;C2; B-&gt;C1,   最终会选择C2</li>
+    </ul>
   </li>
   <li>
-    <p>添加表的索引,唯一索引，主键　　</p>
+    <p>依赖管理 dependency management</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>alter table tb_xx add index `idx_site_channel_status`(`site`,`channel`,`status`)
-alter table tb_xx unique `uniq_name`(`name`)
-alter table tb_xx primary key  `id` (`id`)
-</code></pre>
-    </div>
+    <ul>
+      <li>可以显式指定，来解决多版本问题（传递依赖）。</li>
+    </ul>
   </li>
   <li>
-    <p>删除表的索引　　</p>
+    <p>依赖作用域</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>alter table tb_xx drop index `idx_site_channel_status`　　　/　　drop index `idx_site_channel_status` on tb_xx;
-alter table tb_xx drop index `uniq_name` (*跟删除普通的索引是一样的*)
-alter table tb_xx drop primary key; ps: **auto_increment只能作用于key,删除有auto_increment约束的索引时，必须先将auto_increment约束删除**
-</code></pre>
-    </div>
+    <ul>
+      <li>compile、test、provided、system、runtime、import</li>
+    </ul>
   </li>
-  <li>尽量不要在索引列上进行运算，使用函数，这样就用不到索引了。原因很简单b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大</li>
-  <li>不建议使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会令辅助索引变得过大 参看<a href="/2016/07/16/mysql_explain#ds">mysql执行计划#索引的数据结构</a></li>
-  <li>尽量选择区分度高的列作为索引,区分度的公式是count(distinct col)/count(*)，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1</li>
+  <li>
+    <p>排除依赖 excluded dependencies</p>
+  </li>
+  <li>
+    <p>可选依赖 optional dependencies</p>
+  </li>
 </ol>
 
-<h2 id="other">other</h2>
+<ul>
+  <li>X-&gt; A  A-&gt;B 可以将B声明为optional，这样X就不会依赖B，如果X想引入B依赖，需显式声明,eg: <a href="http://ifeve.com/introduction-to-optional-and-excludes-dependencies/">可选例子</a></li>
+</ul>
 
-<p>COLLATE=utf8_bin</p>
+<blockquote>
+  <p>有一个名为X2的项目，这个项目和hibernate有一些类似的功能，支持许多数据库驱动/依赖，比如说MySQL，postgre，oracle等。为了构建X2，所有的这些依赖都是必须的，但是对于你的项目来说却不是必须的，所以对于X2把这些依赖声明为可选的是非常实用的，不论什么时候当你在POM文件中把X2声明为一个直接依赖的时候，所有被X2支持的驱动不会自动的被包含进你的项目的classpath，你需要直接声明你将要使用的数据库的依赖/驱动。</p>
+</blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>select 'a' = 'A';
-1
-select binary 'a' = 'A'
-0
+<ol>
+  <li>优先级</li>
+</ol>
+
+<ul>
+  <li>依赖管理显式引入的优先级高于依赖调解机制调解出来的</li>
+  <li>当前pom的声明优先于父pom中的声明（对于dependency的，区分是groupId:artifactId:type:classifier，四个都相同是前提；对于plugin是groupId和artifactId），详见下代码</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>dependency management takes precedence over dependency mediation for transitive dependencies</li>
+    <li>the current pom’s declaration takes precedence over its parent’s declaration.</li>
+  </ol>
+</blockquote>
+
+<h4 id="dependencies_merge">子pom的dependencies和父pom的dependencies如何merge</h4>
+
+<p>包括dependencyManagement中的dependencies和真正的dependencies，以源码做注解<a href="https://github.com/apache/maven">maven github地址</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// target：这里是子pom的dependencyManagement
+// source：这里是父pom的dependencyManagement
+// sourceDominant：是否source占主导，这里是false
+protected void mergeDependencyManagement_Dependencies( DependencyManagement target, DependencyManagement source,
+                                                       boolean sourceDominant, Map&lt;Object, Object&gt; context )
+{
+    List&lt;Dependency&gt; src = source.getDependencies();
+    if ( !src.isEmpty() )
+    {
+        List&lt;Dependency&gt; tgt = target.getDependencies();
+        Map&lt;Object, Dependency&gt; merged = new LinkedHashMap&lt;&gt;( ( src.size() + tgt.size() ) * 2 );
+ 
+  
+        // 注意dependency是包含excludes的。
+        for ( Dependency element : tgt )
+        {
+            Object key = getDependencyKey( element );
+            merged.put( key, element );
+        }
+ 
+        for ( Dependency element : src )
+        {
+            // key是groupId+artifactId+type+classifier组成的字符串，见下getManagementKey
+            Object key = getDependencyKey( element );
+            //  sourceDominant为false
+            if ( sourceDominant || !merged.containsKey( key ) )
+            {
+                merged.put( key, element );
+            }
+        }
+ 
+        target.setDependencies( new ArrayList&lt;&gt;( merged.values() ) );
+    }
+}
+  
+@Override
+protected Object getDependencyKey( Dependency dependency )
+{
+    return dependency.getManagementKey();
+}
+  
+public String getManagementKey()
+{
+    if ( managementKey == null )
+    {
+        managementKey = groupId + ":" + artifactId + ":" + type + ( classifier != null ? ":" + classifier : "" );
+    }
+    return managementKey;
+}
 </code></pre>
 </div>
 
-<p>统计相关的不要走业务主库，最好是业务和数据隔离开来，业务使用mysql，数据相关的可以是不同的方式，hbase、es等等</p>
+<h4 id="dependency_manage">dependency如何使用dependencyManagement的配置</h4>
 
-<p>跨系统调用需要注意，避免长事务，事务粒度尽可能的小</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>public void mergeManagedDependencies( Model model )
+{
+    DependencyManagement dependencyManagement = model.getDependencyManagement();
+    if ( dependencyManagement != null )
+    {
+        Map&lt;Object, Dependency&gt; dependencies = new HashMap&lt;&gt;();
+        Map&lt;Object, Object&gt; context = Collections.emptyMap();
+ 
+        for ( Dependency dependency : model.getDependencies() )
+        {
+            // 同上 groupId:artifactId:type:classifier
+            Object key = getDependencyKey( dependency );
+            dependencies.put( key, dependency );
+        }
+ 
+        for ( Dependency managedDependency : dependencyManagement.getDependencies() )
+        {
+            Object key = getDependencyKey( managedDependency );
+            Dependency dependency = dependencies.get( key );
+            if ( dependency != null )
+            {
+                mergeDependency( dependency, managedDependency, false, context );
+            }
+        }
+    }
+}
+  
+protected void mergeDependency( Dependency target, Dependency source, boolean sourceDominant,
+                                Map&lt;Object, Object&gt; context )
+{
+    mergeDependency_GroupId( target, source, sourceDominant, context );
+    mergeDependency_ArtifactId( target, source, sourceDominant, context );
+    mergeDependency_Version( target, source, sourceDominant, context );
+    mergeDependency_Type( target, source, sourceDominant, context );
+    mergeDependency_Classifier( target, source, sourceDominant, context );
+    mergeDependency_Scope( target, source, sourceDominant, context );
+    mergeDependency_SystemPath( target, source, sourceDominant, context );
+    mergeDependency_Optional( target, source, sourceDominant, context );
+    mergeDependency_Exclusions( target, source, sourceDominant, context );
+}
+  
+  
+protected void mergeDependency_Version( Dependency target, Dependency source, boolean sourceDominant,
+                                        Map&lt;Object, Object&gt; context )
+{
+    String src = source.getVersion();
+    if ( src != null )
+    {
+        // 如果dependency中没有声明版本，会取dependencyManagement的（groupId、artifactId、type、classifier、scope、systemPath、optional类似）
+        if ( sourceDominant || target.getVersion() == null )
+        {
+            target.setVersion( src );
+            target.setLocation( "version", source.getLocation( "version" ) );
+        }
+    }
+}
+  
+@Override
+protected void mergeDependency_Exclusions( Dependency target, Dependency source, boolean sourceDominant,
+                                           Map&lt;Object, Object&gt; context )
+{
+    List&lt;Exclusion&gt; tgt = target.getExclusions();
+    // 只有当tgt的exclusions为空时，才会取dependencyManagement中的exclusions
+    if ( tgt.isEmpty() )
+    {
+        List&lt;Exclusion&gt; src = source.getExclusions();
+ 
+        for ( Exclusion element : src )
+        {
+            Exclusion clone = element.clone();
+            target.addExclusion( clone );
+        }
+    }
+}
+</code></pre>
+</div>
 
-<p>主从一致：
-   只读主库，从库只做failover故障转移</p>
+<h3 id="in_action">最佳实践</h3>
 
-<h2 id="ref">参考</h2>
+<ol>
+  <li>
+    <p>项目的parent设置为公共父pom（指定了一些每个项目都需要的配置，不需要你再重复了，包括jdk配置、plugin配置、仓库配置、常用jar的dependencyManagement；引入冲突检测机制，将风险在编译期就暴露出来）</p>
+  </li>
+  <li>
+    <p>依赖冲突都在项目的父模块中解决，子模块中引入</p>
+  </li>
+  <li>
+    <p>尽量使用依赖（dependencyManagement）解决冲突，而不是依赖调解exclude</p>
+  </li>
+  <li>
+    <p>统一日志，使用slf4j + log4j2，详见日志相关</p>
+  </li>
+  <li>
+    <p>线上只引release包，禁止引snapshot包。当然一点点来吧。</p>
+  </li>
+</ol>
 
-<p>[1]<a href="http://www.dofactory.com/sql/alias">http://www.dofactory.com/sql/alias</a></p>
+<h3 id="debug_maven">调试maven</h3>
 
-<p>[2]<a href="http://www.cnblogs.com/JohnABC/p/3309144.html">http://www.cnblogs.com/JohnABC/p/3309144.html</a></p>
+<p>主要是想验证下上边一些不确定的地方，官网没找到相关内容，网上说的不可信，就自己debug源码看了。</p>
 
-<p>[mysql查询技巧]<a href="http://mp.weixin.qq.com/s?timestamp=1462151732&amp;src=3&amp;ver=1&amp;signature=OSVBirQ*w6WZWLcZjH6vpvdgkDEJmVj*2H8YvyHQ*kU3SMtwHC8UZjxCuA7yZG-okuygUsbvjIWjyYv0kzUA6EY59CrHnmPfjAS6z6wa9mVuYVuLetcoDSLcqObopAFRKJTeX*wR6B4E9m0GRcdt-TAvRLRKqxJMgkjiEN6WVls=">http://mp.weixin.qq.com/s?timestamp=1462151732&amp;src=3&amp;ver=1&amp;signature=OSVBirQ*w6WZWLcZjH6vpvdgkDEJmVj*2H8YvyHQ*kU3SMtwHC8UZjxCuA7yZG-okuygUsbvjIWjyYv0kzUA6EY59CrHnmPfjAS6z6wa9mVuYVuLetcoDSLcqObopAFRKJTeX*wR6B4E9m0GRcdt-TAvRLRKqxJMgkjiEN6WVls=</a></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 1. 下载maven源码
+git clone git@github.com:apache/maven.git
+  
+// 2. build maven（你机器上得有maven和jdk）
+mvn -DdistributionTargetFolder="/path/to/maven" clean package
+  
+// 3. 使用你源码build出的命令（不是你之前安装的哟），mvnDebug会设置java的debug端口为8000
+cd  /path/to/you_project
+/path/to/maven/bin/mvnDebug  clean package(你要执行的命令)
+  
+// 4.设置idea的remote debug配置为localhost 8000，入口是MavenCli#main，
+  
+// 5.调试吧。
+</code></pre>
+</div>
 
-<p>[Character Sets and Collations Supported by MySQL]<a href="http://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">http://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html</a></p>
+<h3 id="ref">参考</h3>
+
+<p><a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">maven依赖机制</a></p>
+
+<p><a href="https://maven.apache.org/ref/3.3.9/maven-model/maven.html#class_DependencyManagement">maven</a></p>
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2014/11/13/find">find实用</a>
+                <a href="/2015/12/28/logback_common">logback日常总结</a>
             </li>
             
             
             <li>
                 <span>下一篇</span>
-                <a href="/2014/11/17/gitBasic">git基础命令</a>
+                <a href="/2015/12/28/maven_command">maven基本命令</a>
             </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2014/11/16/sql_basic" data-title="sql基础"
-             data-url="http://lcj1992.github.io/2014/11/16/sql_basic">
+        <div class="ds-share flat" data-thread-key="/2015/12/28/clean_pom" data-title="clean pom"
+             data-url="http://lcj1992.github.io/2015/12/28/clean_pom">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -184,8 +324,8 @@ select binary 'a' = 'A'
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2014/11/16/sql_basic" data-title="sql基础"
-             data-url="http://lcj1992.github.io/2014/11/16/sql_basic"></div>
+        <div class="ds-thread" data-thread-key="/2015/12/28/clean_pom" data-title="clean pom"
+             data-url="http://lcj1992.github.io/2015/12/28/clean_pom"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -348,11 +488,11 @@ select binary 'a' = 'A'
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2014/11/13/find";
+                    window.location.href = "/2015/12/28/logback_common";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2014/11/17/gitBasic";
+                    window.location.href = "/2015/12/28/maven_command";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

@@ -159,103 +159,6 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 
     }
 
-#### 日志框架
-很多时候日志各种jar会冲突，单列出来说下。
-
-![日志jar关系](/images/soft/log_relation.png)
-
-|jar|类型|说明|
-|-|-|-|
-|org.slf4j:slf4j-api|接口，桥接|slf4j api,具体实现交给其他日志|
-|org.apache.commons:commons-logging-api|接口，桥接|jcl api,同上，我们的应用中肯定不会以它为api，但是很多框架中使用了它|
-|org.slf4j:jcl-over-slf4j|过渡包|使用slf4j接管jcl|
-|org.slf4j:slf4j-jcl|过渡包|使用jcl接管slf4j|
-|org.slf4j:log4j-over-slf4j|过渡包|使用slf4j接管log4j1，对于log4j2是不适用的|
-|org.slf4j:slf4j-log4j12|过渡包|使用log4j接管slf4j|
-|org.slf4j:jul-to-slf4j|过渡包|使用slf4j接管jul(java.util.logging)|
-|org.apache.logging.log4j:log4j-jul|过渡包|把jul的接口适配到log4j2的实现|
-|org.apache.logging.log4j:log4j-1.2-api|过渡包|把log4j1的接口适配到log4j2的实现|
-|ch.qos.logback:logback-classic|日志实现||
-|ch.qos.logback:logback-core|日志实现||
-|org.apache.logging.log4j:log4j-api|日志实现||
-|org.apache.logging.log4j:log4j-core|日志实现||
-|org.apache.logging.log4j:log4j-slf4j-impl|过渡包|log4j2是可以不依赖任何桥接包slf4j，jcl，这个包是使用slf4j来接管log4j的。|
-
-推荐实践为：
-
-1.  slf4j + logback
-2.  slf4j + log4j2
-
-#### 接口统一使用slf4j接管
-
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${org.slf4j.version}</version>
-    </dependency>
-
-    <!--Jakarta Commons Logging redirect to slf4j -->
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${org.slf4j.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-
-    <!--Apache log4j redirect to slf4j -->
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>log4j-over-slf4j</artifactId>
-        <version>${org.slf4j.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-
-    <!--Java Util Logging redirect to slf4j -->
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jul-to-slf4j</artifactId>
-        <version>${org.slf4j.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-
-##### 实现使用logback
-
-    <!--slf4j的配置-->
-
-    <!--logback的配置-->
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-core</artifactId>
-        <version>${logback.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-
-##### 实现使用log4j2
-
-    <!--slf4j的配置-->
-
-    <!--log4j2的配置-->
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-slf4j-impl</artifactId>
-        <version>2.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.3</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.3</version>
-    </dependency>
 
 #### 常见冲突解决    
 
@@ -271,6 +174,9 @@ idea的show dependencies(ctrl + (shift) +alt + u)（好像用处不大。。//TO
 
 6. fastxml  codehaus  后者已经不维护了，改名为fastxml了
 
+7. com.google.code.findbugs:annotations   com.google.code.findbugs:jsr305 删除后者
+
+8. spring在3.2.0 之后已经把spring-asm的类直接包含在spring-core中了[详见](http://stackoverflow.com/questions/19800004/why-is-there-no-spring-asm-3-2-4-release-jar)
 #### 参考
 
 [slf4j]<http://www.slf4j.org/manual.html>

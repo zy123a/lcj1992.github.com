@@ -6,7 +6,7 @@
     <meta name="baidu-site-verification" content="vuaTJrjFLn" />
     <meta name="keywords" content="foolchild,linux,java,技术,互联网" />
     <meta name="description" content="技术博客，记录foolchild技术道路上成长的点滴" />
-    <title> maven依赖机制  </title>
+    <title> 日志各jar依赖  </title>
     <link rel="stylesheet" href="/css/default.css" type="text/css"/>
     <link rel="stylesheet" href="/css/small.css" type="text/css" media="(max-width: 720px)"/>
     <link rel="stylesheet" href="/css/syntax.css" type="text/css"/>
@@ -27,68 +27,245 @@
 </div>
 
     <div id="main">
-        <h2> maven依赖机制 </h2>
-        <h4 id="section">原汁原味</h4>
-<p>https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html</p>
+        <h2> 日志各jar依赖 </h2>
+        <ul>
+  <li><a href="#overview">概述</a></li>
+  <li><a href="#in_action">实践</a></li>
+  <li><a href="#other_pics">其他好图</a></li>
+  <li><a href="#ref">参考</a></li>
+</ul>
 
-<h4 id="section-1">依赖机制的介绍</h4>
-<p>依赖管理是maven一个著名的特性，也是maven优秀的一点。如果是一个单一的工程，管理依赖不是很难，</p>
+<h3 id="overview">概述{#overview}</h3>
 
-<p>但是如果你开始处理一个包含有成十上百的模块的多模块的工程和应用时，这时候maven可以在高度的控制和稳定性方面给你提供较大的帮助</p>
+<p>很多的冲突都是日志jar引起的，日志实现性能不一，有必要统一下系统中使用的日志.</p>
 
-<h5 id="transitive-mediation">传递依赖(transitive mediation)</h5>
-<p>传递依赖是maven2.0之后的一个特性，它允许你不用去发现和配置你的依赖的依赖，它自动把它include了。这个特性可以帮助你从你配置的远端仓库阅读项目文件(?)</p>
+<p>日志相关的包根据作用分为几类：</p>
 
-<p>一般情况下，所有的依赖，包含你工程使用的，同时包含这个工程继承自他的parents的。There is no limit to the number of levels that dependencies can be gathered from, and will only cause a problem if a cyclic dependency is discovered.</p>
+<ol>
+  <li>
+    <p>日志门面接口包(eg: slf4j-api)</p>
+  </li>
+  <li>
+    <p>具体的日志实现包(eg: log4j-core)</p>
+  </li>
+  <li>
+    <p>桥接包:桥接日志接口和日志实现(eg: log4j-slf4j-impl)</p>
+  </li>
+  <li>
+    <p>适配包:不同日志接口之间的适配(eg: jcl-over-slf4j)</p>
+  </li>
+</ol>
 
-<p>由于传递依赖，这个依赖关系图可能很大。由于这个原因，有一些额外的特性来决定那个dependencies来include进来。</p>
+<p><img src="/images/soft/log_kinds.png" alt="log_knids" /></p>
 
-<h5 id="dependency-mediation">依赖调解(Dependency mediation)</h5>
-<p>这决定了当出现多版本时决定要选用那个版本。目前，maven2.0仅仅支持“nearest definition”，这意味着它将使用依赖关系树中离工程较近的版本，</p>
+<h3 id="inaction">实践{#in_action}</h3>
 
-<p>你通过在工程pom里边显式的指定一个版本来保证一个版本。如果两个版本在依赖树中有同样的深度，直到2.0.8它不被定义谁将胜，但是自从2.0.9，按照声明的顺序，决定选择那个版本。</p>
+<p>通常我们选择slf4j作为日志接口，log4j2或者logback作为日志实现</p>
 
-<p>“nearest definition” 意味着使用依赖树中距离工程比较近的版本。例如，如果A依赖B依赖C依赖D2.0 并且A依赖E依赖D1.0,那么当编译 A时将会使用D1.0因为从A到D经过E更近。</p>
+<p>为了使我们系统使用到比较高性能的log4j2或者logback，我们需要做三件事</p>
 
-<p>你也可以显式的指定D2.0到A来强制使用D2.0</p>
+<ol>
+  <li>
+    <p>引入slf4j-api包和相关日志实现包(log4j2或者logback)</p>
+  </li>
+  <li>
+    <p>用各种适配包替换掉其他日志接口包(引入适配包，同时exclude掉原有日志接口包)</p>
+  </li>
+  <li>
+    <p>exclude掉其他日志实现</p>
+  </li>
+</ol>
 
-<h5 id="dependency-management">依赖管理(Dependency management)</h5>
-<p>这允许项目的作者来直接指定要使用的artfacts的版本当他们出现在传递依赖中或者在依赖中没有指定版本。在本节的这个例子中，一个依赖直接被加到A上即使他没有被A直接使用。</p>
+<p>适配包是怎么来适配的</p>
 
-<p>A可以在他的dependencyManagement中包含D来直接控制要什么那个版本的D当被提及。</p>
+<p>假设我们日志接口使用slf4j，日志实现使用logback。可是我们的系统中可能引入不同的jar包，会带进来不同的日志包，比如spring使用了commons-logging。为此我们需要exclude掉commons-logging，用jcl-over-slf4j包替换之，这样的话spring还是继续使用commons-logging的api，但是日志实现已经变成slf4j底层的日志实现了（这是logback）。</p>
 
-<h5 id="dependency-scope">依赖作用域(Dependency scope)</h5>
-<p>这允许你在适当的阶段加入依赖。</p>
+<p>怎么实现的，适配器模式呗，比对jcl-over-slff4j和commons-logging-api的jar包。log4j-over-slf4j和jul-to-slf4j类似，原理都是一样的，用slf4j的api，适配原有的日志接口。</p>
 
-<h5 id="excluded-dependencies">排除依赖(Excluded dependencies)</h5>
-<p>如果工程依赖工程Y，工程Y依赖工程Z，工程X的所有者可以使用“exclusion”显式的排除项目</p>
+<p><img src="/images/soft/jcl-over-slf4j.png" alt="jcl-over-slf4j" />
+<img src="/images/soft/jcl.png" alt="jcl" /></p>
 
-<h5 id="optional-dependencies">选择依赖(Optional dependencies)</h5>
-<p>..</p>
+<p>jcl-over-slf4j适配原理</p>
 
-<h4 id="pom">pom继承</h4>
-<p>子pom继承父pom<dependencyment>,<dependencies>等，但是自己子pom可重写。</dependencies></dependencyment></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>#// 摘取SLF4JLog的关键代码片段
+public class SLF4JLog implements Log, Serializable {
+ 
+    ...
+    // 关键点
+    private transient org.slf4j.Logger logger;
+ 
+    SLF4JLog(Logger logger) {
+        this.logger = logger;
+        this.name = logger.getName();
+    }
+ 
+    ...
+    public void info(Object message) {
+        logger.info(String.valueOf(message));
+    }
+}
+</code></pre>
+</div>
 
-<p>父模块packing方式必须为pom才能被子模块继承,在父pom中modules节点中添加子模块，在子模块中添加parent</p>
+<h4 id="slf4jlogback">slf4j+logback</h4>
+
+<p><img src="/images/soft/slf4j_logback.png" alt="slf4j+logback" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+&lt;/dependency&gt;
+ 
+&lt;!--Jakarta Commons Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+ 
+&lt;!--Java Util Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jul-to-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+  
+&lt;!--Apache log4j redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+ 
+&lt;dependency&gt;
+    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;version&gt;${logback.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+    &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+    &lt;version&gt;${logback.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<h4 id="slf4j-log4j2">slf4j+ log4j2</h4>
+
+<p><img src="/images/soft/log4j-1.2-api.png" alt="slf4j + log4j2" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--slf4j的配置--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+&lt;/dependency&gt;
+ 
+&lt;!--Jakarta Commons Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+ 
+&lt;!--Java Util Logging redirect to slf4j --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;jul-to-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;${org.slf4j.version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;!--log4j2的配置--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+    &lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
+&lt;/dependency&gt;
+  
+&lt;!--其实这里使用log4j-over-slf4j也是可以的。无非是多了一层适配--&gt;
+&lt;!--log4j api --&gt; slf4j api --&gt;  slf4j挂的日志实现（这里是log4j2） --&gt;
+&lt;!--log4j api --&gt; log4j2实现 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-1.2-api&lt;/artifactId&gt;
+    &lt;version&gt;2.3&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<h3 id="otherpics">其他好图{#other_pics}</h3>
+
+<p><img src="/images/soft/whichjar-slf4j-2.x.png" alt="log4j2+slf4j" /></p>
+
+<p>使用log4j2的api，底层实现使用slf4j的实现（可以挂不同的实现）</p>
+
+<p><img src="/images/soft/concrete-bindings.png" alt="slf4j+other" /></p>
+
+<p>从左向右一次1，2，3，4..</p>
+
+<ol>
+  <li>
+    <p>使用slf4j-api，没挂系统实现，不打日志</p>
+  </li>
+  <li>
+    <p>使用slf4j-api 挂logback日志实现（logback因为是slf4j作者亲生的，所以天然桥接slf4j，不需要任何桥接包）</p>
+  </li>
+  <li>
+    <p>slf4j-api 挂log4j实现，需要桥接包slf4j-log4j12</p>
+  </li>
+  <li>
+    <p>slf4j-api挂java.util.logging日志实现，需要桥接包 slf4j-jdk14</p>
+  </li>
+  <li>
+    <p>。。。</p>
+  </li>
+  <li>
+    <p>。。。</p>
+  </li>
+  <li>
+    <p>slf4j 挂log4j2，需要桥接包log4j-slf4j-impl，具体见上 slf4j+log4j2</p>
+  </li>
+</ol>
+
+<h3 id="ref">参考{#ref}</h3>
+
+<p><a href="http://www.slf4j.org/legacy.html">slf4j-legacy</a></p>
+
+<p><a href="http://www.slf4j.org/manual.html">slf4j-manual</a></p>
+
+<p><a href="https://logging.apache.org/log4j/2.0/faq.html#troubleshooting">log4j2-troubleshooting</a></p>
+
 
         <ul class="prev_next">
             
             <li>
                 <span>上一篇</span>
-                <a href="/2015/12/28/logback_common">logback日常总结</a>
+                <a href="/2016/11/02/scala_basic">scala基础</a>
             </li>
             
-            
-            <li>
-                <span>下一篇</span>
-                <a href="/2015/12/28/maven_command">maven基本命令</a>
-            </li>
             
         </ul>
 
         <!-- 多说评论 -->
-        <div class="ds-share flat" data-thread-key="/2015/12/28/dependency" data-title="maven依赖机制"
-             data-url="http://lcj1992.github.io/2015/12/28/dependency">
+        <div class="ds-share flat" data-thread-key="/2016/11/04/log_dependency" data-title="日志各jar依赖"
+             data-url="http://lcj1992.github.io/2016/11/04/log_dependency">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
 
@@ -117,8 +294,8 @@
             }
             </script>
         </div>
-        <div class="ds-thread" data-thread-key="/2015/12/28/dependency" data-title="maven依赖机制"
-             data-url="http://lcj1992.github.io/2015/12/28/dependency"></div>
+        <div class="ds-thread" data-thread-key="/2016/11/04/log_dependency" data-title="日志各jar依赖"
+             data-url="http://lcj1992.github.io/2016/11/04/log_dependency"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -281,11 +458,11 @@
                 });
                 // 上一篇
                 $(document).bind('keydown', 'alt+p', function () {
-                    window.location.href = "/2015/12/28/logback_common";
+                    window.location.href = "/2016/11/02/scala_basic";
                 });
                 // 下一篇
                 $(document).bind('keydown', 'alt+n', function () {
-                    window.location.href = "/2015/12/28/maven_command";
+                    window.location.href = "";
                 });
 
                 $.getJSON("/search.json").done(function (data) {

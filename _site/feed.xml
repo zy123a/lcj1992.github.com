@@ -5,9 +5,33 @@
         <description>foolchild的技术博客</description>
         <link>http://foolchild.cn/</link>
         <atom:link href="http://foolchild.cn/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>Sat, 17 Sep 2016 18:35:14 +0800</pubDate>
-        <lastBuildDate>Sat, 17 Sep 2016 18:35:14 +0800</lastBuildDate>
+        <pubDate>Fri, 04 Nov 2016 18:48:16 +0800</pubDate>
+        <lastBuildDate>Fri, 04 Nov 2016 18:48:16 +0800</lastBuildDate>
         <generator>Jekyll v3.1.6</generator>
+        
+        <item>
+            <title>scala基础</title>
+            <description></description>
+            <pubDate>Wed, 02 Nov 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/11/02/scala_basic</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/11/02/scala_basic</guid>
+            
+            <category>scala</category>
+            
+            
+            <category>language</category>
+            
+        </item>
+        
+        <item>
+            <title>Some_words</title>
+            <description></description>
+            <pubDate>Sun, 09 Oct 2016 00:00:00 +0800</pubDate>
+            <link>http://foolchild.cn/2016/10/09/some_words</link>
+            <guid isPermaLink="true">http://foolchild.cn/2016/10/09/some_words</guid>
+            
+            
+        </item>
         
         <item>
             <title>redis集群搭建</title>
@@ -1509,10 +1533,14 @@
             <title>maven依赖机制</title>
             <description></description>
             <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
-            <link>http://foolchild.cn/2015/12/28/dependency</link>
-            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/dependency</guid>
+            <link>http://foolchild.cn/2015/12/28/clean_pom</link>
+            <guid isPermaLink="true">http://foolchild.cn/2015/12/28/clean_pom</guid>
             
             <category>maven</category>
+            
+            <category>dependency</category>
+            
+            <category>conflict</category>
             
             
             <category>soft</category>
