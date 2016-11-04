@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "日志各jar依赖 - 2016-11-04 - maven_slf4j_log4j2_logback_dependency",
+		"url" : "/2016/11/04/log_dependency"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "scala基础 - 2016-11-02 - scala",
 		"url" : "/2016/11/02/scala_basic"
 	}
@@ -787,7 +795,7 @@
 	
     
 	{
-		"title" : "maven依赖机制 - 2015-12-28 - maven_dependency_conflict",
+		"title" : "clean pom - 2015-12-28 - maven_dependency_conflict",
 		"url" : "/2015/12/28/clean_pom"
 	}
 	

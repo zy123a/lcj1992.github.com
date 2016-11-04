@@ -30,12 +30,17 @@
         <h2> 日志各jar依赖 </h2>
         <ul>
   <li><a href="#overview">概述</a></li>
-  <li><a href="#in_action">实践</a></li>
+  <li><a href="#in_action">实践</a>
+    <ul>
+      <li><a href="#slf4j_logback">slf4j + logback</a></li>
+      <li><a href="#slf4j_log4j2">slf4j + log4j2</a></li>
+    </ul>
+  </li>
   <li><a href="#other_pics">其他好图</a></li>
   <li><a href="#ref">参考</a></li>
 </ul>
 
-<h3 id="overview">概述{#overview}</h3>
+<h3 id="overview">概述</h3>
 
 <p>很多的冲突都是日志jar引起的，日志实现性能不一，有必要统一下系统中使用的日志.</p>
 
@@ -58,7 +63,7 @@
 
 <p><img src="/images/soft/log_kinds.png" alt="log_knids" /></p>
 
-<h3 id="inaction">实践{#in_action}</h3>
+<h3 id="in_action">实践</h3>
 
 <p>通常我们选择slf4j作为日志接口，log4j2或者logback作为日志实现</p>
 
@@ -107,7 +112,7 @@ public class SLF4JLog implements Log, Serializable {
 </code></pre>
 </div>
 
-<h4 id="slf4jlogback">slf4j+logback</h4>
+<h4 id="slf4j_logback">slf4j+logback</h4>
 
 <p><img src="/images/soft/slf4j_logback.png" alt="slf4j+logback" /></p>
 
@@ -156,7 +161,7 @@ public class SLF4JLog implements Log, Serializable {
 </code></pre>
 </div>
 
-<h4 id="slf4j-log4j2">slf4j+ log4j2</h4>
+<h4 id="slf4j_log4j2">slf4j+ log4j2</h4>
 
 <p><img src="/images/soft/log4j-1.2-api.png" alt="slf4j + log4j2" /></p>
 
@@ -210,7 +215,7 @@ public class SLF4JLog implements Log, Serializable {
 </code></pre>
 </div>
 
-<h3 id="otherpics">其他好图{#other_pics}</h3>
+<h3 id="other_pics">其他好图</h3>
 
 <p><img src="/images/soft/whichjar-slf4j-2.x.png" alt="log4j2+slf4j" /></p>
 
@@ -244,7 +249,7 @@ public class SLF4JLog implements Log, Serializable {
   </li>
 </ol>
 
-<h3 id="ref">参考{#ref}</h3>
+<h3 id="ref">参考</h3>
 
 <p><a href="http://www.slf4j.org/legacy.html">slf4j-legacy</a></p>
 

@@ -2,6 +2,13 @@
 <articles>
     
     <article>
+        <title>日志各jar依赖</title>
+        <url>http://foolchild.cn/2016/11/04/log_dependency</url>
+        <tag>mavenslf4jlog4j2logbackdependency</tag>
+        <date>2016-11-04</date>
+    </article>
+    
+    <article>
         <title>scala基础</title>
         <url>http://foolchild.cn/2016/11/02/scala_basic</url>
         <tag>scala</tag>
@@ -688,7 +695,7 @@
     </article>
     
     <article>
-        <title>maven依赖机制</title>
+        <title>clean pom</title>
         <url>http://foolchild.cn/2015/12/28/clean_pom</url>
         <tag>mavendependencyconflict</tag>
         <date>2015-12-28</date>
