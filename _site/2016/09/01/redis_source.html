@@ -139,11 +139,11 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">quicklist.h</code>、<code class="highlighter-rouge">quicklist.c</code></td>
-      <td> </td>
+      <td>list对象的底层实现，双端ziplist的链表</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">help.h</code></td>
-      <td><code class="highlighter-rouge">utils/generate-command-help.rb</code> 程序自动生成的命令帮助信息。</td>
+      <td><code class="highlighter-rouge">help.h</code>、<code class="highlighter-rouge">utils/generate-command-help.rb</code> 程序自动生成的命令帮助信息。</td>
+      <td> </td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">hyperloglog.c</code></td>
@@ -325,7 +325,7 @@
 
 <p>其结构图如下：</p>
 
-<p><img src="/images/soft/redisServer.png" alt="redis结构" /></p>
+<p><img src="/images/soft/redis.jpg" alt="redis结构" /></p>
 
 <h3 id="obj">对象</h3>
 
@@ -712,6 +712,10 @@ typedef struct zskiplistNode {
 
 <p>连锁更新</p>
 
+<h4 id="ds_transform">内存结构-多态</h4>
+
+<p><img src="/images/soft/redis_object_transform.jpg" alt="底层数据结构的变换" /></p>
+
 <h3 id="debug_redis">调试redis</h3>
 
 <p>使用vi，ctags，cscope，gdb进行调试 参见<a href="/2016/02/28/view_source">我是这样看源码的</a></p>
@@ -739,6 +743,8 @@ r
 <p><img src="/images/soft/gdb_redis.png" alt="gdb_redis" /></p>
 
 <h3 id="redis_start">redis启动流程</h3>
+
+<p><img src="/images/soft/redis_start.jpg" alt="redis启动流程" /></p>
 
 <p>redis.c中有两个全局变量
 <code class="highlighter-rouge">struct RedisServer * server</code>、 <code class="highlighter-rouge">struct RedisCommand *commandTable</code></p>
@@ -810,6 +816,8 @@ r
 </ol>
 
 <h3 id="redis_accept_request">redis接受请求</h3>
+
+<p><img src="/images/soft/redis_cmd_process.jpg" alt="redis请求处理流程" /></p>
 
 <p><code class="highlighter-rouge">p (struct redisServer) server</code></p>
 

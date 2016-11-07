@@ -46,8 +46,8 @@ redis源码总共6w多行。
 | `fmacros.h`| 一些移植性方面的宏。                                        
 | `geo.h`、`geo.c`|位置相关（经纬度）
 | `latency.h`、`latency.c`|延迟类
-| `quicklist.h`、`quicklist.c`|
-| `help.h`| `utils/generate-command-help.rb` 程序自动生成的命令帮助信息。   
+| `quicklist.h`、`quicklist.c`|list对象的底层实现，双端ziplist的链表|
+| `help.h`、`utils/generate-command-help.rb` 程序自动生成的命令帮助信息。   
 | `hyperloglog.c`| HyperLogLog 数据结构的实现。                                
 | `intset.c` 、 `intset.h`| 整数集合数据结构的实现，用于优化 SET 类型。                 
 | `lzf_c.c` 、 `lzf_d.c` 、 `lzf.h` 、 `lzfP.h`| Redis 对字符串和 RDB 文件进行压缩时使用的 LZF 压缩算法的实现
@@ -102,7 +102,7 @@ redis源码总共6w多行。
 
 其结构图如下：
 
-![redis结构](/images/soft/redisServer.png)
+![redis结构](/images/soft/redis.jpg)
 
 ### 对象 {#obj}
 
@@ -400,6 +400,11 @@ sds: simple dynamic string
 
 连锁更新
 
+#### 内存结构-多态 {#ds_transform}
+
+![底层数据结构的变换](/images/soft/redis_object_transform.jpg)
+
+
 ### 调试redis {#debug_redis}
 
 使用vi，ctags，cscope，gdb进行调试 参见[我是这样看源码的](/2016/02/28/view_source)
@@ -423,6 +428,9 @@ ps: mac上的gdb还需设置下: http://jingyan.baidu.com/article/925f8cb8fa362e
 ![gdb_redis](/images/soft/gdb_redis.png)
 
 ### redis启动流程 {#redis_start}
+
+
+![redis启动流程](/images/soft/redis_start.jpg)
 
 redis.c中有两个全局变量
 `struct RedisServer * server`、 `struct RedisCommand *commandTable`
@@ -470,6 +478,8 @@ Q&A ?
 1. 如何将其设置为守护进程的。
 
 ### redis接受请求 {#redis_accept_request}
+
+![redis请求处理流程](/images/soft/redis_cmd_process.jpg)
 
 `p (struct redisServer) server`
 
