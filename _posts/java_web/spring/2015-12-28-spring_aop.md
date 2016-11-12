@@ -20,7 +20,7 @@ spring Aop使用`jdk动态代理`或者`cglib代理`来为实例创建代理。
 如果你想强制使用cglib代理（例如，想代理目标对象中所有的方法，而不仅仅是实现的接口的方法），你可以做这些，但是有一些问题需要考虑：
 
 final 方法不能被advised，因为他们不能被重写
-从3.2版本，cglib被包含org.srpingframework  的spring-croe jar包中
+从3.20版本，cglib被包含org.srpingframework的spring-croe jar包中
 为了强制使用cglib代理，将<aop:config>中proxy-target-class设为true
 
     <aop:config proxy-target-class="true">
@@ -30,8 +30,8 @@ final 方法不能被advised，因为他们不能被重写
 在使用@Aspectj自动代理时，为了强制使用cglib，需要设置<aop:aspectj-autoproxy>的属性‘proxy-target-class’为true。
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    
-使用proxy-target-class=true 在<tx:annotation-driven/>,<aop:aspectj-autoproxy/>,<aop:config/>任一，会使cglib代理在三者都生效。
+
+使用proxy-target-class=true 在`<tx:annotation-driven/>`,`<aop:aspectj-autoproxy/>`,`<aop:config/>任一，会使cglib代理在三者都生效。
 
 ### 静态代理 {#static_proxy}
 
@@ -44,7 +44,7 @@ aspectj
 * 通知(Advice): 定义了切面是什么以及何时使用，除了描述切面要完成的工作，通知还解决了何时执行这个工作的问题
     * 前置通知(Before): 在目标方法被调用之前调用通知功能,下类似
     * 后置通知(After):
-    * 返回通知(After-teturing)
+    * 返回通知(After-returing)
     * 异常通知(After-throwing)
     * 环绕通知(Around)
 * 连接点(JoinPoint) :在应用执行过程中能够插入切面的一个点
@@ -55,7 +55,7 @@ aspectj
     * 编译期:切面在目标类编译时被织入，这种方式需要特殊的编译器，Aspectj的织入编译器就是以这种方法织入切面的
     * 类加载期: 切面在目标类加载到jvm时被织入。这种方式需要特殊的类加载器，它可以在目标类在被引入应用之前增强该目标类的字节码，Aspectj5的加载时织入(load-time weaving,LTW)就支持以这种方式织入切面
     * 运行时: 切面在应用运行的某个时刻被织入，一般情况下，在织入切面时，aop容器会为目标对象动态创建一个代理对象。spring aop就是以这种方式织入切面的。
-     
+
 以实战中例子说明如下：
 
 ![aop例子说明](/images/java_web/aop_action.png)

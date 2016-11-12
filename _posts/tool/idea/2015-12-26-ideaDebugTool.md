@@ -5,15 +5,15 @@ categories: tool
 tags: idea debug
 ---
 
-*   [Condition Breakpoint](#condition) 
-*   [Exception Breakpoint](#exception) 
-*   [Watch Point](#watch) 
-*   [evaluation](#evaluation) 
-*   [change Variable values](#change) 
-*   [Environment Variables](#env) 
-*   [drop frame](#dropFrame) 
-*   [step over,step into,step out,run to cursor](#general) 
-*   [multi threads](#multiThread) 
+*   [Condition Breakpoint](#condition)
+*   [Exception Breakpoint](#exception)
+*   [Watch Point](#watch)
+*   [evaluation](#evaluation)
+*   [change Variable values](#change)
+*   [Environment Variables](#env)
+*   [drop frame](#dropFrame)
+*   [step over,step into,step out,run to cursor](#general)
+*   [multi threads](#multiThread)
 
 <http://javapapers.com/core-java/top-10-java-debugging-tips-with-eclipse>
 
@@ -85,7 +85,7 @@ force step into alt + shift + F7
 
 run to cursor F9
 
-####  多线程debug {#multiThread} 
+####  多线程debug {#multiThread}
 
 idea 默认run的级别是all 改为Thread就可以debug多线程了
 

@@ -24,6 +24,6 @@ tags: bash terminal short_cut
 |ctrl r	|快速搜索history命令 继续ctrl r会继续搜下一条命令
 |alt d	|删除光标后的一个词
 |alt f	|往右跳一个单词 应该会冲突，我一般直接用ctrl ->
-|alt b	|往左跳一个单词 我一般直接用ctrl \<-
+|alt b	|往左跳一个单词 我一般直接用ctrl <-
 |alt .|循环地移向前一个参数|
 |alt #|在行首添加#,**在你输入命令的时候改变了主意，但是你之后还想用这个命令**|

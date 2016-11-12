@@ -22,7 +22,6 @@ http://blog.csdn.net/lainegates/article/details/27830333
 
 #### 忘记root密码
 
-
     sudo passwd -u root # 启用root账户。
     sudo passwd root #按提示示进行输入，root的密码最好和其他用户的密码不同。
 

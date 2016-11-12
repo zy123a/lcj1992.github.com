@@ -13,7 +13,7 @@ tags: spring
 
 |jar包|说明|
 |-|-|
-|spring-core|spring的核心工具类，其他组件都要用到这个包|
+|spring-core|spring的核心工具类，其他组件都要用到这个包,在3.2.0之后spring-aspects中的相关类已经被包含在spring-core中了|
 |spring-beans|所有应用都要用到的，它包含访问配置文件，创建和管理bean以及进行控制反转/依赖注入操作相关的所有类，如果应用只需基本的Ioc/DI支持，引入spring-core.jar及spring-beans即可|
 |spring-aop|包含应用中使用spring的aop特性时所需要的类，使用基于AOP的spring特性，如声明型事务管理|
 |spring-context|为spring核心提供了大量的扩展，可以找到使用spring　ApplicationContext特性所需的全部类，JDNI所需要的全部类，模板引擎集成的类，以及校验相关的类|
@@ -35,4 +35,3 @@ tags: spring
 #### 参考 {#ref}
 
 [1]<http://www.importnew.com/17474.html>
-

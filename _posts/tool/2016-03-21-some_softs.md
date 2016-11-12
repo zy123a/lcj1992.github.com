@@ -73,7 +73,6 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 
 1,2使用场景: 新开一个桌面,专门放终端,然后cmd+enter全屏显示,然后切换到终端F12,对于经常要登服务器的码农们,简直不要太赞哦
 
-
 ### reeder
 
 mac上我的第一个掏钱的软件,阅读利器
@@ -117,11 +116,15 @@ snip 腾讯的,mac自带的不太好用啊
 
 ### omnigraffle
 
-mac上的`visio`,画图利器
+mac上的`visio`
 
 ### xmind
 
 梳理思路，总结知识点，脑图。
+
+### edrawMax
+
+比omigraffle好用[http://www.sdifenzhou.com/edrawmax84.html]
 
 ## 参考 {#ref}
 

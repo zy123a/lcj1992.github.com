@@ -10,9 +10,9 @@ tags: spring mvc
 ### web项目的加载顺序
 web项目的加载顺序：  
 `context-param -> listener -> filter -> servlet`   
-http://blog.csdn.net/jubincn/article/details/9115205       
+http://blog.csdn.net/jubincn/article/details/9115205      
 结合着我们的项目分析一下spring mvc的启动流程：      
-   
+
 	<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring.xml</param-value>
@@ -21,7 +21,7 @@ http://blog.csdn.net/jubincn/article/details/9115205      
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
- 
+
 ### context-param 和 listener   
 1.在tomcat启动之后，容器会创建一个ServletContext（上下文），应用范围内即整个项目都能使用，接着容器会将读到的<context-param>(我们项目中对应 classpath下的spring.xml)转化成键值对，并交给ServletContext。   
 
@@ -31,7 +31,7 @@ DefaultListableBeanFactory帮我们做了Pre-instantiating singletons（这里�
 注意,这个时候你的WEB项目还没有完全启动完成.这个动作会比所有的Servlet都要早。    
 
 3.这时候我们的context-param 和listener完成加载，项目部署成功.日志中可以看到Root WebApplicationContext: initialization completed in 599 ms，Artifact 2015training1:war exploded: Artifact is deployed successfully
-   
+
 ### servlet  
 DisPatcherServlet，表示以htm为后缀的都要经过这个分发器进行分发。
 	<servlet>
@@ -58,7 +58,7 @@ DisPatcherServlet，表示以htm为后缀的都要经过这个分发器进行分
         <property name="exceptionAttribute" value="ex"/>
     </bean>
     <context:component-scan base-package="com.spring.controller"/>
-	  
+
 然后也会Pre-instantiating singletons(internalResourceViewResolver,SimpleMappingExceptionResolver,
 requestMappingHandlerMapping,viewControllerHandlerMapping,requestMappingHandlerAdapter,  
 simpleControllerHandlerAdapter,handlerExceptionResolver,jsonBodyExceptionResolver，SimpleMappingExceptionResolver等等)  
@@ -67,4 +67,3 @@ simpleControllerHandlerAdapter,handlerExceptionResolver,jsonBodyExceptionResolve
 requestMappingHandlerAdapter将HandlerExecutionChain中的处理器（DemoController）适配为requestMappingHandlerAdapter FrameworkServlet 'web': initialization completed    
 当传入http://localhost:8080/user/jsp/user.htm?name=bob，  
 根据映射关系，执行DemoController中的get方法，返回一个ModelAndView("user/info").addObject("user", user);然后根据ViewResolver中的配置  前缀[逻辑视图名]后缀 也即/WEB-INF/jsp/user/jsp/info.jsp 并传入对象user，渲染，展示，ok了。
-
