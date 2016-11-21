@@ -10,6 +10,7 @@ tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder xmind 
 *   [Dash](#dash)
 *   [homebrew](#homebrew)
 *   [iterm2](#iterm2)
+*   [idea](#idea)
 *   [reeder](#reeder)
 *   [zsh](#zsh)
 *	[theFuck](#thefuck)
@@ -72,6 +73,12 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 11. `cmd + l` 编辑当前session，结合着cmd + o 支持将tab命名，并快速切换。
 
 1,2使用场景: 新开一个桌面,专门放终端,然后cmd+enter全屏显示,然后切换到终端F12,对于经常要登服务器的码农们,简直不要太赞哦
+
+### idea
+
+1.   mybatis plugin [破解](http://download.csdn.net/download/jianglie/9562959)
+2.   maven-helper
+3.   jvm debugger memory view
 
 ### reeder
 

@@ -7,7 +7,7 @@ tags: spring
 
 #### spring架构
 
-![spring架构](/images/java_web/spring.jpg)
+![spring架构](/images/java_web/spring.png)
 
 #### spring各jar包
 

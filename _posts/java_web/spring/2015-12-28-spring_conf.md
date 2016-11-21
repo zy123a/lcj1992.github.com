@@ -24,27 +24,12 @@ spring的配置xsd都有详细说明，然后稍微懂点英语，会看xsd就ok
     ----------
     2.<context:property-placeholder location="classpath*:*.properties" file-encoding="UTF-8"/>
 
-#### 依赖注入
-
-    1.<context:component-scan base-package="com.xxx">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
-    ----------
-    2.<context:annotation-config/>
-    <!--前者除了依赖注入外还可以实例化bean,并将其注入进spring容器中，后者则只对已经在spring容器中的bean有效-->
-
 #### 使用aspectj aop来初始化上下文
 
     <!-- 使用aop来初始化上下文 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
         <bean id="AopForContext" class="com.xxx.util.AopForContext">
     </bean>
-
-#### 开启事务
-
-    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" />
-
-[spring事务的两种方式](/2015/12/28/spring_transaction)
 
 #### 开启spring mvc controller
 
@@ -135,6 +120,4 @@ spring的配置xsd都有详细说明，然后稍微懂点英语，会看xsd就ok
 
 #### 参考 {#ref}
 
-[1]<http://stackoverflow.com/questions/7414794/difference-between-contextannotation-config-vs-contextcomponent-scan>
-
-[2]<http://stackoverflow.com/questions/7621920/scopeprototype-bean-scope-not-creating-new-bean>
+[1]<http://stackoverflow.com/questions/7621920/scopeprototype-bean-scope-not-creating-new-bean>

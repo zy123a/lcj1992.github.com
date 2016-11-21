@@ -10,7 +10,17 @@ tags: proxy factory adapter facade decorator
  下图中的例子都来自[示例代码](https://github.com/lcj1992/learn/tree/master/java/designPattern)
 、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
 
+1. 单一职责
+2. 里式代换
+3. 接口隔离
+4. 开闭
+5. 迪米特法则
+6. 依赖倒转
+7. 合成复用
+
 ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
+
+减少耦合性，好多都是中间加了一层管理者，比如ioc、桥接、观察者等。
 
 |模式|概述|备注or例子|详述|
 |-|-|-|-|-|-|
