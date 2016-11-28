@@ -18,9 +18,16 @@ tags: proxy factory adapter facade decorator
 6. 依赖倒转
 7. 合成复用
 
-ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
+ps:
+1. 类名取名时，取为对象，英语中一般为er，or，ist等后缀
+2. 方法取名时，取为动作，doExecute, createOrder等
+3. 减少耦合性，好多都是中间加了一层管理者，比如ioc、桥接、观察者等。
 
-减少耦合性，好多都是中间加了一层管理者，比如ioc、桥接、观察者等。
+代码的坏味道：
+1. 重复，程序中太多的重复代码
+2. 太多的if-else
+
+ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 |模式|概述|备注or例子|详述|
 |-|-|-|-|-|-|

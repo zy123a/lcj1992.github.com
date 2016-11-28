@@ -5,6 +5,9 @@ categories:  java_web
 tags: spring mvc
 ---
 
+* TOC
+{:toc}
+
 ### 原理图  
 ![spring mvc原理图](/images/web/springMvc.jpg)
 ### web项目的加载顺序
