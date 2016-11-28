@@ -13,7 +13,6 @@ spring ioc容器来管理类，减少耦合。本文以我们web开发中最常�
 
 # xmlwc的类图
 
-![xmlWebApplicationContext类图](/images/java_web/xmlwc_uml.png)
 
 # bean的生命周期
 
@@ -62,6 +61,11 @@ spring ioc容器来管理类，减少耦合。本文以我们web开发中最常�
 > I found this nice summary of which annotations are picked up by which declarations. By studying it you will find that `<context:component-scan/>` recognizes a superset of annotations recognized by `<context:annotation-config/>`, namely: @Component, @Service, @Repository, @Controller, @Endpoint @Configuration, @Bean, @Lazy, @Scope, @Order, @Primary, @Profile, @DependsOn, @Import, @ImportResource. As you can see
 
 > <context:component-scan> logically extends <context:annotation-config> with CLASSPATH component scanning and Java @Configuration features.</context:annotation-config></context:component-scan>
+
+
+ApplicationListener<ContextRefreshEvent>
+
+Constructor > @PostConstruct > InitializingBean > init-method，构造函数最优先
 
 # 参考 {#ref}
 

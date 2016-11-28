@@ -9,8 +9,11 @@ tags: spring mvc
 {:toc}
 
 ### 原理图  
+
 ![spring mvc原理图](/images/web/springMvc.jpg)
+
 ### web项目的加载顺序
+
 web项目的加载顺序：  
 `context-param -> listener -> filter -> servlet`   
 http://blog.csdn.net/jubincn/article/details/9115205      
@@ -26,6 +29,7 @@ http://blog.csdn.net/jubincn/article/details/9115205      
     </listener>
 
 ### context-param 和 listener   
+
 1.在tomcat启动之后，容器会创建一个ServletContext（上下文），应用范围内即整个项目都能使用，接着容器会将读到的<context-param>(我们项目中对应 classpath下的spring.xml)转化成键值对，并交给ServletContext。   
 
 2.tomcat创建<listener></listener>中的类实例,即创建监听（备注：listener定义的类可以是自定义的类但必须需要继承ServletContextListener）。(我们的项目对应于org.springframework.web.context.ContextLoaderListener)。得到这个context-param的值之后,你就可以做一些操作了.日志中我们可以看到这这几句话：
@@ -36,6 +40,7 @@ DefaultListableBeanFactory帮我们做了Pre-instantiating singletons（这里�
 3.这时候我们的context-param 和listener完成加载，项目部署成功.日志中可以看到Root WebApplicationContext: initialization completed in 599 ms，Artifact 2015training1:war exploded: Artifact is deployed successfully
 
 ### servlet  
+
 DisPatcherServlet，表示以htm为后缀的都要经过这个分发器进行分发。
 	<servlet>
         <servlet-name>web</servlet-name>
