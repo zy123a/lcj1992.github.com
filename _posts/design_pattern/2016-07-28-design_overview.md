@@ -11,16 +11,25 @@ tags: proxy factory adapter facade decorator
 、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
 
 1. 单一职责
+
 2. 里式代换
+
 3. 接口隔离
+
 4. 开闭
+
 5. 迪米特法则
+
 6. 依赖倒转
+
 7. 合成复用
 
 ps:
+
 1. 类名取名时，取为对象，英语中一般为er，or，ist等后缀
+
 2. 方法取名时，取为动作，doExecute, createOrder等
+
 3. 减少耦合性，好多都是中间加了一层管理者，比如ioc、桥接、观察者等。
 
 代码的坏味道：

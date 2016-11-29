@@ -183,6 +183,8 @@ initWebApplicationContext创建webApplicationContext实例，然后configureAndR
 
 #### AbstractApplicationContext#refresh
 
+重中之重！！
+
     @Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
@@ -193,7 +195,9 @@ initWebApplicationContext创建webApplicationContext实例，然后configureAndR
             prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			// 1. refreshBeanFactory():a.创建beanFactory;b.加载beanDefinitions
+			// 1. refreshBeanFactory():
+            //    a.创建beanFactory;
+            //    b.加载beanDefinitions
             // 2. getBeanFactory()并返回beanFactory
             ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
@@ -255,7 +259,91 @@ initWebApplicationContext创建webApplicationContext实例，然后configureAndR
 
 #### XmlApplicationContext#loadBeanDefinitions
 
- 
+    	public int loadBeanDefinitions(String location, Set<Resource> actualResources) throws BeanDefinitionStoreException {
+		ResourceLoader resourceLoader = getResourceLoader();
+		if (resourceLoader == null) {
+			throw new BeanDefinitionStoreException(
+					"Cannot import bean definitions from location [" + location + "]: no ResourceLoader available");
+		}
+
+        // 对于我们要分析的XmlWebApplicationContext来说，就是ResourcePatternResolver,走这个分支。不会走到else分支
+        if (resourceLoader instanceof ResourcePatternResolver) {
+			// Resource pattern matching available.
+			try {
+                // 1. classpath*: 包含jar中xx.xml 同名的resource按照classpath中的次序拼接成一个大文件后载入，后边的覆盖前边的。
+                      a. classpath*:xx/*/?   含*或者?通配符的， findPathMatchingResources  eg:classpath*:spring/**/springMVC-*.xml
+                      b. classpath*:xxx.xml  不含*或者?通配符的，findAllClassPathResources eg:classpath*:application.xml
+                // 2. classpath:  不包含jar中的xml findPathMatchingResources
+				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
+				
+                int loadCount = loadBeanDefinitions(resources);
+				if (actualResources != null) {
+					for (Resource resource : resources) {
+						actualResources.add(resource);
+					}
+				}
+				if (logger.isDebugEnabled()) {
+					logger.debug("Loaded " + loadCount + " bean definitions from location pattern [" + location + "]");
+				}
+				return loadCount;
+			}
+			catch (IOException ex) {
+				throw new BeanDefinitionStoreException(
+						"Could not resolve bean definition resource pattern [" + location + "]", ex);
+			}
+		}
+		else {
+			// Can only load single resources by absolute URL.
+			Resource resource = resourceLoader.getResource(location);
+			int loadCount = loadBeanDefinitions(resource);
+			if (actualResources != null) {
+				actualResources.add(resource);
+			}
+			if (logger.isDebugEnabled()) {
+				logger.debug("Loaded " + loadCount + " bean definitions from location [" + location + "]");
+			}
+			return loadCount;
+		}
+	} 
+
+#### loadBeanDefinitions
+
+调用层次太深，就不逐一来了
+   
+    "main@1" prio=5 tid=0x1 nid=NA runnable
+    java.lang.Thread.State: RUNNABLE
+  	    at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1407)
+  	    at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1401)
+  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.parseBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:172)
+  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:142)
+  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.registerBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:94)
+  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.registerBeanDefinitions(XmlBeanDefinitionReader.java:508)
+  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:392)
+  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+  	    at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:125)
+  	    at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:94)
+  	    at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
+  	    at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:612)
+  	    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:513)
+  	    - locked <0xc39> (a java.lang.Object)
+  	    at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:444)
+  	    at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:326)
+  	    at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+  	    at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:775) 
+
+核心的解析xml是这两个方法：
+
+1. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析， 解析bean、import、beans、alias
+2. BeanDefinitionParserDelegate#parseCustomElement: 其他namespace 的解析
+   a. 每个namespace对应有不同的`NamespaceHandler`，eg :tx、context
+   b. 每个namespaceHandler可能对应多个`BeanDefinitionParser`,eg: ContextNamespaceHandler中包含有PropertyPlaceholderBeanDefinitionParser、ComponentScanBeanDefinitionParser、AnnotationConfigBeanDefinitionParser等用于处理context namespace下的不同的标签。
+
+
+
 
 
 event.getServletContext()拿到事件中的ServletContext(ServletContext是一个接口，这里具体实现为ApplicationContext)
