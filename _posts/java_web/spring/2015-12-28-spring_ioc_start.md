@@ -8,8 +8,10 @@ tags: spring ioc ServletContext
 * TOC
 {:toc}
 
-### ContextLoaderListener
- 
+本文基于spring4.3.1
+
+### 入口-ContextLoaderListener
+
     <?xml version="1.1" encoding="UTF-8"?>
     <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
@@ -29,7 +31,7 @@ tags: spring ioc ServletContext
 
 web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring ioc的容器启动就是从ContextLoaderListener开始的。
 
-    public class ContextLoaderListener extends ContextLoader implements ServletContextListener 
+    public class ContextLoaderListener extends ContextLoader implements ServletContextListener
 
 关于ContextLoaderListener
 
@@ -65,7 +67,7 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
      * the servlet is initialized.
      */
 
-本文只讨论前Servletcontext和Root WebApplicationContext，dispatcherServlet的context不在本文讨论范围之内。
+本文只讨论Servletcontext和Root WebApplicationContext.  dispatcherServlet的context不在本文讨论范围之内。
 
 以web应用使用的WebXmlWebApplicationContext作为切入点分析spring ioc的建立流程，ClassPathXmlWebApplicationContext、FileXmlWebApplicationContext类似。
 
@@ -73,133 +75,42 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
 ![xmlWebApplicationContext类图](/images/java_web/xmlwc_uml.png)
 
-从类图中可以看出其实现的接口：
+通过类图，XmlWebApplicationContext实现的接口，我们可以看出其具备的行为：
 
 1. ResourceLoader: 具备加载资源的能力
+
 2. BeanFactory: ioc容器的最顶层接口，获取容器中的bean
+
 3. ...
 
-所以对于xmlWebAplicationContext(ApplicationContext)的加载过程可以分为这几步
+对应的其处理流程：
 
 1. 加载resource, 由context-param标签中的参数指定。
-2. 解析resource，向容器中注册resource对应的bean
-3. 依据BeanDefinition，实例化bean(lazy-init = false)
+
+2. 解析resource，向容器中注册resource对应的bean,即填充beanDefinitionMap等bean的元信息
+
+3. 依据BeanDefinition，实例化bean(lazy-init = false或者在第一次使用bean时)
+
 4. ...
 
 ### 启动流程
 
-#### ContextLoader#initWebApplicationContext
+下边这个方法算是ioc容器启动的主体方法了。
+核心方法：
 
-initWebApplicationContext创建webApplicationContext实例，然后configureAndRefreshWebApplicationContext.
+obtainFreshBeanFactory : 加载resource，解析Resource，向beanFactory中填充BeanDefinition等bean的元信息。
 
-    public WebApplicationContext initWebApplicationContext(ServletContext servletContext) {
+finishBeanFactoryInitialization : 实例化非lazy-init的bean
 
-        ...
-
-		// Store context in local instance variable, to guarantee that
-		// it is available on ServletContext shutdown.
-		if (this.context == null) {
-			// 实例化webApplicationContext,默认为org.springframework.web.context.support.XmlWebApplicationContext
-            this.context = createWebApplicationContext(servletContext);
-		}
-		if (this.context instanceof ConfigurableWebApplicationContext) {
-			ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) this.context;
-			if (!cwac.isActive()) {
-				// The context has not yet been refreshed -> provide services such as
-				// setting the parent context, setting the application context id, etc
-				if (cwac.getParent() == null) {
-					// The context instance was injected without an explicit parent ->
-					// determine parent for root web application context, if any.
-					ApplicationContext parent = loadParentContext(servletContext);
-					cwac.setParent(parent);
-				}
-                // 核心代码都在这里边！
-				configureAndRefreshWebApplicationContext(cwac, servletContext);
-			}
-		}
-		servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
-
-		ClassLoader ccl = Thread.currentThread().getContextClassLoader();
-		if (ccl == ContextLoader.class.getClassLoader()) {
-			currentContext = this.context;
-		}
-		else if (ccl != null) {
-			currentContextPerThread.put(ccl, this.context);
-		}
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("Published root WebApplicationContext as ServletContext attribute with name [" +
-					WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE + "]");
-		}
-		if (logger.isInfoEnabled()) {
-			long elapsedTime = System.currentTimeMillis() - startTime;
-			logger.info("Root WebApplicationContext: initialization completed in " + elapsedTime + " ms");
-		}
-
-		return this.context;
-        ....
-    }
-
-#### ContextLoader#configureAndRefreshWebapplicationContext
-
-    protected void configureAndRefreshWebApplicationContext(ConfigurableWebApplicationContext wac, ServletContext sc) {
-		
-        if (ObjectUtils.identityToString(wac).equals(wac.getId())) {
-			// The application context id is still set to its original default value
-			// -> assign a more useful id based on available information
-			// 如果设置了contextId, 采用设置的，一般我们都没设置，如果没有使用applicationContext的类名+contextPath作为id
-            String idParam = sc.getInitParameter(CONTEXT_ID_PARAM);
-			if (idParam != null) {
-				wac.setId(idParam);
-			}
-			else {
-				// Generate default id...
-				wac.setId(ConfigurableWebApplicationContext.APPLICATION_CONTEXT_ID_PREFIX +
-						ObjectUtils.getDisplayString(sc.getContextPath()));
-			}
-		}
-        
-        // 设置容器所在的web容器上下文ServletContext,见上文。 
-		wac.setServletContext(sc);
-        // 配置文件的地址，一般我们都会设置的。（文章开头那个root-context.xml）
-		String configLocationParam = sc.getInitParameter(CONFIG_LOCATION_PARAM);		
-        if (configLocationParam != null) {
-			wac.setConfigLocation(configLocationParam);
-		}
-
-		// The wac environment's #initPropertySources will be called in any case when the context
-		// is refreshed; do it eagerly here to ensure servlet property sources are in place for
-		// use in any post-processing or initialization that occurs below prior to #refresh
-		ConfigurableEnvironment env = wac.getEnvironment();
-		if (env instanceof ConfigurableWebEnvironment) {
-			// 初始化配置源，对于web applicationContext就是web容器的根目录,xx/xx/webapp
-            ((ConfigurableWebEnvironment) env).initPropertySources(sc, null);
-		}
-
-		customizeContext(sc, wac);
-		// 重中之重
-        wac.refresh();
-	}
-
-#### AbstractApplicationContext#refresh
-
-重中之重！！
 
     @Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
-			// 1.设置启动时间
-            // 2.设置active 标志位为true
-            // 3.资源的初始化 不太懂！
-            prepareRefresh();
+			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			// 1. refreshBeanFactory():
-            //    a.创建beanFactory;
-            //    b.加载beanDefinitions
-            // 2. getBeanFactory()并返回beanFactory
-            ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
@@ -257,149 +168,114 @@ initWebApplicationContext创建webApplicationContext实例，然后configureAndR
 		}
 	}
 
-#### XmlApplicationContext#loadBeanDefinitions
+#### obtainFreshBeanFactory
 
-    	public int loadBeanDefinitions(String location, Set<Resource> actualResources) throws BeanDefinitionStoreException {
-		ResourceLoader resourceLoader = getResourceLoader();
-		if (resourceLoader == null) {
-			throw new BeanDefinitionStoreException(
-					"Cannot import bean definitions from location [" + location + "]: no ResourceLoader available");
+实例化bean有两种方式：xml中配bean或者扫注解。以component-scan扫注解的为例
+
+首先看下其调用栈，![beandefinitionMap](/images/java_web/ioc_call_stack.png)
+
+1. 从调用栈可以看出，从入口ContextLoaderListener到扫描（scan）涉及的对象有：`ContextLoaderListener`、AbstractApplicationContext`、`AbstractRefreshableApplicationContext`、`XmlWebApplicationContext`、`AbstractBeanDefinitionReader`、`XmlBeanDefinitionReader`、`DefaultBeanDefinitionDocumentReader`、`BeanDefinitionParserDelegate`、`NamespaceHandlerSupport`、`ComponentScanBeanDefinitionParser`、`ClassPathBeanDefinitionScanner`
+2. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析，（xml） 解析bean、import、beans、alias等标签
+3. BeanDefinitionParserDelegate#parseCustomElement: 其他namespace 的解析 （注解），如tx、context等
+
+   * 每个namespace对应有不同的`NamespaceHandler`，eg :tx、context
+   * 每个namespaceHandler可能对应多个`BeanDefinitionParser`,eg: ContextNamespaceHandler中包含有PropertyPlaceholderBeanDefinitionParser、ComponentScanBeanDefinitionParser、AnnotationConfigBeanDefinitionParser等用于处理context namespace下的不同的标签。
+具体的处理逻辑可以看对应的parser。
+
+下是component-scan扫注解，加载bean配置的时序图（最后打开个新连接看，图太小了）
+![spring_ioc_bean_definition](/images/java_web/spring_ioc_beanDefinitions.jpg)
+
+ScopedProxyMode : DEFAULT,NO,INTERFACES,TARGET_CLASS
+
+#### finishBeanFactoryInitialization
+
+
+### 几个问题
+
+#### xml声明的bean会覆盖注解声明的bean
+
+ClassPathBeanDefinitionScanner#checkCandidate
+
+DefaultListableBeanFactory#registerBeanDefinition
+
+![annotation_xml](/images/java_web/annotation_xml.png)
+
+![xml_annotation](/images/java_web/xml_annotation.png)
+
+#### classpath*与classpath
+
+1.  classpath*: 包含jar中xx.xml 同名的resource按照classpath中的次序拼接成一个大文件后载入，后边的覆盖前边的。
+
+      a. classpath*:xx/*/?   含*或者?通配符的， findPathMatchingResources  eg:classpath*:spring/**/springMVC-*.xml
+
+      b. classpath*:xxx.xml  不含*或者?通配符的，findAllClassPathResources eg:classpath*:application.xml
+
+2.  classpath:  不包含jar中的xml findPathMatchingResources
+
+#### beanName
+
+    public BeanDefinitionHolder parseBeanDefinitionElement(Element ele, BeanDefinition containingBean) {
+		String id = ele.getAttribute(ID_ATTRIBUTE);
+		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
+
+		List<String> aliases = new ArrayList<String>();
+		if (StringUtils.hasLength(nameAttr)) {
+			String[] nameArr = StringUtils.tokenizeToStringArray(nameAttr, MULTI_VALUE_ATTRIBUTE_DELIMITERS);
+			aliases.addAll(Arrays.asList(nameArr));
 		}
 
-        // 对于我们要分析的XmlWebApplicationContext来说，就是ResourcePatternResolver,走这个分支。不会走到else分支
-        if (resourceLoader instanceof ResourcePatternResolver) {
-			// Resource pattern matching available.
-			try {
-                // 1. classpath*: 包含jar中xx.xml 同名的resource按照classpath中的次序拼接成一个大文件后载入，后边的覆盖前边的。
-                      a. classpath*:xx/*/?   含*或者?通配符的， findPathMatchingResources  eg:classpath*:spring/**/springMVC-*.xml
-                      b. classpath*:xxx.xml  不含*或者?通配符的，findAllClassPathResources eg:classpath*:application.xml
-                // 2. classpath:  不包含jar中的xml findPathMatchingResources
-				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
-				
-                int loadCount = loadBeanDefinitions(resources);
-				if (actualResources != null) {
-					for (Resource resource : resources) {
-						actualResources.add(resource);
+        // 首先取id
+		String beanName = id;
+		if (!StringUtils.hasText(beanName) && !aliases.isEmpty()) {
+ 			// 如果id为空，name不为空，则取name
+            beanName = aliases.remove(0);
+			if (logger.isDebugEnabled()) {
+				logger.debug("No XML 'id' specified - using '" + beanName +
+						"' as bean name and " + aliases + " as aliases");
+			}
+		}
+
+		if (containingBean == null) {
+			checkNameUniqueness(beanName, aliases, ele);
+		}
+
+		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
+		if (beanDefinition != null) {
+			if (!StringUtils.hasText(beanName)) {
+				try {
+					if (containingBean != null) {
+						beanName = BeanDefinitionReaderUtils.generateBeanName(
+								beanDefinition, this.readerContext.getRegistry(), true);
+					}
+					else {
+						beanName = this.readerContext.generateBeanName(beanDefinition);
+						// Register an alias for the plain bean class name, if still possible,
+						// if the generator returned the class name plus a suffix.
+						// This is expected for Spring 1.2/2.0 backwards compatibility.
+						String beanClassName = beanDefinition.getBeanClassName();
+						if (beanClassName != null &&
+								beanName.startsWith(beanClassName) && beanName.length() > beanClassName.length() &&
+								!this.readerContext.getRegistry().isBeanNameInUse(beanClassName)) {
+							aliases.add(beanClassName);
+						}
+					}
+					if (logger.isDebugEnabled()) {
+						logger.debug("Neither XML 'id' nor 'name' specified - " +
+								"using generated bean name [" + beanName + "]");
 					}
 				}
-				if (logger.isDebugEnabled()) {
-					logger.debug("Loaded " + loadCount + " bean definitions from location pattern [" + location + "]");
+				catch (Exception ex) {
+					error(ex.getMessage(), ele);
+					return null;
 				}
-				return loadCount;
 			}
-			catch (IOException ex) {
-				throw new BeanDefinitionStoreException(
-						"Could not resolve bean definition resource pattern [" + location + "]", ex);
-			}
+			String[] aliasesArray = StringUtils.toStringArray(aliases);
+			return new BeanDefinitionHolder(beanDefinition, beanName, aliasesArray);
 		}
-		else {
-			// Can only load single resources by absolute URL.
-			Resource resource = resourceLoader.getResource(location);
-			int loadCount = loadBeanDefinitions(resource);
-			if (actualResources != null) {
-				actualResources.add(resource);
-			}
-			if (logger.isDebugEnabled()) {
-				logger.debug("Loaded " + loadCount + " bean definitions from location [" + location + "]");
-			}
-			return loadCount;
-		}
-	} 
 
-#### loadBeanDefinitions
+		return null;
+	}
 
-调用层次太深，就不逐一来了
-   
-    "main@1" prio=5 tid=0x1 nid=NA runnable
-    java.lang.Thread.State: RUNNABLE
-  	    at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1407)
-  	    at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1401)
-  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.parseBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:172)
-  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:142)
-  	    at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.registerBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:94)
-  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.registerBeanDefinitions(XmlBeanDefinitionReader.java:508)
-  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:392)
-  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
-  	    at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
-  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
-  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
-  	    at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
-  	    at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:125)
-  	    at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:94)
-  	    at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
-  	    at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:612)
-  	    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:513)
-  	    - locked <0xc39> (a java.lang.Object)
-  	    at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:444)
-  	    at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:326)
-  	    at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
-  	    at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:775) 
-
-核心的解析xml是这两个方法：
-
-1. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析， 解析bean、import、beans、alias
-2. BeanDefinitionParserDelegate#parseCustomElement: 其他namespace 的解析
-   a. 每个namespace对应有不同的`NamespaceHandler`，eg :tx、context
-   b. 每个namespaceHandler可能对应多个`BeanDefinitionParser`,eg: ContextNamespaceHandler中包含有PropertyPlaceholderBeanDefinitionParser、ComponentScanBeanDefinitionParser、AnnotationConfigBeanDefinitionParser等用于处理context namespace下的不同的标签。
-
-
-
-
-
-event.getServletContext()拿到事件中的ServletContext(ServletContext是一个接口，这里具体实现为ApplicationContext)
-
-ApplicationContext的官方描述
-
-    /**
-    * Standard implementation of ServletContext that represents
-    * a web application's execution environment. An instance of this class is
-    * associated with each instance of StandardContext.
-    */
-
-后调用initWebApplicationContext()方法(在ClassLoaderListener.java中)，
-
-实例化根Web应用上下文(WebApplicationContext也是一个接口，这里的实现为XmlWebApplicationContext)，
-
-并将其注入ServletContext(具体是实现为ApplicationContext)容器中
-
-    servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
-    //键为 WebApplicationContext.class.getName() + ".ROOT";
-
-至此ContextLoaderListener监听器初始化完毕。
-
-#### ddDispatcherServlet对应WebApplicationContext
-
-然后开始初始化xml配置中的Servlet，以DispatcherServlet为例。
-
-调用initWebApplicationContext()方法(在FrameWorkServlet.java中)
-
-    WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-    WebApplicationContext wac = null;
-
-这里的rootContext即Spring Ioc容器(Root WebApplicationContext)，并初始化WebApplicationContext。
-
-先找是否存在
-
-    wac = findWebApplicationContext();
-
-没有的话，创建
-
-    wac = createWebApplicationContext(rootContext);
-
-创建过程中，会获取Root WebApplicationContext作为自己的parent上下文，并读取Servlet名字-servlet.xml中信息，实例化相应的bean
-
-    wac.setParent(parent);
-    ......
-    configureAndRefreshWebApplicationContext(wac);
-
-最后注入ServletContext(具体实现为ApplicationContext)容器中
-
-    getServletContext().setAttribute(attrName, wac);
-    //键为org.springframework.web.servlet.FrameworkServlet.CONTEXT.web
-
-spring ioc容器读取相应的xsd文件，读取bean的attributes（class类名）和properties（属性）等，然后反射根据类名和属性等实例化相应的bean，加入到容器中。
-
-done!
 
 参考：
 

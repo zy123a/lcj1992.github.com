@@ -19,7 +19,7 @@ tags: url_pattern
 
 |url-pattern|翻译下下|对应wrapper(匹配规则)|
 |-|-|
-|path.endsWith("/*")*|以 /* 结尾的|`Wildcard wrapper`　通配符,匹配/xx /yy.xx|
+|path.endsWith("/\*")*|以 /* 结尾的|`Wildcard wrapper`　通配符,匹配/xx /yy.xx|
 |path.startsWith("\*.")|以 \*. 开头的|`Extension wrapper` 扩展,匹配xx.yy|
 |path.equals("/")|/|`Default wrapper`|
 |else | 以上3种之外的|`Exact wrapper` 精确匹配|
@@ -366,4 +366,3 @@ internalMapWrapper: 按照一定的处理顺序，将请求分别打给对应的
 [1]<http://www.cnblogs.com/fangjian0423/p/servletcontainer-tomcat-urlpattern.html>
 
 [2]<http://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern>
-
