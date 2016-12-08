@@ -1,6 +1,6 @@
 ---
 layout: post
-title: spring ioc
+title: spring实战
 categories: java_web
 tags: spring bean context cglib dynamicProxy
 ---
