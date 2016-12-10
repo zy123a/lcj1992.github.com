@@ -73,13 +73,15 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
 ### XmlWebApplicationContext类图
 
+首先我们先看下其类图，通过其实现的接口看下它具备的能力。
+
 ![xmlWebApplicationContext类图](/images/java_web/xmlwc_uml.png)
 
 通过类图，XmlWebApplicationContext实现的接口，我们可以看出其具备的行为：
 
 1. ResourceLoader: 具备加载资源的能力
 
-2. BeanFactory: ioc容器的最顶层接口，获取容器中的bean
+2. BeanFactory: ioc容器的最顶层接口，获取容器中的bean。HierarchicalBeanFactory表明其是有层级结构的，ListableBeanFactory表明其是可以列举其beans的，其实现类会预加载其所有的beanDefinitions的
 
 3. ...
 
@@ -95,13 +97,7 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
 ### 启动流程
 
-下边这个方法算是ioc容器启动的主体方法了。
-核心方法：
-
-obtainFreshBeanFactory : 加载resource，解析Resource，向beanFactory中填充BeanDefinition等bean的元信息。
-
-finishBeanFactoryInitialization : 实例化非lazy-init的bean
-
+下边这个方法算是ioc容器启动的主体方法了。里边的每个方法都对应一大堆逻辑，我们捡几个重要的，能反映主体流程的说下。
 
     @Override
 	public void refresh() throws BeansException, IllegalStateException {
@@ -110,6 +106,7 @@ finishBeanFactoryInitialization : 实例化非lazy-init的bean
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
+            // 加载resource，解析Resource，向beanFactory中填充BeanDefinition等bean的元信息。
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
@@ -138,6 +135,7 @@ finishBeanFactoryInitialization : 实例化非lazy-init的bean
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+                // 实例化非lazy-init的单例
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
