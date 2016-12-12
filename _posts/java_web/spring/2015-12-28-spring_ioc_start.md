@@ -173,7 +173,7 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 首先看下其调用栈，![beandefinitionMap](/images/java_web/ioc_call_stack.png)
 
 1. 从调用栈可以看出，从入口ContextLoaderListener到扫描（scan）涉及的对象有：`ContextLoaderListener`、AbstractApplicationContext`、`AbstractRefreshableApplicationContext`、`XmlWebApplicationContext`、`AbstractBeanDefinitionReader`、`XmlBeanDefinitionReader`、`DefaultBeanDefinitionDocumentReader`、`BeanDefinitionParserDelegate`、`NamespaceHandlerSupport`、`ComponentScanBeanDefinitionParser`、`ClassPathBeanDefinitionScanner`
-2. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析，（xml） 解析bean、import、beans、alias等标签
+2. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析，（xml） 解析bean、import、beans、alias标签
 3. BeanDefinitionParserDelegate#parseCustomElement: 其他namespace 的解析 （注解），如tx、context等
 
    * 每个namespace对应有不同的`NamespaceHandler`，eg :tx、context
@@ -187,6 +187,174 @@ ScopedProxyMode : DEFAULT,NO,INTERFACES,TARGET_CLASS
 
 #### finishBeanFactoryInitialization
 
+我们只说关键方法，从doCreateBean说明，其调用链如下：
+
+    "RMI TCP Connection(2)-127.0.0.1@1870" daemon prio=5 tid=0x15 nid=NA runnable
+      java.lang.Thread.State: RUNNABLE
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:525)
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+    	  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+    	  - locked <0xe5d> (a java.util.concurrent.ConcurrentHashMap)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+    	  at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:775)
+    	  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:861)
+    	  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541)
+
+关键方法如下：
+
+AbstractAutowireCapableBeanFactory#createBean
+
+实例化bean，包括bean初始化的前置后置逻辑，包括bean属性的填充
+
+    @Override
+    protected Object createBean(String beanName, RootBeanDefinition mbd, Object[] args) throws BeanCreationException {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Creating instance of bean '" + beanName + "'");
+        }
+        RootBeanDefinition mbdToUse = mbd;
+
+        // Make sure bean class is actually resolved at this point, and
+        // clone the bean definition in case of a dynamically resolved Class
+        // which cannot be stored in the shared merged bean definition.
+        Class<?> resolvedClass = resolveBeanClass(mbd, beanName);
+        if (resolvedClass != null && !mbd.hasBeanClass() && mbd.getBeanClassName() != null) {
+            mbdToUse = new RootBeanDefinition(mbd);
+            mbdToUse.setBeanClass(resolvedClass);
+        }
+
+        // Prepare method overrides.
+        try {
+            mbdToUse.prepareMethodOverrides();
+        }
+        catch (BeanDefinitionValidationException ex) {
+            throw new BeanDefinitionStoreException(mbdToUse.getResourceDescription(),
+                    beanName, "Validation of method overrides failed", ex);
+        }
+
+        try {
+            // Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+            // 拦截逻辑
+            Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
+            if (bean != null) {
+                return bean;
+            }
+        }
+        catch (Throwable ex) {
+            throw new BeanCreationException(mbdToUse.getResourceDescription(), beanName,
+                    "BeanPostProcessor before instantiation of bean failed", ex);
+        }
+        // 实例化
+        Object beanInstance = doCreateBean(beanName, mbdToUse, args);
+        if (logger.isDebugEnabled()) {
+            logger.debug("Finished creating instance of bean '" + beanName + "'");
+        }
+        return beanInstance;
+    }
+
+AbstractAutowireCapableBeanFactory#doCreateBean
+
+    protected Object doCreateBean(final String beanName, final RootBeanDefinition mbd, final Object[] args) {
+    	// Instantiate the bean.
+    	BeanWrapper instanceWrapper = null;
+    	if (mbd.isSingleton()) {
+    		instanceWrapper = this.factoryBeanInstanceCache.remove(beanName);
+    	}
+    	if (instanceWrapper == null) {
+            // 构造bean
+    		instanceWrapper = createBeanInstance(beanName, mbd, args);
+    	}
+    	final Object bean = (instanceWrapper != null ? instanceWrapper.getWrappedInstance() : null);
+    	Class<?> beanType = (instanceWrapper != null ? instanceWrapper.getWrappedClass() : null);
+
+    	// Allow post-processors to modify the merged bean definition.
+    	synchronized (mbd.postProcessingLock) {
+    		if (!mbd.postProcessed) {
+    			applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
+    			mbd.postProcessed = true;
+    		}
+    	}
+
+    	// Eagerly cache singletons to be able to resolve circular references
+    	// even when triggered by lifecycle interfaces like BeanFactoryAware.
+    	boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
+    			isSingletonCurrentlyInCreation(beanName));
+    	if (earlySingletonExposure) {
+    		if (logger.isDebugEnabled()) {
+    			logger.debug("Eagerly caching bean '" + beanName +
+    					"' to allow for resolving potential circular references");
+    		}
+    		addSingletonFactory(beanName, new ObjectFactory<Object>() {
+    			@Override
+    			public Object getObject() throws BeansException {
+    				return getEarlyBeanReference(beanName, mbd, bean);
+    			}
+    		});
+    	}
+
+    	// Initialize the bean instance.
+    	Object exposedObject = bean;
+    	try {
+            // 填充bean，解析@Resource、@Autowired等标签
+    		populateBean(beanName, mbd, instanceWrapper);
+    		if (exposedObject != null) {
+    			exposedObject = initializeBean(beanName, exposedObject, mbd);
+    		}
+    	}
+    	catch (Throwable ex) {
+    		if (ex instanceof BeanCreationException && beanName.equals(((BeanCreationException) ex).getBeanName())) {
+    			throw (BeanCreationException) ex;
+    		}
+    		else {
+    			throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Initialization of bean failed", ex);
+    		}
+    	}
+
+    	if (earlySingletonExposure) {
+    		Object earlySingletonReference = getSingleton(beanName, false);
+    		if (earlySingletonReference != null) {
+    			if (exposedObject == bean) {
+    				exposedObject = earlySingletonReference;
+    			}
+    			else if (!this.allowRawInjectionDespiteWrapping && hasDependentBean(beanName)) {
+    				String[] dependentBeans = getDependentBeans(beanName);
+    				Set<String> actualDependentBeans = new LinkedHashSet<String>(dependentBeans.length);
+    				for (String dependentBean : dependentBeans) {
+    					if (!removeSingletonIfCreatedForTypeCheckOnly(dependentBean)) {
+    						actualDependentBeans.add(dependentBean);
+    					}
+    				}
+    				if (!actualDependentBeans.isEmpty()) {
+    					throw new BeanCurrentlyInCreationException(beanName,
+    							"Bean with name '" + beanName + "' has been injected into other beans [" +
+    							StringUtils.collectionToCommaDelimitedString(actualDependentBeans) +
+    							"] in its raw version as part of a circular reference, but has eventually been " +
+    							"wrapped. This means that said other beans do not use the final version of the " +
+    							"bean. This is often the result of over-eager type matching - consider using " +
+    							"'getBeanNamesOfType' with the 'allowEagerInit' flag turned off, for example.");
+    				}
+    			}
+    		}
+    	}
+
+    	// Register bean as disposable.
+    	try {
+    		registerDisposableBeanIfNecessary(beanName, bean, mbd);
+    	}
+    	catch (BeanDefinitionValidationException ex) {
+    		throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Invalid destruction signature", ex);
+    	}
+
+    	return exposedObject;
+    }
+
+
+AbstractAutowireCapableBeanFactory#populateBean
+
+解析依赖，填充属性
+
+实例化策略：java自带的实例化，cglib，jdk动态代理
 
 参考：
 

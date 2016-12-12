@@ -332,6 +332,16 @@ xml：
         return new String(chars);
     }
 
+
+#### @Resource和@Autowired的区别
+
+AbstractAutowireCapableBeanFactory#applyBeanPostProcessorsBeforeInstantiation
+
+InstantiationAwareBeanPostProcessor
+
+
+#### spring的回调接口
+
 参考：
 
 [spring4.0 源码分析 bean标签的解析(三)](http://blog.csdn.net/sun_aichao/article/details/50284715)
