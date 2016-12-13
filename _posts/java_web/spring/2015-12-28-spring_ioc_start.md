@@ -180,10 +180,14 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
    * 每个namespaceHandler可能对应多个`BeanDefinitionParser`,eg: ContextNamespaceHandler中包含有PropertyPlaceholderBeanDefinitionParser、ComponentScanBeanDefinitionParser、AnnotationConfigBeanDefinitionParser等用于处理context namespace下的不同的标签。
 具体的处理逻辑可以看对应的parser。
 
+##### DefaultBeanDefinitionDocumentReader#parseDefaultElement
+
+
+##### BeanDefinitionParserDelegate#parseCustomElement
+
 下是component-scan扫注解，加载bean配置的时序图（最好打开个新连接看，图太小了）
 ![spring_ioc_bean_definition](/images/java_web/spring_ioc_beanDefinitions.jpg)
 
-ScopedProxyMode : DEFAULT,NO,INTERFACES,TARGET_CLASS
 
 #### finishBeanFactoryInitialization
 
