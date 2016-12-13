@@ -100,71 +100,71 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 下边这个方法算是ioc容器启动的主体方法了。里边的每个方法都对应一大堆逻辑，我们捡几个重要的，能反映主体流程的说下。
 
     @Override
-	public void refresh() throws BeansException, IllegalStateException {
-		synchronized (this.startupShutdownMonitor) {
-			// Prepare this context for refreshing.
-			prepareRefresh();
+    public void refresh() throws BeansException, IllegalStateException {
+        synchronized (this.startupShutdownMonitor) {
+            // Prepare this context for refreshing.
+            prepareRefresh();
 
-			// Tell the subclass to refresh the internal bean factory.
+            // Tell the subclass to refresh the internal bean factory.
             // 加载resource，解析Resource，向beanFactory中填充BeanDefinition等bean的元信息。
-			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+            ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
-			// Prepare the bean factory for use in this context.
-			prepareBeanFactory(beanFactory);
+            // Prepare the bean factory for use in this context.
+            prepareBeanFactory(beanFactory);
 
-			try {
-				// Allows post-processing of the bean factory in context subclasses.
-				postProcessBeanFactory(beanFactory);
+            try {
+                // Allows post-processing of the bean factory in context subclasses.
+                postProcessBeanFactory(beanFactory);
 
-				// Invoke factory processors registered as beans in the context.
-				invokeBeanFactoryPostProcessors(beanFactory);
+                // Invoke factory processors registered as beans in the context.
+                invokeBeanFactoryPostProcessors(beanFactory);
 
-				// Register bean processors that intercept bean creation.
-				registerBeanPostProcessors(beanFactory);
+                // Register bean processors that intercept bean creation.
+                registerBeanPostProcessors(beanFactory);
 
-				// Initialize message source for this context.
-				initMessageSource();
+                // Initialize message source for this context.
+                initMessageSource();
 
-				// Initialize event multicaster for this context.
-				initApplicationEventMulticaster();
+                // Initialize event multicaster for this context.
+                initApplicationEventMulticaster();
 
-				// Initialize other special beans in specific context subclasses.
-				onRefresh();
+                // Initialize other special beans in specific context subclasses.
+                onRefresh();
 
-				// Check for listener beans and register them.
-				registerListeners();
+                // Check for listener beans and register them.
+                registerListeners();
 
-				// Instantiate all remaining (non-lazy-init) singletons.
-                // 实例化非lazy-init的单例
-				finishBeanFactoryInitialization(beanFactory);
+                // Instantiate all remaining (non-lazy-init) singletons.
+                // 实例化非lazy-init的单例。顺带着也会实例化其依赖的bean
+                finishBeanFactoryInitialization(beanFactory);
 
-				// Last step: publish corresponding event.
-				finishRefresh();
-			}
+                // Last step: publish corresponding event.
+                finishRefresh();
+            }
 
-			catch (BeansException ex) {
-				if (logger.isWarnEnabled()) {
-					logger.warn("Exception encountered during context initialization - " +
-							"cancelling refresh attempt: " + ex);
-				}
+            catch (BeansException ex) {
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Exception encountered during context initialization - " +
+                            "cancelling refresh attempt: " + ex);
+                }
 
-				// Destroy already created singletons to avoid dangling resources.
-				destroyBeans();
+                // Destroy already created singletons to avoid dangling resources.
+                destroyBeans();
 
-				// Reset 'active' flag.
-				cancelRefresh(ex);
+                // Reset 'active' flag.
+                cancelRefresh(ex);
 
-				// Propagate exception to caller.
-				throw ex;
-			}
+                // Propagate exception to caller.
+                throw ex;
+            }
 
-			finally {
-				// Reset common introspection caches in Spring's core, since we
-				// might not ever need metadata for singleton beans anymore...
-				resetCommonCaches();
-			}
-		}
-	}
+            finally {
+                // Reset common introspection caches in Spring's core, since we
+                // might not ever need metadata for singleton beans anymore...
+                resetCommonCaches();
+            }
+        }
+    }
 
 #### obtainFreshBeanFactory
 
@@ -172,7 +172,7 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
 首先看下其调用栈，![beandefinitionMap](/images/java_web/ioc_call_stack.png)
 
-1. 从调用栈可以看出，从入口ContextLoaderListener到扫描（scan）涉及的对象有：`ContextLoaderListener`、AbstractApplicationContext`、`AbstractRefreshableApplicationContext`、`XmlWebApplicationContext`、`AbstractBeanDefinitionReader`、`XmlBeanDefinitionReader`、`DefaultBeanDefinitionDocumentReader`、`BeanDefinitionParserDelegate`、`NamespaceHandlerSupport`、`ComponentScanBeanDefinitionParser`、`ClassPathBeanDefinitionScanner`
+1. 从调用栈可以看出，从入口ContextLoaderListener到扫描（scan）涉及的对象有：`ContextLoaderListener`、`AbstractApplicationContext`、`AbstractRefreshableApplicationContext`、`XmlWebApplicationContext`、`AbstractBeanDefinitionReader`、`XmlBeanDefinitionReader`、`DefaultBeanDefinitionDocumentReader`、`BeanDefinitionParserDelegate`、`NamespaceHandlerSupport`、`ComponentScanBeanDefinitionParser`、`ClassPathBeanDefinitionScanner`
 2. DefaultBeanDefinitionDocumentReader#parseDefaultElement: 默认namespace的解析，（xml） 解析bean、import、beans、alias标签
 3. BeanDefinitionParserDelegate#parseCustomElement: 其他namespace 的解析 （注解），如tx、context等
 
@@ -182,8 +182,11 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
 ##### DefaultBeanDefinitionDocumentReader#parseDefaultElement
 
+默认namespace的解析，bean、beans、import、alias
 
 ##### BeanDefinitionParserDelegate#parseCustomElement
+
+其他namespace的解析，如tx，context等
 
 下是component-scan扫注解，加载bean配置的时序图（最好打开个新连接看，图太小了）
 ![spring_ioc_bean_definition](/images/java_web/spring_ioc_beanDefinitions.jpg)
@@ -195,16 +198,16 @@ web.xml中的启动遵循context-param -> listener -> filter -> servlet。spring
 
     "RMI TCP Connection(2)-127.0.0.1@1870" daemon prio=5 tid=0x15 nid=NA runnable
       java.lang.Thread.State: RUNNABLE
-    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:525)
-    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
-    	  at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
-    	  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-    	  - locked <0xe5d> (a java.util.concurrent.ConcurrentHashMap)
-    	  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
-    	  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
-    	  at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:775)
-    	  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:861)
-    	  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:525)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+          at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+          - locked <0xe5d> (a java.util.concurrent.ConcurrentHashMap)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:775)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:861)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541)
 
 关键方法如下：
 
@@ -259,104 +262,108 @@ AbstractAutowireCapableBeanFactory#createBean
 
 AbstractAutowireCapableBeanFactory#doCreateBean
 
-	protected Object doCreateBean(final String beanName, final RootBeanDefinition mbd, final Object[] args) {
-		// Instantiate the bean.
-		BeanWrapper instanceWrapper = null;
-		if (mbd.isSingleton()) {
-			instanceWrapper = this.factoryBeanInstanceCache.remove(beanName);
-		}
-		if (instanceWrapper == null) {
-		    // 构造bean
-			instanceWrapper = createBeanInstance(beanName, mbd, args);
-		}
-		final Object bean = (instanceWrapper != null ? instanceWrapper.getWrappedInstance() : null);
-		Class<?> beanType = (instanceWrapper != null ? instanceWrapper.getWrappedClass() : null);
+    protected Object doCreateBean(final String beanName, final RootBeanDefinition mbd, final Object[] args) {
+        // Instantiate the bean.
+        BeanWrapper instanceWrapper = null;
+        if (mbd.isSingleton()) {
+            instanceWrapper = this.factoryBeanInstanceCache.remove(beanName);
+        }
+        if (instanceWrapper == null) {
+            // 构造bean
+            instanceWrapper = createBeanInstance(beanName, mbd, args);
+        }
+        final Object bean = (instanceWrapper != null ? instanceWrapper.getWrappedInstance() : null);
+        Class<?> beanType = (instanceWrapper != null ? instanceWrapper.getWrappedClass() : null);
 
-		// Allow post-processors to modify the merged bean definition.
-		synchronized (mbd.postProcessingLock) {
-			if (!mbd.postProcessed) {
-				applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
-				mbd.postProcessed = true;
-			}
-		}
+        // Allow post-processors to modify the merged bean definition.
+        synchronized (mbd.postProcessingLock) {
+            if (!mbd.postProcessed) {
+                // 处理beandefinition的各种后置拦截逻辑，
+                // 包括AutowiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor解析@Resource和@Autowired等标签
+                applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
+                mbd.postProcessed = true;
+            }
+        }
 
-		// Eagerly cache singletons to be able to resolve circular references
-		// even when triggered by lifecycle interfaces like BeanFactoryAware.
-		boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
-				isSingletonCurrentlyInCreation(beanName));
-		if (earlySingletonExposure) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("Eagerly caching bean '" + beanName +
-						"' to allow for resolving potential circular references");
-			}
-			addSingletonFactory(beanName, new ObjectFactory<Object>() {
-				@Override
-				public Object getObject() throws BeansException {
-					return getEarlyBeanReference(beanName, mbd, bean);
-				}
-			});
-		}
+        // Eagerly cache singletons to be able to resolve circular references
+        // even when triggered by lifecycle interfaces like BeanFactoryAware.
+        boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
+                isSingletonCurrentlyInCreation(beanName));
+        if (earlySingletonExposure) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Eagerly caching bean '" + beanName +
+                        "' to allow for resolving potential circular references");
+            }
+            addSingletonFactory(beanName, new ObjectFactory<Object>() {
+                @Override
+                public Object getObject() throws BeansException {
+                    return getEarlyBeanReference(beanName, mbd, bean);
+                }
+            });
+        }
 
-		// Initialize the bean instance.
-		Object exposedObject = bean;
-		try {
-		    // 填充bean，解析@Resource、@Autowired等标签
-			populateBean(beanName, mbd, instanceWrapper);
-			if (exposedObject != null) {
-				exposedObject = initializeBean(beanName, exposedObject, mbd);
-			}
-		}
-		catch (Throwable ex) {
-			if (ex instanceof BeanCreationException && beanName.equals(((BeanCreationException) ex).getBeanName())) {
-				throw (BeanCreationException) ex;
-			}
-			else {
-				throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Initialization of bean failed", ex);
-			}
-		}
+        // Initialize the bean instance.
+        Object exposedObject = bean;
+        try {
+            // 填充bean，解析@Resource、@Autowired等标签
+            populateBean(beanName, mbd, instanceWrapper);
+            if (exposedObject != null) {
+                exposedObject = initializeBean(beanName, exposedObject, mbd);
+            }
+        }
+        catch (Throwable ex) {
+            if (ex instanceof BeanCreationException && beanName.equals(((BeanCreationException) ex).getBeanName())) {
+                throw (BeanCreationException) ex;
+            }
+            else {
+                throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Initialization of bean failed", ex);
+            }
+        }
 
-		if (earlySingletonExposure) {
-			Object earlySingletonReference = getSingleton(beanName, false);
-			if (earlySingletonReference != null) {
-				if (exposedObject == bean) {
-					exposedObject = earlySingletonReference;
-				}
-				else if (!this.allowRawInjectionDespiteWrapping && hasDependentBean(beanName)) {
-					String[] dependentBeans = getDependentBeans(beanName);
-					Set<String> actualDependentBeans = new LinkedHashSet<String>(dependentBeans.length);
-					for (String dependentBean : dependentBeans) {
-						if (!removeSingletonIfCreatedForTypeCheckOnly(dependentBean)) {
-							actualDependentBeans.add(dependentBean);
-						}
-					}
-					if (!actualDependentBeans.isEmpty()) {
-						throw new BeanCurrentlyInCreationException(beanName,
-								"Bean with name '" + beanName + "' has been injected into other beans [" +
-								StringUtils.collectionToCommaDelimitedString(actualDependentBeans) +
-								"] in its raw version as part of a circular reference, but has eventually been " +
-								"wrapped. This means that said other beans do not use the final version of the " +
-								"bean. This is often the result of over-eager type matching - consider using " +
-								"'getBeanNamesOfType' with the 'allowEagerInit' flag turned off, for example.");
-					}
-				}
-			}
-		}
+        if (earlySingletonExposure) {
+            Object earlySingletonReference = getSingleton(beanName, false);
+            if (earlySingletonReference != null) {
+                if (exposedObject == bean) {
+                    exposedObject = earlySingletonReference;
+                }
+                else if (!this.allowRawInjectionDespiteWrapping && hasDependentBean(beanName)) {
+                    String[] dependentBeans = getDependentBeans(beanName);
+                    Set<String> actualDependentBeans = new LinkedHashSet<String>(dependentBeans.length);
+                    for (String dependentBean : dependentBeans) {
+                        if (!removeSingletonIfCreatedForTypeCheckOnly(dependentBean)) {
+                            actualDependentBeans.add(dependentBean);
+                        }
+                    }
+                    if (!actualDependentBeans.isEmpty()) {
+                        throw new BeanCurrentlyInCreationException(beanName,
+                                "Bean with name '" + beanName + "' has been injected into other beans [" +
+                                StringUtils.collectionToCommaDelimitedString(actualDependentBeans) +
+                                "] in its raw version as part of a circular reference, but has eventually been " +
+                                "wrapped. This means that said other beans do not use the final version of the " +
+                                "bean. This is often the result of over-eager type matching - consider using " +
+                                "'getBeanNamesOfType' with the 'allowEagerInit' flag turned off, for example.");
+                    }
+                }
+            }
+        }
 
-		// Register bean as disposable.
-		try {
-			registerDisposableBeanIfNecessary(beanName, bean, mbd);
-		}
-		catch (BeanDefinitionValidationException ex) {
-			throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Invalid destruction signature", ex);
-		}
+        // Register bean as disposable.
+        try {
+            registerDisposableBeanIfNecessary(beanName, bean, mbd);
+        }
+        catch (BeanDefinitionValidationException ex) {
+            throw new BeanCreationException(mbd.getResourceDescription(), beanName, "Invalid destruction signature", ex);
+        }
 
-		return exposedObject;
-	}
+        return exposedObject;
+    }
 
 
 AbstractAutowireCapableBeanFactory#populateBean
 
 解析依赖，填充属性
+
+![填充属性](/images/java_web/spring_populate_bean.png)
 
 实例化策略：java自带的实例化，cglib，jdk动态代理
 
