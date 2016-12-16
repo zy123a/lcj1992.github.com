@@ -339,6 +339,50 @@ AbstractAutowireCapableBeanFactory#applyBeanPostProcessorsBeforeInstantiation
 
 InstantiationAwareBeanPostProcessor
 
+[spring中Autowired和Resource的区别](http://qiangmzsx.blog.51cto.com/2052549/1359952)
+
+#### 动态代理的几个问题
+
+    "RMI TCP Connection(2)-127.0.0.1@1974" daemon prio=5 tid=0x15 nid=NA runnable
+      java.lang.Thread.State: RUNNABLE
+    	  at org.springframework.cglib.core.DefaultNamingPolicy.getClassName(DefaultNamingPolicy.java:39)
+    	  at org.springframework.cglib.core.AbstractClassGenerator.generateClassName(AbstractClassGenerator.java:154)
+    	  at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:317)
+    	  - locked <0xdf7> (a org.apache.catalina.loader.WebappClassLoader)
+    	  at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:492)
+    	  at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:93)
+    	  at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:91)
+    	  at org.springframework.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54)
+    	  at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+    	  at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61)
+    	  at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+    	  at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:116)
+    	  at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:291)
+    	  at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:480)
+    	  at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:337)
+    	  at org.springframework.aop.framework.ObjenesisCglibAopProxy.createProxyClassAndInstance(ObjenesisCglibAopProxy.java:55)
+    	  at org.springframework.aop.framework.CglibAopProxy.getProxy(CglibAopProxy.java:203)
+    	  at org.springframework.aop.framework.ProxyFactory.getProxy(ProxyFactory.java:109)
+    	  at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.createProxy(AbstractAutoProxyCreator.java:470)
+    	  at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary(AbstractAutoProxyCreator.java:350)
+    	  at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:299)
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:422)
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1583)
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+    	  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+    	  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+    	  - locked <0xeaf> (a java.util.concurrent.ConcurrentHashMap)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+    	  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+    	  at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:775)
+    	  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:861)
+    	  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541)
+    	  - locked <0x1270> (a java.lang.Object)
+
+##### 代理的时机
+
+##### 代理的种类
 
 #### spring的回调接口
 
