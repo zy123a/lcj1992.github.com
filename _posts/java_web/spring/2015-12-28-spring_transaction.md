@@ -251,3 +251,7 @@ case3：保险plus 多人退保（子单维度），退保定时任务几乎同�
        </plugin>
     </plugins>
     </build>
+
+### 参考
+
+[spring事务](http://docs.spring.io/spring-framework/docs/4.0.x/spring-framework-reference/html/transaction.html)
