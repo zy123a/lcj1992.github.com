@@ -5,8 +5,8 @@ categories: java
 tags: concurrent
 ---
 
-* [简介](#intro)
-* [线程安全性](#threadSafe)
+* TOC
+{:toc}
 
 ### 简介{#intro}
 
@@ -46,7 +46,7 @@ tags: concurrent
            *  lock()
            *  tryLock()
            *  lockInterruptly()
-        
+
 ps:  线程安全的程序不一定完全由线程安全类构成，线程安全类构成的程序不一定就是线程安全的，线程安全类中也可以
 包含非线程安全的类
 
