@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 常用并发类的使用
+title: 线程间通信方式
 categories: java
 tags: CountDownLatch,CyclicBarrier,Exchanger,Semaphore
 ---
