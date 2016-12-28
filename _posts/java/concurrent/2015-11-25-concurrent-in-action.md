@@ -23,11 +23,15 @@ eg. 多线程获取所有待执行task，获取完成之后执行之。具体见
 
 eg. CountDownLatch的例子同样适用。
 
-### Exchanger一对线程交换数据
+### Exchanger：一对线程交换数据
 
 1. exchange方法帮一对线程交换数据
 2. exchange方法会阻塞调用方线程直至另一方线程参与交换
 
-### Semaphore 信号量
+### Semaphore：信号量
 
 1. 通过计数器控制对共享资源的访问
+
+### 参考
+
+[java线程阻塞中断和LockSupport的常见问题](http://agapple.iteye.com/blog/970055)
