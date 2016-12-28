@@ -8,8 +8,6 @@ tags: CountDownLatch,CyclicBarrier,Exchanger,Semaphore
 * TOC
 {:toc}
 
-## 线程间通信
-
 ### CountDownLatch：某个线程等待其他线程
 
 1. 某个线程等待其他线程执行完任务后，它才执行。
