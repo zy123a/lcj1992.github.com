@@ -5,19 +5,8 @@ categories: tool
 tags: alfred oh-my-zsh zsh z switchHosts theFuck z homebrew iterm2 reeder xmind omnigraffle
 ---
 
-*   [alfred](#alfred)
-*   [switchHosts](#switchhosts)
-*   [Dash](#dash)
-*   [homebrew](#homebrew)
-*   [iterm2](#iterm2)
-*   [idea](#idea)
-*   [reeder](#reeder)
-*   [zsh](#zsh)
-*	[theFuck](#thefuck)
-*	[z](#z)
-*   [omnigraffle](#omnigraffle)
-*   [xmind](#xmind)
-*	[参考](#ref)
+* TOC
+{:toc}
 
 ### alfred
 
@@ -82,7 +71,7 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 
 ### reeder
 
-mac上我的第一个掏钱的软件,阅读利器
+mac上我的第一个掏钱的软件,买亏了。
 
 ### snip
 
@@ -131,7 +120,13 @@ mac上的`visio`
 
 ### edrawMax
 
-比omigraffle好用[http://www.sdifenzhou.com/edrawmax84.html]
+[比omigraffle好用](http://www.sdifenzhou.com/edrawmax84.html)
+
+### go2Shell
+
+切换终端为iterm，命令行输入一下：
+
+open -a Go2Shell --args config 
 
 ## 参考 {#ref}
 
