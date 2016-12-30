@@ -177,7 +177,7 @@ Proxy$ProxyClassFactory.apply
 
 ![proxy_class_uml](/images/java/proxy_class_uml.png)
 
-生成的类具体如下：
+生成的代理类具体如下：
 
     package jdk.proxy;
 
