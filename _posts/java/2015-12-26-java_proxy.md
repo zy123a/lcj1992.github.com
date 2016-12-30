@@ -236,37 +236,44 @@ Proxy$ProxyClassFactory.apply
 
 ### cglib代理
 
-    BookFacadeImpl1.java
+先上代码例子：
 
-    public class BookFacadeImpl1 {
-        public void addBook(){
-            System.out.println("增加图书的普通方法...");
-        }
-    }
-    BookFacadeCglib.java
+    class TransactionalMethodInterceptor implements MethodInterceptor {
 
-    public class BookFacadeCglib implements MethodInterceptor {
-        private Object target;
-
-        public Object getInstance(Object target){
-            this.target = target;
-            Enhancer enhancer = new Enhancer();
-            enhancer.setSuperclass(this.target.getClass());
-            enhancer.setCallback(this);
-            return enhancer.create();
-        }
-
-        @Override
         public Object intercept(Object obj, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-            System.out.println("事务开始");
-            methodProxy.invokeSuper(obj, objects);
-            System.out.println("事务结束");
-            return null;
+            System.out.println("begin transaction");
+            Object result = methodProxy.invokeSuper(obj, objects);
+            System.out.println("end transaction");
+            return result;
         }
     }
+    
+    class CglibBooker {
+        synchronized void book() {
+            System.out.println("book a trip ticket");
+        }
+    }
+    
+    public class CglibProxyTest {
+        @Test
+        public void cglibProxy() {
+            // 这步会把cglib生成的代理类，生成在这个目录下,便于我们使用反编译工具查看。
+            System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "/Users/lichuangjian/");
+            TransactionalMethodInterceptor methodInterceptor = new TransactionalMethodInterceptor();
+            CglibBooker cglibBooker = new CglibBooker();
+            Enhancer enhancer = new Enhancer();
+            enhancer.setSuperclass(cglibBooker.getClass());
+            enhancer.setCallback(methodInterceptor);
+            CglibBooker bookerProxy = (CglibBooker) enhancer.create();
+            bookerProxy.book();
+        }
+    }
+
 
 ### 参考
 
 [JDK动态代理的实现及原理](http://blog.csdn.net/zhangerqing/article/details/42504281)
 
 [java的动态代理机制详解](http://www.cnblogs.com/xiaoluo501395377/p/3383130.html)
+
+[cglib源码分析（四）：cglib 动态代理原理分析](http://www.cnblogs.com/cruze/p/3865180.html)
