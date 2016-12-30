@@ -12,44 +12,50 @@ tags: Proxy cglib InvocationHandler
 
 ### jdk动态代理
 
-    只对实现接口的类有效
-
-    BookFacade.java
-
-    public interface BookFacade {
-        public void addBook();
+    interface Booker {
+        void book();
     }
-    BookFacadeImpl.java
-
-    public class BookFacadeImpl implements BookFacade {
+    
+    class TripTicketBooker implements Booker {
+    
         @Override
-        public void addBook() {
-            System.out.println("增加图书方法.....");
+        public void book() {
+            System.out.println("book a trip ticket");
         }
     }
-    BookFacadeProxy.java
-
-    //实现java的动态代理只需要实现InvocationHandler接口就行
-    public class BookFacadeProxy implements InvocationHandler {
-
+    
+    class TransactionalInvocationHandler implements InvocationHandler {
+    
         private Object target;
-
-        public Object bind(Object target){
+    
+        TransactionalInvocationHandler(Object target) {
             this.target = target;
-            //运行时创建一个实现了BookFacade接口的类,只对实现接口的类有效，这也是java动态代理的缺点。
-            return Proxy.newProxyInstance(target.getClass().getClassLoader(),
-                    target.getClass().getInterfaces(), this);
         }
-
+    
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            Object  result = null;
-            System.out.println("事务开始");
-            result = method.invoke(target,args);
-            System.out.println("事务结束");
-            return result;
+            System.out.println("begin transaction");
+            Object object = method.invoke(target, args);
+            System.out.println("end transaction");
+            return object;
         }
     }
+    
+    public class JdkDynamicProxyTest {
+    
+        @Test
+        public void dynamicProxyTest() throws InterruptedException {
+            Booker booker = new TripTicketBooker();
+            Class clazz = booker.getClass();
+            Booker bookerProxy = (Booker) Proxy.newProxyInstance(clazz.getClassLoader(), 
+                clazz.getInterfaces(), new TransactionalInvocationHandler(booker));
+            bookerProxy.book();
+        }
+    }
+
+1. 生成的代理类`bookerProxy`实现了`Booker`接口，继承自`Proxy`类
+2. `Proxy`类含有一个`InvocationHandler`的属性，我们代码中InvocationHandler的实现为`TransactionInvocationHandler`
+3. bookerProxy实现的Booker接口中的book方法，实际上是通过调用TransactionInvocationHandler的invoke方法实现的。 
 
 #### 创建代理对象
 
@@ -167,7 +173,11 @@ Proxy$ProxyClassFactory.apply
 2. $Proxy2的方法执行实际是通过内部的InvocationHandler（是Proxy的一个属性）来执行的。
 3. 代理类是final
 
-具体如下：
+借用head first design patterns中的uml图,可以参照下
+
+![proxy_class_uml](/images/java/proxy_class_uml.png)
+
+生成的类具体如下：
 
     package jdk.proxy;
 
