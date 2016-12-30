@@ -45,6 +45,9 @@ tags: Proxy cglib InvocationHandler
     
         @Test
         public void dynamicProxyTest() throws InterruptedException {
+            // 下边这行代码是保存动态生成的类，我这不知怎么的不好使
+            // 我下边是通过debug，然后把动态生成的类信息对应的byte数组自己alt + f8动态运行搞到文件里的。
+            // System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
             Booker booker = new TripTicketBooker();
             Class clazz = booker.getClass();
             Booker bookerProxy = (Booker) Proxy.newProxyInstance(clazz.getClassLoader(), 

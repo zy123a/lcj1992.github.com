@@ -41,13 +41,13 @@ keywords: openjdk
 
 ## mac ox10.11编译openjdk
 
-brew install mercurial
-brew install ccache
-brew install freetype
-mkdir openjdk9
-cd openjdk9
-hg clone http://hg.openjdk.java.net/jdk9/dev
-cd dev
-chmod u+x get_source.sh
-./get_source.sh
-bash ./configure --enable-debug --with-target-bits=64 -with-freetype-include=/usr/local/Cellar/freetype/2.6.5/include/freetype2 -with-freetype-lib=/usr/local/Cellar/freetype/2.6.5/lib
+    brew install mercurial
+    brew install ccache
+    brew install freetype
+    mkdir openjdk9
+    cd openjdk9
+    hg clone http://hg.openjdk.java.net/jdk9/dev
+    cd dev
+    chmod u+x get_source.sh
+    ./get_source.sh
+    bash ./configure --enable-debug --with-target-bits=64 -with-freetype-include=/usr/local/Cellar/freetype/2.6.5/include/freetype2 -with-freetype-lib=/usr/local/Cellar/freetype/2.6.5/lib
