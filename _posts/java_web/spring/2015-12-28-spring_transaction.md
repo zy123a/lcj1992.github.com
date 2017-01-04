@@ -29,6 +29,8 @@ tags: spring transaction
 6.  使用PrepareStatement，帮助我们避免了sql注入攻击，自动规避了特殊字符；允许我们执行带参数输入的动态查询；支持批量操作
 7.  使用事务[code3](#code3)
 
+![jdbc_driver](/images/java_web/jdbc_driver.png)
+ 
 ##### code1
 
 Class.forName()时，先执行static代码块，会先new一个Driver实例，然后注册进DriverManager
