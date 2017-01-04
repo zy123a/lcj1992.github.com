@@ -272,6 +272,9 @@ Proxy$ProxyClassFactory.apply
         }
     }
 
+生成的代理类，继承自`net.sf.cglib.proxy.Factory`，实现了CglibBooker接口。
+
+
 
 ### 参考
 
@@ -280,3 +283,5 @@ Proxy$ProxyClassFactory.apply
 [java的动态代理机制详解](http://www.cnblogs.com/xiaoluo501395377/p/3383130.html)
 
 [cglib源码分析（四）：cglib 动态代理原理分析](http://www.cnblogs.com/cruze/p/3865180.html)
+
+[cglib源码学习交流](https://yq.aliyun.com/articles/14528)
