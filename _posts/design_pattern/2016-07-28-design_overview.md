@@ -10,17 +10,17 @@ tags: proxy factory adapter facade decorator
  下图中的例子都来自[示例代码](https://github.com/lcj1992/learn/tree/master/java/designPattern)
 、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
 
-1. 单一职责
+1. [单一职责](https://en.wikipedia.org/wiki/Single_responsibility_principle): 一个类只负责一个功能领域中的相应职责，就一个类而言，应该只有一个引起它变化的原因。
 
-2. 里式代换
+2. [里式代换](https://en.wikipedia.org/wiki/Liskov_substitution_principle): 所有引用基类的地方必须能够透明的使用其子类的对象
 
-3. 接口隔离
+3. [接口隔离](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 
-4. 开闭
+4. [开闭](https://en.wikipedia.org/wiki/Open/closed_principle)
 
 5. 迪米特法则
 
-6. 依赖倒转
+6. [依赖倒转](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
 
 7. 合成复用
 
@@ -88,3 +88,8 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 [图说设计模式]<http://design-patterns.readthedocs.io/zh_CN/latest/>
 
 [设计模式]<http://alicharles.com/category/designpattern/>
+
+[SOLID(Object-oriented design)](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
+
+[The Principles of OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)
+
