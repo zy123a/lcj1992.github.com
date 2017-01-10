@@ -89,7 +89,10 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 [设计模式]<http://alicharles.com/category/designpattern/>
 
+[设计模式六大原则](http://www.uml.org.cn/sjms/201211023.asp)
+
 [SOLID(Object-oriented design)](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
 
 [The Principles of OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)
 
+[Examples of GoF Design Patterns in Java's core libraries](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries)

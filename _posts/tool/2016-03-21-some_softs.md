@@ -68,6 +68,10 @@ homebrew有个插件也不错cask,主要用来管理非终端软件
 1.   mybatis plugin [破解](http://download.csdn.net/download/jianglie/9562959)
 2.   maven-helper
 3.   jvm debugger memory view
+4.   ini
+5.   gitignore
+6.   markdown
+7.   lombok
 
 ### reeder
 

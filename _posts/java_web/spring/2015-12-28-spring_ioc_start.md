@@ -374,3 +374,5 @@ AbstractAutowireCapableBeanFactory#populateBean
 [2]<https://www.ibm.com/developerworks/cn/java/j-lo-servlet/>
 
 [Spring MVC注解故障追踪记](http://tech.meituan.com/mt-trip-springmvc-service-annotation-problem-research.html)
+
+[看看Spring的源码（一）——Bean加载过程](http://geeekr.com/read-spring-source-1-how-to-load-bean/)

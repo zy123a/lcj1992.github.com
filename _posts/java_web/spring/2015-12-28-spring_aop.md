@@ -85,3 +85,5 @@ ps:
 
 举例如下：
 ![aspectj_expression](/images/java_web/aspectj_expression.jpeg)
+
+[spring aop通知顺序](http://www.uml.org.cn/sjms/201211023.asp)
