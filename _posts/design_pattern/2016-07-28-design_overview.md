@@ -5,26 +5,13 @@ categories: design_pattern
 tags: proxy factory adapter facade decorator
 ---
 
-### 创建型 {#create}
 
- 下图中的例子都来自[示例代码](https://github.com/lcj1992/learn/tree/master/java/designPattern)
-、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
+* TOC
+{:toc}
 
-1. [单一职责](https://en.wikipedia.org/wiki/Single_responsibility_principle): 一个类只负责一个功能领域中的相应职责，就一个类而言，应该只有一个引起它变化的原因。
+## 设计原则
 
-2. [里式代换](https://en.wikipedia.org/wiki/Liskov_substitution_principle): 所有引用基类的地方必须能够透明的使用其子类的对象
-
-3. [接口隔离](https://en.wikipedia.org/wiki/Interface_segregation_principle)
-
-4. [开闭](https://en.wikipedia.org/wiki/Open/closed_principle)
-
-5. 迪米特法则
-
-6. [依赖倒转](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
-
-7. 合成复用
-
-OO基础：
+### OO基础
 
 1. 抽象
 
@@ -34,11 +21,39 @@ OO基础：
 
 4. 继承
 
-head first设计模式中的OO原则：
+### 设计原则
+
+SOLID
+
+1. [单一职责SRP](https://en.wikipedia.org/wiki/Single_responsibility_principle)
+    
+    * a class should have only a single responsibility (i.e. only one potential change in the software's specification should be able to affect the specification of the class)
+
+2. [开闭OCP](https://en.wikipedia.org/wiki/Open/closed_principle)
+    
+    * “software entities … should be open for extension, but closed for modification.”
+
+3. [里式代换LSP](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
+    
+    * “objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.”
+
+4. [接口隔离ISP](https://en.wikipedia.org/wiki/Interface_segregation_principle)
+    
+    * “many client-specific interfaces are better than one general-purpose interface.”
+
+5. [依赖倒转DIP](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
+
+    * one should “depend upon abstractions, [not] concretions.”
+
+6. 迪米特法则
+
+7. 合成复用
+
+### head first设计模式提到的OO原则：
 
 1. 封装变化
 
-2. 多用组合，少用继承
+2. 多用组合，少用继承 
 
 3. 针对接口编程，不针对实现编程
 
@@ -47,10 +62,6 @@ head first设计模式中的OO原则：
 5. 类应该对扩展开放，对修改关闭
 
 6. 要依赖抽象，不要依赖具体类
-
-	* 变量不可以次有具体类的引用
-	* 不要让类派生自具体类
-	* 不要覆盖基类中已实现的方法。
 
 7. 只和朋友交谈
 
@@ -79,6 +90,12 @@ ps:
 1. 重复，程序中太多的重复代码
 
 2. 太多的if-else
+
+下图中的例子都来自[示例代码](https://github.com/lcj1992/learn/tree/master/java/designPattern)、`jdk`、[gitbook](https://quanke.gitbooks.io/design-pattern-java/content/)或者[wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern)
+
+##设计模式
+
+### 创建型 {#create}
 
 ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
