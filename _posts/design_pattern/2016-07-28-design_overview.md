@@ -155,3 +155,7 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 [The Principles of OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)
 
 [Examples of GoF Design Patterns in Java's core libraries](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries)
+
+[依赖倒置原则的“倒置”体现在哪里](https://q.cnblogs.com/q/72496/)
+
+[Dependency Injection Is NOT The Same As The Dependency Inversion Principle](https://lostechies.com/derickbailey/2011/09/22/dependency-injection-is-not-the-same-as-the-dependency-inversion-principle/)
