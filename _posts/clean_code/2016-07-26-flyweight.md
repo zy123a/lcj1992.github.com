@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 享元模式
-categories: design_pattern
+categories: clean_code
 tags: flyweight
 ---
 

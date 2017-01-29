@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 设计模式
-categories: design_pattern
+categories: clean_code
 tags: proxy factory adapter facade decorator
 ---
 

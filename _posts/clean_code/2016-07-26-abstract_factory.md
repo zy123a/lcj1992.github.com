@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 抽象工厂模式
-categories: design_pattern
+categories: clean_code
 tags: abstract_factory
 ---
 

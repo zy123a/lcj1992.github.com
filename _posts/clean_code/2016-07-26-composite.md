@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 组合模式
-categories: design_pattern
+categories: clean_code
 tags: composite
 ---
 
