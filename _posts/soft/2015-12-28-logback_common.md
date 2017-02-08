@@ -18,7 +18,7 @@ eg:
 
     logger.debug("Entry number: " + i + " is " +  String.valueOf(entry[i]));
     logger.debug("Entry number: {} is {}", i, entry[i]);
-    前者无论是否打都会进行字符串拼接,
+    前者即使在日志关闭的情况下也会进行字符串拼接,
 
 *   异步appender
 
