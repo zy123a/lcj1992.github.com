@@ -45,9 +45,9 @@ SOLID
 
     * one should “depend upon abstractions, [not] concretions.”
 
-6. 迪米特法则
+6. [迪米特法则](https://en.wikipedia.org/wiki/Law_of_Demeter)
 
-7. 合成复用
+7. [合成复用](https://en.wikipedia.org/wiki/Composition_over_inheritance)
 
 ### head first设计模式提到的OO原则：
 
@@ -138,7 +138,7 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 ### 参考 {#ref}
 
-[1]<http://linuxtools-rst.readthedocs.org/zh_CN/latest/>
+[如何提升代码可读性？其实不是你想的那样](http://www.iteye.com/news/27610)
 
 [wikipedia]<https://en.wikipedia.org/wiki/Design_pattern>
 
@@ -148,14 +148,24 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 [设计模式]<http://alicharles.com/category/designpattern/>
 
+[oodesign]<http://www.oodesign.com/>
+
+[Software quality](https://en.wikipedia.org/wiki/Software_quality)
+
+[List of system quality attributes](https://en.wikipedia.org/wiki/List_of_system_quality_attributes)
+
 [设计模式六大原则](http://www.uml.org.cn/sjms/201211023.asp)
 
 [SOLID(Object-oriented design)](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
 
 [The Principles of OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)
 
+[类与类之间的几种关系](http://www.cnblogs.com/liuling/archive/2013/05/03/classrelation.html)
+
 [Examples of GoF Design Patterns in Java's core libraries](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries)
 
 [依赖倒置原则的“倒置”体现在哪里](https://q.cnblogs.com/q/72496/)
 
 [Dependency Injection Is NOT The Same As The Dependency Inversion Principle](https://lostechies.com/derickbailey/2011/09/22/dependency-injection-is-not-the-same-as-the-dependency-inversion-principle/)
+
+
