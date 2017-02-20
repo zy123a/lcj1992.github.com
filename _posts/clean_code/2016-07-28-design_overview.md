@@ -162,6 +162,8 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 [类与类之间的几种关系](http://www.cnblogs.com/liuling/archive/2013/05/03/classrelation.html)
 
+[UML类图几种关系的总结](http://blog.csdn.net/tianhai110/article/details/6339565)
+
 [Examples of GoF Design Patterns in Java's core libraries](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries)
 
 [依赖倒置原则的“倒置”体现在哪里](https://q.cnblogs.com/q/72496/)
