@@ -170,4 +170,4 @@ ps： 下边的gitbook xxx是指的gitbook中的相应的例子。
 
 [Dependency Injection Is NOT The Same As The Dependency Inversion Principle](https://lostechies.com/derickbailey/2011/09/22/dependency-injection-is-not-the-same-as-the-dependency-inversion-principle/)
 
-
+[谈一谈自己对依赖、关联、聚合和组合之间区别的理解](http://www.open-open.com/lib/view/open1427621514639.html)
