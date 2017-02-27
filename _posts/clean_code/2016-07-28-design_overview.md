@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 设计模式
+title: 设计模式概述
 categories: clean_code
 tags: proxy factory adapter facade decorator
 ---
@@ -8,6 +8,17 @@ tags: proxy factory adapter facade decorator
 
 * TOC
 {:toc}
+
+## 动机
+
+学习一个东西首先要搞清楚学它有啥用，那学习设计模式有什么用呢？
+
+于个人，架构设计做的无非就是物理世界和软件世界的映射，抽象能力
+
+于公司，学习设计模式是可以减少软件开发的成本的。
+
+对于一个系统软件
+
 
 ## 设计原则
 
