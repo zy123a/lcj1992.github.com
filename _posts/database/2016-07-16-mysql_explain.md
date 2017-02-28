@@ -79,6 +79,8 @@ limit works on MySQL and PostgreSQL, top works on SQL Server, rownum works on Or
 
     跨库查询，union会去重，union all 不会去重
 
+8.  group by 之后，可以通过加order by null避免文件排序
+
 ## 执行计划 {#explain}
 
 explain来解释和分析sql查询语句
