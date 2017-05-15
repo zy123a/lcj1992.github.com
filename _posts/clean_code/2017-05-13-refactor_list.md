@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 实现模式
+title: 重构
 categories: clean_code
 tags: clean_code
 ---
