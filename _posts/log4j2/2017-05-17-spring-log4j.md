@@ -1,12 +1,12 @@
 ---
 layout: post
-title: log4j2与springmvc的集成
+title: springmvc+slf4j+log4j2的集成
 categories: log
 tags: log4j2 springmvc
 ---
 [toc]
 
-## 引入相关jar包
+### 引入相关jar包
      <!--日志系统-->
      <!-- 将common-log牵引到slf4j-->  
      <dependency>  
@@ -47,3 +47,5 @@ tags: log4j2 springmvc
        <artifactId>log4j-web</artifactId>
        <version>2.8.2</version>
      </dependency>
+### 配置文件
+  
