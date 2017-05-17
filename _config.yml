@@ -7,6 +7,7 @@ author: foolchild
 paginate: 12
 description: foolchild的技术博客
 url: /zy-blog
+baseurl : /zy-blog
 rss_url: feed.xml
 
 # ---------------- #

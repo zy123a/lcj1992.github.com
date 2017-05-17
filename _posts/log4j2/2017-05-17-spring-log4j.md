@@ -4,7 +4,7 @@ title: log4j2与springmvc的集成
 categories: log
 tags: log4j2 springmvc
 ---
-[TOC]
+[toc]
 
 ##引入相关jar包
      <!--日志系统-->
