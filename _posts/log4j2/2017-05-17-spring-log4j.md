@@ -4,8 +4,6 @@ title: springmvc+slf4j+log4j2的集成
 categories: log
 tags: log4j2 springmvc
 ---
-* toc
-[: toc]
 
 ### 引入相关jar包
      <!--日志系统-->
@@ -47,6 +45,63 @@ tags: log4j2 springmvc
        <groupId>org.apache.logging.log4j</groupId>
        <artifactId>log4j-web</artifactId>
        <version>2.8.2</version>
-     </dependency>
-### 配置文件
+     </dependency>  
+     
+### 配置文件     
+
+*配置文件必须放置到ClassPath下供log4j2初始化能够寻找到，否者需要在web.xml里面指定日志配置位置*  
+```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration status="warn">
+  
+      <Properties>
+          <Property name="log_collect_path">/Users/zhengyin</Property>
+      </Properties>
+  
+      <appenders>
+          <!--输出日志到控制台-->
+          <Console name="stdout" target="SYSTEM_OUT">
+              <PatternLayout pattern="%5p [%t] %d{yyyy-MM-dd HH:mm:ss.SSS} %l %m %n"/>
+          </Console>
+  
+          <!--输出日志到指定位置，appender为回滚-->
+          <RollingRandomAccessFile name="info"
+                                   fileName="${log_collect_path}/info.log"
+                                   filePattern="${log_collect_path}/info.log.%d{yyyy-MM-dd}">
+              <PatternLayout
+                      pattern="%5p [%t] %d{yyyy-MM-dd HH:mm:ss.SSS} %l %m %n"/>
+              <Policies>
+                  <TimeBasedTriggeringPolicy/>
+                  <SizeBasedTriggeringPolicy size="100 MB"/>
+              </Policies>
+              <DefaultRolloverStrategy max="20"/>
+          </RollingRandomAccessFile>
+  
+      </appenders>
+      <loggers>
+          <root level="info" >
+              <appender-ref ref="stdout"/>
+              <appender-ref ref="info"/>
+          </root>
+      </loggers>
+  </configuration>
+  ```
+  
+  ### 使用
+  ``` 
+  // 注解的方式
+  @Slf4j
+  public class Test {
+  //    直接获取slf4j的logger对象进行日志的输出
+  //    private static final Logger log = LoggerFactory.getLogger(Test.class);
+  
+      public static void main(String[] args) {
+          log.info("测试info日志输出");
+          log.warn("测试warn日志输出");
+          log.error("测试error日志输出");
+      }
+  }
+  ```
+  
+
   
