@@ -4,8 +4,10 @@ title: springmvc+slf4j+log4j2的集成
 categories: log
 tags: log4j2 springmvc
 ---
+[TOC]
 
 ### 引入相关jar包
+```
      <!--日志系统-->
      <!-- 将common-log牵引到slf4j-->  
      <dependency>  
@@ -46,7 +48,7 @@ tags: log4j2 springmvc
        <artifactId>log4j-web</artifactId>
        <version>2.8.2</version>
      </dependency>  
-     
+```  
 ### 配置文件     
 
 *配置文件必须放置到ClassPath下供log4j2初始化能够寻找到，否者需要在web.xml里面指定日志配置位置*  
@@ -88,6 +90,7 @@ tags: log4j2 springmvc
   ```
   
   ### 使用
+  
   ``` 
   // 注解的方式
   @Slf4j
