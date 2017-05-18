@@ -50,7 +50,7 @@ tags: log4j2 springmvc
      </dependency>  
 ```  
 ### 配置文件     
-
+     
 **配置文件必须放置到ClassPath下供log4j2初始化能够寻找到，否者需要在web.xml里面指定日志配置位置**  
 ```
     <?xml version="1.0" encoding="UTF-8"?>
@@ -89,7 +89,7 @@ tags: log4j2 springmvc
   </configuration>
   ```
   
-  ### 使用
+### 使用  
   
   ``` 
   // 注解的方式
