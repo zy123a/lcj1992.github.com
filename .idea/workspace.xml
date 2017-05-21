@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md" afterPath="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/web/2017-05-19-request.md" afterPath="$PROJECT_DIR$/_posts/web/2017-05-19-request.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +18,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2017-05-17-spring-log4j.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2017-05-17-spring-log4j.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -31,12 +31,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2017-05-19-request.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2017-05-19-request.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/web/2017-05-19-request.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="203">
-                <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+              <first_editor relative-caret-position="638">
+                <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -60,8 +60,8 @@
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/_includes/navigation.html" />
         <option value="$PROJECT_DIR$/pages/categories.md" />
-        <option value="$PROJECT_DIR$/_posts/web/2017-05-19-request.md" />
         <option value="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md" />
+        <option value="$PROJECT_DIR$/_posts/web/2017-05-19-request.md" />
       </list>
     </option>
   </component>
@@ -133,6 +133,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="_posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -573,12 +577,12 @@
       <workItem from="1495089221583" duration="1107000" />
       <workItem from="1495094981800" duration="4500000" />
       <workItem from="1495165477165" duration="1455000" />
-      <workItem from="1495187456925" duration="3755000" />
+      <workItem from="1495187456925" duration="3893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24310000" />
+    <option name="totallyTimeSpent" value="24448000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="21" y="23" width="1440" height="807" extended-state="0" />
@@ -865,22 +869,22 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/web/2017-05-19-request.md">
+    <entry file="file://$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="203">
-            <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <first_editor relative-caret-position="-2896">
+            <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md">
+    <entry file="file://$PROJECT_DIR$/_posts/web/2017-05-19-request.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-2896">
-            <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <first_editor relative-caret-position="638">
+            <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
