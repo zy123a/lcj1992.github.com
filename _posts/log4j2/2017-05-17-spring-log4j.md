@@ -72,14 +72,17 @@ tags: log4j2 springmvc
                                    filePattern="${log_collect_path}/info.log.%d{yyyy-MM-dd}">
               <PatternLayout
                       pattern="%5p [%t] %d{yyyy-MM-dd HH:mm:ss.SSS} %l %m %n"/>
-              <Policies>
-                  <TimeBasedTriggeringPolicy/>
-                  <SizeBasedTriggeringPolicy size="100 MB"/>
-              </Policies>
+               <Policies>
+                <!--默认一天一翻滚-->
+                <TimeBasedTriggeringPolicy/>
+                <!--当日志文件大于100翻滚-->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                </Policies>
+              <!--当日志文件超过了20个开始删除-->
               <DefaultRolloverStrategy max="20"/>
           </RollingRandomAccessFile>
-  
       </appenders>
+      
       <loggers>
           <root level="info" >
               <appender-ref ref="stdout"/>
