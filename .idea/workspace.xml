@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md" afterPath="$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,12 +31,12 @@
         <entry file="file://$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="435">
-                <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+              <first_editor relative-caret-position="-1267">
+                <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
                 <folding>
-                  <marker date="1496246099000" expanded="true" signature="1066:1359" ph="..." />
-                  <marker date="1496246099000" expanded="true" signature="1094:1181" ph="..." />
-                  <marker date="1496246099000" expanded="true" signature="1279:1349" ph="..." />
+                  <marker date="1496246147000" expanded="true" signature="1066:1359" ph="..." />
+                  <marker date="1496246147000" expanded="true" signature="1094:1181" ph="..." />
+                  <marker date="1496246147000" expanded="true" signature="1279:1349" ph="..." />
                 </folding>
               </first_editor>
               <second_editor />
@@ -680,16 +679,16 @@
       <workItem from="1495772174320" duration="1908000" />
       <workItem from="1495798854590" duration="618000" />
       <workItem from="1495799523545" duration="733000" />
-      <workItem from="1496242609966" duration="2735000" />
+      <workItem from="1496242609966" duration="3103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42159000" />
+    <option name="totallyTimeSpent" value="42527000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="810" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -702,7 +701,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32225433" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32225433" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19670959" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -970,12 +969,12 @@
     <entry file="file://$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="435">
-            <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+          <first_editor relative-caret-position="-1267">
+            <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
             <folding>
-              <marker date="1496246099000" expanded="true" signature="1066:1359" ph="..." />
-              <marker date="1496246099000" expanded="true" signature="1094:1181" ph="..." />
-              <marker date="1496246099000" expanded="true" signature="1279:1349" ph="..." />
+              <marker date="1496246147000" expanded="true" signature="1066:1359" ph="..." />
+              <marker date="1496246147000" expanded="true" signature="1094:1181" ph="..." />
+              <marker date="1496246147000" expanded="true" signature="1279:1349" ph="..." />
             </folding>
           </first_editor>
           <second_editor />
