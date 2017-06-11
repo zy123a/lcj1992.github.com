@@ -47,12 +47,12 @@ public class MySqlSessionFactoryUtils {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
         try {
-            //            读取配置文件
+            // 读取配置文件
             inputStream = Resources.getResourceAsStream(resource);
-            //            创建SqlSessionFactory
+            // 创建SqlSessionFactory
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession sqlSession = sqlSessionFactory.openSession();
-            //            执行查询语句
+            // 执行查询语句
             EnvironmentDo environmentDo = sqlSession
                     .selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",
                             Type.Rhone_callback.getId());
@@ -77,9 +77,11 @@ public class SqlSessionFactoryBuilder {
     try {
        // 通过创建XMLConfigBuilder来解析配置文件，生成Configuration对象
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
+      
       // 通过XMLConfigBuilder.parse()方法解析配置文件信息来创建Configuration，然后根据Configuration对象
       // 创建SqlSessionFactory对象
       return build(parser.parse());
+      
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error building SqlSession.", e);
     } finally {
@@ -99,10 +101,11 @@ public class SqlSessionFactoryBuilder {
 }
 ```   
 
-###### 2.2、**创建Configuration的过程**     
+###### 2.1.1、**创建Configuration的过程**     
  
- mybatis通过配置文件流创建XMLConfigBuilder对象，然后解析配置文件生产Configuration对象，下面我们具体看下这个创建过程代码：   
-     
+ mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
+ 文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
+ 
  ```java
   public class XMLConfigBuilder extends BaseBuilder {
   
@@ -112,6 +115,7 @@ public class SqlSessionFactoryBuilder {
     private ReflectorFactory localReflectorFactory = new DefaultReflectorFactory();
   
     public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
+      // 封装配置文件信息和配置文件定义到XPathParser对象
       this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
     }
   
@@ -124,15 +128,22 @@ public class SqlSessionFactoryBuilder {
       this.parser = parser;
     }
   
+    /**
+    * 解析配置文件信息方法
+    */
     public Configuration parse() {
       if (parsed) {
         throw new BuilderException("Each XMLConfigBuilder can only be used once.");
       }
       parsed = true;
+      // 具体提取配置文件的<configuration>节点信息，然后分别解析其子节点Node：Mapper，properties，plugins，setting等
       parseConfiguration(parser.evalNode("/configuration"));
       return configuration;
     }
   
+    /**
+    * 解析配置文件的各个子节点信息组装成configuration对象，下面将以解析插件配置信息为例
+    */
     private void parseConfiguration(XNode root) {
       try {
         //issue #117 read properties first
@@ -154,8 +165,80 @@ public class SqlSessionFactoryBuilder {
         throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);
       }
     }
+    /**
+    * 解析配置文件中的插件信息
+    */
+    private void pluginElement(XNode parent) throws Exception {
+        if (parent != null) {
+          for (XNode child : parent.getChildren()) {
+            // 获取插件节点名称
+            String interceptor = child.getStringAttribute("interceptor");
+            // 获取节点属性
+            Properties properties = child.getChildrenAsProperties();
+            // 创建插件实例
+            Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).newInstance();
+            // 设置插件属性
+            interceptorInstance.setProperties(properties);
+            // 将该插件添加到插件责任链中
+            configuration.addInterceptor(interceptorInstance);
+          }
+        }
+      }
   }
-```
+```  
 
+###### 2.2 打开SqlSession的过程   
+```java
+public class DefaultSqlSessionFactory implements SqlSessionFactory {
+    private final Configuration configuration;
+
+    public DefaultSqlSessionFactory(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    public SqlSession openSession() {
+        return this.openSessionFromDataSource(this.configuration.getDefaultExecutorType(), (TransactionIsolationLevel)null, false);
+    }
+    
+    /**
+    * 打开SqlSession会话，
+    * execType 执行器类别，类别分为三种：simple简单执行器，REUSE预处理语句执行器，BATCH批量执行器
+    * level 事务隔离级别，隔离级别分为四种：read uncommitted，read committed，repeatable read，Serializable 
+    * autoCommit 是否自动提交事务
+    */
+    private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionIsolationLevel level, boolean autoCommit) {
+            Transaction tx = null;
+    
+            DefaultSqlSession var8;
+            try {
+                // 获取环境配置，数据源配置等
+                Environment e = this.configuration.getEnvironment();
+                
+                // 创建事务工厂
+                TransactionFactory transactionFactory = this.getTransactionFactoryFromEnvironment(e);
+                
+                // 对数据源创建事务
+                tx = transactionFactory.newTransaction(e.getDataSource(), level, autoCommit);
+                
+                // 创建执行器
+                Executor executor = this.configuration.newExecutor(tx, execType);
+                
+                // 创建默认SqlSession会话
+                var8 = new DefaultSqlSession(this.configuration, executor, autoCommit);
+            } catch (Exception var12) {
+                this.closeTransaction(tx);
+                throw ExceptionFactory.wrapException("Error opening session.  Cause: " + var12, var12);
+            } finally {
+                ErrorContext.instance().reset();
+            }
+    
+            return var8;
+        }
+}
+
+```
+ **mybaits如何创建的执行器，下面我们来看下执行器的创建过程：**
+ 
+ 
 
  
