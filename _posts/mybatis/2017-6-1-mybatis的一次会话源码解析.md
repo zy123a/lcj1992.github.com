@@ -10,7 +10,7 @@ categories: mybatis
    
 * **SqlSessionFactoryBuilder：** 负责生产SqlSessionFactory的类；   
   
-* **XMLConfigBuilder：**负责解析mybatis的配置文件xxx.xml生产configuration的；   
+* **XMLConfigBuilder：** 负责解析mybatis的配置文件xxx.xml生产configuration的；   
 
 * **configuration：** 保存着mybatis的所有配置信息，如settings设置，typeAliases别名，environment环境，mapper映射器；    
 
@@ -88,7 +88,7 @@ public class SqlSessionFactoryBuilder {
   public SqlSessionFactory build(InputStream inputStream) {
     return build(inputStream, null, null);
   }
-
+  
  public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
        // 通过创建XMLConfigBuilder来解析配置文件，生成Configuration对象
@@ -122,8 +122,8 @@ public class SqlSessionFactoryBuilder {
  mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
  文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
  
- 
-  public class XMLConfigBuilder extends BaseBuilder {
+ ```java
+public class XMLConfigBuilder extends BaseBuilder {
   
     private boolean parsed;
     private XPathParser parser;
@@ -202,11 +202,11 @@ public class SqlSessionFactoryBuilder {
       }
   }     
  
-     
+```     
 
 ##### 3.3、打开SqlSession的过程  
 
-
+```java
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
     private final Configuration configuration;
 
@@ -253,15 +253,12 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             return var8;
         }
 }
+```
 
-```  
-##### 3.4、 SqlSession如何来执行一次查询    
+**SqlSession如何来执行一次查询**    
  
- 让我们分析下   
- ``
- EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId());
- ``  
- 先来看下内部方法的实现                                 
+ 让我们分析下EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId());  先来看下内部方法的实现                                 
+ 
  ```java
 public class DefaultSqlSession implements SqlSession {
     private Configuration configuration;
@@ -506,7 +503,6 @@ public class DefaultResultSetHandler implements ResultSetHandler {
         return collapseSingleResultList(multipleResults);
     }
 }
-
 ```   
 
 从上述代码我们可以看出，StatementHandler 的List<E> query(Statement statement, ResultHandler resultHandler)方法的实现，是调用了ResultSetHandler的handleResultSets(Statement) 方法。ResultSetHandler的handleResultSets(Statement) 方法会将Statement语句执行后生成的resultSet 结果集转换成List<E>
