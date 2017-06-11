@@ -26,17 +26,17 @@ categories: mybatis
 
 <img src="https://zy123a.github.io/zy-blog/images/mybatis/mybatis层次结构.png" width="600" height="700" alt="image"/>     
 
-代码执行过程如下：
-	1、由xml配置文件创建XMLConfigBuilder；
-	2、XMLConfigBuilder.parse()解析配置文件生产Configuration对	象；
-	3、SqlSessionFactoryBuilder依据配置对象Configuration创建	SqlSessionFactory；
-	4、SqlSessionFactory会话工厂打开一个SqlSession会话；
-	5、SqlSession会话执行查询时，由Configuration对象依据StatementId获取MapperStatement对象；
-	6、将MapperStatement委托给Executor对象进行查询任务；
-	7、Executor对象来调度StatementHandle，paremeterhandler,resultHandler协调完成查询任务；
-	8、StateMent负责创建Statement，然后负责调paremeterHandler给参数设值，最后执行Statement查询得到结果；
-	9、paremeterHandler对象负责给Statement中的参数设值；
-	10、resultHandler对象负责封装集成查询到的结果；            
+**代码执行过程如下：**  
+	1、由xml配置文件创建XMLConfigBuilder；    
+	2、XMLConfigBuilder.parse()解析配置文件生产Configuration对象；   
+	3、SqlSessionFactoryBuilder依据配置对象Configuration创建SqlSessionFactory；  
+	4、SqlSessionFactory会话工厂打开一个SqlSession会话；  
+	5、SqlSession会话执行查询时，由Configuration对象依据StatementId获取MapperStatement对象；  
+	6、将MapperStatement委托给Executor对象进行查询任务；  
+	7、Executor对象来调度StatementHandle，paremeterhandler,resultHandler协调完成查询任务；  
+	8、StateMent负责创建Statement，然后负责调paremeterHandler给参数设值，最后执行Statement查询得到结果；  
+	9、paremeterHandler对象负责给Statement中的参数设值；  
+	10、resultHandler对象负责封装集成查询到的结果；              
        
 #### 3.源码解析    
 
