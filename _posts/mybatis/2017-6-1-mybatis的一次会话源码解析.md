@@ -20,9 +20,13 @@ categories: mybatis
     1、Executor：执行器，负责调度StatementHandler，ParameterHandler，resultHandler来完成一次sql操作；  
     2、StatementHandler：使用数据库的Statement（preparedStatement）来与数据库进行交互，其是四大对象的核心，起到承上启下的作用；   
     3、ParameterHandler：用于对sql的参数进行处理；   
-    4、resultHandler：对数据库返回的数据进行封装集成的；    
+    4、resultHandler：对数据库返回的数据进行封装集成的；      
+
+#### 2.mybatis查询过程   
+
+<img src="https://zy123a.github.io/zy-blog/images/mybatis/mybatis层次结构.png" width="600" height="500" alt="image"/>                
        
-#### 2.源码解析    
+#### 3.源码解析    
 
 ```java
 package com.meituan.service.mobile.meilv.utils;
@@ -62,7 +66,7 @@ public class MySqlSessionFactoryUtils {
     }
 }
 ```    
-##### 2.1、创建SqlSessionFactory的过程    
+##### 3.1、创建SqlSessionFactory的过程    
    
 获取配置文件流后通过SqlSessionFactoryBuilder.build(...)方法来创建SqlSessionFactory，下面我们来看下这个方法：   
 
@@ -101,12 +105,12 @@ public class SqlSessionFactoryBuilder {
 }
 ```   
 
-##### 2.1.1、**创建Configuration的过程**     
+##### 3.2、**创建Configuration的过程**     
  
  mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
  文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
  
- ```java
+ 
   public class XMLConfigBuilder extends BaseBuilder {
   
     private boolean parsed;
@@ -184,11 +188,13 @@ public class SqlSessionFactoryBuilder {
           }
         }
       }
-  }
-```  
+  }     
+ 
+     
 
-##### 2.2 打开SqlSession的过程   
-```java
+##### 3.3、打开SqlSession的过程  
+
+
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
     private final Configuration configuration;
 
@@ -236,8 +242,8 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
         }
 }
 
-```
- ##### 2.3 SqlSession如何来执行一次查询    
+```  
+##### 3.4、 SqlSession如何来执行一次查询    
  
  让我们分析下   
  ``
@@ -292,9 +298,10 @@ MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存
 ```  
 加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.meituan.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。
 
-###### 2.3.1 Executor执行查询任务   
+##### 3.4、 Executor执行查询任务         
+   
 ```java
-public class SimpleExecutor extends BaseExecutor {
+public class ReuseExecutor extends BaseExecutor {
     
      public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
             Statement stmt = null;
@@ -325,24 +332,176 @@ public class SimpleExecutor extends BaseExecutor {
         *  创建Statement对象方法
         */
         private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
-             // 获取连接   
-            Connection connection = this.getConnection(statementLog);
-            
-            // 创建预处理Statement
-            Statement stmt = handler.prepare(connection, this.transaction.getTimeout());
-            
-            // 向Statement设置参数
+            Statement stmt;
+            BoundSql boundSql = handler.getBoundSql();
+            String sql = boundSql.getSql();
+            // 判断是否已存在改sql的Statement，有则取，无则建
+            if (hasStatementFor(sql)) {
+              stmt = getStatement(sql);
+              applyTransactionTimeout(stmt);
+            } else {
+              Connection connection = getConnection(statementLog);
+              // 创建prepareStatement
+              stmt = handler.prepare(connection, transaction.getTimeout());
+              // 放入缓存中
+              putStatement(sql, stmt);
+            } 
+            // 对prepareStatement的参数设置
             handler.parameterize(stmt);
             return stmt;
          }
 }
 ```     
+**1、创建Statement过程**   
+```java
+public class PreparedStatementHandler extends BaseStatementHandler {
+    public Statement prepare(Connection connection, Integer transactionTimeout) throws SQLException {
+            ErrorContext.instance().sql(this.boundSql.getSql());
+            Statement statement = null;
+    
+            try {
+                // 依据connection创建Statement对象
+                statement = this.instantiateStatement(connection);
+                // 设置Statement参数
+                this.setStatementTimeout(statement, transactionTimeout);
+                this.setFetchSize(statement);
+                return statement;
+            } catch (SQLException var5) {
+                this.closeStatement(statement);
+                throw var5;
+            } catch (Exception var6) {
+                this.closeStatement(statement);
+                throw new ExecutorException("Error preparing statement.  Cause: " + var6, var6);
+            }
+    }      
+    
+    /**
+    * 创建preStatement对象
+    */
+    protected Statement instantiateStatement(Connection connection) throws SQLException {
+        String sql = this.boundSql.getSql();
+        if(this.mappedStatement.getKeyGenerator() instanceof Jdbc3KeyGenerator) {
+            String[] keyColumnNames = this.mappedStatement.getKeyColumns();
+            return keyColumnNames == null?connection.prepareStatement(sql, 1):connection.prepareStatement(sql, keyColumnNames);
+        } else {
+            return this.mappedStatement.getResultSetType() != null?connection.prepareStatement(sql, this.mappedStatement.getResultSetType().getValue(), 1007):connection.prepareStatement(sql);
+        }
+    }
+    // 向prepareStatement中参数设值
+     public void parameterize(Statement statement) throws SQLException {
+           parameterHandler.setParameters((PreparedStatement) statement);
+     }
+}
+```   
+**2、向Statement中的参数设值**    
+  
+```java
+public class DefaultParameterHandler implements ParameterHandler {
+    /** 
+    *ParameterHandler类的setParameters(PreparedStatement ps) 实现 
+    * 对某一个Statement进行设置参数 
+    */  
+    public void setParameters(PreparedStatement ps) {
+        ErrorContext.instance().activity("setting parameters").object(mappedStatement.getParameterMap().getId());
+        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        if (parameterMappings != null) {
+          for (int i = 0; i < parameterMappings.size(); i++) {
+            ParameterMapping parameterMapping = parameterMappings.get(i);
+            if (parameterMapping.getMode() != ParameterMode.OUT) {
+              Object value;
+              String propertyName = parameterMapping.getProperty();
+              if (boundSql.hasAdditionalParameter(propertyName)) { // issue #448 ask first for additional params
+                value = boundSql.getAdditionalParameter(propertyName);
+              } else if (parameterObject == null) {
+                value = null;
+              } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
+                value = parameterObject;
+              } else {
+                MetaObject metaObject = configuration.newMetaObject(parameterObject);
+                value = metaObject.getValue(propertyName);
+              }
+              
+              // 每一个Mapping都有一个TypeHandler，根据TypeHandler来对preparedStatement进行设置参数
+              TypeHandler typeHandler = parameterMapping.getTypeHandler();
+              JdbcType jdbcType = parameterMapping.getJdbcType();
+              if (value == null && jdbcType == null) {
+                jdbcType = configuration.getJdbcTypeForNull();
+              }
+              try {
+                // 向prepareStatement中参数设值
+                typeHandler.setParameter(ps, i + 1, value, jdbcType);
+              } catch (TypeException e) {
+                throw new TypeException("Could not set parameters for mapping: " + parameterMapping + ". Cause: " + e, e);
+              } catch (SQLException e) {
+                throw new TypeException("Could not set parameters for mapping: " + parameterMapping + ". Cause: " + e, e);
+              }
+            }
+          }
+        }
+      }
+}
+```
 
-依据参数
+**3、statement执行查询**     
+```java
+public class PreparedStatementHandler extends BaseStatementHandler {
+    public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
+        PreparedStatement ps = (PreparedStatement) statement;
+        // 执行查询
+        ps.execute();
+        // 使用resultSetHandler封装集成查询结果
+        return resultSetHandler.<E> handleResultSets(ps);
+    }
+}
+```    
+```java
+public class DefaultResultSetHandler implements ResultSetHandler {
+    
+    public List<Object> handleResultSets(Statement stmt) throws SQLException {
+        ErrorContext.instance().activity("handling results").object(mappedStatement.getId());
+    
+        final List<Object> multipleResults = new ArrayList<Object>();
+    
+        int resultSetCount = 0;
+        ResultSetWrapper rsw = getFirstResultSet(stmt);
+    
+        List<ResultMap> resultMaps = mappedStatement.getResultMaps();
+        int resultMapCount = resultMaps.size();
+        validateResultMapsCount(rsw, resultMapCount);
+        while (rsw != null && resultMapCount > resultSetCount) {
+          ResultMap resultMap = resultMaps.get(resultSetCount);
+          handleResultSet(rsw, resultMap, multipleResults, null);
+          rsw = getNextResultSet(stmt);
+          cleanUpAfterHandlingResultSet();
+          resultSetCount++;
+        }
+    
+        String[] resultSets = mappedStatement.getResultSets();
+        if (resultSets != null) {
+          while (rsw != null && resultSetCount < resultSets.length) {
+            ResultMapping parentMapping = nextResultMaps.get(resultSets[resultSetCount]);
+            if (parentMapping != null) {
+              String nestedResultMapId = parentMapping.getNestedResultMapId();
+              ResultMap resultMap = configuration.getResultMap(nestedResultMapId);
+              handleResultSet(rsw, resultMap, null, parentMapping);
+            }
+            rsw = getNextResultSet(stmt);
+            cleanUpAfterHandlingResultSet();
+            resultSetCount++;
+          }
+        }
+    
+        return collapseSingleResultList(multipleResults);
+    }
+}
 
+```   
+
+从上述代码我们可以看出，StatementHandler 的List<E> query(Statement statement, ResultHandler resultHandler)方法的实现，是调用了ResultSetHandler的handleResultSets(Statement) 方法。ResultSetHandler的handleResultSets(Statement) 方法会将Statement语句执行后生成的resultSet 结果集转换成List<E>
 
 
  
  
 
  
+
