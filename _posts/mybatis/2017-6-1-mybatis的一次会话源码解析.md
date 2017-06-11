@@ -6,7 +6,7 @@ categories: mybatis
 ---    
 [toc]  
 
-##### 1.主要构件介绍  
+#### 1.主要构件介绍  
    
 * **SqlSessionFactoryBuilder：** 负责生产SqlSessionFactory的类；   
   
@@ -22,7 +22,7 @@ categories: mybatis
     3、ParameterHandler：用于对sql的参数进行处理；   
     4、resultHandler：对数据库返回的数据进行封装集成的；    
        
-##### 2.源码解析    
+#### 2.源码解析    
 
 ```java
 package com.meituan.service.mobile.meilv.utils;
@@ -62,7 +62,7 @@ public class MySqlSessionFactoryUtils {
     }
 }
 ```    
-###### 2.1、创建SqlSessionFactory的过程    
+##### 2.1、创建SqlSessionFactory的过程    
    
 获取配置文件流后通过SqlSessionFactoryBuilder.build(...)方法来创建SqlSessionFactory，下面我们来看下这个方法：   
 
@@ -101,7 +101,7 @@ public class SqlSessionFactoryBuilder {
 }
 ```   
 
-###### 2.1.1、**创建Configuration的过程**     
+##### 2.1.1、**创建Configuration的过程**     
  
  mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
  文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
@@ -187,7 +187,7 @@ public class SqlSessionFactoryBuilder {
   }
 ```  
 
-###### 2.2 打开SqlSession的过程   
+##### 2.2 打开SqlSession的过程   
 ```java
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
     private final Configuration configuration;
@@ -237,7 +237,111 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 }
 
 ```
- **mybaits如何创建的执行器，下面我们来看下执行器的创建过程：**
+ ##### 2.3 SqlSession如何来执行一次查询    
+ 
+ 让我们分析下   
+ ``
+ EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId());
+ ``  
+ 先来看下内部方法的实现                                 
+ ```java
+public class DefaultSqlSession implements SqlSession {
+    private Configuration configuration;
+    private Executor executor;
+    private boolean autoCommit;
+    private boolean dirty;
+    private List<Cursor<?>> cursorList;
+    
+    public <T> T selectOne(String statement, Object parameter) {
+            List list = this.selectList(statement, parameter);
+            if(list.size() == 1) {
+                return list.get(0);
+            } else if(list.size() > 1) {
+                throw new TooManyResultsException("Expected one result (or null) to be returned by selectOne(), but found: " + list.size());
+            } else {
+                return null;
+            }
+    }   
+    
+    public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
+            List var5;
+            try {
+                /**
+                * 1.根据Statement Id，在mybatis 配置对象Configuration中查找和配置文件相对应的MappedStatement
+                */
+                MappedStatement e = this.configuration.getMappedStatement(statement);     
+               
+                // 调用执行器执行查询语句
+                var5 = this.executor.query(e, this.wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
+            } catch (Exception var9) {
+                throw ExceptionFactory.wrapException("Error querying database.  Cause: " + var9, var9);
+            } finally {
+                ErrorContext.instance().reset();
+            }
+            return var5;
+        }
+    
+
+}
+```
+MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存中，使用org.apache.ibatis.session.Configuration实例来维护。使用者可以使用sqlSession.getConfiguration()方法来获取。MyBatis的配置文件中配置信息的组织格式和内存中对象的组织格式几乎完全对应的。上述例子中的
+```xml
+<select id="selectById" resultType="com.meituan.service.mobile.meilv.dao.bean.EnvironmentDo">
+        SELECT id ,ip,name FROM test_env WHERE id=#{id}
+</select>
+```  
+加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.meituan.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。
+
+###### 2.3.1 Executor执行查询任务   
+```java
+public class SimpleExecutor extends BaseExecutor {
+    
+     public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+            Statement stmt = null;
+    
+            List var9;
+            try {
+                Configuration configuration = ms.getConfiguration();
+                
+                /** 
+                * 1、根据既有的参数，创建StatementHandler对象来执行查询操作
+                * StatementHandler分三种：SimpleStatementHandler，PreparedStatementHandler，CallableStatementHandler
+                */
+                StatementHandler handler = configuration.newStatementHandler(this.wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
+                
+                // 2、依据handler和statementLog创建java.sql.Statement
+                stmt = this.prepareStatement(handler, ms.getStatementLog());
+                
+                // 3、调用StatementHandler.query()方法，返回List结果集
+                var9 = handler.query(stmt, resultHandler);
+            } finally {
+                this.closeStatement(stmt);
+            }
+    
+            return var9;
+        }
+        
+        /**
+        *  创建Statement对象方法
+        */
+        private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
+             // 获取连接   
+            Connection connection = this.getConnection(statementLog);
+            
+            // 创建预处理Statement
+            Statement stmt = handler.prepare(connection, this.transaction.getTimeout());
+            
+            // 向Statement设置参数
+            handler.parameterize(stmt);
+            return stmt;
+         }
+}
+```     
+
+依据参数
+
+
+
  
  
 
