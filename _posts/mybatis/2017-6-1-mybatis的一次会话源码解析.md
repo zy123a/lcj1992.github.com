@@ -24,7 +24,19 @@ categories: mybatis
 
 #### 2.mybatis查询过程   
 
-<img src="https://zy123a.github.io/zy-blog/images/mybatis/mybatis层次结构.png" width="600" height="500" alt="image"/>                
+<img src="https://zy123a.github.io/zy-blog/images/mybatis/mybatis层次结构.png" width="600" height="700" alt="image"/>     
+
+代码执行过程如下：
+	1、由xml配置文件创建XMLConfigBuilder；
+	2、XMLConfigBuilder.parse()解析配置文件生产Configuration对	象；
+	3、SqlSessionFactoryBuilder依据配置对象Configuration创建	SqlSessionFactory；
+	4、SqlSessionFactory会话工厂打开一个SqlSession会话；
+	5、SqlSession会话执行查询时，由Configuration对象依据StatementId获取MapperStatement对象；
+	6、将MapperStatement委托给Executor对象进行查询任务；
+	7、Executor对象来调度StatementHandle，paremeterhandler,resultHandler协调完成查询任务；
+	8、StateMent负责创建Statement，然后负责调paremeterHandler给参数设值，最后执行Statement查询得到结果；
+	9、paremeterHandler对象负责给Statement中的参数设值；
+	10、resultHandler对象负责封装集成查询到的结果；            
        
 #### 3.源码解析    
 
@@ -105,7 +117,7 @@ public class SqlSessionFactoryBuilder {
 }
 ```   
 
-##### 3.2、**创建Configuration的过程**     
+##### 3.2、创建Configuration的过程    
  
  mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
  文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
