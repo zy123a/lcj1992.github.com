@@ -5,7 +5,7 @@ body {
 }
 
 #main {
-    font-family: "Palatino Linotype", "URW Palladio L", "palladio l", palatino, "book antiqua", times, serif;
+    font-family:"楷体_GB2312", "Palatino Linotype", "URW Palladio L", "palladio l", palatino, "book antiqua", times, serif;
     font-size: 1.1em;
     margin: auto;
     padding: 2% 5% 2% 5%;
@@ -39,7 +39,7 @@ blockquote {
 }
 
 pre {
-    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-family:"楷体_GB2312", Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
     border: solid 1px #ddd;
     border-radius: 3px;
     background-color: #f8f8ff;
@@ -50,7 +50,7 @@ pre {
 }
 
 code {
-    font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+    font-family:"楷体_GB2312", Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
     font-size: 0.75em;
     border: solid 1px #ddd;
     border-radius: 3px;
