@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md" />
     </list>
@@ -55,22 +52,22 @@
         <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="116">
-                <caret line="123" column="23" lean-forward="false" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
+              <first_editor relative-caret-position="638">
+                <caret line="127" column="0" lean-forward="true" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
                 <folding>
-                  <marker date="1499831700000" expanded="false" signature="1360:1371" ph=" { " />
-                  <marker date="1499831700000" expanded="false" signature="1386:1392" ph=" }" />
-                  <marker date="1499831700000" expanded="false" signature="1437:1448" ph=" { " />
-                  <marker date="1499831700000" expanded="false" signature="1471:1477" ph=" }" />
-                  <marker date="1499831700000" expanded="true" signature="1668:2005" ph="{...}" />
-                  <marker date="1499831700000" expanded="true" signature="2121:2458" ph="{...}" />
-                  <marker date="1499831700000" expanded="true" signature="2561:2814" ph="{...}" />
-                  <marker date="1499831700000" expanded="true" signature="3147:3298" ph="{...}" />
-                  <marker date="1499831700000" expanded="true" signature="3431:3580" ph="{...}" />
-                  <marker date="1499831700000" expanded="true" signature="3808:4019" ph="{...}" />
-                  <marker date="1499831700000" expanded="false" signature="4061:4072" ph=" { " />
-                  <marker date="1499831700000" expanded="false" signature="4096:4102" ph=" }" />
-                  <marker date="1499831700000" expanded="true" signature="4203:4478" ph="{...}" />
+                  <marker date="1499831763000" expanded="false" signature="1360:1371" ph=" { " />
+                  <marker date="1499831763000" expanded="false" signature="1386:1392" ph=" }" />
+                  <marker date="1499831763000" expanded="false" signature="1437:1448" ph=" { " />
+                  <marker date="1499831763000" expanded="false" signature="1471:1477" ph=" }" />
+                  <marker date="1499831763000" expanded="true" signature="1668:2005" ph="{...}" />
+                  <marker date="1499831763000" expanded="true" signature="2121:2458" ph="{...}" />
+                  <marker date="1499831763000" expanded="true" signature="2561:2814" ph="{...}" />
+                  <marker date="1499831763000" expanded="true" signature="3149:3300" ph="{...}" />
+                  <marker date="1499831763000" expanded="true" signature="3433:3582" ph="{...}" />
+                  <marker date="1499831763000" expanded="true" signature="3810:4021" ph="{...}" />
+                  <marker date="1499831763000" expanded="false" signature="4063:4074" ph=" { " />
+                  <marker date="1499831763000" expanded="false" signature="4098:4104" ph=" }" />
+                  <marker date="1499831763000" expanded="true" signature="4205:4480" ph="{...}" />
                 </folding>
               </first_editor>
               <second_editor />
@@ -678,12 +675,12 @@
       <workItem from="1498973225241" duration="4644000" />
       <workItem from="1499007476284" duration="1062000" />
       <workItem from="1499772249554" duration="899000" />
-      <workItem from="1499829454581" duration="1894000" />
+      <workItem from="1499829454581" duration="1956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79032000" />
+    <option name="totallyTimeSpent" value="79094000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="817" extended-state="6" />
@@ -1033,22 +1030,22 @@
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="116">
-            <caret line="123" column="23" lean-forward="false" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
+          <first_editor relative-caret-position="638">
+            <caret line="127" column="0" lean-forward="true" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
             <folding>
-              <marker date="1499831700000" expanded="false" signature="1360:1371" ph=" { " />
-              <marker date="1499831700000" expanded="false" signature="1386:1392" ph=" }" />
-              <marker date="1499831700000" expanded="false" signature="1437:1448" ph=" { " />
-              <marker date="1499831700000" expanded="false" signature="1471:1477" ph=" }" />
-              <marker date="1499831700000" expanded="true" signature="1668:2005" ph="{...}" />
-              <marker date="1499831700000" expanded="true" signature="2121:2458" ph="{...}" />
-              <marker date="1499831700000" expanded="true" signature="2561:2814" ph="{...}" />
-              <marker date="1499831700000" expanded="true" signature="3147:3298" ph="{...}" />
-              <marker date="1499831700000" expanded="true" signature="3431:3580" ph="{...}" />
-              <marker date="1499831700000" expanded="true" signature="3808:4019" ph="{...}" />
-              <marker date="1499831700000" expanded="false" signature="4061:4072" ph=" { " />
-              <marker date="1499831700000" expanded="false" signature="4096:4102" ph=" }" />
-              <marker date="1499831700000" expanded="true" signature="4203:4478" ph="{...}" />
+              <marker date="1499831763000" expanded="false" signature="1360:1371" ph=" { " />
+              <marker date="1499831763000" expanded="false" signature="1386:1392" ph=" }" />
+              <marker date="1499831763000" expanded="false" signature="1437:1448" ph=" { " />
+              <marker date="1499831763000" expanded="false" signature="1471:1477" ph=" }" />
+              <marker date="1499831763000" expanded="true" signature="1668:2005" ph="{...}" />
+              <marker date="1499831763000" expanded="true" signature="2121:2458" ph="{...}" />
+              <marker date="1499831763000" expanded="true" signature="2561:2814" ph="{...}" />
+              <marker date="1499831763000" expanded="true" signature="3149:3300" ph="{...}" />
+              <marker date="1499831763000" expanded="true" signature="3433:3582" ph="{...}" />
+              <marker date="1499831763000" expanded="true" signature="3810:4021" ph="{...}" />
+              <marker date="1499831763000" expanded="false" signature="4063:4074" ph=" { " />
+              <marker date="1499831763000" expanded="false" signature="4098:4104" ph=" }" />
+              <marker date="1499831763000" expanded="true" signature="4205:4480" ph="{...}" />
             </folding>
           </first_editor>
           <second_editor />
