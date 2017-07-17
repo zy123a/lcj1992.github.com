@@ -3,6 +3,176 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/test/TestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/test/TestThriftController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/applicationContext.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/spring/spring-bean.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/testcontext-applicationContext.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/lane/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/local/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_dev/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_test/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_test_mock/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/rd_auto_test/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/rd_deva/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/rd_devb/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging03/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging03/spring/spring-out-serv.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/test/resources/biztest/applicationContext.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/order/OrderDeleteBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/jobprocessor/CloseOrderProcessor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/OrderCloseFollowWorkBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/OrderCloseSwitchService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/TradeCenterOrderCloseClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/handler/BusinessDataHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/handler/OrderCloseEventSendHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/handler/TradeCenterHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/realizeframe/AbstactActuator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/realizeframe/Handler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/realizeframe/OrderCloseActuator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/realizeframe/OrderCloseClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderclose/utils/OrderCloseCacheUtils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderevent/OrderCloseListener.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/biz/pay/callback/strategy/PayTimeoutStrategy.java">
           <value>
             <set />
@@ -34,6 +204,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/java/2017-7-17-Java的Executor框架和线程池实现原理.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/java/2017-7-17-多线程.md">
           <value>
             <set />
           </value>
