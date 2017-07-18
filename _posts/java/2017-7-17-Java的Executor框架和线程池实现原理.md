@@ -126,7 +126,6 @@ public interface Callable<V> {
 ```   
 
 * Future    
- 
 ```java
 public interface Future<V> {
     /**
