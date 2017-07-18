@@ -123,7 +123,8 @@ public interface Callable<V> {
 }
 ```   
 
-* Future  
+* Future    
+ 
 ```java
 public interface Future<V> {
     /**
@@ -161,7 +162,9 @@ public static Callable<Object> callable(Runnable task);
 实现上通过一个RunnableAdapter适配器直接适配过来的；  
 
 * FutureTask:  
-通常使用FutureTask来处理我们的任务。FutureTask类同时又实现了Runnable接口，所以可以直接提交给Executor执行;   
+  
+通常使用FutureTask来处理我们的任务。FutureTask类同时又实现了Runnable接口，所以可以直接提交给Executor执行;  
+   
 ```
 xecutorService executor = Executors.newSingleThreadExecutor();     
 FutureTask<String> future =     
