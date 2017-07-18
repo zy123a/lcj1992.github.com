@@ -10,7 +10,7 @@ body {
     margin: auto;
     padding: 2% 5% 2% 5%;
     /* width: 700px; */
-    line-height: 130%;
+    line-height: 150%;
     border: 1px solid LightGrey;
 }
 
@@ -28,7 +28,7 @@ H3, H4 {
     margin-bottom: 1.5em;
     /*border-bottom: 1px LightGrey solid;*/
     width: 80%;
-    line-height: 150%;
+    line-height: 170%;
     color: #666666;
 }
 
@@ -45,7 +45,7 @@ pre {
     background-color: #f8f8ff;
     padding: 6px 10px;
     font-size: 1em;
-    line-height: 130%;
+    line-height: 150%;
     overflow: auto;
 }
 
@@ -100,7 +100,7 @@ div.nav {
     padding: 0 7% 0 7%;
     width: auto;
     height: 1.5em;
-    line-height: 150%;
+    line-height: 170%;
     font-size: 2em;
 }
 

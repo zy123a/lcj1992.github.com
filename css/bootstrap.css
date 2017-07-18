@@ -277,7 +277,7 @@ th {
   font-family:KaiTi_GB2312,"楷体_GB2312", 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
-  line-height: 1;
+  line-height: 1.5;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1076,7 +1076,7 @@ html {
 body {
   font-family:KaiTi_GB2312, "楷体_GB2312","Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 1.8;
   color: #333;
   background-color: #fff;
 }

@@ -1,6 +1,6 @@
 body {
   font-family: KaiTi_GB2312,"楷体_GB2312","Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
   font-size: 16px;
   color: #404040;
   overflow-x: hidden;
@@ -15,8 +15,8 @@ h4,
 h5,
 h6 {
   font-family:KaiTi_GB2312, "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
-  line-height: 1.1;
+  line-height: 2;
+  line-height: 1.3;
   font-weight: 800;
 }
 h1 {
@@ -102,7 +102,7 @@ hr.small {
   width: 100%;
   z-index: 3;
   font-family:KaiTi_GB2312,KaiTi_GB2312,"楷体_GB2312", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
@@ -228,9 +228,9 @@ hr.small {
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
   font-family: "楷体_GB2312","Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
   font-size: 20px;
-  line-height: 1.1;
+  line-height: 1.3;
   display: block;
   font-weight: 300;
   margin: 10px 0 0;
@@ -246,12 +246,12 @@ hr.small {
 }
 .intro-header .post-heading .subheading,
 .intro-header .post-heading .meta {
-  line-height: 1.1;
+  line-height: 1.3;
   display: block;
 }
 .intro-header .post-heading .subheading {
   font-family:KaiTi_GB2312,"楷体_GB2312", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
   font-size: 17px;
   font-weight: normal;
   margin: 10px 0 30px;
@@ -287,7 +287,7 @@ hr.small {
 }
 .post-preview > a > .post-title {
   font-size: 21px;
-  line-height: 1.3;
+  line-height: 1.5;
   margin-top: 30px;
   margin-bottom: 8px;
 }
@@ -316,7 +316,7 @@ hr.small {
 @media only screen and (min-width: 768px) {
   .post-preview > a > .post-title {
     font-size: 26px;
-    line-height: 1.3;
+    line-height: 1.5;
     margin-bottom: 10px;
   }
   .post-preview > a > .post-subtitle {
@@ -393,7 +393,7 @@ footer .copyright {
   top: 2em;
   margin: 0;
   font-size: 0.85em;
-  line-height: 1.764705882em;
+  line-height: 2em;
   vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
@@ -418,7 +418,7 @@ form .row:first-child .floating-label-form-group {
 }
 .btn {
   font-family:KaiTi_GB2312,"楷体_GB2312", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -442,7 +442,7 @@ form .row:first-child .floating-label-form-group {
 .pager li > a,
 .pager li > span {
   font-family:KaiTi_GB2312,"楷体_GB2312", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-  line-height: 1.7;
+  line-height: 2;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -507,7 +507,7 @@ body {
   border-radius: 999em;
   padding: 0 10px;
   color: #ffffff;
-  line-height: 24px;
+  line-height: 30px;
   font-size: 12px;
   text-decoration: none;
   margin: 0 1px;
@@ -540,7 +540,7 @@ body {
 #tag_cloud .tag {
   font-size: 14px;
   border: none;
-  line-height: 28px;
+  line-height: 32px;
   margin: 0 2px;
   margin-bottom: 8px;
 }
@@ -576,7 +576,7 @@ body {
 @media only screen and (min-width: 768px) {
   .listing-seperator {
     font-size: 20px !important;
-    line-height: 1.5 !important;
+    line-height: 2 !important;
     margin-top: 5px;
   }
 }
@@ -596,7 +596,7 @@ body {
   bottom: 0px;
   margin: 0px;
   font-size: 12px;
-  line-height: 12px;
+  line-height: 15px;
 }
 @media only screen and (min-width: 768px) {
   .one-tag-list .post-preview {
@@ -604,7 +604,7 @@ body {
   }
   .one-tag-list .post-preview > a > .post-title {
     font-size: 18px;
-    line-height: 1.3;
+    line-height: 1.6;
   }
   .one-tag-list .post-preview > a > .post-subtitle {
     font-size: 14px;
