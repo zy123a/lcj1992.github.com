@@ -6,11 +6,11 @@ categories: java
 --- 
 
 【toc】
-#### 1、Executor框架  
+### 1、Executor框架  
 <img src="https://zy123a.github.io/zy-blog/images/java/Executor框架.png" width="500" height="400" alt="image"/>  
     
-#### 2、相关接口类介绍  
-##### 2.1、Executor  
+### 2、相关接口类介绍  
+#### 2.1、Executor  
 ```java
 public interface Executor {
     void execute(Runnable command);
@@ -19,7 +19,7 @@ public interface Executor {
 Executor作为Executor框架最基础的接口，只定义了一个执行Runnable的execute方法，其没有实现类，只有一个
 继承其的接口ExecutorService     
 
-##### 2.2、ExecutorService   
+#### 2.2、ExecutorService   
 ```java
 public interface ExecutorService extends Executor {
 
@@ -86,7 +86,7 @@ public interface ExecutorService extends Executor {
 }
 ```   
 
-##### 2.3、Executors   
+#### 2.3、Executors   
 
 Executors负责生成各种ExecutorService的实例：
 * newFixedThreadPool() :固定线程数，ExecutorService负责创建一个固定数量线程的线程池，并行执行的线程
@@ -105,7 +105,9 @@ Executors负责生成各种ExecutorService的实例：
                                                                        (new ThreadPoolExecutor(1, 1,
                                                                                                0L, TimeUnit.MILLISECONDS,
                                                                                                new LinkedBlockingQueue<Runnable>()));   
-##### 2.4、Runnable，Callable,Future，FutureTast  
+
+
+#### 2.4、Runnable，Callable,Future，FutureTast  
 
 * Runnable  
 ```java
@@ -187,8 +189,8 @@ try {
 
 ```    
 
-#### 3、线程池原理解析   
-##### 3.1、参数介绍  
+### 3、线程池原理解析   
+#### 3.1、参数介绍  
     public ThreadPoolExecutor(int corePoolSize,
                               int maximumPoolSize,
                               long keepAliveTime,
@@ -222,7 +224,7 @@ try {
     3、ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
     4、ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务
    
-##### 3.2、线程池执行流程    
+#### 3.2、线程池执行流程    
 
 <img src="https://zy123a.github.io/zy-blog/images/java/线程池执行步骤.png" width="500" height="400" alt="image"/>  
 
@@ -230,12 +232,12 @@ try {
 2、其次线程池判断工作队列是否已满？没满，则将新提交的任务存储在工作队列里。满了，则进入下个流程。  
 3、最后线程池判断整个线程池是否已满（< maximumPoolSize ？）？没满，则创建一个新的工作线程来执行任务，满了，则交给饱和策略来处理这个任务。   
 
-##### 3.3、线程池的关闭
+#### 3.3、线程池的关闭
 
 • shutdown()：不会立即终止线程池，而是再也不会接受新的任务，要等所有任务缓存队列中的任务都执行完后才终止  
 • shutdownNow()：立即终止线程池，再也不会接受新的任务，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务   
 
-##### 3.4、线程池的状态   
+#### 3.4、线程池的状态   
       RUNNING 允许状态；
       SHUTDOWN 关闭状态；
       stop 停止状态；
