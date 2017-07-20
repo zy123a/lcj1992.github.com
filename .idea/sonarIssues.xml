@@ -173,6 +173,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/biz-layer/src/main/java/com/meituan/lvyou/ticket/trade/order/biz/PayNoticeAsynHandleBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/biz/pay/callback/strategy/PayTimeoutStrategy.java">
           <value>
             <set />
@@ -204,6 +209,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md">
           <value>
             <set />
           </value>
