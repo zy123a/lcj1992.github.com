@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="" />
+    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-20-装饰者模式.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,75 +19,16 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="2017-7-11-命令模式.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="2017-7-17-模板模式.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="527">
-                <caret line="178" column="1" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="1" />
-                <folding>
-                  <marker date="1500540648000" expanded="true" signature="1295:1330" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="1372:1507" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="1395:1406" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1433:1439" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="1461:1472" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1499:1505" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="1557:1592" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="1630:1766" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="1654:1665" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1692:1698" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="1720:1731" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1758:1764" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="1859:1987" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="1908:1919" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1929:1935" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="1959:1970" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="1979:1985" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2054:2182" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="2103:2114" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2123:2129" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2153:2164" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2174:2180" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2252:2387" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="2304:2315" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2327:2333" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2357:2368" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2379:2385" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2457:2585" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="2502:2513" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2524:2530" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2554:2565" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2577:2583" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2633:3002" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="2734:2745" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="2767:2773" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="2799:2888" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="2913:3000" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3192:3461" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3537:3616" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3651:3726" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3760:3835" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3868:3945" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="3977:4052" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="4086:4161" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="4196:4273" ph="{...}" />
-                  <marker date="1500540648000" expanded="true" signature="4303:4314" ph=" { " />
-                  <marker date="1500540648000" expanded="true" signature="4332:4338" ph=" }" />
-                  <marker date="1500540648000" expanded="true" signature="4440:5420" ph="{...}" />
-                </folding>
+              <first_editor relative-caret-position="232">
+                <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                <folding />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2017-6-28-观察者模式.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="21" column="1" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="1" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -127,10 +73,11 @@
         <option value="$PROJECT_DIR$/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/css/codeboy.css" />
         <option value="$PROJECT_DIR$/css/default.css" />
-        <option value="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" />
         <option value="$PROJECT_DIR$/_posts/java/2017-7-17-多线程.md" />
         <option value="$PROJECT_DIR$/_posts/java/2017-7-17-Java的Executor框架和线程池实现原理.md" />
         <option value="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md" />
+        <option value="$PROJECT_DIR$/_posts/design_mode/2017-7-20-装饰者模式.md" />
+        <option value="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" />
       </list>
     </option>
   </component>
@@ -146,7 +93,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="815" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -163,9 +110,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -257,13 +204,13 @@
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/_posts/design_mode" />
-      <recent name="$PROJECT_DIR$/images/web" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images/java" />
       <recent name="$PROJECT_DIR$/images/mode" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts/design_mode" />
+      <recent name="$PROJECT_DIR$/images/web" />
     </key>
   </component>
   <component name="RunManager">
@@ -694,15 +641,18 @@
       <workItem from="1500349444738" duration="8155000" />
       <workItem from="1500517737290" duration="1002000" />
       <workItem from="1500535770258" duration="4780000" />
+      <workItem from="1500545112158" duration="1152000" />
+      <workItem from="1500605873189" duration="1000" />
+      <workItem from="1500801750262" duration="1622000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99554000" />
+    <option name="totallyTimeSpent" value="102329000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="815" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -716,10 +666,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31133428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3106383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21745351" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SonarQube" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -781,7 +731,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/images/git/git.png" />
     <entry file="file://$USER_HOME$/Desktop/request_response.jpg" />
     <entry file="file://$PROJECT_DIR$/images/web/twoRequest.png">
       <provider selected="true" editor-type-id="images">
@@ -1012,17 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="145">
-            <caret line="5" column="4" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/mode/命令模式.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1044,6 +982,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="21" column="1" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="348">
@@ -1052,17 +996,11 @@
           <second_editor />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="21" column="1" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="527">
+          <first_editor relative-caret-position="4031">
             <caret line="178" column="1" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="1" />
             <folding>
               <marker date="1500540648000" expanded="true" signature="1295:1330" ph="{...}" />
@@ -1114,6 +1052,28 @@
               <marker date="1500540648000" expanded="true" signature="4332:4338" ph=" }" />
               <marker date="1500540648000" expanded="true" signature="4440:5420" ph="{...}" />
             </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-20-装饰者模式.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="551">
+            <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="232">
+            <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
