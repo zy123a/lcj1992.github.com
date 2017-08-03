@@ -6,7 +6,7 @@ categories: mybatis
 ---    
 [toc]  
 
-#### 1.主要构件介绍  
+### 1.主要构件介绍  
    
 * **SqlSessionFactoryBuilder：** 负责生产SqlSessionFactory的类；   
   
@@ -22,7 +22,7 @@ categories: mybatis
     3、ParameterHandler：用于对sql的参数进行处理；   
     4、resultHandler：对数据库返回的数据进行封装集成的；      
 
-#### 2.mybatis查询过程   
+### 2.mybatis查询过程   
 
 <img src="https://zy123a.github.io/zy-blog/images/mybatis/mybatis层次结构.png" width="600" height="700" alt="image"/>     
 
@@ -38,18 +38,9 @@ categories: mybatis
 	9、paremeterHandler对象负责给Statement中的参数设值；  
 	10、resultHandler对象负责封装集成查询到的结果；              
        
-#### 3.源码解析    
+### 3.源码解析    
 
 ```java
-package com.meituan.service.mobile.meilv.utils;
-
-import com.meituan.service.mobile.meilv.dao.bean.EnvironmentDo;
-import com.meituan.service.mobile.meilv.dao.bean.Type;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import java.io.InputStream;
 
 /**
  * Desc:
@@ -78,7 +69,7 @@ public class MySqlSessionFactoryUtils {
     }
 }
 ```    
-##### 3.1、创建SqlSessionFactory的过程    
+#### 3.1、创建SqlSessionFactory的过程    
    
 获取配置文件流后通过SqlSessionFactoryBuilder.build(...)方法来创建SqlSessionFactory，下面我们来看下这个方法：   
 
@@ -117,24 +108,22 @@ public class SqlSessionFactoryBuilder {
 }
 ```   
 
-##### 3.2、创建Configuration的过程    
+#### 3.2、创建Configuration的过程      
+    
  
  mybatis通过配置文件流创建XMLConfigBuilder对象，XMLConfigBuilder会将配置文件信息转换成document对象，而XML的配置定义
- 文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。   
+ 文件转换成XMLMapperEntityResolver对象，封装在XPathParser对象中。XPathParser对象提供了获取DOM节点信息的方法。    
  
  ```java
-public class XMLConfigBuilder extends BaseBuilder {
-  
+ public class XMLConfigBuilder extends BaseBuilder {
     private boolean parsed;
     private XPathParser parser;
     private String environment;
     private ReflectorFactory localReflectorFactory = new DefaultReflectorFactory();
-  
     public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
       // 封装配置文件信息和配置文件定义到XPathParser对象
       this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
     }
-  
     private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
       super(new Configuration());
       ErrorContext.instance().resource("SQL Mapper Configuration");
@@ -143,7 +132,6 @@ public class XMLConfigBuilder extends BaseBuilder {
       this.environment = environment;
       this.parser = parser;
     }
-  
     /**
     * 解析配置文件信息方法
     */
@@ -200,11 +188,13 @@ public class XMLConfigBuilder extends BaseBuilder {
           }
         }
       }
-  }     
- 
-```     
+    }    
+ ```    
+  
+   
 
-##### 3.3、打开SqlSession的过程  
+#### 3.3、打开SqlSession的过程    
+
 
 ```java
 public class DefaultSqlSessionFactory implements SqlSessionFactory {
@@ -253,20 +243,23 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             return var8;
         }
 }
-```
 
-**SqlSession如何来执行一次查询**    
+
+```     
+
+
+#### 3.4、 SqlSession如何来执行一次查询   
  
- 让我们分析下EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId());  先来看下内部方法的实现                                 
- 
- ```java
+ 让我们分析下`EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId()); ` 先来看下内部方法的实现.   
+
+```java    
 public class DefaultSqlSession implements SqlSession {
     private Configuration configuration;
     private Executor executor;
     private boolean autoCommit;
     private boolean dirty;
     private List<Cursor<?>> cursorList;
-    
+  
     public <T> T selectOne(String statement, Object parameter) {
             List list = this.selectList(statement, parameter);
             if(list.size() == 1) {
@@ -295,23 +288,22 @@ public class DefaultSqlSession implements SqlSession {
             }
             return var5;
         }
-    
+} 
 
-}
-```
+```   
+
 MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存中，使用org.apache.ibatis.session.Configuration实例来维护。使用者可以使用sqlSession.getConfiguration()方法来获取。MyBatis的配置文件中配置信息的组织格式和内存中对象的组织格式几乎完全对应的。上述例子中的
-```xml
+`
 <select id="selectById" resultType="com.meituan.service.mobile.meilv.dao.bean.EnvironmentDo">
         SELECT id ,ip,name FROM test_env WHERE id=#{id}
-</select>
-```  
-加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.meituan.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。
+</select>` 
+加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.meituan.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。    
 
-##### 3.4、 Executor执行查询任务         
-   
-```java
+
+#### 3.5、 Executor执行查询任务      
+
+```java    
 public class ReuseExecutor extends BaseExecutor {
-    
      public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
             Statement stmt = null;
     
@@ -360,9 +352,14 @@ public class ReuseExecutor extends BaseExecutor {
             return stmt;
          }
 }
-```     
-**1、创建Statement过程**   
-```java
+
+```   
+
+         
+     
+##### 3.5.1、创建Statement过程      
+
+```java   
 public class PreparedStatementHandler extends BaseStatementHandler {
     public Statement prepare(Connection connection, Integer transactionTimeout) throws SQLException {
             ErrorContext.instance().sql(this.boundSql.getSql());
@@ -401,10 +398,12 @@ public class PreparedStatementHandler extends BaseStatementHandler {
            parameterHandler.setParameters((PreparedStatement) statement);
      }
 }
-```   
-**2、向Statement中的参数设值**    
+```     
   
-```java
+##### 3.5.2、向Statement中的参数设值       
+
+```java     
+
 public class DefaultParameterHandler implements ParameterHandler {
     /** 
     *ParameterHandler类的setParameters(PreparedStatement ps) 实现 
@@ -449,10 +448,13 @@ public class DefaultParameterHandler implements ParameterHandler {
         }
       }
 }
-```
+```    
 
-**3、statement执行查询**     
+##### 3.5.3、statement执行查询    
+
+
 ```java
+    
 public class PreparedStatementHandler extends BaseStatementHandler {
     public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
         PreparedStatement ps = (PreparedStatement) statement;
@@ -462,8 +464,7 @@ public class PreparedStatementHandler extends BaseStatementHandler {
         return resultSetHandler.<E> handleResultSets(ps);
     }
 }
-```    
-```java
+
 public class DefaultResultSetHandler implements ResultSetHandler {
     
     public List<Object> handleResultSets(Statement stmt) throws SQLException {
@@ -502,9 +503,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     
         return collapseSingleResultList(multipleResults);
     }
-}
 ```   
-
 从上述代码我们可以看出，StatementHandler 的List<E> query(Statement statement, ResultHandler resultHandler)方法的实现，是调用了ResultSetHandler的handleResultSets(Statement) 方法。ResultSetHandler的handleResultSets(Statement) 方法会将Statement语句执行后生成的resultSet 结果集转换成List<E>
 
 
