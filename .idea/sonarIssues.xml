@@ -178,6 +178,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/biz-layer/src/main/java/com/meituan/lvyou/ticket/trade/order/biz/rhone/SupplierPayNotifyHandleBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/biz/pay/callback/strategy/PayTimeoutStrategy.java">
           <value>
             <set />
@@ -263,6 +268,41 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/Beverage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/Coffee.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/Decorator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/MilkDecorator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/SugarDecorator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/Tea.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/decoratormode/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/observermode/Observer.java">
           <value>
             <set />
@@ -314,6 +354,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/templatemode/VWCar.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
           <value>
             <set />
           </value>
