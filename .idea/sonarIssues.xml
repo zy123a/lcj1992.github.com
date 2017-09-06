@@ -103,6 +103,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/thrift/ThriftPayConfirm2BusinessServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/jobprocessor/CloseOrderProcessor.java">
           <value>
             <set />
@@ -164,6 +169,41 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/orderevent/OrderCloseListener.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/PayConfirmFailFromSupplierPayFailClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/PayConfirmFailOfRiskFailClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/PayConfirmFailRefundBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/PayConfirmFailSwitch.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/RiskControlFailFromPayNotifyBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/payconfirmfail/observer/RefundObserver.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/refund/eventdriven/PayConfirmFailRefundListener.java">
           <value>
             <set />
           </value>
@@ -239,6 +279,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/java/2017-7-17-多线程.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/linux/2017-09-06-系统性能监控命令">
           <value>
             <set />
           </value>
