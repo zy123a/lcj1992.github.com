@@ -81,9 +81,9 @@
         <script src="/js/bootstrap3-typeahead.js"></script>
         <script src="/js/jquery.hotkeys.js"></script>
 
-        <script src="/js/jquery-1.4.4.min.js"></script>
-        <script src="/js/jquery.ztree.core-3.5.js"></script>
-        <script src="/js/ztree_toc.js"></script>
+        <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.ztree.core-3.5.js"></script>
+        <script type="text/javascript" src="/js/ztree_toc.js"></script>
         <!-- <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -114,13 +114,14 @@
             });
         </script>
 
-        <script type="text/javascript" >
+        <SCRIPT type="text/javascript" >
             $(document).ready(function(){
                 $('#tree').ztree_toc({
                     is_auto_number: true,
+                    // documment_selector: '.first_part'
                 });
             });
-        </script>
+        </SCRIPT>
 
         <!-- async load function -->
         <script>
