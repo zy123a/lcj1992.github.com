@@ -243,6 +243,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/_config.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_layouts/post.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-09-08-状态模式.md">
           <value>
             <set />
