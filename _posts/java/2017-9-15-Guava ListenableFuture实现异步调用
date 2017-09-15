@@ -1,0 +1,59 @@
+---
+layout: post
+title: Java的Guava LisenableFuture实现异步非阻塞调用
+tags: 多线程,Guava
+categories: java
+--- 
+[toc]   
+
+### 1、简介    
+    ListenableFuture是可以监听的Future，它是对java原生Future的扩展增强。Future表示一个异步计算任务，当任务完成时可以得到计
+    算结果。如果希望计算完成时马上就拿到结果展示给用户或者做另外的计算，就必须使用另一个线程不断的查询计算状态。这样做会使得代码复杂，
+    且效率低下。如果使用ListenableFuture，Guava会帮助检测Future是否完成了，如果完成就自动调用回调函数，这样可以减少并发程序的复杂度。      
+    
+### 2、类说明    
+**1、MoreExecutors：**     
+该类是final类型的工具类，提供了很多静态方法。例如listeningDecorator方法初始化ListeningExecutorService方法，使用此实例submit方法即
+可初始化ListenableFuture对象。   
+    
+**2、ListeningExecutorService**  
+ 该类是对ExecutorService的扩展，重写ExecutorService类中的submit方法，返回ListenableFuture对象。   
+ 
+**3、ListenableFuture**  
+该接口扩展了Future接口，增加了addListener方法，该方法在给定的excutor上注册一个监听器，当计算完成时会马上调用该监听器。不能够确保监听器执行
+的顺序，但可以在计算完成时确保马上被调用。    
+
+**4、FutureCallback** 
+该接口提供了OnSuccess和OnFailuren方法。获取异步计算的结果并回调。     
+
+**5、Futures**   
+该类提供和很多实用的静态方法以供使用。       
+
+**6、ListenableFutureTask**  
+该类扩展了FutureTask类并实现ListenableFuture接口，增加了addListener方法。    
+
+###3、实例      
+```java
+public class GuavaTest {
+    ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+    public static void main(String[] args) throws Exception {
+        GuavaTest guavaTest = new GuavaTest();
+        ListeningExecutorService service = MoreExecutors.listeningDecorator(guavaTest.executorService);
+        ListenableFuture<String> listenableFuture = service.submit(new Callable<String>() {
+            public String call() throws Exception {
+                return "线程执行完成";
+            }
+        });
+        Futures.addCallback(listenableFuture, new FutureCallback<String>() {
+            public void onSuccess(String s) {
+                System.out.println("输出成功：" + s);
+            }
+
+            public void onFailure(Throwable throwable) {
+                System.out.println("输出失败：");
+            }
+        });
+    }
+}
+```
