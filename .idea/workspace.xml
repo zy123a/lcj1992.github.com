@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-    </list>
+    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,16 +19,16 @@
         <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="319">
+              <first_editor relative-caret-position="348">
                 <caret line="18" column="88" lean-forward="false" selection-start-line="18" selection-start-column="88" selection-end-line="18" selection-end-column="88" />
                 <folding>
-                  <marker date="1506332174000" expanded="true" signature="1254:1636" ph="{...}" />
-                  <marker date="1506332174000" expanded="true" signature="1753:2149" ph="{...}" />
-                  <marker date="1506332174000" expanded="true" signature="2304:2315" ph=" { " />
-                  <marker date="1506332174000" expanded="true" signature="2348:2354" ph=" }" />
-                  <marker date="1506332174000" expanded="true" signature="2386:2397" ph=" { " />
-                  <marker date="1506332174000" expanded="true" signature="2425:2431" ph=" }" />
-                  <marker date="1506332174000" expanded="true" signature="2523:2814" ph="{...}" />
+                  <marker date="1506332442000" expanded="true" signature="1254:1636" ph="{...}" />
+                  <marker date="1506332442000" expanded="true" signature="1753:2149" ph="{...}" />
+                  <marker date="1506332442000" expanded="true" signature="2304:2315" ph=" { " />
+                  <marker date="1506332442000" expanded="true" signature="2348:2354" ph=" }" />
+                  <marker date="1506332442000" expanded="true" signature="2386:2397" ph=" { " />
+                  <marker date="1506332442000" expanded="true" signature="2425:2431" ph=" }" />
+                  <marker date="1506332442000" expanded="true" signature="2523:2814" ph="{...}" />
                 </folding>
               </first_editor>
               <second_editor />
@@ -604,12 +602,12 @@
       <workItem from="1506307471149" duration="1388000" />
       <workItem from="1506313999442" duration="2553000" />
       <workItem from="1506328911196" duration="1133000" />
-      <workItem from="1506332354527" duration="63000" />
+      <workItem from="1506332354527" duration="102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132327000" />
+    <option name="totallyTimeSpent" value="132366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="817" extended-state="6" />
@@ -625,7 +623,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907802" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30472103" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1047,16 +1045,16 @@
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="319">
+          <first_editor relative-caret-position="348">
             <caret line="18" column="88" lean-forward="false" selection-start-line="18" selection-start-column="88" selection-end-line="18" selection-end-column="88" />
             <folding>
-              <marker date="1506332174000" expanded="true" signature="1254:1636" ph="{...}" />
-              <marker date="1506332174000" expanded="true" signature="1753:2149" ph="{...}" />
-              <marker date="1506332174000" expanded="true" signature="2304:2315" ph=" { " />
-              <marker date="1506332174000" expanded="true" signature="2348:2354" ph=" }" />
-              <marker date="1506332174000" expanded="true" signature="2386:2397" ph=" { " />
-              <marker date="1506332174000" expanded="true" signature="2425:2431" ph=" }" />
-              <marker date="1506332174000" expanded="true" signature="2523:2814" ph="{...}" />
+              <marker date="1506332442000" expanded="true" signature="1254:1636" ph="{...}" />
+              <marker date="1506332442000" expanded="true" signature="1753:2149" ph="{...}" />
+              <marker date="1506332442000" expanded="true" signature="2304:2315" ph=" { " />
+              <marker date="1506332442000" expanded="true" signature="2348:2354" ph=" }" />
+              <marker date="1506332442000" expanded="true" signature="2386:2397" ph=" { " />
+              <marker date="1506332442000" expanded="true" signature="2425:2431" ph=" }" />
+              <marker date="1506332442000" expanded="true" signature="2523:2814" ph="{...}" />
             </folding>
           </first_editor>
           <second_editor />
