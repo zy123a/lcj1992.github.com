@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/pagination.html" afterPath="$PROJECT_DIR$/_includes/pagination.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/JVM/2017-9-25-gc垃圾回收.md" afterPath="$PROJECT_DIR$/_posts/JVM/2017-9-25-gc垃圾回收.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,43 +50,19 @@
       <file leaf-file-name="post.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_layouts/post.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="36" column="23" lean-forward="true" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+            <state relative-caret-position="232">
+              <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pagination.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pagination.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_includes/pagination.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+            <state relative-caret-position="348">
+              <caret line="22" column="33" lean-forward="false" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2017-9-25-gc垃圾回收.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/JVM/2017-9-25-gc垃圾回收.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="145">
-                <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-                <folding>
-                  <marker date="1506335235000" expanded="true" signature="1162:1202" ph="{...}" />
-                  <marker date="1506335235000" expanded="false" signature="1361:1372" ph=" { " />
-                  <marker date="1506335235000" expanded="false" signature="1402:1408" ph=" }" />
-                  <marker date="1506335235000" expanded="false" signature="1433:1444" ph=" { " />
-                  <marker date="1506335235000" expanded="false" signature="1474:1480" ph=" }" />
-                  <marker date="1506335235000" expanded="false" signature="1565:1576" ph=" { " />
-                  <marker date="1506335235000" expanded="false" signature="1606:1612" ph=" }" />
-                  <marker date="1506335235000" expanded="false" signature="1637:1648" ph=" { " />
-                  <marker date="1506335235000" expanded="false" signature="1678:1684" ph=" }" />
-                  <marker date="1506335235000" expanded="true" signature="1774:1907" ph="{...}" />
-                </folding>
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -150,8 +128,8 @@
         <option value="$PROJECT_DIR$/_posts/java/2017-9-15-Guava ListenableFuture实现异步调用" />
         <option value="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" />
         <option value="$PROJECT_DIR$/_posts/JVM/2017-09-25-jvm内存区域" />
-        <option value="$PROJECT_DIR$/_includes/pagination.html" />
         <option value="$PROJECT_DIR$/_posts/JVM/2017-7-17-gc垃圾回收.md" />
+        <option value="$PROJECT_DIR$/_includes/pagination.html" />
       </list>
     </option>
   </component>
@@ -747,12 +725,12 @@
       <workItem from="1506307471149" duration="1388000" />
       <workItem from="1506313999442" duration="2553000" />
       <workItem from="1506328911196" duration="1133000" />
-      <workItem from="1506332354527" duration="2475000" />
+      <workItem from="1506332354527" duration="2547000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134739000" />
+    <option name="totallyTimeSpent" value="134811000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="817" extended-state="6" />
@@ -1179,22 +1157,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_layouts/post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="36" column="23" lean-forward="true" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/pagination.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -1241,6 +1203,22 @@
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_layouts/post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/pagination.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="22" column="33" lean-forward="false" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
