@@ -53,6 +53,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/online/spring/spring-out-serv.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_dev/sal/service-thrift.xml">
           <value>
             <set />
@@ -238,6 +243,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/thriddepend/riskcontrol/RiskControlBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/pom.xml">
           <value>
             <set />
@@ -254,6 +264,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-09-08-状态模式.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
           <value>
             <set />
           </value>
@@ -409,6 +424,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/observermode/WeatherData.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/strategy/InsertSortStrategy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/strategy/SelectSortStrategy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/strategy/SortStrategy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/strategy/StrategyContext.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/strategy/Test.java">
           <value>
             <set />
           </value>
