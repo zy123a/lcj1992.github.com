@@ -6,7 +6,7 @@ permalink: /about.html
 
 ### 关于我 {#about_me}
 
-15届华中科技大学计院卓越工程师班,在去哪儿呆了一年，现美团门票后台开发。
+16届华中师范大学计院硕士毕业，现美团门票后台开发。
 
 ### 正确的打开方式 {#open}
 
@@ -20,7 +20,5 @@ permalink: /about.html
 |alt + c| 目录|
 
 ### 联系 {#contact}
+* [github@lcj1992](https://zy123a.github.io/zy-blog)
 
-* [github@lcj1992](http://github.com/lcj1992/)
-* [微博@fool_child](http://weibo.com/u/1825339361)  
-* [rss订阅](http://foolchild.cn/feed.xml)
