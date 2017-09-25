@@ -2,7 +2,7 @@
 
   {% if paginator.previous_page %}
     {% if paginator.previous_page == 1 %}
-    <a href="/"><前页</a>
+    <a href="{{ site.baseurl }}/"><前页</a>
     {% else %}
     <a href="{{ site.baseurl }}/page{{paginator.previous_page}}"><前页</a>
     {% endif %}
@@ -12,7 +12,7 @@
       {% if paginator.page == 1 %}
       <span class="current-page">1</span>
       {% else %}
-      <a href="/">1</a>
+      <a href="{{ site.baseurl }}/">1</a>
       {% endif %}
 
     {% for count in (2..paginator.total_pages) %}
