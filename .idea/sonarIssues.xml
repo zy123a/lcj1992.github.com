@@ -228,7 +228,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/biz-layer/src/main/java/com/meituan/lvyou/ticket/trade/order/biz/push/PushOrderDataServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../ticket-trade-order/biz-layer/src/main/java/com/meituan/lvyou/ticket/trade/order/biz/rhone/SupplierPayNotifyHandleBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-dal/src/main/java/com/meituan/trip/ordercenter/dal/mapper/PayLogMapper.java">
           <value>
             <set />
           </value>
@@ -349,6 +359,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/linux/2017-09-06-系统性能监控命令">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/linux/2017-09-26-wget命令.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/linux/2017-09-26-命令积累.md">
           <value>
             <set />
           </value>
