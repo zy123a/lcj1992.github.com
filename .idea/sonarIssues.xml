@@ -13,6 +13,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/test/RedisLockTestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/test/TestController.java">
           <value>
             <set />
@@ -21,6 +26,65 @@
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/test/TestThriftController.java">
           <value>
             <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/trade/ticket/OrderStatusAndPayController.java">
+          <value>
+            <set>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVtm4ItVpHKjczWI1Ql8" />
+                <option name="message" value="2 duplicated blocks of code must be removed." />
+                <option name="ruleKey" value="common-java:DuplicatedBlocks" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="102d4976-e253-4f38-96e1-1d35fb707e5c" />
+                <option name="line" value="44" />
+                <option name="message" value="Make the &quot;log&quot; logger private static final and rename it to comply with the format &quot;LOG(?:GER)?&quot;." />
+                <option name="ruleKey" value="squid:S1312" />
+                <option name="severity" value="MINOR" />
+              </SonarIssue>
+            </set>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/java/com/meituan/service/mobile/meilv/controller/trade/ticket/TicketSecondPayController.java">
+          <value>
+            <set>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="5e3b903b-0c37-4002-8285-c5a31a5dc371" />
+                <option name="line" value="61" />
+                <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
+                <option name="ruleKey" value="squid:S00112" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="28ef2c20-7ad3-4a82-b4a7-c1fba241ce7f" />
+                <option name="line" value="38" />
+                <option name="message" value="Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'." />
+                <option name="ruleKey" value="squid:S00115" />
+                <option name="severity" value="MINOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="3f7e441d-7871-4aa9-a098-1f649c372fa8" />
+                <option name="line" value="59" />
+                <option name="message" value="Reorder the modifiers to comply with the Java Language Specification." />
+                <option name="ruleKey" value="squid:ModifiersOrderCheck" />
+                <option name="severity" value="MINOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="7b4e25fe-d0ee-48a9-ba1d-bef365ea595a" />
+                <option name="line" value="37" />
+                <option name="message" value="Rename the &quot;log&quot; logger to comply with the format &quot;LOG(?:GER)?&quot;." />
+                <option name="ruleKey" value="squid:S1312" />
+                <option name="severity" value="MINOR" />
+              </SonarIssue>
+            </set>
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/applicationContext.xml">
@@ -214,6 +278,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/refund/eventdriven/PayConfirmFailRefundListener.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-common/src/main/java/com/meituan/service/mobile/meilv/common/lock/Lock.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-common/src/main/java/com/meituan/service/mobile/meilv/common/lock/MedisLock.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-common/src/main/java/com/meituan/service/mobile/meilv/common/lock/MedisTripLock.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-common/src/main/java/com/meituan/service/mobile/meilv/common/lock/RedisLock.java">
           <value>
             <set />
           </value>
