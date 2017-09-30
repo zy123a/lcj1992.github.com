@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/JVM/2017-9-25-jvm内存区域.md" afterPath="$PROJECT_DIR$/_posts/JVM/2017-9-25-jvm内存区域.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-09-08-状态模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-09-08-状态模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-6-26-责任链模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-11-命令模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-17-模板模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-7-20-装饰者模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-7-20-装饰者模式.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2017-5-26-xml文档解析.md" afterPath="$PROJECT_DIR$/_posts/java/2017-5-26-xml文档解析.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2017-7-17-Java的Executor框架和线程池实现原理.md" afterPath="$PROJECT_DIR$/_posts/java/2017-7-17-Java的Executor框架和线程池实现原理.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2017-9-15-Guava ListenableFuture实现异步调用" afterPath="$PROJECT_DIR$/_posts/java/2017-9-15-Guava ListenableFuture实现异步调用" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/java/2017-9-28-面向对象设计七大原则.md" afterPath="$PROJECT_DIR$/_posts/java/2017-9-28-面向对象设计七大原则.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/linux/2017-09-06-系统性能监控命令.md" afterPath="$PROJECT_DIR$/_posts/linux/2017-09-06-系统性能监控命令.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/linux/2017-09-26-wget命令.md" afterPath="$PROJECT_DIR$/_posts/linux/2017-09-26-wget命令.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md" afterPath="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md" afterPath="$PROJECT_DIR$/_posts/mybatis/2017-5-28-mybatis整体框架介绍.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/mybatis/2017-6-1-mybatis的一次会话源码解析.md" afterPath="$PROJECT_DIR$/_posts/mybatis/2017-6-1-mybatis的一次会话源码解析.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/default.css" afterPath="$PROJECT_DIR$/css/default.css" />
-    </list>
+    <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,18 +14,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="default.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/default.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -645,12 +613,12 @@
       <workItem from="1506588179984" duration="6672000" />
       <workItem from="1506654274665" duration="4078000" />
       <workItem from="1506672362296" duration="2737000" />
-      <workItem from="1506740903376" duration="988000" />
+      <workItem from="1506740903376" duration="1708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170285000" />
+    <option name="totallyTimeSpent" value="171005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="815" extended-state="6" />
@@ -733,7 +701,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/web/2017-05-22-cache.html" />
     <entry file="file://$PROJECT_DIR$/_posts/web/2017-05-19-请求响应过程.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1359,10 +1326,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/MWeb/asset/javascripts/jquery.fancybox.pack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="5" column="109" lean-forward="false" selection-start-line="5" selection-start-column="109" selection-end-line="5" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/default.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="348">
+          <caret line="109" column="17" lean-forward="true" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="17" />
           <folding />
         </state>
       </provider>
