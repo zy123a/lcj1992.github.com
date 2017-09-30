@@ -172,7 +172,7 @@
                 window.location.href = "{{page.next.url}}";
             });
 
-            $.getJSON("/search.json").done(function (data) {
+            $.getJSON("/zy-blog/search.json").done(function (data) {
                 if (data.code == 0) {
                     for (var index in data.data) {
                         var item = data.data[index];
