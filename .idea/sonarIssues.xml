@@ -332,6 +332,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/biz/service/BizPayConfirm2TPService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/listener/reverse/OrderReverseByRefundServerService.java">
           <value>
             <set />
@@ -363,6 +368,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_includes/pagination.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_layouts/default.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_layouts/page.html">
           <value>
             <set />
           </value>
