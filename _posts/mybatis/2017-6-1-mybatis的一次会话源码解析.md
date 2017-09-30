@@ -4,7 +4,8 @@ title: mybatis一次会话源码解析
 tags: mybatis 源码
 categories: mybatis
 ---    
-[toc]  
+* TOC
+{:toc}   
 
 ### 1.主要构件介绍  
    

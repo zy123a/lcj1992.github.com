@@ -5,7 +5,8 @@ categories: log
 tags: log4j2 springmvc
 ---
 <br />
-[TOC]
+* TOC
+{:toc} 
 
 #### 引入相关jar包 <br />
 ```

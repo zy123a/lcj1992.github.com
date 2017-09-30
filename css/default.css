@@ -5,11 +5,11 @@ body {
 }
 
 #main {
-    font-family:KaiTi_GB2312,"楷体_GB2312", "Palatino Linotype", "URW Palladio L", "palladio l", palatino, "book antiqua", times, serif;
-    font-size: 1.1em;
+    font-family:"KaiTi_GB2312","微软雅黑","楷体_GB2312", "Palatino Linotype", "URW Palladio L", "palladio l", palatino, "book antiqua", times, serif;
+    font-size: 1.08em;
     margin: auto;
     padding: 2% 5% 2% 5%;
-    /* width: 700px; */
+    width: 86%;
     line-height: 180%;
     border: 1px solid LightGrey;
 }
@@ -97,7 +97,7 @@ div.nav a:hover {
 }
 
 div.nav {
-    padding: 0 7% 0 7%;
+    padding: 0 7% 0 10%;
     width: auto;
     height: 1.5em;
     line-height: 170%;

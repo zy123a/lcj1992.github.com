@@ -4,7 +4,8 @@ title: Java的Guava LisenableFuture实现异步非阻塞调用
 tags: 多线程,Guava
 categories: java
 --- 
-[toc]   
+* TOC
+{:toc}   
 
 ### 1、简介    
     ListenableFuture是可以监听的Future，它是对java原生Future的扩展增强。Future表示一个异步计算任务，当任务完成时可以得到计
