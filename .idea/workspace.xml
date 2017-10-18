@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da280acf-1765-498d-bf5d-192639d631e5" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" afterPath="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,12 +19,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2017-09-29-类之间的关系.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/java/2017-09-29-类之间的关系.md">
+      <file leaf-file-name="2017-10-17-代理模式.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="261">
-                <caret line="39" column="86" lean-forward="false" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
+              <first_editor relative-caret-position="464">
+                <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -31,20 +32,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2017-09-22-策略模式.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2017-09-22-策略模式.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="1334">
-                <caret line="46" column="7" lean-forward="true" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+              <first_editor relative-caret-position="522">
+                <caret line="18" column="15" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="18" selection-end-column="15" />
                 <folding>
-                  <marker date="1508122908000" expanded="true" signature="1260:1642" ph="{...}" />
-                  <marker date="1508122908000" expanded="true" signature="1759:2155" ph="{...}" />
-                  <marker date="1508122908000" expanded="false" signature="2310:2321" ph=" { " />
-                  <marker date="1508122908000" expanded="false" signature="2354:2360" ph=" }" />
-                  <marker date="1508122908000" expanded="false" signature="2392:2403" ph=" { " />
-                  <marker date="1508122908000" expanded="false" signature="2431:2437" ph=" }" />
-                  <marker date="1508122908000" expanded="true" signature="2529:2820" ph="{...}" />
+                  <marker date="1508122980000" expanded="true" signature="1260:1642" ph="{...}" />
+                  <marker date="1508122980000" expanded="true" signature="1759:2155" ph="{...}" />
+                  <marker date="1508122980000" expanded="false" signature="2310:2321" ph=" { " />
+                  <marker date="1508122980000" expanded="false" signature="2354:2360" ph=" }" />
+                  <marker date="1508122980000" expanded="false" signature="2392:2403" ph=" { " />
+                  <marker date="1508122980000" expanded="false" signature="2431:2437" ph=" }" />
+                  <marker date="1508122980000" expanded="true" signature="2529:2820" ph="{...}" />
                 </folding>
               </first_editor>
               <second_editor />
@@ -120,6 +121,7 @@
         <option value="$PROJECT_DIR$/search.json" />
         <option value="$PROJECT_DIR$/_posts/java/2017-09-29-类之间的关系.md" />
         <option value="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md" />
+        <option value="$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md" />
       </list>
     </option>
   </component>
@@ -135,7 +137,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="813" />
+    <option name="height" value="823" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -152,8 +154,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -176,7 +178,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_posts" />
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zy-blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zy-blog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mode" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -191,10 +211,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="_posts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="design_mode" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,7 +230,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -692,15 +708,18 @@
       <workItem from="1506672362296" duration="2737000" />
       <workItem from="1506740903376" duration="6285000" />
       <workItem from="1507690222822" duration="2205000" />
-      <workItem from="1508122869046" duration="63000" />
+      <workItem from="1508122869046" duration="721000" />
+      <workItem from="1508124837361" duration="2545000" />
+      <workItem from="1508310430808" duration="1186000" />
+      <workItem from="1508328020403" duration="27000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177850000" />
+    <option name="totallyTimeSpent" value="182266000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="823" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -715,10 +734,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32716927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27738264" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.276259" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21959943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="SonarQube" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -750,7 +769,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-6-28-观察者模式.md" />
     <entry file="file://$PROJECT_DIR$/css/codeboy.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1128,7 +1146,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="261">
             <caret line="39" column="86" lean-forward="false" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1137,17 +1154,28 @@
     <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="1334">
-            <caret line="46" column="7" lean-forward="true" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+          <first_editor relative-caret-position="522">
+            <caret line="18" column="15" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="18" selection-end-column="15" />
             <folding>
-              <marker date="1508122908000" expanded="true" signature="1260:1642" ph="{...}" />
-              <marker date="1508122908000" expanded="true" signature="1759:2155" ph="{...}" />
-              <marker date="1508122908000" expanded="false" signature="2310:2321" ph=" { " />
-              <marker date="1508122908000" expanded="false" signature="2354:2360" ph=" }" />
-              <marker date="1508122908000" expanded="false" signature="2392:2403" ph=" { " />
-              <marker date="1508122908000" expanded="false" signature="2431:2437" ph=" }" />
-              <marker date="1508122908000" expanded="true" signature="2529:2820" ph="{...}" />
+              <marker date="1508122980000" expanded="true" signature="1260:1642" ph="{...}" />
+              <marker date="1508122980000" expanded="true" signature="1759:2155" ph="{...}" />
+              <marker date="1508122980000" expanded="false" signature="2310:2321" ph=" { " />
+              <marker date="1508122980000" expanded="false" signature="2354:2360" ph=" }" />
+              <marker date="1508122980000" expanded="false" signature="2392:2403" ph=" { " />
+              <marker date="1508122980000" expanded="false" signature="2431:2437" ph=" }" />
+              <marker date="1508122980000" expanded="true" signature="2529:2820" ph="{...}" />
             </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="464">
+            <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>

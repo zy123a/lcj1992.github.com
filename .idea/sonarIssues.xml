@@ -92,6 +92,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/dal/mysql-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/base/sal/service-thrift.xml">
           <value>
             <set />
@@ -107,12 +112,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/lane/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/lane/sal/service-thrift.xml">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/local/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/local/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/online/dal/db.properties">
           <value>
             <set />
           </value>
@@ -123,6 +143,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_dev/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/qa_test/dal/db.properties">
           <value>
             <set />
           </value>
@@ -152,7 +177,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging/sal/service-thrift.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-app/src/main/resources/staging03/dal/db.properties">
           <value>
             <set />
           </value>
@@ -173,6 +208,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/order/OrderDeleteBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/order/advertisement/AdvertisementHanderBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/order/advertisement/AdvertisementImp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-biz/src/main/java/com/meituan/service/mobile/meilv/biz/api/scs/order/advertisement/bean/AdRequest.java">
           <value>
             <set />
           </value>
@@ -302,7 +352,75 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../hermes-ticket/meilv-dal/pom.xml">
+          <value>
+            <set>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVw_idCM4z_4NssDdiTX" />
+                <option name="message" value="17 more comment lines need to be written to reach the minimum threshold of 25.0% comment density." />
+                <option name="ruleKey" value="common-xml:InsufficientCommentDensity" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVw_idb94z_4NssDdiTh" />
+                <option name="message" value="415 more comment lines need to be written to reach the minimum threshold of 25.0% comment density." />
+                <option name="ruleKey" value="common-xml:InsufficientCommentDensity" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVrL0_HqFggx9VIWMgey" />
+                <option name="line" value="1" />
+                <option name="message" value="Remove this forbidden dependency." />
+                <option name="ruleKey" value="squid:Should_not_use_c3p0" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+            </set>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../hermes-ticket/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/base/dal/mysql-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/lane/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/local/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/online/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/qa_test/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/staging/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/api/src/main/resources/staging02/dal/db.properties">
           <value>
             <set />
           </value>
@@ -318,6 +436,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../ticket-trade-order/biz-layer/src/main/java/com/meituan/lvyou/ticket/trade/order/biz/rhone/SupplierPayNotifyHandleBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/data-access-layer/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ticket-trade-order/pom.xml">
           <value>
             <set />
           </value>
@@ -408,6 +536,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-09-22-策略模式.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md">
           <value>
             <set />
           </value>
