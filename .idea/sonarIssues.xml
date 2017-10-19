@@ -770,6 +770,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/dynamicProxy/DynamicProxyClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/dynamicProxy/DynamicProxyHandle.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/forceProxy/ForceProxyClient.java">
           <value>
             <set />
