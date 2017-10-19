@@ -770,6 +770,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/forceProxy/ForceProxyClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/forceProxy/GamePlayerV2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/forceProxy/GamePlayerV2Proxy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/forceProxy/IGamePlayerV2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/generalProxy/GamePlayer.java">
           <value>
             <set />
