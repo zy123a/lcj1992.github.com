@@ -357,13 +357,6 @@
             <set>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVw_idCM4z_4NssDdiTX" />
-                <option name="message" value="17 more comment lines need to be written to reach the minimum threshold of 25.0% comment density." />
-                <option name="ruleKey" value="common-xml:InsufficientCommentDensity" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
                 <option name="key" value="AVw_idb94z_4NssDdiTh" />
                 <option name="message" value="415 more comment lines need to be written to reach the minimum threshold of 25.0% comment density." />
                 <option name="ruleKey" value="common-xml:InsufficientCommentDensity" />
@@ -375,6 +368,13 @@
                 <option name="line" value="1" />
                 <option name="message" value="Remove this forbidden dependency." />
                 <option name="ruleKey" value="squid:Should_not_use_c3p0" />
+                <option name="severity" value="MAJOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVw_idCM4z_4NssDdiTX" />
+                <option name="message" value="17 more comment lines need to be written to reach the minimum threshold of 25.0% comment density." />
+                <option name="ruleKey" value="common-xml:InsufficientCommentDensity" />
                 <option name="severity" value="MAJOR" />
               </SonarIssue>
             </set>
@@ -455,6 +455,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/biz/pay/callback/strategy/PayTimeoutStrategy.java">
           <value>
             <set />
@@ -471,6 +476,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/thriddepend/riskcontrol/RiskControlBiz.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/base/dal/mysql-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/online/dal/db.properties">
           <value>
             <set />
           </value>
@@ -751,6 +766,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/observermode/WeatherData.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/generalProxy/GamePlayer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/generalProxy/GamePlayerProxy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/generalProxy/GeneralProxyClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/designmode/proxy/generalProxy/IGamePlayer.java">
           <value>
             <set />
           </value>
