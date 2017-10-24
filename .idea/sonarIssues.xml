@@ -455,6 +455,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-dal/src/main/resources/dal/xmlmapper/StockInfoMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/pom.xml">
           <value>
             <set />
@@ -470,6 +475,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/framework/ThriftInvokeLogPrintPointcut.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/framework/ThriftTradeNoMarkPointcut.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/listener/reverse/OrderReverseByRefundServerService.java">
           <value>
             <set />
@@ -480,12 +495,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/java/com/meituan/trip/ordercenter/server/web/test/TestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/base/dal/mysql-datasource.xml">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/lane/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/online/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/qa_test/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/staging/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-order-center/ordercenter-server/src/main/resources/staging_03/dal/db.properties">
           <value>
             <set />
           </value>
@@ -496,6 +536,56 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../trip-trade-center/domain/order/src/main/java/com/meituan/trip/tradecenter/domain/order/core/closedcycle/OrderCloseServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/infra/persist/mysql/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/base/dal/mysql-datasource.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/lane/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/local/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/online/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/qa_test/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/staging/dal/db.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../trip-tradeplatform-refund/trip-tradeplatform-refund-server/src/main/resources/staging03/dal/db.properties">
           <value>
             <set />
           </value>
@@ -556,6 +646,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/design_mode/2017-10-17-代理模式.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/design_mode/2017-10-23-建造者模式.md">
           <value>
             <set />
           </value>
