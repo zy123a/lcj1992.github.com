@@ -46,7 +46,7 @@ categories: mybatis
 /**
  * Desc:
  * ------------------------------------
- * Author:zhengyin@meituan.com
+ * Author:XXXX
  * Date:2017/5/11
  * Time:11:24
  */

@@ -60,7 +60,7 @@ tags: log4j2 springmvc
     <configuration status="warn">
   
       <Properties>
-          <Property name="log_collect_path">/Users/zhengyin</Property>
+          <Property name="log_collect_path">/Users/XXXX</Property>
       </Properties>
   
       <appenders>

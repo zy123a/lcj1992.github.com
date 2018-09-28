@@ -625,6 +625,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/_posts/JVM/2017-12-14-jvm垃圾收集器与内存分配策略.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/JVM/2017-12-14-jvm垃圾收集齐与内存分配策略.md">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/_posts/JVM/2017-7-17-gc垃圾回收.md">
           <value>
             <set />
@@ -741,6 +751,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/_posts/log4j2/2017-05-17-spring-log4j.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/_posts/mybatis/2017-5-27-mybatis与spring的整合.md">
           <value>
             <set />
           </value>
@@ -966,6 +981,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../zy-test/src/main/java/com/zy/test/TestThread.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../zy-test/src/main/resources/mysql-datasource.xml">
           <value>
             <set />
           </value>
