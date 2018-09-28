@@ -62,7 +62,7 @@ public class MySqlSessionFactoryUtils {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             // 执行查询语句
             EnvironmentDo environmentDo = sqlSession
-                    .selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",
+                    .selectOne("com.XXXX.service.mobile.meilv.dao.EnvironmentDao.updateEnv",
                             Type.Rhone_callback.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +251,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
 #### 3.4、 SqlSession如何来执行一次查询   
  
- 让我们分析下`EnvironmentDo environmentDo = sqlSession.selectOne("com.meituan.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId()); ` 先来看下内部方法的实现.   
+ 让我们分析下`EnvironmentDo environmentDo = sqlSession.selectOne("com.XXXX.service.mobile.meilv.dao.EnvironmentDao.updateEnv",Type.Rhone_callback.getId()); ` 先来看下内部方法的实现.   
 
 ```java    
 public class DefaultSqlSession implements SqlSession {
@@ -295,10 +295,10 @@ public class DefaultSqlSession implements SqlSession {
 
 MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存中，使用org.apache.ibatis.session.Configuration实例来维护。使用者可以使用sqlSession.getConfiguration()方法来获取。MyBatis的配置文件中配置信息的组织格式和内存中对象的组织格式几乎完全对应的。上述例子中的
 `
-<select id="selectById" resultType="com.meituan.service.mobile.meilv.dao.bean.EnvironmentDo">
+<select id="selectById" resultType="com.XXXX.service.mobile.meilv.dao.bean.EnvironmentDo">
         SELECT id ,ip,name FROM test_env WHERE id=#{id}
 </select>` 
-加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.meituan.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。    
+加载到内存中会生成一个对应的MappedStatement对象，然后会以key="com.XXXX.service.mobile.meilv.dao.EnvironmentDao#selectById" ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要通过Id值来获取就可以了。    
 
 
 #### 3.5、 Executor执行查询任务      
